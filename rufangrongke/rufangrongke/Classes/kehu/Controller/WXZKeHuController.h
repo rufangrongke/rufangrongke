@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  WXZKeHuController.h
 //  rufangrongke
 //
 //  Created by dymost on 15/10/18.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface WXZKeHuController : UITableViewController
 
 @end
-
