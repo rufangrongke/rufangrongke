@@ -16,10 +16,6 @@
 		3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3057845C1BD3DA3100169C44 /* UIView+WXZFrame.m */; };
 		30869F6D1BD637F700632BD9 /* WXZTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30869F6B1BD637F700632BD9 /* WXZTableViewCell.m */; };
 		30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30869F6C1BD637F700632BD9 /* WXZTableViewCell.xib */; };
-		30869F741BD645D800632BD9 /* XMGDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = 30869F701BD645D800632BD9 /* XMGDeal.m */; };
-		30869F751BD645D800632BD9 /* XMGDealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30869F721BD645D800632BD9 /* XMGDealCell.m */; };
-		30869F761BD645D800632BD9 /* XMGDealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30869F731BD645D800632BD9 /* XMGDealCell.xib */; };
-		30869F7A1BD6486D00632BD9 /* deals.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30869F791BD6486D00632BD9 /* deals.plist */; };
 		30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */; };
 		30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B2DB9F1BD6515400F00DF0 /* WXZLouPan.m */; };
 		30D59AAD1BD5DDB3003F0A0C /* MIDU_HomeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D59AAC1BD5DDB3003F0A0C /* MIDU_HomeTopView.m */; };
@@ -62,12 +58,6 @@
 		30869F6A1BD637F700632BD9 /* WXZTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZTableViewCell.h; sourceTree = "<group>"; };
 		30869F6B1BD637F700632BD9 /* WXZTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZTableViewCell.m; sourceTree = "<group>"; };
 		30869F6C1BD637F700632BD9 /* WXZTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZTableViewCell.xib; sourceTree = "<group>"; };
-		30869F6F1BD645D800632BD9 /* XMGDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGDeal.h; sourceTree = "<group>"; };
-		30869F701BD645D800632BD9 /* XMGDeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGDeal.m; sourceTree = "<group>"; };
-		30869F711BD645D800632BD9 /* XMGDealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGDealCell.h; sourceTree = "<group>"; };
-		30869F721BD645D800632BD9 /* XMGDealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGDealCell.m; sourceTree = "<group>"; };
-		30869F731BD645D800632BD9 /* XMGDealCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMGDealCell.xib; sourceTree = "<group>"; };
-		30869F791BD6486D00632BD9 /* deals.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = deals.plist; sourceTree = "<group>"; };
 		30A9F1EE1BD4A20E00A6440D /* WXZSeachView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZSeachView.h; sourceTree = "<group>"; };
 		30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZSeachView.m; sourceTree = "<group>"; };
 		30B2DB9E1BD6515400F00DF0 /* WXZLouPan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPan.h; sourceTree = "<group>"; };
@@ -190,12 +180,6 @@
 				30869F6A1BD637F700632BD9 /* WXZTableViewCell.h */,
 				30869F6B1BD637F700632BD9 /* WXZTableViewCell.m */,
 				30869F6C1BD637F700632BD9 /* WXZTableViewCell.xib */,
-				30869F6F1BD645D800632BD9 /* XMGDeal.h */,
-				30869F701BD645D800632BD9 /* XMGDeal.m */,
-				30869F711BD645D800632BD9 /* XMGDealCell.h */,
-				30869F721BD645D800632BD9 /* XMGDealCell.m */,
-				30869F731BD645D800632BD9 /* XMGDealCell.xib */,
-				30869F791BD6486D00632BD9 /* deals.plist */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -452,8 +436,6 @@
 			files = (
 				30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */,
 				30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */,
-				30869F761BD645D800632BD9 /* XMGDealCell.xib in Resources */,
-				30869F7A1BD6486D00632BD9 /* deals.plist in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
 				30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */,
 			);
@@ -507,9 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				305784471BD3D35000169C44 /* AppDelegate.m in Sources */,
-				30869F751BD645D800632BD9 /* XMGDealCell.m in Sources */,
 				30D59AAD1BD5DDB3003F0A0C /* MIDU_HomeTopView.m in Sources */,
-				30869F741BD645D800632BD9 /* XMGDeal.m in Sources */,
 				30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */,
 				30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,

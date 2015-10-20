@@ -9,10 +9,6 @@
 #import "WXZLouPanController.h"
 #import "WXZSeachView.h"
 
-#import "XMGDeal.h"
-#import "XMGDealCell.h"
-
-
 @interface WXZLouPanController ()
 /** 所有团购数据 */
 @property (nonatomic, strong) NSArray *dates;
@@ -32,24 +28,6 @@
     // 设置导航栏左边的按钮
 }
 
-#pragma 懒加载数据
-- (NSArray *)dates
-{
-    if (_dates == nil)
-    {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"deals.plist" ofType:nil];
-        NSArray *dictArray = [NSArray arrayWithContentsOfFile:path];
-        // 字典数组 -> 模型数组
-        NSMutableArray *dealArray = [NSMutableArray array];
-        for (NSDictionary *dict in dictArray) {
-            XMGDeal *deal = [XMGDeal dealWithDict:dict];
-            [dealArray addObject:deal];
-        }
-            _dates = dealArray;
-    }
-        return _dates;
-}
-
 
 
 #pragma mark - Table view data source
@@ -58,16 +36,11 @@
     return self.dates.count;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // 创建cell
-    XMGDealCell *cell = [XMGDealCell cellWithTableView:tableView];
-    
-    // 取出模型数据
-    cell.deal = self.dates[indexPath.row];
-    
-    return cell;
-}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    return cell;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
