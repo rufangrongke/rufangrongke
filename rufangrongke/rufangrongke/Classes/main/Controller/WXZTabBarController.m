@@ -10,10 +10,14 @@
 #import "WXZLouPanController.h"
 #import "WXZKeHuController.h"
 #import "WXZWoController.h"
+#import "WXZNavController.h"
+#import "WXZTabBar.h"
 
 @interface WXZTabBarController ()
 
 @end
+
+#define FontSize 12
 
 @implementation WXZTabBarController
 
@@ -22,7 +26,7 @@
     
     // 通过appearance统一设置所有UITabBarItem的文字属性
     NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
-    attrs[NSFontAttributeName] = [UIFont systemFontOfSize:12];
+    attrs[NSFontAttributeName] = [UIFont systemFontOfSize:FontSize];
     attrs[NSForegroundColorAttributeName] = [UIColor grayColor];
     
     NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
@@ -40,6 +44,8 @@
     
     [self setupChildVc:[[WXZWoController alloc] init] title:@"我" image:@"ico_me_normal" selectedImage:@"ico_me_press"];
     
+    // 自定义Tabbar
+    [self setValue:[[WXZTabBar alloc] init] forKey:@"tabBar"];
 }
 
 /**
@@ -54,8 +60,11 @@
     vc.tabBarItem.selectedImage = [UIImage imageNamed:selectedImage];
     
     // 包装一个导航控制器, 添加导航控制器为tabbarcontroller的子控制器
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:vc];
+    
+    // 设置导航栏背景图片和颜色
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"NavBg"] forBarMetrics:UIBarMetricsDefault];
+    
     [self addChildViewController:nav];
 }
 

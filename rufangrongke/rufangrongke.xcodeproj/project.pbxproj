@@ -14,6 +14,12 @@
 		305784561BD3D54900169C44 /* WXZKeHuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305784551BD3D54900169C44 /* WXZKeHuController.m */; };
 		305784591BD3D55B00169C44 /* WXZWoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305784581BD3D55B00169C44 /* WXZWoController.m */; };
 		3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3057845C1BD3DA3100169C44 /* UIView+WXZFrame.m */; };
+		30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */; };
+		30D59AAD1BD5DDB3003F0A0C /* MIDU_HomeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D59AAC1BD5DDB3003F0A0C /* MIDU_HomeTopView.m */; };
+		30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30D59AB31BD5E519003F0A0C /* WXZSeachView.xib */; };
+		30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D59AB61BD5EAEE003F0A0C /* WXZNavController.m */; };
+		30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D59AB91BD5ECD6003F0A0C /* WXZTabBar.m */; };
+		30D59ABE1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D59ABD1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.m */; };
 		30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2741BD2B3B4006A8090 /* Images.xcassets */; };
 		30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2761BD2B3B4006A8090 /* LaunchScreen.xib */; };
 		30ECA2841BD2B3B5006A8090 /* rufangrongkeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30ECA2831BD2B3B5006A8090 /* rufangrongkeTests.m */; };
@@ -46,6 +52,19 @@
 		3057845A1BD3D96B00169C44 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3057845B1BD3DA3100169C44 /* UIView+WXZFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WXZFrame.h"; sourceTree = "<group>"; };
 		3057845C1BD3DA3100169C44 /* UIView+WXZFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WXZFrame.m"; sourceTree = "<group>"; };
+		30A9F1EE1BD4A20E00A6440D /* WXZSeachView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZSeachView.h; sourceTree = "<group>"; };
+		30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZSeachView.m; sourceTree = "<group>"; };
+		30D59AAB1BD5DDB3003F0A0C /* MIDU_HomeTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDU_HomeTopView.h; sourceTree = "<group>"; };
+		30D59AAC1BD5DDB3003F0A0C /* MIDU_HomeTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDU_HomeTopView.m; sourceTree = "<group>"; };
+		30D59AAE1BD5DE32003F0A0C /* MIDU_HomeDefineVariableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIDU_HomeDefineVariableTool.h; sourceTree = "<group>"; };
+		30D59AAF1BD5DE67003F0A0C /* DefineVariableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineVariableTool.h; sourceTree = "<group>"; };
+		30D59AB31BD5E519003F0A0C /* WXZSeachView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZSeachView.xib; sourceTree = "<group>"; };
+		30D59AB51BD5EAEE003F0A0C /* WXZNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZNavController.h; sourceTree = "<group>"; };
+		30D59AB61BD5EAEE003F0A0C /* WXZNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZNavController.m; sourceTree = "<group>"; };
+		30D59AB81BD5ECD6003F0A0C /* WXZTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZTabBar.h; sourceTree = "<group>"; };
+		30D59AB91BD5ECD6003F0A0C /* WXZTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZTabBar.m; sourceTree = "<group>"; };
+		30D59ABC1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+XMGExtension.h"; sourceTree = "<group>"; };
+		30D59ABD1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+XMGExtension.m"; sourceTree = "<group>"; };
 		30ECA2641BD2B3B4006A8090 /* rufangrongke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rufangrongke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ECA2681BD2B3B4006A8090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30ECA2741BD2B3B4006A8090 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -123,6 +142,7 @@
 		305784351BD3D35000169C44 /* loupan */ = {
 			isa = PBXGroup;
 			children = (
+				30D59ABB1BD5EDEF003F0A0C /* Tools */,
 				305784501BD3D51D00169C44 /* Controller */,
 				305784371BD3D35000169C44 /* Model */,
 				305784381BD3D35000169C44 /* View */,
@@ -140,6 +160,13 @@
 		305784381BD3D35000169C44 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				30D59AAF1BD5DE67003F0A0C /* DefineVariableTool.h */,
+				30D59AAE1BD5DE32003F0A0C /* MIDU_HomeDefineVariableTool.h */,
+				30D59AAB1BD5DDB3003F0A0C /* MIDU_HomeTopView.h */,
+				30D59AAC1BD5DDB3003F0A0C /* MIDU_HomeTopView.m */,
+				30A9F1EE1BD4A20E00A6440D /* WXZSeachView.h */,
+				30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */,
+				30D59AB31BD5E519003F0A0C /* WXZSeachView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,6 +190,8 @@
 			children = (
 				3057845B1BD3DA3100169C44 /* UIView+WXZFrame.h */,
 				3057845C1BD3DA3100169C44 /* UIView+WXZFrame.m */,
+				30D59ABC1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.h */,
+				30D59ABD1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -172,6 +201,8 @@
 			children = (
 				3057844A1BD3D3A900169C44 /* WXZTabBarController.h */,
 				3057844B1BD3D3A900169C44 /* WXZTabBarController.m */,
+				30D59AB51BD5EAEE003F0A0C /* WXZNavController.h */,
+				30D59AB61BD5EAEE003F0A0C /* WXZNavController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -179,6 +210,8 @@
 		305784421BD3D35000169C44 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				30D59AB81BD5ECD6003F0A0C /* WXZTabBar.h */,
+				30D59AB91BD5ECD6003F0A0C /* WXZTabBar.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +256,13 @@
 				305784521BD3D52C00169C44 /* WXZLouPanController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		30D59ABB1BD5EDEF003F0A0C /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		30ECA25B1BD2B3B4006A8090 = {
@@ -381,6 +421,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
 				30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */,
 			);
@@ -434,12 +475,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				305784471BD3D35000169C44 /* AppDelegate.m in Sources */,
+				30D59AAD1BD5DDB3003F0A0C /* MIDU_HomeTopView.m in Sources */,
+				30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */,
+				30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,
+				30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */,
 				3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */,
 				305784561BD3D54900169C44 /* WXZKeHuController.m in Sources */,
 				305784591BD3D55B00169C44 /* WXZWoController.m in Sources */,
 				305784531BD3D52D00169C44 /* WXZLouPanController.m in Sources */,
 				305784491BD3D35000169C44 /* main.m in Sources */,
+				30D59ABE1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,7 +607,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = rufangrongke/Classes/main/PrefixHeader.pch;
 				INFOPLIST_FILE = rufangrongke/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -575,7 +621,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = rufangrongke/Classes/main/PrefixHeader.pch;
 				INFOPLIST_FILE = rufangrongke/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

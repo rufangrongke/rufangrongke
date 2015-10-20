@@ -7,6 +7,7 @@
 //
 
 #import "WXZLouPanController.h"
+#import "WXZSeachView.h"
 
 @interface WXZLouPanController ()
 
@@ -17,14 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    // 设置导航栏标题
-//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MainTitle"]];
-//    
-//    // 设置导航栏左边的按钮
-//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"MainTagSubIcon" highImage:@"MainTagSubIconClick" target:self action:@selector(tagClick)];
-//    
-//    // 设置背景色
-//    self.view.backgroundColor = XMGGlobalBg;
+    
+    WXZSeachView *search = [[WXZSeachView alloc] init];
+    
+    self.navigationItem.titleView = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
+    
+    // 设置导航栏左边的按钮
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
