@@ -13,14 +13,14 @@
           "height" : 1
         },
         "capInsets" : {
-          "bottom" : 10,
-          "top" : 10,
-          "right" : 13,
-          "left" : 12
+          "bottom" : 12,
+          "top" : 11,
+          "right" : 36,
+          "left" : 36
         }
       },
       "idiom" : "universal",
-      "filename" : "Snip20151018_7@2x.png",
+      "filename" : "NavBg@2x.png",
       "scale" : "2x"
     },
     {

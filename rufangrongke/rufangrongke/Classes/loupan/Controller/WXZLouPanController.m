@@ -9,7 +9,13 @@
 #import "WXZLouPanController.h"
 #import "WXZSeachView.h"
 
+#import "XMGDeal.h"
+#import "XMGDealCell.h"
+
+
 @interface WXZLouPanController ()
+/** 所有团购数据 */
+@property (nonatomic, strong) NSArray *dates;
 
 @end
 
@@ -21,47 +27,52 @@
     
     WXZSeachView *search = [[WXZSeachView alloc] init];
     
-    self.navigationItem.titleView = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
+    self.navigationItem.titleView = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 1, 30)];
     
     // 设置导航栏左边的按钮
-    
-    
-    // 设置导航栏左边的按钮
-    
-    // 设置导航栏左边的按钮
-    
-    
-    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma 懒加载数据
+- (NSArray *)dates
+{
+    if (_dates == nil)
+    {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"deals.plist" ofType:nil];
+        NSArray *dictArray = [NSArray arrayWithContentsOfFile:path];
+        // 字典数组 -> 模型数组
+        NSMutableArray *dealArray = [NSMutableArray array];
+        for (NSDictionary *dict in dictArray) {
+            XMGDeal *deal = [XMGDeal dealWithDict:dict];
+            [dealArray addObject:deal];
+        }
+            _dates = dealArray;
+    }
+        return _dates;
 }
+
+
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+
+    return self.dates.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    // 创建cell
+    XMGDealCell *cell = [XMGDealCell cellWithTableView:tableView];
     
-    // Configure the cell...
+    // 取出模型数据
+    cell.deal = self.dates[indexPath.row];
     
     return cell;
 }
-*/
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 70.0;
+}
 
 /*
 // Override to support conditional editing of the table view.
