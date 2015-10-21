@@ -24,7 +24,7 @@
     WXZSeachView *search = [[WXZSeachView alloc] init];
     
     self.navigationItem.titleView = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 1, 30)];
-    
+    // yttvytvjytv
 }
 
 
