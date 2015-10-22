@@ -22,4 +22,7 @@
 #define WXZRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
 #define WXZNavBg WXZRGBColor(241, 92, 16)
+
+// Networking
+#define BaseURL @"http://192.168.1.21:34/Svs/"
 #endif

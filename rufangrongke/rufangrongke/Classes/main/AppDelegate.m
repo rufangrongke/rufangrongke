@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "WXZTabBarController.h"
+#import "WXZLoginController.h"
 
 @interface AppDelegate ()
 
@@ -24,7 +25,7 @@
     self.window.frame = [UIScreen mainScreen].bounds;
     
     // 设置窗口的根控制器
-    self.window.rootViewController = [[WXZTabBarController alloc] init];
+    self.window.rootViewController = [[WXZLoginController alloc] init];
     
     // 显示窗口
     [self.window makeKeyAndVisible];
