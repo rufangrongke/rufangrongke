@@ -38,6 +38,8 @@
 		88EAA71C1BD87C180072CD40 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7111BD87C180072CD40 /* AFURLRequestSerialization.m */; };
 		88EAA71D1BD87C180072CD40 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7131BD87C180072CD40 /* AFURLResponseSerialization.m */; };
 		88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7151BD87C180072CD40 /* AFURLSessionManager.m */; };
+		88EAA7221BD88DA40072CD40 /* WXZLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7201BD88DA40072CD40 /* WXZLoginController.m */; };
+		88EAA7231BD88DA40072CD40 /* WXZLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88EAA7211BD88DA40072CD40 /* WXZLoginController.xib */; };
 		EC7F4BA2BF9782D90A9E7AA8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E4B58BBB8C86BCD96EA8CF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +115,9 @@
 		88EAA7131BD87C180072CD40 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		88EAA7141BD87C180072CD40 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		88EAA7151BD87C180072CD40 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		88EAA71F1BD88DA40072CD40 /* WXZLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLoginController.h; sourceTree = "<group>"; };
+		88EAA7201BD88DA40072CD40 /* WXZLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLoginController.m; sourceTree = "<group>"; };
+		88EAA7211BD88DA40072CD40 /* WXZLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLoginController.xib; sourceTree = "<group>"; };
 		90E4B58BBB8C86BCD96EA8CF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -249,6 +254,9 @@
 				3057844B1BD3D3A900169C44 /* WXZTabBarController.m */,
 				30D59AB51BD5EAEE003F0A0C /* WXZNavController.h */,
 				30D59AB61BD5EAEE003F0A0C /* WXZNavController.m */,
+				88EAA71F1BD88DA40072CD40 /* WXZLoginController.h */,
+				88EAA7201BD88DA40072CD40 /* WXZLoginController.m */,
+				88EAA7211BD88DA40072CD40 /* WXZLoginController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -500,6 +508,7 @@
 				886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */,
 				30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
+				88EAA7231BD88DA40072CD40 /* WXZLoginController.xib in Resources */,
 				886388AF1BD8784A00498AF0 /* WXZKeHuListCell.xib in Resources */,
 				30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */,
 			);
@@ -588,6 +597,7 @@
 				88EAA71A1BD87C180072CD40 /* AFSecurityPolicy.m in Sources */,
 				30D59ABE1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.m in Sources */,
 				88EAA7171BD87C180072CD40 /* AFHTTPRequestOperationManager.m in Sources */,
+				88EAA7221BD88DA40072CD40 /* WXZLoginController.m in Sources */,
 				886388B81BD87AC200498AF0 /* WXZWoController.m in Sources */,
 				88EAA71D1BD87C180072CD40 /* AFURLResponseSerialization.m in Sources */,
 			);
