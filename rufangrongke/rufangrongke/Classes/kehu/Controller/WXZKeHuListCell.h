@@ -1,5 +1,5 @@
 //
-//  WXZWoController.h
+//  WXZKeHuListCell.h
 //  rufangrongke
 //
 //  Created by 儒房融科 on 15/10/22.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WXZWoController : UIViewController
+@interface WXZKeHuListCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet UIView *listCellBackView;
 
 @end

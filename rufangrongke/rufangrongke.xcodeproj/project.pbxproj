@@ -12,7 +12,6 @@
 		3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3057844B1BD3D3A900169C44 /* WXZTabBarController.m */; };
 		305784531BD3D52D00169C44 /* WXZLouPanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305784521BD3D52C00169C44 /* WXZLouPanController.m */; };
 		305784561BD3D54900169C44 /* WXZKeHuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305784551BD3D54900169C44 /* WXZKeHuController.m */; };
-		305784591BD3D55B00169C44 /* WXZWoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305784581BD3D55B00169C44 /* WXZWoController.m */; };
 		3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3057845C1BD3DA3100169C44 /* UIView+WXZFrame.m */; };
 		30869F6D1BD637F700632BD9 /* WXZTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30869F6B1BD637F700632BD9 /* WXZTableViewCell.m */; };
 		30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30869F6C1BD637F700632BD9 /* WXZTableViewCell.xib */; };
@@ -26,6 +25,11 @@
 		30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2741BD2B3B4006A8090 /* Images.xcassets */; };
 		30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2761BD2B3B4006A8090 /* LaunchScreen.xib */; };
 		30ECA2841BD2B3B5006A8090 /* rufangrongkeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30ECA2831BD2B3B5006A8090 /* rufangrongkeTests.m */; };
+		886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886388A91BD877AB00498AF0 /* WXZKeHuController.xib */; };
+		886388AE1BD8784A00498AF0 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 886388AC1BD8784A00498AF0 /* WXZKeHuListCell.m */; };
+		886388AF1BD8784A00498AF0 /* WXZKeHuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886388AD1BD8784A00498AF0 /* WXZKeHuListCell.xib */; };
+		886388B81BD87AC200498AF0 /* WXZWoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 886388B61BD87AC200498AF0 /* WXZWoController.m */; };
+		886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886388B71BD87AC200498AF0 /* WXZWoController.xib */; };
 		EC7F4BA2BF9782D90A9E7AA8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E4B58BBB8C86BCD96EA8CF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -50,8 +54,6 @@
 		305784521BD3D52C00169C44 /* WXZLouPanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanController.m; sourceTree = "<group>"; };
 		305784541BD3D54900169C44 /* WXZKeHuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKeHuController.h; sourceTree = "<group>"; };
 		305784551BD3D54900169C44 /* WXZKeHuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKeHuController.m; sourceTree = "<group>"; };
-		305784571BD3D55B00169C44 /* WXZWoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZWoController.h; sourceTree = "<group>"; };
-		305784581BD3D55B00169C44 /* WXZWoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoController.m; sourceTree = "<group>"; };
 		3057845A1BD3D96B00169C44 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3057845B1BD3DA3100169C44 /* UIView+WXZFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WXZFrame.h"; sourceTree = "<group>"; };
 		3057845C1BD3DA3100169C44 /* UIView+WXZFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WXZFrame.m"; sourceTree = "<group>"; };
@@ -81,6 +83,13 @@
 		30ECA2821BD2B3B5006A8090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30ECA2831BD2B3B5006A8090 /* rufangrongkeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rufangrongkeTests.m; sourceTree = "<group>"; };
 		39928E051B59D36C45248CC0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		886388A91BD877AB00498AF0 /* WXZKeHuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKeHuController.xib; sourceTree = "<group>"; };
+		886388AB1BD8784A00498AF0 /* WXZKeHuListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZKeHuListCell.h; path = rufangrongke/Classes/kehu/Controller/WXZKeHuListCell.h; sourceTree = SOURCE_ROOT; };
+		886388AC1BD8784A00498AF0 /* WXZKeHuListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZKeHuListCell.m; path = rufangrongke/Classes/kehu/Controller/WXZKeHuListCell.m; sourceTree = SOURCE_ROOT; };
+		886388AD1BD8784A00498AF0 /* WXZKeHuListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WXZKeHuListCell.xib; path = rufangrongke/Classes/kehu/Controller/WXZKeHuListCell.xib; sourceTree = SOURCE_ROOT; };
+		886388B51BD87AC200498AF0 /* WXZWoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZWoController.h; sourceTree = "<group>"; };
+		886388B61BD87AC200498AF0 /* WXZWoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoController.m; sourceTree = "<group>"; };
+		886388B71BD87AC200498AF0 /* WXZWoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZWoController.xib; sourceTree = "<group>"; };
 		90E4B58BBB8C86BCD96EA8CF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -129,6 +138,7 @@
 			children = (
 				305784541BD3D54900169C44 /* WXZKeHuController.h */,
 				305784551BD3D54900169C44 /* WXZKeHuController.m */,
+				886388A91BD877AB00498AF0 /* WXZKeHuController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -143,6 +153,9 @@
 		305784341BD3D35000169C44 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				886388AB1BD8784A00498AF0 /* WXZKeHuListCell.h */,
+				886388AC1BD8784A00498AF0 /* WXZKeHuListCell.m */,
+				886388AD1BD8784A00498AF0 /* WXZKeHuListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,8 +255,9 @@
 		305784441BD3D35000169C44 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				305784571BD3D55B00169C44 /* WXZWoController.h */,
-				305784581BD3D55B00169C44 /* WXZWoController.m */,
+				886388B51BD87AC200498AF0 /* WXZWoController.h */,
+				886388B61BD87AC200498AF0 /* WXZWoController.m */,
+				886388B71BD87AC200498AF0 /* WXZWoController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -435,8 +449,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */,
+				886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */,
+				886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */,
 				30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
+				886388AF1BD8784A00498AF0 /* WXZKeHuListCell.xib in Resources */,
 				30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,13 +512,14 @@
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,
 				30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */,
 				3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */,
+				886388AE1BD8784A00498AF0 /* WXZKeHuListCell.m in Sources */,
 				305784561BD3D54900169C44 /* WXZKeHuController.m in Sources */,
-				305784591BD3D55B00169C44 /* WXZWoController.m in Sources */,
 				30869F6D1BD637F700632BD9 /* WXZTableViewCell.m in Sources */,
 				305784531BD3D52D00169C44 /* WXZLouPanController.m in Sources */,
 				305784491BD3D35000169C44 /* main.m in Sources */,
 				30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */,
 				30D59ABE1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.m in Sources */,
+				886388B81BD87AC200498AF0 /* WXZWoController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
