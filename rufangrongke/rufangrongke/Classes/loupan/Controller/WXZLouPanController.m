@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // 安装
     
     WXZSeachView *search = [[WXZSeachView alloc] init];
     
