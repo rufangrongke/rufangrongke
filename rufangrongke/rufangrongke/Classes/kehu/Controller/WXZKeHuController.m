@@ -8,8 +8,6 @@
 
 #import "WXZKeHuController.h"
 #import "UIBarButtonItem+XMGExtension.h"
-#import "DefineVariableTool.h"
-#import <AFNetworking.h>
 #import "WXZKeHuListCell.h"
 
 @interface WXZKeHuController ()
@@ -39,21 +37,7 @@
 #pragma mark - Data Request Methods
 - (void)request
 {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *url = nil;
-    //        NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
-    //        NSURLSessionDataTask *task = [[NSURLSessionDataTask alloc] init];
-    //        NSObject *obj = [[NSObject alloc] init];
-    //        NSError *error = nil;
-    //        [manager GET:&url parameters:parameter success:^nullable void(NSURLSessionDataTask * task, id obj) {
-    //
-    //        } failure:^nullable void(NSURLSessionDataTask * task, NSError * nil) {
-    //
-    //        }];
-    //        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/html", nil];
-    //        manager.requestSerializer.HTTPShouldHandleCookies = YES;
-    
-    
+       
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,7 +84,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     // 添加新客户背景view
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
     headerView.backgroundColor = [UIColor clearColor];
     
     // 添加新客户按钮

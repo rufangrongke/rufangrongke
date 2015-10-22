@@ -17,7 +17,6 @@
 		30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30869F6C1BD637F700632BD9 /* WXZTableViewCell.xib */; };
 		30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */; };
 		30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B2DB9F1BD6515400F00DF0 /* WXZLouPan.m */; };
-		30D59AAD1BD5DDB3003F0A0C /* MIDU_HomeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D59AAC1BD5DDB3003F0A0C /* MIDU_HomeTopView.m */; };
 		30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30D59AB31BD5E519003F0A0C /* WXZSeachView.xib */; };
 		30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D59AB61BD5EAEE003F0A0C /* WXZNavController.m */; };
 		30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D59AB91BD5ECD6003F0A0C /* WXZTabBar.m */; };
@@ -73,10 +72,6 @@
 		30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZSeachView.m; sourceTree = "<group>"; };
 		30B2DB9E1BD6515400F00DF0 /* WXZLouPan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPan.h; sourceTree = "<group>"; };
 		30B2DB9F1BD6515400F00DF0 /* WXZLouPan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPan.m; sourceTree = "<group>"; };
-		30D59AAB1BD5DDB3003F0A0C /* MIDU_HomeTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDU_HomeTopView.h; sourceTree = "<group>"; };
-		30D59AAC1BD5DDB3003F0A0C /* MIDU_HomeTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDU_HomeTopView.m; sourceTree = "<group>"; };
-		30D59AAE1BD5DE32003F0A0C /* MIDU_HomeDefineVariableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MIDU_HomeDefineVariableTool.h; sourceTree = "<group>"; };
-		30D59AAF1BD5DE67003F0A0C /* DefineVariableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineVariableTool.h; sourceTree = "<group>"; };
 		30D59AB31BD5E519003F0A0C /* WXZSeachView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZSeachView.xib; sourceTree = "<group>"; };
 		30D59AB51BD5EAEE003F0A0C /* WXZNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZNavController.h; sourceTree = "<group>"; };
 		30D59AB61BD5EAEE003F0A0C /* WXZNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZNavController.m; sourceTree = "<group>"; };
@@ -211,10 +206,6 @@
 		305784381BD3D35000169C44 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				30D59AAF1BD5DE67003F0A0C /* DefineVariableTool.h */,
-				30D59AAE1BD5DE32003F0A0C /* MIDU_HomeDefineVariableTool.h */,
-				30D59AAB1BD5DDB3003F0A0C /* MIDU_HomeTopView.h */,
-				30D59AAC1BD5DDB3003F0A0C /* MIDU_HomeTopView.m */,
 				30A9F1EE1BD4A20E00A6440D /* WXZSeachView.h */,
 				30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */,
 				30D59AB31BD5E519003F0A0C /* WXZSeachView.xib */,
@@ -432,6 +423,7 @@
 				30ECA2611BD2B3B4006A8090 /* Frameworks */,
 				30ECA2621BD2B3B4006A8090 /* Resources */,
 				8587A1DDD609E9873BE1410D /* Copy Pods Resources */,
+				4C0C5D1DD6098693B2070FC9 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -523,6 +515,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4C0C5D1DD6098693B2070FC9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8587A1DDD609E9873BE1410D /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -561,7 +568,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				305784471BD3D35000169C44 /* AppDelegate.m in Sources */,
-				30D59AAD1BD5DDB3003F0A0C /* MIDU_HomeTopView.m in Sources */,
 				30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */,
 				88EAA7181BD87C180072CD40 /* AFHTTPSessionManager.m in Sources */,
 				30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */,
