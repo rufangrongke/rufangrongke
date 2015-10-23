@@ -39,7 +39,6 @@
     
     // 添加子控制器
     [self setupChildVc:[[WXZLouPanController alloc] init] title:@"楼盘" image:@"ico_index_normal" selectedImage:@"ico_index_press"];
-    
     [self setupChildVc:[[WXZKeHuController alloc] init] title:@"客户" image:@"客户" selectedImage:@"客户"];
     
     [self setupChildVc:[[WXZWoController alloc] init] title:@"我" image:@"ico_me_normal" selectedImage:@"ico_me_press"];
@@ -61,6 +60,7 @@
     
     // 包装一个导航控制器, 添加导航控制器为tabbarcontroller的子控制器
     WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:vc];
+    
     
     // 设置导航栏背景图片和颜色
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"NavBg"] forBarMetrics:UIBarMetricsDefault];
