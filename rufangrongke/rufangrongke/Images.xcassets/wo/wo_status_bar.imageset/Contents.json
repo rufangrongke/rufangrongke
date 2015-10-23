@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "wo_right_ arrow.png"
+      "filename" : "wo_status_bar.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "wo_right_ arrow@2x.png"
+      "filename" : "wo_status_bar@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "wo_right_ arrow@3x.png"
+      "filename" : "wo_status_bar@3x.png"
     }
   ],
   "info" : {
