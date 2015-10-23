@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view from its nib.
     
     // 视图整体背景色
-    self.view.backgroundColor = WXZRGBColor(209, 211, 212);
+    self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = YES;
@@ -86,18 +86,20 @@
                 headCell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
+            // 头像外边框
             headCell.headBorderImgView.layer.cornerRadius = 60;
             headCell.headBorderImgView.layer.masksToBounds = YES;
             headCell.headBorderImgView.layer.borderWidth = 6;
             headCell.headBorderImgView.layer.borderColor = WXZRGBColor(27, 28, 27).CGColor;
-            headCell.headBorderImgView.alpha = 0.44f;//;
-            
+            headCell.headBorderImgView.alpha = 0.44f;
+            // 头像内边框
             headCell.headImgView.layer.cornerRadius = 60;
             headCell.headImgView.layer.masksToBounds = YES;
             headCell.headImgView.layer.borderWidth = 8;
             headCell.headImgView.layer.borderColor =  WXZRGBColor(104, 111, 111).CGColor;
             
-//            headCell.headImgView.hidden = YES;
+            // 添加立即绑定button 响应事件
+            [headCell.bindingBtn addTarget:self action:@selector(immediatelyBindingAction:) forControlEvents:UIControlEventTouchUpInside];
             
             return headCell;
         }
@@ -111,6 +113,7 @@
                 typeCell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
+            // 添加button 响应事件
             [typeCell.commissionBtn addTarget:self action:@selector(pushToCommissionPage:) forControlEvents:UIControlEventTouchUpInside];
             [typeCell.chengjiaojiangBtn addTarget:self action:@selector(pushToChengjiaojiangPage:) forControlEvents:UIControlEventTouchUpInside];
             [typeCell.integralBtn addTarget:self action:@selector(pushToIntegralPage:) forControlEvents:UIControlEventTouchUpInside];
@@ -127,7 +130,6 @@
         {
             listCell = [WXZWoListCell initHeadCell];
             listCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            listCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
         // 判断列表属于哪个组，显示不同信息
@@ -201,7 +203,51 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"section = %ld  ,row = %ld",(long)indexPath.section,(long)indexPath.row);
+    switch (indexPath.section)
+    {
+        case 0:
+        {
+            if (indexPath.row == 0)
+            {
+                // 推出个人信息页面
+                
+            }
+        }
+            break;
+        case 1:
+        {
+            if (indexPath.row == 0)
+            {
+                // 推出意见反馈页面
+                
+            }
+            else if (indexPath.row == 1)
+            {
+                // 推出排行榜页面
+                
+            }
+            else
+            {
+                // 推出百问百答页面
+                
+            }
+        }
+            break;
+        case 2:
+        {
+            // 推出帮助页面
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - 立即绑定事件
+- (void)immediatelyBindingAction:(id)sender
+{
+    NSLog(@"立即绑定");
 }
 
 #pragma mark - Wo_Type Button Event

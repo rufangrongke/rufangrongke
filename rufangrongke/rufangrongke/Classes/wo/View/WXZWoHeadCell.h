@@ -13,7 +13,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headBgImgVeiw; // 头像大背景图
 @property (weak, nonatomic) IBOutlet UIImageView *headBorderImgView; // 头像边框
 @property (weak, nonatomic) IBOutlet UIImageView *headImgView; // 头像
+@property (weak, nonatomic) IBOutlet UIImageView *certificationImgView;
 
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *storeYardsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *declarationLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *bindingBtn;
 
 + (instancetype)initHeadCell;
 

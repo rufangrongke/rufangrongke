@@ -23,15 +23,41 @@
     // 设置搜索框
     self.navigationItem.titleView = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
     
+    
+}
+
+#define fontf [UIFont systemFontOfSize:16];
+
+- (void)viewWillAppear:(BOOL)animated
+{
     // 设置导航栏左右两侧的 button
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"" highImage:@"" target:self action:@selector(navLeftAction:)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"" highImage:@"" target:self action:@selector(navRightAction:)];
+    UIView *leftBtnView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 53, 44)];
+    // 标题
+    UILabel *leftTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 34, leftBtnView.height)];
+    leftTitleLabel.text = @"筛选";
+    leftTitleLabel.textAlignment = NSTextAlignmentLeft;
+    leftTitleLabel.textColor = [UIColor whiteColor];
+    [leftBtnView addSubview:leftTitleLabel];
+    // 箭头图片
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(leftTitleLabel.x+leftTitleLabel.width, (leftBtnView.height-11)/2, 19, 11)];
+    imgView.image = [UIImage imageNamed:@"kh_zkj"];
+    imgView.userInteractionEnabled = YES;
+    [leftBtnView addSubview:imgView];
+    // 添加轻击手势
+    UITapGestureRecognizer *leftTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screeningAction:)];
+    [leftBtnView addGestureRecognizer:leftTap];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    // 右侧按钮
+    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtn.frame = CGRectMake(0, 0, 40, 44);
+    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    rightBtn.titleLabel.font = fontf;
+    [rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)]; // 标题向左侧偏移7
+    [rightBtn addTarget:self action:@selector(determineAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtnView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
 }
 
 #pragma mark - Data Request Methods
@@ -123,14 +149,16 @@
 }
 
 #pragma mark - Navigation BarButtonItem Click Event
-- (void)navLeftAction:(id)sender
+- (void)screeningAction:(id)sender
 {
-    
+    // 筛选
+    NSLog(@"筛选");
 }
 
-- (void)navRightAction:(id)sender
+- (void)determineAction:(id)sender
 {
-    
+    // 确定
+    NSLog(@"确定");
 }
 
 /*
