@@ -25,4 +25,12 @@
 
 // Networking
 #define BaseURL @"http://192.168.1.21:34/Svs/"
+
+// System Information Screen
+#define WXZ_ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define WXZ_ScreenHeight [UIScreen mainScreen].bounds.size.height
+
+// Set Font
+#define WXZ_SystemFont(size) [UIFont systemFontOfSize:size]
+
 #endif

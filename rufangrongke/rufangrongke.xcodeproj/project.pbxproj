@@ -29,12 +29,22 @@
 		88588DC31BD8D097002B357D /* WXZWoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88588DC11BD8D097002B357D /* WXZWoListCell.m */; };
 		88588DC41BD8D097002B357D /* WXZWoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88588DC21BD8D097002B357D /* WXZWoListCell.xib */; };
 		886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886388A91BD877AB00498AF0 /* WXZKeHuController.xib */; };
-		886388AE1BD8784A00498AF0 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 886388AC1BD8784A00498AF0 /* WXZKeHuListCell.m */; };
-		886388AF1BD8784A00498AF0 /* WXZKeHuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886388AD1BD8784A00498AF0 /* WXZKeHuListCell.xib */; };
 		886388B81BD87AC200498AF0 /* WXZWoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 886388B61BD87AC200498AF0 /* WXZWoController.m */; };
 		886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886388B71BD87AC200498AF0 /* WXZWoController.xib */; };
 		8870349B1BD9BDC300315D1A /* WXZWoHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 887034991BD9BDC300315D1A /* WXZWoHeadCell.m */; };
 		8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8870349A1BD9BDC300315D1A /* WXZWoHeadCell.xib */; };
+		888575B11BDB4679005E5AC4 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */; };
+		888575B21BDB4679005E5AC4 /* WXZKeHuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575B01BDB4679005E5AC4 /* WXZKeHuListCell.xib */; };
+		888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575B41BDB46FB005E5AC4 /* WXZKHListHeaderView.m */; };
+		888575B71BDB472C005E5AC4 /* WXZKHListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575B61BDB472C005E5AC4 /* WXZKHListHeaderView.xib */; };
+		888575BA1BDB4A8E005E5AC4 /* WXZKHListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575B91BDB4A8E005E5AC4 /* WXZKHListFooterView.m */; };
+		888575BC1BDB4AA2005E5AC4 /* WXZKHListFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575BB1BDB4AA2005E5AC4 /* WXZKHListFooterView.xib */; };
+		889887B91BDB7CC100460FE3 /* WXZPersonalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889887B71BDB7CC100460FE3 /* WXZPersonalController.m */; };
+		889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887B81BDB7CC100460FE3 /* WXZPersonalController.xib */; };
+		889887C31BDB862F00460FE3 /* WXZPersonalDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 889887C11BDB862F00460FE3 /* WXZPersonalDataCell.m */; };
+		889887C41BDB862F00460FE3 /* WXZPersonalDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887C21BDB862F00460FE3 /* WXZPersonalDataCell.xib */; };
+		889887CD1BDB99A000460FE3 /* WXZPersonalData2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 889887CB1BDB99A000460FE3 /* WXZPersonalData2Cell.m */; };
+		889887CE1BDB99A000460FE3 /* WXZPersonalData2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887CC1BDB99A000460FE3 /* WXZPersonalData2Cell.xib */; };
 		88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7041BD87C180072CD40 /* AFHTTPRequestOperation.m */; };
 		88EAA7171BD87C180072CD40 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7061BD87C180072CD40 /* AFHTTPRequestOperationManager.m */; };
 		88EAA7181BD87C180072CD40 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7081BD87C180072CD40 /* AFHTTPSessionManager.m */; };
@@ -102,15 +112,30 @@
 		88588DC11BD8D097002B357D /* WXZWoListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoListCell.m; sourceTree = "<group>"; };
 		88588DC21BD8D097002B357D /* WXZWoListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZWoListCell.xib; sourceTree = "<group>"; };
 		886388A91BD877AB00498AF0 /* WXZKeHuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKeHuController.xib; sourceTree = "<group>"; };
-		886388AB1BD8784A00498AF0 /* WXZKeHuListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZKeHuListCell.h; path = rufangrongke/Classes/kehu/Controller/WXZKeHuListCell.h; sourceTree = SOURCE_ROOT; };
-		886388AC1BD8784A00498AF0 /* WXZKeHuListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZKeHuListCell.m; path = rufangrongke/Classes/kehu/Controller/WXZKeHuListCell.m; sourceTree = SOURCE_ROOT; };
-		886388AD1BD8784A00498AF0 /* WXZKeHuListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WXZKeHuListCell.xib; path = rufangrongke/Classes/kehu/Controller/WXZKeHuListCell.xib; sourceTree = SOURCE_ROOT; };
 		886388B51BD87AC200498AF0 /* WXZWoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZWoController.h; sourceTree = "<group>"; };
 		886388B61BD87AC200498AF0 /* WXZWoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoController.m; sourceTree = "<group>"; };
 		886388B71BD87AC200498AF0 /* WXZWoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZWoController.xib; sourceTree = "<group>"; };
 		887034981BD9BDC300315D1A /* WXZWoHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZWoHeadCell.h; sourceTree = "<group>"; };
 		887034991BD9BDC300315D1A /* WXZWoHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoHeadCell.m; sourceTree = "<group>"; };
 		8870349A1BD9BDC300315D1A /* WXZWoHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZWoHeadCell.xib; sourceTree = "<group>"; };
+		888575AE1BDB4679005E5AC4 /* WXZKeHuListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKeHuListCell.h; sourceTree = "<group>"; };
+		888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKeHuListCell.m; sourceTree = "<group>"; };
+		888575B01BDB4679005E5AC4 /* WXZKeHuListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKeHuListCell.xib; sourceTree = "<group>"; };
+		888575B31BDB46FB005E5AC4 /* WXZKHListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKHListHeaderView.h; sourceTree = "<group>"; };
+		888575B41BDB46FB005E5AC4 /* WXZKHListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKHListHeaderView.m; sourceTree = "<group>"; };
+		888575B61BDB472C005E5AC4 /* WXZKHListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKHListHeaderView.xib; sourceTree = "<group>"; };
+		888575B81BDB4A8E005E5AC4 /* WXZKHListFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKHListFooterView.h; sourceTree = "<group>"; };
+		888575B91BDB4A8E005E5AC4 /* WXZKHListFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKHListFooterView.m; sourceTree = "<group>"; };
+		888575BB1BDB4AA2005E5AC4 /* WXZKHListFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKHListFooterView.xib; sourceTree = "<group>"; };
+		889887B61BDB7CC100460FE3 /* WXZPersonalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalController.h; sourceTree = "<group>"; };
+		889887B71BDB7CC100460FE3 /* WXZPersonalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalController.m; sourceTree = "<group>"; };
+		889887B81BDB7CC100460FE3 /* WXZPersonalController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalController.xib; sourceTree = "<group>"; };
+		889887C01BDB862F00460FE3 /* WXZPersonalDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalDataCell.h; sourceTree = "<group>"; };
+		889887C11BDB862F00460FE3 /* WXZPersonalDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalDataCell.m; sourceTree = "<group>"; };
+		889887C21BDB862F00460FE3 /* WXZPersonalDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalDataCell.xib; sourceTree = "<group>"; };
+		889887CA1BDB99A000460FE3 /* WXZPersonalData2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalData2Cell.h; sourceTree = "<group>"; };
+		889887CB1BDB99A000460FE3 /* WXZPersonalData2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalData2Cell.m; sourceTree = "<group>"; };
+		889887CC1BDB99A000460FE3 /* WXZPersonalData2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalData2Cell.xib; sourceTree = "<group>"; };
 		88EAA7031BD87C180072CD40 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		88EAA7041BD87C180072CD40 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		88EAA7051BD87C180072CD40 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -196,9 +221,15 @@
 		305784341BD3D35000169C44 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				886388AB1BD8784A00498AF0 /* WXZKeHuListCell.h */,
-				886388AC1BD8784A00498AF0 /* WXZKeHuListCell.m */,
-				886388AD1BD8784A00498AF0 /* WXZKeHuListCell.xib */,
+				888575AE1BDB4679005E5AC4 /* WXZKeHuListCell.h */,
+				888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */,
+				888575B01BDB4679005E5AC4 /* WXZKeHuListCell.xib */,
+				888575B31BDB46FB005E5AC4 /* WXZKHListHeaderView.h */,
+				888575B41BDB46FB005E5AC4 /* WXZKHListHeaderView.m */,
+				888575B61BDB472C005E5AC4 /* WXZKHListHeaderView.xib */,
+				888575B81BDB4A8E005E5AC4 /* WXZKHListFooterView.h */,
+				888575B91BDB4A8E005E5AC4 /* WXZKHListFooterView.m */,
+				888575BB1BDB4AA2005E5AC4 /* WXZKHListFooterView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +332,9 @@
 				886388B51BD87AC200498AF0 /* WXZWoController.h */,
 				886388B61BD87AC200498AF0 /* WXZWoController.m */,
 				886388B71BD87AC200498AF0 /* WXZWoController.xib */,
+				889887B61BDB7CC100460FE3 /* WXZPersonalController.h */,
+				889887B71BDB7CC100460FE3 /* WXZPersonalController.m */,
+				889887B81BDB7CC100460FE3 /* WXZPersonalController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -324,6 +358,12 @@
 				88588DC01BD8D097002B357D /* WXZWoListCell.h */,
 				88588DC11BD8D097002B357D /* WXZWoListCell.m */,
 				88588DC21BD8D097002B357D /* WXZWoListCell.xib */,
+				889887C01BDB862F00460FE3 /* WXZPersonalDataCell.h */,
+				889887C11BDB862F00460FE3 /* WXZPersonalDataCell.m */,
+				889887C21BDB862F00460FE3 /* WXZPersonalDataCell.xib */,
+				889887CA1BDB99A000460FE3 /* WXZPersonalData2Cell.h */,
+				889887CB1BDB99A000460FE3 /* WXZPersonalData2Cell.m */,
+				889887CC1BDB99A000460FE3 /* WXZPersonalData2Cell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -527,16 +567,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				889887CE1BDB99A000460FE3 /* WXZPersonalData2Cell.xib in Resources */,
+				888575B71BDB472C005E5AC4 /* WXZKHListHeaderView.xib in Resources */,
 				30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */,
 				886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */,
 				886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */,
 				8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */,
 				88588DBC1BD8D031002B357D /* WXZWoTypeCell.xib in Resources */,
 				30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */,
+				889887C41BDB862F00460FE3 /* WXZPersonalDataCell.xib in Resources */,
+				888575B21BDB4679005E5AC4 /* WXZKeHuListCell.xib in Resources */,
 				88588DC41BD8D097002B357D /* WXZWoListCell.xib in Resources */,
+				889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
 				88EAA7231BD88DA40072CD40 /* WXZLoginController.xib in Resources */,
-				886388AF1BD8784A00498AF0 /* WXZKeHuListCell.xib in Resources */,
+				888575BC1BDB4AA2005E5AC4 /* WXZKHListFooterView.xib in Resources */,
 				30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,21 +652,26 @@
 				30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */,
 				88EAA7181BD87C180072CD40 /* AFHTTPSessionManager.m in Sources */,
 				30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */,
+				888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */,
+				889887C31BDB862F00460FE3 /* WXZPersonalDataCell.m in Sources */,
 				88EAA7191BD87C180072CD40 /* AFNetworkReachabilityManager.m in Sources */,
 				88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */,
 				88EAA71C1BD87C180072CD40 /* AFURLRequestSerialization.m in Sources */,
 				88588DBB1BD8D031002B357D /* WXZWoTypeCell.m in Sources */,
 				88EAA71B1BD87C180072CD40 /* AFURLConnectionOperation.m in Sources */,
+				888575B11BDB4679005E5AC4 /* WXZKeHuListCell.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,
 				88588DC31BD8D097002B357D /* WXZWoListCell.m in Sources */,
 				30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */,
 				3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */,
-				886388AE1BD8784A00498AF0 /* WXZKeHuListCell.m in Sources */,
+				889887CD1BDB99A000460FE3 /* WXZPersonalData2Cell.m in Sources */,
 				305784561BD3D54900169C44 /* WXZKeHuController.m in Sources */,
+				889887B91BDB7CC100460FE3 /* WXZPersonalController.m in Sources */,
 				30869F6D1BD637F700632BD9 /* WXZTableViewCell.m in Sources */,
 				305784531BD3D52D00169C44 /* WXZLouPanController.m in Sources */,
 				8870349B1BD9BDC300315D1A /* WXZWoHeadCell.m in Sources */,
+				888575BA1BDB4A8E005E5AC4 /* WXZKHListFooterView.m in Sources */,
 				305784491BD3D35000169C44 /* main.m in Sources */,
 				30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */,
 				88EAA71A1BD87C180072CD40 /* AFSecurityPolicy.m in Sources */,

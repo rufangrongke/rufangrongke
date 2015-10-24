@@ -9,6 +9,8 @@
 #import "WXZKeHuController.h"
 #import "UIBarButtonItem+XMGExtension.h"
 #import "WXZKeHuListCell.h"
+#import "WXZKHListHeaderView.h"
+#import "WXZKHListFooterView.h"
 
 @interface WXZKeHuController ()
 
@@ -18,29 +20,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = WXZRGBColor(237, 237, 237);
+    // 视图整体背景色
+    self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     
     // 设置搜索框
-    self.navigationItem.titleView = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
-    
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+    searchBar.placeholder = @"请输入客户姓名";
+    self.navigationItem.titleView = searchBar;
     
 }
-
-#define fontf [UIFont systemFontOfSize:16];
 
 - (void)viewWillAppear:(BOOL)animated
 {
     // 设置导航栏左右两侧的 button
-    UIView *leftBtnView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 53, 44)];
+    UIView *leftBtnView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     // 标题
-    UILabel *leftTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 34, leftBtnView.height)];
+    UILabel *leftTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 32, leftBtnView.height)];
     leftTitleLabel.text = @"筛选";
     leftTitleLabel.textAlignment = NSTextAlignmentLeft;
     leftTitleLabel.textColor = [UIColor whiteColor];
+    leftTitleLabel.font = WXZ_SystemFont(16);
     [leftBtnView addSubview:leftTitleLabel];
     // 箭头图片
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(leftTitleLabel.x+leftTitleLabel.width, (leftBtnView.height-11)/2, 19, 11)];
-    imgView.image = [UIImage imageNamed:@"kh_zkj"];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(leftTitleLabel.x+leftTitleLabel.width, (leftBtnView.height-6)/2, 12, 6)];
+    imgView.image = [UIImage imageNamed:@"kh_ip_jt"];
     imgView.userInteractionEnabled = YES;
     [leftBtnView addSubview:imgView];
     // 添加轻击手势
@@ -52,8 +55,8 @@
     rightBtn.frame = CGRectMake(0, 0, 40, 44);
     [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    rightBtn.titleLabel.font = fontf;
-    [rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)]; // 标题向左侧偏移7
+    rightBtn.titleLabel.font = WXZ_SystemFont(16);
+    [rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)]; // 标题向左侧偏移
     [rightBtn addTarget:self action:@selector(determineAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtnView];
@@ -73,11 +76,23 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 3;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 20;
+    if (section == 0)
+    {
+        return 2;
+    }
+    else
+    {
+        return 3;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,18 +101,19 @@
     
     if (!keHuInfoCell)
     {
-        keHuInfoCell = [[[NSBundle mainBundle] loadNibNamed:@"WXZKeHuListCell" owner:self options:nil] lastObject];
+        keHuInfoCell = [WXZKeHuListCell initListCell];
         keHuInfoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    // 设置底层view
-    keHuInfoCell.listCellBackView.layer.cornerRadius = 6.0f;
-    keHuInfoCell.listCellBackView.layer.masksToBounds = YES;
-    keHuInfoCell.listCellBackView.layer.borderWidth = 1;
-    keHuInfoCell.listCellBackView.layer.borderColor = [UIColor blackColor].CGColor;
+    // 添加单击事件
+    [keHuInfoCell buttonWithTarget:self action:@selector(reportedOrCallAction:)];
+    keHuInfoCell.reportedBtn.hidden = YES;
+    keHuInfoCell.reportedOrCallBtn.hidden = NO;
     
     // 赋值
-    //    keHuInfoCell.name.text = @"anan";
+    keHuInfoCell.customerNameLabel.text = @"刘丽莎";
+    keHuInfoCell.customerPhoneLabel.text = @"13921754683";
+    keHuInfoCell.houseInfoLabel.text = @"急售新华区｜裕华区，｜三室｜别墅，440-1000万";
     
     return keHuInfoCell;
 }
@@ -109,43 +125,69 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    // 添加新客户背景view
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
-    headerView.backgroundColor = [UIColor clearColor];
+    if (section == 0)
+    {
+        WXZKHListHeaderView *headerView = [WXZKHListHeaderView initListHeaderView]; // header背景 view
+        // 添加轻击手势
+        UITapGestureRecognizer *headerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewKeHuAction:)];
+        [headerView addGestureRecognizer:headerTap];
+        
+        return headerView;
+    }
+    else
+    {
+        return nil;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    WXZKHListFooterView *footerView = [WXZKHListFooterView initListFooterView]; // footer背景 view
+    [footerView footerInfoLabel:@"15-10-21 10:10 带看裕华区6号楼 590-1000W,阿萨德和积分卡"]; // footer 信息
     
-    // 添加新客户按钮
-    UIButton *addKeHuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    addKeHuBtn.frame = CGRectMake(0, 0, headerView.width, headerView.height);
-    [addKeHuBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [addKeHuBtn setTitle:@"添加新客户" forState:UIControlStateNormal];
-    [addKeHuBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
-    [addKeHuBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    addKeHuBtn.backgroundColor = [UIColor orangeColor];
-    [addKeHuBtn addTarget:self action:@selector(addNewKeHuAction:) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:addKeHuBtn];
-    
-    return headerView;
+    return footerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 50;
+    // 返回header的高
+    if (section == 0)
+    {
+        return 48;
+    }
+    else
+    {
+        return 0.1;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 1;
+    return 31;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 75;
 }
 
-// 添加新客户行为
+// 添加新客户事件
 - (void)addNewKeHuAction:(id)sender
 {
     NSLog(@"添加新客户!");
+}
+
+// 报备/打电话事件
+- (void)reportedOrCallAction:(UIButton *)sender
+{
+    if (sender.tag == 100001)
+    {
+        NSLog(@"报备事件");
+    }
+    else
+    {
+        NSLog(@"打电话事件");
+    }
 }
 
 #pragma mark - Navigation BarButtonItem Click Event
