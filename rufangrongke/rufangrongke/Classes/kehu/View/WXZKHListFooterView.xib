@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WXZKHListFooterView"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WXZKHListFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="31"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0L-dZ-TcJ">
+                    <rect key="frame" x="8" y="7" width="36" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.8901960784313725" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="R0L-dZ-TcJ" secondAttribute="centerY" id="7ud-zL-bgw"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="R0L-dZ-TcJ" secondAttribute="trailing" constant="20" id="UMe-Qb-TaR"/>
+                <constraint firstAttribute="bottom" secondItem="R0L-dZ-TcJ" secondAttribute="bottom" constant="5" id="Wdr-BS-TyH"/>
+                <constraint firstItem="R0L-dZ-TcJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="a4y-6O-9z2"/>
+                <constraint firstItem="R0L-dZ-TcJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="kkQ-VF-PcY"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Wdr-BS-TyH"/>
+                    <exclude reference="a4y-6O-9z2"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="671" y="109.5"/>
+        </view>
+    </objects>
+</document>

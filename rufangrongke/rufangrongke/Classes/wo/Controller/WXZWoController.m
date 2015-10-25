@@ -10,10 +10,11 @@
 #import "WXZWoHeadCell.h"
 #import "WXZWoTypeCell.h"
 #import "WXZWoListCell.h"
+#import "WXZPersonalController.h"
 
 @interface WXZWoController ()<UITableViewDelegate,UITableViewDataSource> // 遵循协议
 
-@property (weak, nonatomic) IBOutlet UITableView *myTableView; // 
+@property (weak, nonatomic) IBOutlet UITableView *myTableView; // 底层TableView
 
 @end
 
@@ -24,10 +25,7 @@
     // Do any additional setup after loading the view from its nib.
     
     // 视图整体背景色
-    self.view.backgroundColor = WXZRGBColor(209, 211, 212);
-    
-    // 隐藏导航navigation
-    self.navigationController.navigationBarHidden = YES;
+    self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     
     // 状态栏
     UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
@@ -37,9 +35,25 @@
     // 设置数据源，遵循协议
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
+    
+    // 注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWoData:) name:@"UpdateWoPage" object:nil];
 }
 
-#pragma mark - UITableViewDelegate,UITableViewDataSource Methods
+- (void)viewWillAppear:(BOOL)animated
+{
+    // 隐藏导航navigation
+    self.navigationController.navigationBarHidden = YES;
+    
+    [self.myTableView reloadData];
+}
+
+- (void)updateWoData:(NSNotification *)noti
+{
+    [self.myTableView reloadData];
+}
+
+#pragma mark - UITableViewDelegate/DataSource Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -73,8 +87,6 @@
     // 通过组和行数，显示具体信息
     if (secction == 0)
     {
-        
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         if (row == 0)
         {
             // 头像cell
@@ -86,18 +98,11 @@
                 headCell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
-            headCell.headBorderImgView.layer.cornerRadius = 60;
-            headCell.headBorderImgView.layer.masksToBounds = YES;
-            headCell.headBorderImgView.layer.borderWidth = 6;
-            headCell.headBorderImgView.layer.borderColor = WXZRGBColor(27, 28, 27).CGColor;
-            headCell.headBorderImgView.alpha = 0.44f;//;
+            [headCell headBorder]; // 设置头像边框
+            [headCell updateWoInfo]; // 更新信息
             
-            headCell.headImgView.layer.cornerRadius = 60;
-            headCell.headImgView.layer.masksToBounds = YES;
-            headCell.headImgView.layer.borderWidth = 8;
-            headCell.headImgView.layer.borderColor =  WXZRGBColor(104, 111, 111).CGColor;
-            
-//            headCell.headImgView.hidden = YES;
+            // 添加立即绑定button 响应事件
+            [headCell buttonWithTarget:self withAction:@selector(immediatelyBindingAction:)];
             
             return headCell;
         }
@@ -111,10 +116,8 @@
                 typeCell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
-            [typeCell.commissionBtn addTarget:self action:@selector(pushToCommissionPage:) forControlEvents:UIControlEventTouchUpInside];
-            [typeCell.chengjiaojiangBtn addTarget:self action:@selector(pushToChengjiaojiangPage:) forControlEvents:UIControlEventTouchUpInside];
-            [typeCell.integralBtn addTarget:self action:@selector(pushToIntegralPage:) forControlEvents:UIControlEventTouchUpInside];
-            [typeCell.creditValueBtn addTarget:self action:@selector(pushToCreditValuePage:) forControlEvents:UIControlEventTouchUpInside];
+            // 添加button 响应事件
+            [typeCell buttonWithTarget:self withAction:@selector(typeAction:)];
             
             return typeCell;
         }
@@ -127,34 +130,10 @@
         {
             listCell = [WXZWoListCell initHeadCell];
             listCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            listCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
-        // 判断列表属于哪个组，显示不同信息
-        if (secction == 1)
-        {
-            // section = 1 ,添加分割线
-            if (row < 2)
-            {
-                UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(12, 54.7, [UIScreen mainScreen].bounds.size.width-12, 0.3)];
-                lineLabel.backgroundColor = WXZRGBColor(215, 213, 213);
-                [listCell addSubview:lineLabel];
-            }
-            
-            // 自定义信息
-            NSArray *listImgArr = @[@"wo_ feedback",@"wo_paihangbang",@"wo_ask_best _answer"];
-            NSArray *listTitleArr = @[@"意见反馈",@"排行榜",@"百问百答"];
-            // 赋值
-            listCell.listImgView.image = [UIImage imageNamed:listImgArr[indexPath.row]];
-            listCell.listTitleLabel.text = listTitleArr[indexPath.row];
-        }
-        else
-        {
-            // section = 2 ,信息显示
-            listCell.listImgView.image = [UIImage imageNamed:@"wo_help"];
-            listCell.listTitleLabel.text = @"帮助";
-        }
-        
+        // 列表属于哪个组，显示不同信息
+        [listCell listInfoWithSection:indexPath.section row:indexPath.row];
         
         return listCell;
     }
@@ -201,32 +180,75 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"section = %ld  ,row = %ld",(long)indexPath.section,(long)indexPath.row);
+    NSLog(@"section = %ld,row = %ld",(long)indexPath.section,(long)indexPath.row);
+    switch (indexPath.section)
+    {
+        case 0:
+        {
+            if (indexPath.row == 0)
+            {
+                // 推出个人资料页面
+                NSLog(@"个人资料");
+                [self.navigationController pushViewController:[[WXZPersonalController alloc] init] animated:YES];
+            }
+        }
+            break;
+        case 1:
+        {
+            if (indexPath.row == 0)
+            {
+                // 推出意见反馈页面
+                NSLog(@"意见反馈");
+            }
+            else if (indexPath.row == 1)
+            {
+                // 推出排行榜页面
+                NSLog(@"排行榜");
+            }
+            else
+            {
+                // 推出百问百答页面
+                NSLog(@"百问百答");
+            }
+        }
+            break;
+        case 2:
+        {
+            // 推出帮助页面
+            NSLog(@"帮助");
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - 立即绑定事件
+- (void)immediatelyBindingAction:(id)sender
+{
+    NSLog(@"立即绑定");
 }
 
 #pragma mark - Wo_Type Button Event
-- (void)pushToCommissionPage:(id)sender
+- (void)typeAction:(UIButton *)sender
 {
-    // 佣金
-    NSLog(@"佣金");
-}
-
-- (void)pushToChengjiaojiangPage:(id)sender
-{
-    // 成交奖
-    NSLog(@"成交奖");
-}
-
-- (void)pushToIntegralPage:(id)sender
-{
-    // 积分
-    NSLog(@"积分");
-}
-
-- (void)pushToCreditValuePage:(id)sender
-{
-    // 信用值
-    NSLog(@"信用值");
+    if (sender.tag == 100003)
+    {
+        NSLog(@"佣金");
+    }
+    else if (sender.tag == 100004)
+    {
+        NSLog(@"成交奖");
+    }
+    else if (sender.tag == 100005)
+    {
+        NSLog(@"积分");
+    }
+    else if (sender.tag == 100006)
+    {
+        NSLog(@"信用值");
+    }
 }
 
 - (void)didReceiveMemoryWarning {
