@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "WXZTabBarController.h"
 #import "WXZLoginController.h"
+#import "WXZNavController.h"
 
 @interface AppDelegate ()
 
@@ -24,8 +25,13 @@
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
     
+    // 创建Nav控制器
+//    WXZLoginController *loginVC = [[WXZLoginController alloc]init];
+//    loginVC.
+    WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZLoginController alloc] init]];
+    
     // 设置窗口的根控制器
-    self.window.rootViewController = [[WXZTabBarController alloc] init];
+    self.window.rootViewController = nav;
     
     // 显示窗口
     [self.window makeKeyAndVisible];

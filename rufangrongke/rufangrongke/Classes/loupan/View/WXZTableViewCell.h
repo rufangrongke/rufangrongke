@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WXZLouPan.h"
 @interface WXZTableViewCell : UITableViewCell
-
+/** 楼盘模型 */
+@property (nonatomic, strong) WXZLouPan *loupan;
 @end

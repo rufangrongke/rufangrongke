@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "lp_kehu.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ico_me_normal@2x.png"
+      "filename" : "lp_kehu@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "lp_kehu@3x.png"
     }
   ],
   "info" : {

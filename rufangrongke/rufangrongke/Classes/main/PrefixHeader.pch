@@ -9,18 +9,23 @@
 #ifndef _1_______PrefixHeader_pch
 #define _1_______PrefixHeader_pch
 
+#pragma 头文件
+// 控件尺寸
 #import "UIView+WXZFrame.h"
+// const常量
+#import "WXZConst.h"
 
+#pragma 自定义日志输出
 #ifdef DEBUG
 #define WXZLog(...) NSLog(__VA_ARGS__)
 #else
 #define WXZLog(...)
 #endif
-
 #define WXZLogFunc WXZLog(@"%s", __func__)
 
+#pragma 自定义宏
+// 颜色
 #define WXZRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
-
 #define WXZNavBg WXZRGBColor(241, 92, 16)
 
 // Networking

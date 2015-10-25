@@ -34,4 +34,11 @@
     // Configure the view for the selected state
 }
 
+// 模型-->cell
+- (void)setLoupan:(WXZLouPan *)loupan
+{
+    self.loupan = loupan;
+    
+}
+
 @end

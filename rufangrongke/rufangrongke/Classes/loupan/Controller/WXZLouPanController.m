@@ -8,86 +8,76 @@
 
 #import "WXZLouPanController.h"
 #import "WXZSeachView.h"
+#import <SVProgressHUD.h>
+#import "AFNetworking.h"
+#import "WXZLouPan.h"
+#import "WXZTableViewCell.h"
+#import <MJExtension.h>
 
 @interface WXZLouPanController ()
 /** 所有团购数据 */
-@property (nonatomic, strong) NSArray *dates;
+@property (nonatomic, strong) NSArray *loupanLeibiaoS;
 
 @end
 
 @implementation WXZLouPanController
 
+static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // 安装
     
-    WXZSeachView *search = [[WXZSeachView alloc] init];
+    self.tableView.height = 120;
+    // 添加一个系统的搜索框
+    self.navigationItem.titleView = [[UISearchBar alloc]init];
     
-    self.navigationItem.titleView = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 1, 30)];
-    // yttvytvjytvtvjytvtvjytvtvjytvtvjytvtvjytvtvjytvtvjytv
+    // 注册
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZTableViewCell class]) bundle:nil] forCellReuseIdentifier:WXZLoupanCellID];
+    
+    // 显示指示器
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    
+    // 发送请求
+    NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
+//    WXZLog(@"%@", url);
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"inp"] = @1;
+    [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        // 隐藏指示器
+        [SVProgressHUD dismiss];
+        
+//        WXZLog(@"%@", responseObject);
+        // 服务器返回的JSON数据
+        self.loupanLeibiaoS = [WXZLouPan objectArrayWithKeyValuesArray:responseObject[@"fys"]];
+
+        WXZLouPan *loupan =self.loupanLeibiaoS[0];
+        WXZLog(@"%@", loupan.PicUrl);
+        // 刷新表格
+        [self.tableView reloadData];
+        
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        // 显示失败信息
+        [SVProgressHUD showErrorWithStatus:@"加载推荐信息失败!"];
+    }];
 }
 
+#pragma mark - <UITableViewDataSource>
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return self.loupanLeibiaoS.count;
+//}
 
-
-#pragma mark - Table view data source
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return self.dates.count;
-}
-
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    WXZTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WXZLoupanCellID];
+//    
+////    cell.loupan = self.loupanLeibiaoS[indexPath.row];
+////    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
 //    
 //    return cell;
 //}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 70.0;
-}
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

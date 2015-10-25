@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "lp_loupandj.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ico_index_normal@2x.png"
+      "filename" : "lp_loupandj@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "lp_loupandj@3x.png"
     }
   ],
   "info" : {

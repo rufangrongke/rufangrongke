@@ -13,8 +13,6 @@
 		305784531BD3D52D00169C44 /* WXZLouPanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305784521BD3D52C00169C44 /* WXZLouPanController.m */; };
 		305784561BD3D54900169C44 /* WXZKeHuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305784551BD3D54900169C44 /* WXZKeHuController.m */; };
 		3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3057845C1BD3DA3100169C44 /* UIView+WXZFrame.m */; };
-		30869F6D1BD637F700632BD9 /* WXZTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30869F6B1BD637F700632BD9 /* WXZTableViewCell.m */; };
-		30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30869F6C1BD637F700632BD9 /* WXZTableViewCell.xib */; };
 		30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */; };
 		30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B2DB9F1BD6515400F00DF0 /* WXZLouPan.m */; };
 		30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30D59AB31BD5E519003F0A0C /* WXZSeachView.xib */; };
@@ -24,6 +22,14 @@
 		30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2741BD2B3B4006A8090 /* Images.xcassets */; };
 		30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2761BD2B3B4006A8090 /* LaunchScreen.xib */; };
 		30ECA2841BD2B3B5006A8090 /* rufangrongkeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30ECA2831BD2B3B5006A8090 /* rufangrongkeTests.m */; };
+		885387F01BDCB958005DCF38 /* WXZConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387EF1BDCB958005DCF38 /* WXZConst.m */; };
+		885387F41BDCE5D3005DCF38 /* WXZRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387F21BDCE5D3005DCF38 /* WXZRegisterController.m */; };
+		885387F51BDCE5D3005DCF38 /* WXZRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 885387F31BDCE5D3005DCF38 /* WXZRegisterController.xib */; };
+		885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387F71BDD01D6005DCF38 /* WXZFindPasswordController.m */; };
+		885387FA1BDD01D6005DCF38 /* WXZFindPasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 885387F81BDD01D6005DCF38 /* WXZFindPasswordController.xib */; };
+		885387FC1BDD1591005DCF38 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387FB1BDD1591005DCF38 /* Foundation+Log.m */; };
+		885388001BDD1DC0005DCF38 /* WXZTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387FE1BDD1DC0005DCF38 /* WXZTableViewCell.m */; };
+		885388011BDD1DC0005DCF38 /* WXZTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 885387FF1BDD1DC0005DCF38 /* WXZTableViewCell.xib */; };
 		88588DBB1BD8D031002B357D /* WXZWoTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88588DB91BD8D031002B357D /* WXZWoTypeCell.m */; };
 		88588DBC1BD8D031002B357D /* WXZWoTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88588DBA1BD8D031002B357D /* WXZWoTypeCell.xib */; };
 		88588DC31BD8D097002B357D /* WXZWoListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88588DC11BD8D097002B357D /* WXZWoListCell.m */; };
@@ -73,9 +79,6 @@
 		3057845A1BD3D96B00169C44 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3057845B1BD3DA3100169C44 /* UIView+WXZFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WXZFrame.h"; sourceTree = "<group>"; };
 		3057845C1BD3DA3100169C44 /* UIView+WXZFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WXZFrame.m"; sourceTree = "<group>"; };
-		30869F6A1BD637F700632BD9 /* WXZTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZTableViewCell.h; sourceTree = "<group>"; };
-		30869F6B1BD637F700632BD9 /* WXZTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZTableViewCell.m; sourceTree = "<group>"; };
-		30869F6C1BD637F700632BD9 /* WXZTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZTableViewCell.xib; sourceTree = "<group>"; };
 		30A9F1EE1BD4A20E00A6440D /* WXZSeachView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZSeachView.h; sourceTree = "<group>"; };
 		30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZSeachView.m; sourceTree = "<group>"; };
 		30B2DB9E1BD6515400F00DF0 /* WXZLouPan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPan.h; sourceTree = "<group>"; };
@@ -95,6 +98,18 @@
 		30ECA2821BD2B3B5006A8090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30ECA2831BD2B3B5006A8090 /* rufangrongkeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rufangrongkeTests.m; sourceTree = "<group>"; };
 		39928E051B59D36C45248CC0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		885387EE1BDCB852005DCF38 /* WXZConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXZConst.h; sourceTree = "<group>"; };
+		885387EF1BDCB958005DCF38 /* WXZConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZConst.m; sourceTree = "<group>"; };
+		885387F11BDCE5D3005DCF38 /* WXZRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZRegisterController.h; sourceTree = "<group>"; };
+		885387F21BDCE5D3005DCF38 /* WXZRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZRegisterController.m; sourceTree = "<group>"; };
+		885387F31BDCE5D3005DCF38 /* WXZRegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZRegisterController.xib; sourceTree = "<group>"; };
+		885387F61BDD01D6005DCF38 /* WXZFindPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZFindPasswordController.h; sourceTree = "<group>"; };
+		885387F71BDD01D6005DCF38 /* WXZFindPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZFindPasswordController.m; sourceTree = "<group>"; };
+		885387F81BDD01D6005DCF38 /* WXZFindPasswordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZFindPasswordController.xib; sourceTree = "<group>"; };
+		885387FB1BDD1591005DCF38 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		885387FD1BDD1DC0005DCF38 /* WXZTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZTableViewCell.h; sourceTree = "<group>"; };
+		885387FE1BDD1DC0005DCF38 /* WXZTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZTableViewCell.m; sourceTree = "<group>"; };
+		885387FF1BDD1DC0005DCF38 /* WXZTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZTableViewCell.xib; sourceTree = "<group>"; };
 		88588DB81BD8D031002B357D /* WXZWoTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZWoTypeCell.h; sourceTree = "<group>"; };
 		88588DB91BD8D031002B357D /* WXZWoTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoTypeCell.m; sourceTree = "<group>"; };
 		88588DBA1BD8D031002B357D /* WXZWoTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZWoTypeCell.xib; sourceTree = "<group>"; };
@@ -229,9 +244,9 @@
 				30A9F1EE1BD4A20E00A6440D /* WXZSeachView.h */,
 				30A9F1EF1BD4A20E00A6440D /* WXZSeachView.m */,
 				30D59AB31BD5E519003F0A0C /* WXZSeachView.xib */,
-				30869F6A1BD637F700632BD9 /* WXZTableViewCell.h */,
-				30869F6B1BD637F700632BD9 /* WXZTableViewCell.m */,
-				30869F6C1BD637F700632BD9 /* WXZTableViewCell.xib */,
+				885387FD1BDD1DC0005DCF38 /* WXZTableViewCell.h */,
+				885387FE1BDD1DC0005DCF38 /* WXZTableViewCell.m */,
+				885387FF1BDD1DC0005DCF38 /* WXZTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,7 +257,9 @@
 				3057843A1BD3D35000169C44 /* AppDelegate.h */,
 				3057843B1BD3D35000169C44 /* AppDelegate.m */,
 				305784401BD3D35000169C44 /* main.m */,
+				885387FB1BDD1591005DCF38 /* Foundation+Log.m */,
 				3057845A1BD3D96B00169C44 /* PrefixHeader.pch */,
+				885387ED1BDCB824005DCF38 /* Const */,
 				3057843C1BD3D35000169C44 /* Category */,
 				3057843F1BD3D35000169C44 /* Controller */,
 				305784421BD3D35000169C44 /* View */,
@@ -272,6 +289,12 @@
 				88EAA71F1BD88DA40072CD40 /* WXZLoginController.h */,
 				88EAA7201BD88DA40072CD40 /* WXZLoginController.m */,
 				88EAA7211BD88DA40072CD40 /* WXZLoginController.xib */,
+				885387F11BDCE5D3005DCF38 /* WXZRegisterController.h */,
+				885387F21BDCE5D3005DCF38 /* WXZRegisterController.m */,
+				885387F31BDCE5D3005DCF38 /* WXZRegisterController.xib */,
+				885387F61BDD01D6005DCF38 /* WXZFindPasswordController.h */,
+				885387F71BDD01D6005DCF38 /* WXZFindPasswordController.m */,
+				885387F81BDD01D6005DCF38 /* WXZFindPasswordController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -398,6 +421,15 @@
 				30ECA2821BD2B3B5006A8090 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		885387ED1BDCB824005DCF38 /* Const */ = {
+			isa = PBXGroup;
+			children = (
+				885387EE1BDCB852005DCF38 /* WXZConst.h */,
+				885387EF1BDCB958005DCF38 /* WXZConst.m */,
+			);
+			name = Const;
 			sourceTree = "<group>";
 		};
 		88EAA7021BD87BE60072CD40 /* NetWorkingTools */ = {
@@ -527,16 +559,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				885387F51BDCE5D3005DCF38 /* WXZRegisterController.xib in Resources */,
 				30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */,
 				886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */,
 				886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */,
 				8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */,
 				88588DBC1BD8D031002B357D /* WXZWoTypeCell.xib in Resources */,
-				30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */,
 				88588DC41BD8D097002B357D /* WXZWoListCell.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
+				885388011BDD1DC0005DCF38 /* WXZTableViewCell.xib in Resources */,
 				88EAA7231BD88DA40072CD40 /* WXZLoginController.xib in Resources */,
 				886388AF1BD8784A00498AF0 /* WXZKeHuListCell.xib in Resources */,
+				885387FA1BDD01D6005DCF38 /* WXZFindPasswordController.xib in Resources */,
 				30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -612,23 +646,27 @@
 				88EAA71C1BD87C180072CD40 /* AFURLRequestSerialization.m in Sources */,
 				88588DBB1BD8D031002B357D /* WXZWoTypeCell.m in Sources */,
 				88EAA71B1BD87C180072CD40 /* AFURLConnectionOperation.m in Sources */,
+				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,
+				885387F41BDCE5D3005DCF38 /* WXZRegisterController.m in Sources */,
 				88588DC31BD8D097002B357D /* WXZWoListCell.m in Sources */,
 				30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */,
 				3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */,
 				886388AE1BD8784A00498AF0 /* WXZKeHuListCell.m in Sources */,
 				305784561BD3D54900169C44 /* WXZKeHuController.m in Sources */,
-				30869F6D1BD637F700632BD9 /* WXZTableViewCell.m in Sources */,
 				305784531BD3D52D00169C44 /* WXZLouPanController.m in Sources */,
 				8870349B1BD9BDC300315D1A /* WXZWoHeadCell.m in Sources */,
 				305784491BD3D35000169C44 /* main.m in Sources */,
 				30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */,
+				885387F01BDCB958005DCF38 /* WXZConst.m in Sources */,
+				885387FC1BDD1591005DCF38 /* Foundation+Log.m in Sources */,
 				88EAA71A1BD87C180072CD40 /* AFSecurityPolicy.m in Sources */,
 				30D59ABE1BD5F523003F0A0C /* UIBarButtonItem+XMGExtension.m in Sources */,
 				88EAA7171BD87C180072CD40 /* AFHTTPRequestOperationManager.m in Sources */,
 				88EAA7221BD88DA40072CD40 /* WXZLoginController.m in Sources */,
 				886388B81BD87AC200498AF0 /* WXZWoController.m in Sources */,
+				885388001BDD1DC0005DCF38 /* WXZTableViewCell.m in Sources */,
 				88EAA71D1BD87C180072CD40 /* AFURLResponseSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

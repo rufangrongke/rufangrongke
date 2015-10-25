@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "lp_mex.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ico_me_press@2x.png"
+      "filename" : "lp_mex@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "lp_mex@3x.png"
     }
   ],
   "info" : {

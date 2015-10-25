@@ -17,7 +17,7 @@
 
 @end
 
-#define FontSize 12
+#define FontSize 13
 
 @implementation WXZTabBarController
 
@@ -38,10 +38,11 @@
     [item setTitleTextAttributes:selectedAttrs forState:UIControlStateSelected];
     
     // 添加子控制器
-    [self setupChildVc:[[WXZLouPanController alloc] init] title:@"楼盘" image:@"ico_index_normal" selectedImage:@"ico_index_press"];
-    [self setupChildVc:[[WXZKeHuController alloc] init] title:@"客户" image:@"客户" selectedImage:@"客户"];
+//    [UIImage imageNamed:lp];
+    [self setupChildVc:[[WXZLouPanController alloc] init] title:@"楼盘" image:@"lp_loupan" selectedImage:@"lp_loupandj"];
+    [self setupChildVc:[[WXZKeHuController alloc] init] title:@"客户" image:@"lp_kehu" selectedImage:@"lp_kehux"];
     
-    [self setupChildVc:[[WXZWoController alloc] init] title:@"我" image:@"ico_me_normal" selectedImage:@"ico_me_press"];
+    [self setupChildVc:[[WXZWoController alloc] init] title:@"我" image:@"lp_me" selectedImage:@"lp_mex"];
     
     // 自定义Tabbar
     [self setValue:[[WXZTabBar alloc] init] forKey:@"tabBar"];
@@ -63,7 +64,7 @@
     
     
     // 设置导航栏背景图片和颜色
-    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"NavBg"] forBarMetrics:UIBarMetricsDefault];
+//    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"NavBg"] forBarMetrics:UIBarMetricsDefault];
     
     [self addChildViewController:nav];
 }
