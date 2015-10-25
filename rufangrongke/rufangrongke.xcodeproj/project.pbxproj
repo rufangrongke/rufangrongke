@@ -33,6 +33,10 @@
 		886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886388B71BD87AC200498AF0 /* WXZWoController.xib */; };
 		8870349B1BD9BDC300315D1A /* WXZWoHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 887034991BD9BDC300315D1A /* WXZWoHeadCell.m */; };
 		8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8870349A1BD9BDC300315D1A /* WXZWoHeadCell.xib */; };
+		887218D11BDC9BD800620080 /* WXZPersonalNameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 887218CF1BDC9BD800620080 /* WXZPersonalNameVC.m */; };
+		887218D21BDC9BD800620080 /* WXZPersonalNameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 887218D01BDC9BD800620080 /* WXZPersonalNameVC.xib */; };
+		887218D61BDCAD9C00620080 /* WXZPersonalSexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */; };
+		887218D71BDCAD9C00620080 /* WXZPersonalSexVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 887218D51BDCAD9C00620080 /* WXZPersonalSexVC.xib */; };
 		888575B11BDB4679005E5AC4 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */; };
 		888575B21BDB4679005E5AC4 /* WXZKeHuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575B01BDB4679005E5AC4 /* WXZKeHuListCell.xib */; };
 		888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575B41BDB46FB005E5AC4 /* WXZKHListHeaderView.m */; };
@@ -118,6 +122,12 @@
 		887034981BD9BDC300315D1A /* WXZWoHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZWoHeadCell.h; sourceTree = "<group>"; };
 		887034991BD9BDC300315D1A /* WXZWoHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoHeadCell.m; sourceTree = "<group>"; };
 		8870349A1BD9BDC300315D1A /* WXZWoHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZWoHeadCell.xib; sourceTree = "<group>"; };
+		887218CE1BDC9BD800620080 /* WXZPersonalNameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalNameVC.h; sourceTree = "<group>"; };
+		887218CF1BDC9BD800620080 /* WXZPersonalNameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalNameVC.m; sourceTree = "<group>"; };
+		887218D01BDC9BD800620080 /* WXZPersonalNameVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalNameVC.xib; sourceTree = "<group>"; };
+		887218D31BDCAD9C00620080 /* WXZPersonalSexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalSexVC.h; sourceTree = "<group>"; };
+		887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalSexVC.m; sourceTree = "<group>"; };
+		887218D51BDCAD9C00620080 /* WXZPersonalSexVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalSexVC.xib; sourceTree = "<group>"; };
 		888575AE1BDB4679005E5AC4 /* WXZKeHuListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKeHuListCell.h; sourceTree = "<group>"; };
 		888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKeHuListCell.m; sourceTree = "<group>"; };
 		888575B01BDB4679005E5AC4 /* WXZKeHuListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKeHuListCell.xib; sourceTree = "<group>"; };
@@ -319,6 +329,7 @@
 		305784431BD3D35000169C44 /* wo */ = {
 			isa = PBXGroup;
 			children = (
+				887218CC1BDC8A4700620080 /* Tool */,
 				305784441BD3D35000169C44 /* Controller */,
 				305784451BD3D35000169C44 /* Model */,
 				305784461BD3D35000169C44 /* View */,
@@ -335,6 +346,12 @@
 				889887B61BDB7CC100460FE3 /* WXZPersonalController.h */,
 				889887B71BDB7CC100460FE3 /* WXZPersonalController.m */,
 				889887B81BDB7CC100460FE3 /* WXZPersonalController.xib */,
+				887218CE1BDC9BD800620080 /* WXZPersonalNameVC.h */,
+				887218CF1BDC9BD800620080 /* WXZPersonalNameVC.m */,
+				887218D01BDC9BD800620080 /* WXZPersonalNameVC.xib */,
+				887218D31BDCAD9C00620080 /* WXZPersonalSexVC.h */,
+				887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */,
+				887218D51BDCAD9C00620080 /* WXZPersonalSexVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -438,6 +455,13 @@
 				30ECA2821BD2B3B5006A8090 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		887218CC1BDC8A4700620080 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Tool;
 			sourceTree = "<group>";
 		};
 		88EAA7021BD87BE60072CD40 /* NetWorkingTools */ = {
@@ -572,12 +596,14 @@
 				30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */,
 				886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */,
 				886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */,
+				887218D71BDCAD9C00620080 /* WXZPersonalSexVC.xib in Resources */,
 				8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */,
 				88588DBC1BD8D031002B357D /* WXZWoTypeCell.xib in Resources */,
 				30869F6E1BD637F700632BD9 /* WXZTableViewCell.xib in Resources */,
 				889887C41BDB862F00460FE3 /* WXZPersonalDataCell.xib in Resources */,
 				888575B21BDB4679005E5AC4 /* WXZKeHuListCell.xib in Resources */,
 				88588DC41BD8D097002B357D /* WXZWoListCell.xib in Resources */,
+				887218D21BDC9BD800620080 /* WXZPersonalNameVC.xib in Resources */,
 				889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
 				88EAA7231BD88DA40072CD40 /* WXZLoginController.xib in Resources */,
@@ -655,6 +681,7 @@
 				888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */,
 				889887C31BDB862F00460FE3 /* WXZPersonalDataCell.m in Sources */,
 				88EAA7191BD87C180072CD40 /* AFNetworkReachabilityManager.m in Sources */,
+				887218D11BDC9BD800620080 /* WXZPersonalNameVC.m in Sources */,
 				88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */,
 				88EAA71C1BD87C180072CD40 /* AFURLRequestSerialization.m in Sources */,
 				88588DBB1BD8D031002B357D /* WXZWoTypeCell.m in Sources */,
@@ -662,6 +689,7 @@
 				888575B11BDB4679005E5AC4 /* WXZKeHuListCell.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,
+				887218D61BDCAD9C00620080 /* WXZPersonalSexVC.m in Sources */,
 				88588DC31BD8D097002B357D /* WXZWoListCell.m in Sources */,
 				30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */,
 				3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */,

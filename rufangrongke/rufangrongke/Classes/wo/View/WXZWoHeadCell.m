@@ -36,6 +36,32 @@
     self.headImgView.layer.borderColor =  WXZRGBColor(104, 111, 111).CGColor;
 }
 
+- (void)updateWoInfo
+{
+    // 判断是否有缓存
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pHead"])
+    {
+        self.headImgView.image = [UIImage imageWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"pHead"]]; // 贴头像
+    }
+    else
+    {
+        self.headImgView.image = [UIImage imageNamed:@"wo_head"];
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pName"])
+    {
+        self.userNameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"pName"]; // 用户名
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pStore"])
+    {
+        self.storeYardsLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"pStore"]; // 门店
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pDeclaration"])
+    {
+        self.declarationLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"pDeclaration"]; // 服务宣言
+    }
+}
+
 // 设置button单击事件
 - (void)buttonWithTarget:(id)target withAction:(SEL)action
 {

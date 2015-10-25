@@ -19,7 +19,7 @@
 + (instancetype)initPersonalData2Cell;
 
 // 初始化信息
-- (void)personalDataInfo:(NSInteger)row;
+- (void)personalDataInfo:(NSInteger)row data:(NSMutableDictionary *)dic;
 //
 - (void)buttonWithTarget:(id)target action:(SEL)action;
 

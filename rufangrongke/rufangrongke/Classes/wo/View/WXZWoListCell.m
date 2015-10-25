@@ -35,7 +35,7 @@
         }
         
         // 自定义信息
-        NSArray *listImgArr = @[@"wo_ feedback",@"wo_paihangbang",@"wo_ask_best _answer"];
+        NSArray *listImgArr = @[@"wo_feedback",@"wo_paihangbang",@"wo_ask_best_answer"];
         NSArray *listTitleArr = @[@"意见反馈",@"排行榜",@"百问百答"];
         // 赋值
         self.listImgView.image = [UIImage imageNamed:listImgArr[row]];

@@ -17,5 +17,7 @@
 
 // 头像边框
 - (void)headBorder;
+// 刷新头像
+- (void)updateHead;
 
 @end

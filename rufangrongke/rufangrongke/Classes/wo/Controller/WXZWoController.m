@@ -35,15 +35,25 @@
     // 设置数据源，遵循协议
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
+    
+    // 注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWoData:) name:@"UpdateWoPage" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = YES;
+    
+    [self.myTableView reloadData];
 }
 
-#pragma mark - UITableViewDelegate,UITableViewDataSource Methods
+- (void)updateWoData:(NSNotification *)noti
+{
+    [self.myTableView reloadData];
+}
+
+#pragma mark - UITableViewDelegate/DataSource Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -89,6 +99,7 @@
             }
             
             [headCell headBorder]; // 设置头像边框
+            [headCell updateWoInfo]; // 更新信息
             
             // 添加立即绑定button 响应事件
             [headCell buttonWithTarget:self withAction:@selector(immediatelyBindingAction:)];
