@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WXZPersonalPhoneVC">
             <connections>
+                <outlet property="myTableView" destination="TJU-pK-jht" id="rwB-wc-4Y3"/>
+                <outlet property="phoneNumLabel" destination="KkQ-B6-DQh" id="XJr-f1-kXP"/>
+                <outlet property="tipsHeaderView" destination="JLE-4s-yGQ" id="CP8-fB-tqO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +17,114 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="TJU-pK-jht">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="531"/>
+                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOj-v3-u2m">
+                    <rect key="frame" x="0.0" y="531" width="600" height="69"/>
+                    <subviews>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_dottedline" translatesAutoresizingMaskIntoConstraints="NO" id="5Zf-kM-LoA">
+                            <rect key="frame" x="14" y="0.0" width="572" height="1"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="sHi-tf-IaI"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前手机号码为：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsB-be-WUr">
+                            <rect key="frame" x="14" y="11" width="96" height="14"/>
+                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
+                            <color key="textColor" red="0.5490196078431373" green="0.54509803921568623" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1、网络通讯录异常可能造成短信丢失，请重新获取或稍后再试。" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKn-aN-xcu">
+                            <rect key="frame" x="14" y="26" width="286" height="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" red="0.5490196078431373" green="0.54509803921568623" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2、请核实手机是否欠费停机，或者屏蔽了系统短信。" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7S-aF-7l0">
+                            <rect key="frame" x="14" y="39" width="236" height="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" red="0.5490196078431373" green="0.54509803921568623" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="QKn-aN-xcu" firstAttribute="top" secondItem="nsB-be-WUr" secondAttribute="bottom" constant="1" id="12C-rz-1cX"/>
+                        <constraint firstItem="QKn-aN-xcu" firstAttribute="leading" secondItem="nsB-be-WUr" secondAttribute="leading" id="351-kj-CBx"/>
+                        <constraint firstAttribute="height" constant="69" id="4wr-KP-KnH"/>
+                        <constraint firstItem="5Zf-kM-LoA" firstAttribute="leading" secondItem="BOj-v3-u2m" secondAttribute="leading" constant="14" id="84t-rM-47F"/>
+                        <constraint firstItem="5Zf-kM-LoA" firstAttribute="top" secondItem="BOj-v3-u2m" secondAttribute="top" id="AKD-y2-oK7"/>
+                        <constraint firstItem="A7S-aF-7l0" firstAttribute="top" secondItem="QKn-aN-xcu" secondAttribute="bottom" constant="1" id="apv-XC-Yy1"/>
+                        <constraint firstAttribute="trailing" secondItem="5Zf-kM-LoA" secondAttribute="trailing" constant="14" id="bWs-iz-7eO"/>
+                        <constraint firstItem="A7S-aF-7l0" firstAttribute="leading" secondItem="QKn-aN-xcu" secondAttribute="leading" id="bkb-eQ-61P"/>
+                        <constraint firstItem="nsB-be-WUr" firstAttribute="top" secondItem="5Zf-kM-LoA" secondAttribute="bottom" constant="10" id="oBa-uh-TMK"/>
+                        <constraint firstItem="nsB-be-WUr" firstAttribute="leading" secondItem="BOj-v3-u2m" secondAttribute="leading" constant="14" id="ra2-ng-ofi"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="BOj-v3-u2m" secondAttribute="bottom" id="Fjf-P1-2Tz"/>
+                <constraint firstAttribute="trailing" secondItem="BOj-v3-u2m" secondAttribute="trailing" id="Jun-lf-CtD"/>
+                <constraint firstItem="BOj-v3-u2m" firstAttribute="top" secondItem="TJU-pK-jht" secondAttribute="bottom" id="KtW-Xh-ChH"/>
+                <constraint firstAttribute="trailing" secondItem="TJU-pK-jht" secondAttribute="trailing" id="RwB-BP-rNU"/>
+                <constraint firstItem="BOj-v3-u2m" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cjW-zj-nvg"/>
+                <constraint firstItem="TJU-pK-jht" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jFD-3O-DN5"/>
+                <constraint firstItem="TJU-pK-jht" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ozc-i0-9P7"/>
+            </constraints>
+        </view>
+        <view contentMode="scaleToFill" id="JLE-4s-yGQ">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="62"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改后下次可使用新手机号登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88O-UN-wSH">
+                    <rect key="frame" x="14" y="15" width="196" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.54901960780000003" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前手机号码为：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaA-EV-c5I">
+                    <rect key="frame" x="14" y="30" width="112" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.54901960780000003" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KkQ-B6-DQh">
+                    <rect key="frame" x="128" y="30" width="36" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.54901960780000003" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_personal_divider" translatesAutoresizingMaskIntoConstraints="NO" id="Oxr-H9-DaF">
+                    <rect key="frame" x="0.0" y="61" width="600" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="EP8-kl-1NG"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Oxr-H9-DaF" secondAttribute="trailing" id="JdX-Z2-2g6"/>
+                <constraint firstItem="KkQ-B6-DQh" firstAttribute="leading" secondItem="kaA-EV-c5I" secondAttribute="trailing" constant="2" id="QnM-S9-cdS"/>
+                <constraint firstAttribute="bottom" secondItem="Oxr-H9-DaF" secondAttribute="bottom" id="Wve-yZ-U2U"/>
+                <constraint firstAttribute="bottom" secondItem="kaA-EV-c5I" secondAttribute="bottom" constant="15" id="Yqg-L8-xZX"/>
+                <constraint firstItem="KkQ-B6-DQh" firstAttribute="top" secondItem="kaA-EV-c5I" secondAttribute="top" id="aC0-SD-Zzq"/>
+                <constraint firstItem="88O-UN-wSH" firstAttribute="top" secondItem="JLE-4s-yGQ" secondAttribute="top" constant="15" id="m5u-DT-FY7"/>
+                <constraint firstItem="Oxr-H9-DaF" firstAttribute="leading" secondItem="JLE-4s-yGQ" secondAttribute="leading" id="qQE-h1-aKQ"/>
+                <constraint firstItem="88O-UN-wSH" firstAttribute="leading" secondItem="JLE-4s-yGQ" secondAttribute="leading" constant="14" id="xpb-Rs-ELZ"/>
+                <constraint firstItem="kaA-EV-c5I" firstAttribute="leading" secondItem="88O-UN-wSH" secondAttribute="leading" id="zJc-Xq-nfS"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="1296" y="129"/>
         </view>
     </objects>
+    <resources>
+        <image name="wo_dottedline" width="355" height="1"/>
+        <image name="wo_personal_divider" width="375" height="1"/>
+    </resources>
 </document>
