@@ -86,16 +86,7 @@
             }else{ //登陆失败
                 [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];
             }
-            
-            // 显示一些提示信息
-//            NSUInteger loc = [string rangeOfString:@"\":\""].location + 3;
-//            NSUInteger len = [string rangeOfString:@"\"}"].location - loc;
-//            NSString *msg = [string substringWithRange:NSMakeRange(loc, len)];
-//            if ([string containsString:@"success"]) {
-//                [SVProgressHUD showSuccessWithStatus:msg];
-//            } else {
-//                [SVProgressHUD showErrorWithStatus:msg];
-//            }
+           
         }];
     }];
     
