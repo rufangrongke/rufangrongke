@@ -41,12 +41,15 @@
 		887218D11BDC9BD800620080 /* WXZPersonalNameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 887218CF1BDC9BD800620080 /* WXZPersonalNameVC.m */; };
 		887218D21BDC9BD800620080 /* WXZPersonalNameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 887218D01BDC9BD800620080 /* WXZPersonalNameVC.xib */; };
 		887218D71BDCAD9C00620080 /* WXZPersonalSexVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 887218D51BDCAD9C00620080 /* WXZPersonalSexVC.xib */; };
-		888115D71BDDBEA8003A0356 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */; };
-		888115D81BDDBEB4003A0356 /* WXZPersonalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889887B71BDB7CC100460FE3 /* WXZPersonalController.m */; };
-		888115D91BDDBEC5003A0356 /* WXZPersonalSexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */; };
-		888115DC1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */; };
-		888115DF1BDDCA3F003A0356 /* WXZLoupanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DE1BDDCA3F003A0356 /* WXZLoupanCell.m */; };
-		888115E11BDDCA5F003A0356 /* WXZLoupanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888115E01BDDCA5F003A0356 /* WXZLoupanCell.xib */; };
+		88770E3C1BDDC93100B9C0C3 /* WXZKeHuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575B01BDB4679005E5AC4 /* WXZKeHuListCell.xib */; };
+		88770E3D1BDDC9A300B9C0C3 /* WXZKHListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575B61BDB472C005E5AC4 /* WXZKHListHeaderView.xib */; };
+		88770E3E1BDDC9B500B9C0C3 /* WXZKHListFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575BB1BDB4AA2005E5AC4 /* WXZKHListFooterView.xib */; };
+		88770E3F1BDDCA0600B9C0C3 /* WXZPersonalDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887C21BDB862F00460FE3 /* WXZPersonalDataCell.xib */; };
+		88770E401BDDCA0600B9C0C3 /* WXZPersonalData2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887CC1BDB99A000460FE3 /* WXZPersonalData2Cell.xib */; };
+		888115E21BDDCDD9003A0356 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */; };
+		888115E31BDDCDE0003A0356 /* WXZPersonalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889887B71BDB7CC100460FE3 /* WXZPersonalController.m */; };
+		888115E41BDDCDEC003A0356 /* WXZPersonalSexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */; };
+		888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */; };
 		888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575B41BDB46FB005E5AC4 /* WXZKHListHeaderView.m */; };
 		888575BA1BDB4A8E005E5AC4 /* WXZKHListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575B91BDB4A8E005E5AC4 /* WXZKHListFooterView.m */; };
 		889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887B81BDB7CC100460FE3 /* WXZPersonalController.xib */; };
@@ -633,7 +636,6 @@
 				88588DC41BD8D097002B357D /* WXZWoListCell.xib in Resources */,
 				887218D21BDC9BD800620080 /* WXZPersonalNameVC.xib in Resources */,
 				889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */,
-				888115E11BDDCA5F003A0356 /* WXZLoupanCell.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
 				885388011BDD1DC0005DCF38 /* WXZTableViewCell.xib in Resources */,
 				88EAA7231BD88DA40072CD40 /* WXZLoginController.xib in Resources */,
@@ -704,9 +706,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				888115D91BDDBEC5003A0356 /* WXZPersonalSexVC.m in Sources */,
-				888115D81BDDBEB4003A0356 /* WXZPersonalController.m in Sources */,
-				888115D71BDDBEA8003A0356 /* WXZKeHuListCell.m in Sources */,
+				888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */,
+				888115E41BDDCDEC003A0356 /* WXZPersonalSexVC.m in Sources */,
+				888115E31BDDCDE0003A0356 /* WXZPersonalController.m in Sources */,
+				888115E21BDDCDD9003A0356 /* WXZKeHuListCell.m in Sources */,
 				305784471BD3D35000169C44 /* AppDelegate.m in Sources */,
 				30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */,
 				88EAA7181BD87C180072CD40 /* AFHTTPSessionManager.m in Sources */,
@@ -723,7 +726,6 @@
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,
 				885387F41BDCE5D3005DCF38 /* WXZRegisterController.m in Sources */,
-				888115DF1BDDCA3F003A0356 /* WXZLoupanCell.m in Sources */,
 				88588DC31BD8D097002B357D /* WXZWoListCell.m in Sources */,
 				30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */,
 				3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */,
@@ -735,7 +737,6 @@
 				305784491BD3D35000169C44 /* main.m in Sources */,
 				30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */,
 				885387F01BDCB958005DCF38 /* WXZConst.m in Sources */,
-				888115DC1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */,
 				885387FC1BDD1591005DCF38 /* Foundation+Log.m in Sources */,
 				88EAA71A1BD87C180072CD40 /* AFSecurityPolicy.m in Sources */,
 				88EAA7171BD87C180072CD40 /* AFHTTPRequestOperationManager.m in Sources */,

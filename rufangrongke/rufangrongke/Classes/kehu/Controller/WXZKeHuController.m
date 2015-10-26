@@ -17,6 +17,46 @@
 
 @implementation WXZKeHuController
 
+#pragma 初始化项目
+- (void)setUp{
+    // 设置导航栏左边按钮
+    {
+        //    // 右边
+        //    UIButton *button_right = [UIButton buttonWithType:UIButtonTypeCustom];
+        //    [button_right setBackgroundImage:[UIImage imageNamed:@"lp_qd"] forState:UIControlStateNormal];
+        //    [button_right setBackgroundImage:[UIImage imageNamed:@"lp_qd"] forState:UIControlStateHighlighted];
+        //    button_right.size = button_right.currentBackgroundImage.size;
+        //    [button_right addTarget:self action:@selector(queDing_click) forControlEvents:UIControlEventTouchUpInside];
+        //    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button_right];
+        //    self.navigationItem.rightBarButtonItem = rightItem;
+        //
+        //    // 左边
+        //    UIButton *button_left = [UIButton buttonWithType:UIButtonTypeCustom];
+        //    [button_left setBackgroundImage:[UIImage imageNamed:@"lp_quyutu"] forState:UIControlStateNormal];
+        //    [button_left setBackgroundImage:[UIImage imageNamed:@"lp_quyutu"] forState:UIControlStateHighlighted];
+        //    button_left.size = button_left.currentBackgroundImage.size;
+        //    [button_left addTarget:self action:@selector(quDu_click) forControlEvents:UIControlEventTouchUpInside];
+        //    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:button_left];
+        //    self.navigationItem.leftBarButtonItem = leftItem;
+    }
+    // 左边按钮
+    //    [UIBarButtonItem];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_quyutu" highImage:@"lp_quyutu" target:self action:@selector(quDu_click)];
+    // 右边按钮
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
+    // 添加一个系统的搜索框
+    self.navigationItem.titleView = [[UISearchBar alloc]init];
+    
+}
+// 右上方按钮监听点击
+- (void)queDing_click{
+    WXZLogFunc;
+}
+// 左上方按钮监听点击
+- (void)quDu_click{
+    WXZLogFunc;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 视图整体背景色
@@ -100,7 +140,6 @@
     
     if (!keHuInfoCell)
     {
-        NSLog(@"%@",[NSBundle mainBundle]);
         keHuInfoCell = [WXZKeHuListCell initListCell];
         keHuInfoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
