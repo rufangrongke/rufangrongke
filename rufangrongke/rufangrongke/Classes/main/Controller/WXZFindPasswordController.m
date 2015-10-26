@@ -9,6 +9,9 @@
 #import "WXZFindPasswordController.h"
 
 @interface WXZFindPasswordController ()
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumber;
+@property (weak, nonatomic) IBOutlet UITextField *verificationCode;
+@property (weak, nonatomic) IBOutlet UITextField *resetPassword;
 
 @end
 
@@ -24,6 +27,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+// 取消键盘
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+//    [self.usernameField resignFirstResponder];
+//    [self.pwdField resignFirstResponder];
 }
 
 /*

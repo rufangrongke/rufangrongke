@@ -30,6 +30,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+// 取消键盘
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+//    [self.usernameField resignFirstResponder];
+//    [self.pwdField resignFirstResponder];
+}
 
 /*
 #pragma mark - Navigation
