@@ -46,6 +46,18 @@
 		88770E3E1BDDC9B500B9C0C3 /* WXZKHListFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575BB1BDB4AA2005E5AC4 /* WXZKHListFooterView.xib */; };
 		88770E3F1BDDCA0600B9C0C3 /* WXZPersonalDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887C21BDB862F00460FE3 /* WXZPersonalDataCell.xib */; };
 		88770E401BDDCA0600B9C0C3 /* WXZPersonalData2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887CC1BDB99A000460FE3 /* WXZPersonalData2Cell.xib */; };
+		88770E441BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E421BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.m */; };
+		88770E451BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E431BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.xib */; };
+		88770E491BDDF54000B9C0C3 /* WXZPersonalCertificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E471BDDF54000B9C0C3 /* WXZPersonalCertificationVC.m */; };
+		88770E4A1BDDF54000B9C0C3 /* WXZPersonalCertificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E481BDDF54000B9C0C3 /* WXZPersonalCertificationVC.xib */; };
+		88770E4E1BDDF58900B9C0C3 /* WXZPersonalCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E4C1BDDF58900B9C0C3 /* WXZPersonalCityVC.m */; };
+		88770E4F1BDDF58900B9C0C3 /* WXZPersonalCityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E4D1BDDF58900B9C0C3 /* WXZPersonalCityVC.xib */; };
+		88770E531BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E511BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m */; };
+		88770E541BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E521BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib */; };
+		88770E581BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E561BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m */; };
+		88770E591BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E571BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib */; };
+		88770E5D1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E5B1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m */; };
+		88770E5E1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E5C1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib */; };
 		888115E21BDDCDD9003A0356 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */; };
 		888115E31BDDCDE0003A0356 /* WXZPersonalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889887B71BDB7CC100460FE3 /* WXZPersonalController.m */; };
 		888115E41BDDCDEC003A0356 /* WXZPersonalSexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */; };
@@ -141,6 +153,24 @@
 		887218D31BDCAD9C00620080 /* WXZPersonalSexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalSexVC.h; sourceTree = "<group>"; };
 		887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalSexVC.m; sourceTree = "<group>"; };
 		887218D51BDCAD9C00620080 /* WXZPersonalSexVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalSexVC.xib; sourceTree = "<group>"; };
+		88770E411BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalDeclarationVC.h; sourceTree = "<group>"; };
+		88770E421BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalDeclarationVC.m; sourceTree = "<group>"; };
+		88770E431BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalDeclarationVC.xib; sourceTree = "<group>"; };
+		88770E461BDDF54000B9C0C3 /* WXZPersonalCertificationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalCertificationVC.h; sourceTree = "<group>"; };
+		88770E471BDDF54000B9C0C3 /* WXZPersonalCertificationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalCertificationVC.m; sourceTree = "<group>"; };
+		88770E481BDDF54000B9C0C3 /* WXZPersonalCertificationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalCertificationVC.xib; sourceTree = "<group>"; };
+		88770E4B1BDDF58900B9C0C3 /* WXZPersonalCityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalCityVC.h; sourceTree = "<group>"; };
+		88770E4C1BDDF58900B9C0C3 /* WXZPersonalCityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalCityVC.m; sourceTree = "<group>"; };
+		88770E4D1BDDF58900B9C0C3 /* WXZPersonalCityVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalCityVC.xib; sourceTree = "<group>"; };
+		88770E501BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalStoreVC.h; sourceTree = "<group>"; };
+		88770E511BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalStoreVC.m; sourceTree = "<group>"; };
+		88770E521BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalStoreVC.xib; sourceTree = "<group>"; };
+		88770E551BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalPhoneVC.h; sourceTree = "<group>"; };
+		88770E561BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalPhoneVC.m; sourceTree = "<group>"; };
+		88770E571BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalPhoneVC.xib; sourceTree = "<group>"; };
+		88770E5A1BDDF61E00B9C0C3 /* WXZResetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZResetPasswordVC.h; sourceTree = "<group>"; };
+		88770E5B1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZResetPasswordVC.m; sourceTree = "<group>"; };
+		88770E5C1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZResetPasswordVC.xib; sourceTree = "<group>"; };
 		888115DA1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WXZExtension.h"; sourceTree = "<group>"; };
 		888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WXZExtension.m"; sourceTree = "<group>"; };
 		888115DD1BDDCA3F003A0356 /* WXZLoupanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLoupanCell.h; sourceTree = "<group>"; };
@@ -380,6 +410,24 @@
 				887218D31BDCAD9C00620080 /* WXZPersonalSexVC.h */,
 				887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */,
 				887218D51BDCAD9C00620080 /* WXZPersonalSexVC.xib */,
+				88770E411BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.h */,
+				88770E421BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.m */,
+				88770E431BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.xib */,
+				88770E461BDDF54000B9C0C3 /* WXZPersonalCertificationVC.h */,
+				88770E471BDDF54000B9C0C3 /* WXZPersonalCertificationVC.m */,
+				88770E481BDDF54000B9C0C3 /* WXZPersonalCertificationVC.xib */,
+				88770E4B1BDDF58900B9C0C3 /* WXZPersonalCityVC.h */,
+				88770E4C1BDDF58900B9C0C3 /* WXZPersonalCityVC.m */,
+				88770E4D1BDDF58900B9C0C3 /* WXZPersonalCityVC.xib */,
+				88770E501BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.h */,
+				88770E511BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m */,
+				88770E521BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib */,
+				88770E551BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.h */,
+				88770E561BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m */,
+				88770E571BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib */,
+				88770E5A1BDDF61E00B9C0C3 /* WXZResetPasswordVC.h */,
+				88770E5B1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m */,
+				88770E5C1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -623,6 +671,8 @@
 			files = (
 				88770E3F1BDDCA0600B9C0C3 /* WXZPersonalDataCell.xib in Resources */,
 				88770E401BDDCA0600B9C0C3 /* WXZPersonalData2Cell.xib in Resources */,
+				88770E541BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib in Resources */,
+				88770E4F1BDDF58900B9C0C3 /* WXZPersonalCityVC.xib in Resources */,
 				88770E3E1BDDC9B500B9C0C3 /* WXZKHListFooterView.xib in Resources */,
 				88770E3D1BDDC9A300B9C0C3 /* WXZKHListHeaderView.xib in Resources */,
 				88770E3C1BDDC93100B9C0C3 /* WXZKeHuListCell.xib in Resources */,
@@ -632,9 +682,13 @@
 				886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */,
 				887218D71BDCAD9C00620080 /* WXZPersonalSexVC.xib in Resources */,
 				8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */,
+				88770E591BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib in Resources */,
+				88770E4A1BDDF54000B9C0C3 /* WXZPersonalCertificationVC.xib in Resources */,
+				88770E5E1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib in Resources */,
 				88588DBC1BD8D031002B357D /* WXZWoTypeCell.xib in Resources */,
 				88588DC41BD8D097002B357D /* WXZWoListCell.xib in Resources */,
 				887218D21BDC9BD800620080 /* WXZPersonalNameVC.xib in Resources */,
+				88770E451BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.xib in Resources */,
 				889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
 				885388011BDD1DC0005DCF38 /* WXZTableViewCell.xib in Resources */,
@@ -707,9 +761,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */,
+				88770E581BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m in Sources */,
 				888115E41BDDCDEC003A0356 /* WXZPersonalSexVC.m in Sources */,
 				888115E31BDDCDE0003A0356 /* WXZPersonalController.m in Sources */,
 				888115E21BDDCDD9003A0356 /* WXZKeHuListCell.m in Sources */,
+				88770E4E1BDDF58900B9C0C3 /* WXZPersonalCityVC.m in Sources */,
 				305784471BD3D35000169C44 /* AppDelegate.m in Sources */,
 				30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */,
 				88EAA7181BD87C180072CD40 /* AFHTTPSessionManager.m in Sources */,
@@ -723,6 +779,8 @@
 				88588DBB1BD8D031002B357D /* WXZWoTypeCell.m in Sources */,
 				88EAA71B1BD87C180072CD40 /* AFURLConnectionOperation.m in Sources */,
 				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
+				88770E5D1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m in Sources */,
+				88770E441BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,
 				885387F41BDCE5D3005DCF38 /* WXZRegisterController.m in Sources */,
@@ -738,11 +796,13 @@
 				30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */,
 				885387F01BDCB958005DCF38 /* WXZConst.m in Sources */,
 				885387FC1BDD1591005DCF38 /* Foundation+Log.m in Sources */,
+				88770E491BDDF54000B9C0C3 /* WXZPersonalCertificationVC.m in Sources */,
 				88EAA71A1BD87C180072CD40 /* AFSecurityPolicy.m in Sources */,
 				88EAA7171BD87C180072CD40 /* AFHTTPRequestOperationManager.m in Sources */,
 				88EAA7221BD88DA40072CD40 /* WXZLoginController.m in Sources */,
 				886388B81BD87AC200498AF0 /* WXZWoController.m in Sources */,
 				885388001BDD1DC0005DCF38 /* WXZTableViewCell.m in Sources */,
+				88770E531BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m in Sources */,
 				88EAA71D1BD87C180072CD40 /* AFURLResponseSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

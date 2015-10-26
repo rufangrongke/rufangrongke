@@ -12,6 +12,12 @@
 #import <UIImageView+WebCache.h>
 #import "WXZPersonalNameVC.h"
 #import "WXZPersonalSexVC.h"
+#import "WXZPersonalDeclarationVC.h"
+#import "WXZPersonalCertificationVC.h"
+#import "WXZPersonalCityVC.h"
+#import "WXZPersonalStoreVC.h"
+#import "WXZPersonalPhoneVC.h"
+#import "WXZResetPasswordVC.h"
 
 @interface WXZPersonalController () <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -30,7 +36,7 @@
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"个人资料";
-    NSDictionary *titleAttributeDic = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:WXZ_SystemFont(17)};
+    NSDictionary *titleAttributeDic = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:WXZ_SystemFont(18)};
     [self.navigationController.navigationBar setTitleTextAttributes:titleAttributeDic];
     
     // 初始化数据源
@@ -51,14 +57,14 @@
     self.navigationController.navigationBarHidden = NO;
     
     // 返回按钮
-    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.frame = CGRectMake(0, 0, 40, 44);
-    [leftBtn setImage:[UIImage imageNamed:@"kh_rjt"] forState:UIControlStateNormal];
-    leftBtn.transform = CGAffineTransformMakeRotation(M_PI); // 图片旋转d
-    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)]; // 标题向左侧偏移
-    [leftBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+//    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    leftBtn.frame = CGRectMake(0, 0, 40, 44);
+//    [leftBtn setImage:[UIImage imageNamed:@"kh_rjt"] forState:UIControlStateNormal];
+//    leftBtn.transform = CGAffineTransformMakeRotation(M_PI); // 图片旋转d
+//    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)]; // 标题向左侧偏移
+//    [leftBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
 }
 
 // 初始化数据源
@@ -171,6 +177,30 @@
     else if (indexPath.row == 2)
     {
         [self.navigationController pushViewController:[[WXZPersonalSexVC alloc] init] animated:YES];
+    }
+    else if (indexPath.row == 4)
+    {
+        [self.navigationController pushViewController:[[WXZPersonalDeclarationVC alloc] init] animated:YES];
+    }
+    else if (indexPath.row == 5)
+    {
+        [self.navigationController pushViewController:[[WXZPersonalCertificationVC alloc] init] animated:YES];
+    }
+    else if (indexPath.row == 6)
+    {
+        [self.navigationController pushViewController:[[WXZPersonalCityVC alloc] init] animated:YES];
+    }
+    else if (indexPath.row == 7)
+    {
+        [self.navigationController pushViewController:[[WXZPersonalStoreVC alloc] init] animated:YES];
+    }
+    else if (indexPath.row == 8)
+    {
+        [self.navigationController pushViewController:[[WXZPersonalPhoneVC alloc] init] animated:YES];
+    }
+    else if (indexPath.row == 9)
+    {
+        [self.navigationController pushViewController:[[WXZResetPasswordVC alloc] init] animated:YES];
     }
 }
 

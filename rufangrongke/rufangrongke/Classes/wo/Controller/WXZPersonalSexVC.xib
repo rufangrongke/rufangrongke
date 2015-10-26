@@ -23,13 +23,13 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="男" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UH3-Ot-viX">
                             <rect key="frame" x="12" y="20" width="15" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="女" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCM-fb-YQu">
                             <rect key="frame" x="12" y="72" width="15" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_personalsex" translatesAutoresizingMaskIntoConstraints="NO" id="EcN-24-LiQ">
@@ -53,7 +53,7 @@
                                 <constraint firstAttribute="height" constant="1" id="fd1-X9-4aT"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="100007" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVE-AT-SgS">
@@ -104,7 +104,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7M-ve-Ouo">
-                    <rect key="frame" x="12" y="139" width="576" height="27"/>
+                    <rect key="frame" x="12" y="129" width="576" height="44"/>
                     <state key="normal" title="确定" backgroundImage="wo_determine">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -119,7 +119,7 @@
                 <constraint firstAttribute="centerX" secondItem="BuW-gB-Lf3" secondAttribute="centerX" id="BAw-gS-Hkb"/>
                 <constraint firstItem="b7M-ve-Ouo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="D3n-T1-VPH"/>
                 <constraint firstItem="BuW-gB-Lf3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="G61-nt-hbI"/>
-                <constraint firstItem="b7M-ve-Ouo" firstAttribute="top" secondItem="BuW-gB-Lf3" secondAttribute="bottom" constant="21" id="MOq-83-i1z"/>
+                <constraint firstItem="b7M-ve-Ouo" firstAttribute="top" secondItem="BuW-gB-Lf3" secondAttribute="bottom" constant="11" id="MOq-83-i1z"/>
                 <constraint firstAttribute="trailing" secondItem="BuW-gB-Lf3" secondAttribute="trailing" id="XBs-mL-LTe"/>
                 <constraint firstAttribute="trailing" secondItem="b7M-ve-Ouo" secondAttribute="trailing" constant="12" id="XJw-Qm-W4M"/>
                 <constraint firstItem="BuW-gB-Lf3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="c1M-zD-NaK"/>
@@ -128,7 +128,7 @@
         </view>
     </objects>
     <resources>
-        <image name="wo_determine" width="234" height="27"/>
+        <image name="wo_determine" width="340" height="44"/>
         <image name="wo_personalsex" width="17" height="17"/>
     </resources>
 </document>

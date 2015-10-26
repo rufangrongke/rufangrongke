@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WXZPersonalDeclarationVC">
+            <connections>
+                <outlet property="declarationTextView" destination="dnp-UQ-q2o" id="WKU-fu-kvS"/>
+                <outlet property="declarationWordPromptLabel" destination="QDr-Iv-RWJ" id="z8z-nd-v3M"/>
+                <outlet property="myScrollView" destination="RgU-M4-mmb" id="nIH-LD-CdN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RgU-M4-mmb">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjS-jt-xPa">
+                            <rect key="frame" x="0.0" y="10" width="600" height="290"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_personal_declarationbox" translatesAutoresizingMaskIntoConstraints="NO" id="vRN-Sh-2TX">
+                                    <rect key="frame" x="10" y="0.0" width="580" height="179"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="179" id="9da-zJ-hPF"/>
+                                    </constraints>
+                                </imageView>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnp-UQ-q2o">
+                                    <rect key="frame" x="12" y="0.0" width="576" height="150"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="150" id="JQD-XD-wmX"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                </textView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7PX-GB-hvQ">
+                                    <rect key="frame" x="10" y="189" width="580" height="44"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                    <state key="normal" title="提交" backgroundImage="wo_determine">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="declarationCommitAction:" destination="-1" eventType="touchUpInside" id="GfP-Xc-0Xj"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/30" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDr-Iv-RWJ">
+                                    <rect key="frame" x="529" y="158" width="31" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="dnp-UQ-q2o" firstAttribute="top" secondItem="OjS-jt-xPa" secondAttribute="top" id="2Ii-es-sjH"/>
+                                <constraint firstItem="QDr-Iv-RWJ" firstAttribute="top" secondItem="dnp-UQ-q2o" secondAttribute="bottom" constant="8" symbolic="YES" id="2sT-Hv-GJG"/>
+                                <constraint firstItem="vRN-Sh-2TX" firstAttribute="leading" secondItem="OjS-jt-xPa" secondAttribute="leading" constant="10" id="6El-nK-FDi"/>
+                                <constraint firstAttribute="trailing" secondItem="vRN-Sh-2TX" secondAttribute="trailing" constant="10" id="Btf-b3-y8J"/>
+                                <constraint firstAttribute="trailing" secondItem="QDr-Iv-RWJ" secondAttribute="trailing" constant="40" id="ET2-bh-Xgs"/>
+                                <constraint firstItem="7PX-GB-hvQ" firstAttribute="top" secondItem="vRN-Sh-2TX" secondAttribute="bottom" constant="10" id="FuM-Ek-XWS"/>
+                                <constraint firstItem="7PX-GB-hvQ" firstAttribute="leading" secondItem="OjS-jt-xPa" secondAttribute="leading" constant="10" id="IEU-FJ-N6j"/>
+                                <constraint firstAttribute="trailing" secondItem="7PX-GB-hvQ" secondAttribute="trailing" constant="10" id="TfE-Hg-zvu"/>
+                                <constraint firstAttribute="height" constant="290" id="ZTZ-g5-hj7"/>
+                                <constraint firstItem="dnp-UQ-q2o" firstAttribute="leading" secondItem="OjS-jt-xPa" secondAttribute="leading" constant="12" id="dT0-Fg-e68"/>
+                                <constraint firstAttribute="trailing" secondItem="dnp-UQ-q2o" secondAttribute="trailing" constant="12" id="duy-I0-p1q"/>
+                                <constraint firstItem="vRN-Sh-2TX" firstAttribute="top" secondItem="OjS-jt-xPa" secondAttribute="top" id="rqj-xU-At2"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="OjS-jt-xPa" firstAttribute="leading" secondItem="RgU-M4-mmb" secondAttribute="leading" id="5vZ-nA-15H"/>
+                        <constraint firstAttribute="width" secondItem="OjS-jt-xPa" secondAttribute="width" id="Ae1-Pd-W73"/>
+                        <constraint firstAttribute="height" constant="300" id="Dia-Nw-VTN"/>
+                        <constraint firstAttribute="trailing" secondItem="OjS-jt-xPa" secondAttribute="trailing" id="lzq-lD-BVQ"/>
+                        <constraint firstAttribute="bottom" secondItem="OjS-jt-xPa" secondAttribute="bottom" id="qrZ-6B-Aku"/>
+                        <constraint firstItem="OjS-jt-xPa" firstAttribute="top" secondItem="RgU-M4-mmb" secondAttribute="top" constant="10" id="yyB-rg-7sY"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Dia-Nw-VTN"/>
+                        </mask>
+                    </variation>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="RgU-M4-mmb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1e8-xa-RQ4"/>
+                <constraint firstItem="RgU-M4-mmb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZPq-eP-4cn"/>
+                <constraint firstAttribute="trailing" secondItem="RgU-M4-mmb" secondAttribute="trailing" id="bS8-tX-Rfx"/>
+                <constraint firstAttribute="bottom" secondItem="RgU-M4-mmb" secondAttribute="bottom" id="nFT-nI-7ex"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="wo_determine" width="340" height="44"/>
+        <image name="wo_personal_declarationbox" width="352" height="177"/>
+    </resources>
+</document>
