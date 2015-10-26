@@ -13,6 +13,7 @@
 #import "WXZLouPan.h"
 #import "WXZTableViewCell.h"
 #import <MJExtension.h>
+#import "WXZLoupanCell.h"
 
 @interface WXZLouPanController ()
 /** 所有团购数据 */
@@ -26,6 +27,8 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 
 #pragma 初始化项目
 - (void)setUp{
+    // 去除分割线
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置导航栏左边按钮
     {
 //    // 右边
@@ -52,23 +55,27 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     // 右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
     // 添加一个系统的搜索框
-    self.navigationItem.titleView = [[UISearchBar alloc]init];
+    UISearchBar *search = [[UISearchBar alloc]init];
+    search.placeholder = @"楼盘搜索";
+    self.navigationItem.titleView = search;
 
 }
 // 右上方按钮监听点击
 - (void)queDing_click{
-    WXZLogFunc;
+//    WXZLogFunc;
+    WXZLog(@"%@", [self localUserInfo]);
 }
 // 左上方按钮监听点击
 - (void)quDu_click{
-    WXZLogFunc;
+//    WXZLogFunc;
+    WXZLog(@"%@", [self loginMessage]);
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 初始化信息
     [self setUp];
     
-    self.tableView.height = 120;
+    self.tableView.rowHeight = 100;
     
     // 注册
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZTableViewCell class]) bundle:nil] forCellReuseIdentifier:WXZLoupanCellID];
@@ -86,11 +93,11 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
         [SVProgressHUD dismiss];
         
 //        WXZLog(@"%@", responseObject);
-        // 服务器返回的JSON数据
+//        // 服务器返回的JSON数据
         self.loupanLeibiaoS = [WXZLouPan objectArrayWithKeyValuesArray:responseObject[@"fys"]];
-
+        NSLog(@"%@", self.loupanLeibiaoS);
         WXZLouPan *loupan =self.loupanLeibiaoS[0];
-        WXZLog(@"%@", loupan.PicUrl);
+        WXZLog(@"%@", loupan.YiXiangKeHuNum);
         // 刷新表格
         [self.tableView reloadData];
         
@@ -102,20 +109,21 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 }
 
 #pragma mark - <UITableViewDataSource>
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return self.loupanLeibiaoS.count;
-//}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.loupanLeibiaoS.count;
+}
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    WXZTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WXZLoupanCellID];
-//    
-////    cell.loupan = self.loupanLeibiaoS[indexPath.row];
-////    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
-//    
-//    return cell;
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WXZTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WXZLoupanCellID];
+    
+    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
+    cell.loupan = self.loupanLeibiaoS[indexPath.row];
+//    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
+    
+    return cell;
+}
 
 
 

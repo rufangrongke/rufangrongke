@@ -25,11 +25,14 @@
     // 设置导航栏背景图片,背景色
 //    [bar setBackgroundImage:[UIImage imageNamed:@"navigationbarBackgroundWhite"] forBarMetrics:UIBarMetricsDefault];
     
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSDictionary *titleAttributeDic = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:WXZ_SystemFont(20)};
+    [self.navigationBar setTitleTextAttributes:titleAttributeDic];
+
         [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"NavBg"] forBarMetrics:UIBarMetricsDefault];
 }
 
@@ -70,12 +73,12 @@
     [self popViewControllerAnimated:YES];
 }
 
-// 重写hidden方法
-- (void)setNavigationBarHidden:(BOOL)navigationBarHidden
-{
-    if (self.childViewControllers.count > 0) {
-        [super setNavigationBarHidden:navigationBarHidden];
-    }
-}
+//// 重写hidden方法
+//- (void)setNavigationBarHidden:(BOOL)navigationBarHidden
+//{
+//    if (self.childViewControllers.count > 0) {
+//        [super setNavigationBarHidden:navigationBarHidden];
+//    }
+//}
 
 @end

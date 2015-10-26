@@ -19,6 +19,9 @@
     // 显示导航栏
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.title = @"注册";
+    
+    // 隐藏导航栏
+    [self.navigationController setNavigationBarHidden:NO];
 //    self.navigationItem set
     // Do any additional setup after loading the view from its nib.
 }

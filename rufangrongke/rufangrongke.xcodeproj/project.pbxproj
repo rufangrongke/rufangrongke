@@ -62,6 +62,9 @@
 		888115E31BDDCDE0003A0356 /* WXZPersonalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889887B71BDB7CC100460FE3 /* WXZPersonalController.m */; };
 		888115E41BDDCDEC003A0356 /* WXZPersonalSexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */; };
 		888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */; };
+		888115E61BDDD288003A0356 /* WXZLoupanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888115E01BDDCA5F003A0356 /* WXZLoupanCell.xib */; };
+		888115E71BDDD293003A0356 /* WXZLoupanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DE1BDDCA3F003A0356 /* WXZLoupanCell.m */; };
+		888115EA1BDE068C003A0356 /* UIViewController+WXZLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115E91BDE068C003A0356 /* UIViewController+WXZLogin.m */; };
 		888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575B41BDB46FB005E5AC4 /* WXZKHListHeaderView.m */; };
 		888575BA1BDB4A8E005E5AC4 /* WXZKHListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575B91BDB4A8E005E5AC4 /* WXZKHListFooterView.m */; };
 		889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887B81BDB7CC100460FE3 /* WXZPersonalController.xib */; };
@@ -176,6 +179,8 @@
 		888115DD1BDDCA3F003A0356 /* WXZLoupanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLoupanCell.h; sourceTree = "<group>"; };
 		888115DE1BDDCA3F003A0356 /* WXZLoupanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLoupanCell.m; sourceTree = "<group>"; };
 		888115E01BDDCA5F003A0356 /* WXZLoupanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLoupanCell.xib; sourceTree = "<group>"; };
+		888115E81BDE068C003A0356 /* UIViewController+WXZLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WXZLogin.h"; sourceTree = "<group>"; };
+		888115E91BDE068C003A0356 /* UIViewController+WXZLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WXZLogin.m"; sourceTree = "<group>"; };
 		888575AE1BDB4679005E5AC4 /* WXZKeHuListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKeHuListCell.h; sourceTree = "<group>"; };
 		888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKeHuListCell.m; sourceTree = "<group>"; };
 		888575B01BDB4679005E5AC4 /* WXZKeHuListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKeHuListCell.xib; sourceTree = "<group>"; };
@@ -352,6 +357,8 @@
 				3057845C1BD3DA3100169C44 /* UIView+WXZFrame.m */,
 				888115DA1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.h */,
 				888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */,
+				888115E81BDE068C003A0356 /* UIViewController+WXZLogin.h */,
+				888115E91BDE068C003A0356 /* UIViewController+WXZLogin.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -669,6 +676,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				888115E61BDDD288003A0356 /* WXZLoupanCell.xib in Resources */,
 				88770E3F1BDDCA0600B9C0C3 /* WXZPersonalDataCell.xib in Resources */,
 				88770E401BDDCA0600B9C0C3 /* WXZPersonalData2Cell.xib in Resources */,
 				88770E541BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib in Resources */,
@@ -760,6 +768,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				888115E71BDDD293003A0356 /* WXZLoupanCell.m in Sources */,
 				888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */,
 				88770E581BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m in Sources */,
 				888115E41BDDCDEC003A0356 /* WXZPersonalSexVC.m in Sources */,
@@ -777,6 +786,7 @@
 				88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */,
 				88EAA71C1BD87C180072CD40 /* AFURLRequestSerialization.m in Sources */,
 				88588DBB1BD8D031002B357D /* WXZWoTypeCell.m in Sources */,
+				888115EA1BDE068C003A0356 /* UIViewController+WXZLogin.m in Sources */,
 				88EAA71B1BD87C180072CD40 /* AFURLConnectionOperation.m in Sources */,
 				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
 				88770E5D1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m in Sources */,

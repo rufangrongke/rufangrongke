@@ -25,6 +25,8 @@
     
 //    // 检测用户名
 //    NSString *username = self.usernameField.text;
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:username forKey:@"phoneNumber"];
 //    if (username.length == 0) {
 //        [SVProgressHUD showErrorWithStatus:self.usernameField.placeholder];
 //        return;
@@ -32,6 +34,7 @@
 //    
 //    // 检测密码
 //    NSString *pwd = self.pwdField.text;
+//    [defaults setObject:pwd forKey:@"password"];
 //    if (pwd.length == 0) {
 //        [SVProgressHUD showErrorWithStatus:self.pwdField.placeholder];
 //        return;
@@ -61,7 +64,14 @@
         // 3.解析服务器返回的数据（解析成字符串）
         NSDictionary *loginContentDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
 //        WXZLog(@"%@", loginContentDic);
-        
+        // 获取沙河路径
+//        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//        path = [path stringByAppendingString:@"userinfo.plist"];
+        NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
+        // 获取用户信息
+        NSDictionary *userinfo = loginContentDic[@"u"];
+        // 讲用户信息写入字典
+        [userinfo writeToFile:userinfoPath atomically:YES];
         
         // 4.回到主线程
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
