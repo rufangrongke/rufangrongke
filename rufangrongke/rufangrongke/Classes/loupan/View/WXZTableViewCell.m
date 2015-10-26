@@ -7,6 +7,7 @@
 //
 
 #import "WXZTableViewCell.h"
+#import <UIImageView+WebCache.h>
 
 @interface WXZTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *loupantupian;
@@ -37,7 +38,15 @@
 // 模型-->cell
 - (void)setLoupan:(WXZLouPan *)loupan
 {
-    self.loupan = loupan;
+    _loupan = loupan;
+    
+    NSString *picUrlString = [picBaseULR stringByAppendingString:loupan.PicUrl];
+    [self.loupantupian sd_setImageWithURL:[NSURL URLWithString:picUrlString] placeholderImage:[UIImage imageNamed:@"lp_fyt4"]];
+    self.loupanmingcheng.text = loupan.xiaoqu;
+    self.loufangtaoshu.text = loupan.YongJin;
+    self.pingmijiage.text = loupan.JunJia;
+    self.jingjirenshu.text = loupan.HeZuoJJrNum;
+    self.yixiangkehushu.text = loupan.YiXiangKeHuNum;
     
 }
 

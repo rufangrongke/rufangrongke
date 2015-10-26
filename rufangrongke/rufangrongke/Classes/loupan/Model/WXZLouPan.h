@@ -27,15 +27,16 @@
  */
 
 @property(nonatomic ,copy) NSString *PicUrl;
-@property(nonatomic ,copy) NSString *TJHX;
-@property(nonatomic ,strong) NSNumber *fyhao;
-@property(nonatomic ,copy) NSString *addtime;
+//@property(nonatomic ,copy) NSString *TJHX;
+//@property(nonatomic ,strong) NSNumber *fyhao;
+//@property(nonatomic ,copy) NSString *addtime;
 @property(nonatomic ,copy) NSString *YiXiangKeHuNum;
 @property(nonatomic ,copy) NSString *xiaoqu;
 @property(nonatomic ,copy) NSString *JunJia;
-@property(nonatomic ,copy) NSString *qu;
+//@property(nonatomic ,copy) NSString *qu;
 @property(nonatomic ,copy) NSString *YongJin;
-@property(nonatomic ,assign) BOOL isTop;
-@property(nonatomic ,strong) NSNumber *Row;
+//@property(nonatomic ,assign) BOOL isTop;
+//@property(nonatomic ,strong) NSNumber *Row;
 @property(nonatomic ,copy) NSString *HeZuoJJrNum;
+
 @end

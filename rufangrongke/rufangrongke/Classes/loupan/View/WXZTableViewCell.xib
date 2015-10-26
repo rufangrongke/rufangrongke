@@ -28,7 +28,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TLM-pn-Cy5" userLabel="拥">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lp_yong" translatesAutoresizingMaskIntoConstraints="NO" id="TLM-pn-Cy5" userLabel="拥">
                         <rect key="frame" x="123" y="44" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="8iS-9c-wYR"/>
@@ -66,19 +66,26 @@
                             <constraint firstAttribute="width" constant="2" id="4yf-qz-tHS"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gFT-WC-UcI" userLabel="地图尺标图">
-                        <rect key="frame" x="362" y="14" width="20" height="20.5"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lp_mc" translatesAutoresizingMaskIntoConstraints="NO" id="gFT-WC-UcI" userLabel="地图尺标图">
+                        <rect key="frame" x="366" y="14" width="20" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="hbn-ma-d8a"/>
                             <constraint firstAttribute="height" constant="20" id="rZX-c3-PCp"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbz-6K-YlP" userLabel="相距距离">
-                        <rect key="frame" x="397" y="14" width="42" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 km" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbz-6K-YlP" userLabel="相距距离">
+                        <rect key="frame" x="401" y="14" width="38" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hm7-fu-vUy" userLabel="分割线">
+                        <rect key="frame" x="0.0" y="107" width="449" height="1"/>
+                        <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Mo6-7b-2f4"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="eoD-Dm-SKk" firstAttribute="top" secondItem="4uT-7x-zxh" secondAttribute="top" id="1vQ-eY-g0O"/>
@@ -89,11 +96,14 @@
                     <constraint firstItem="eoD-Dm-SKk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="9s3-pj-vNR"/>
                     <constraint firstItem="6rB-wJ-arv" firstAttribute="leading" secondItem="TLM-pn-Cy5" secondAttribute="trailing" constant="14" id="Acg-zB-QND"/>
                     <constraint firstItem="gFT-WC-UcI" firstAttribute="top" secondItem="eoD-Dm-SKk" secondAttribute="top" constant="-6" id="Ask-Pa-fzh"/>
+                    <constraint firstItem="hm7-fu-vUy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Cce-wQ-ZsR"/>
+                    <constraint firstAttribute="trailing" secondItem="hm7-fu-vUy" secondAttribute="trailing" id="Dv2-7v-7Oo"/>
                     <constraint firstItem="eoD-Dm-SKk" firstAttribute="bottom" secondItem="FmA-av-orl" secondAttribute="bottom" id="HSi-Wa-kqW"/>
                     <constraint firstItem="FmA-av-orl" firstAttribute="leading" secondItem="eoD-Dm-SKk" secondAttribute="trailing" constant="10" id="Kas-Id-OBV"/>
                     <constraint firstAttribute="centerY" secondItem="TLM-pn-Cy5" secondAttribute="centerY" id="MMF-fX-f8c"/>
                     <constraint firstItem="V9t-QL-unr" firstAttribute="bottom" secondItem="FmA-av-orl" secondAttribute="bottom" id="N71-tw-lk5"/>
                     <constraint firstItem="gFT-WC-UcI" firstAttribute="top" secondItem="zbz-6K-YlP" secondAttribute="top" id="ObO-cc-qlO"/>
+                    <constraint firstAttribute="bottom" secondItem="hm7-fu-vUy" secondAttribute="bottom" id="Pmf-Dh-hIR"/>
                     <constraint firstAttribute="trailing" secondItem="zbz-6K-YlP" secondAttribute="trailing" constant="10" id="Vg7-jF-l7f"/>
                     <constraint firstItem="V9t-QL-unr" firstAttribute="bottom" secondItem="Kxe-dH-haB" secondAttribute="bottom" constant="1" id="WI5-mL-HBF"/>
                     <constraint firstItem="TLM-pn-Cy5" firstAttribute="leading" secondItem="eoD-Dm-SKk" secondAttribute="trailing" constant="10" id="WUz-a5-aI0"/>
@@ -127,4 +137,8 @@
             <point key="canvasLocation" x="369.5" y="345.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="lp_mc" width="14" height="14"/>
+        <image name="lp_yong" width="19" height="19"/>
+    </resources>
 </document>

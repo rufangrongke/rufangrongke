@@ -5,6 +5,7 @@
 //  Created by dymost on 15/10/18.
 //  Copyright (c) 2015年 王晓植. All rights reserved.
 //
+#import <UIKit/UIKit.h>
 
 #ifndef _1_______PrefixHeader_pch
 #define _1_______PrefixHeader_pch
@@ -16,6 +17,9 @@
 #import "UIBarButtonItem+WXZExtension.h"
 // const常量
 #import "WXZConst.h"
+// 控制器登陆扩展
+#import "UIViewController+WXZLogin.h"
+
 
 #pragma 自定义日志输出
 #ifdef DEBUG
@@ -39,5 +43,9 @@
 
 // Set Font
 #define WXZ_SystemFont(size) [UIFont systemFontOfSize:size]
+
+// 用户信息沙河路径
+//NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//path = [path stringByAppendingString:@"userinfo.plist"];
 
 #endif

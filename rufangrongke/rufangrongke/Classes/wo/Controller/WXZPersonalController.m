@@ -30,8 +30,8 @@
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"个人资料";
-    NSDictionary *titleAttributeDic = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:WXZ_SystemFont(17)};
-    [self.navigationController.navigationBar setTitleTextAttributes:titleAttributeDic];
+//    NSDictionary *titleAttributeDic = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:WXZ_SystemFont(20)};
+//    [self.navigationController.navigationBar setTitleTextAttributes:titleAttributeDic];
     
     // 初始化数据源
     self.dataArr = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"",@"pName",@"",@"pSex",@"",@"pWorkingTime",@"",@"pDeclaration",@"",@"pCertification",@"",@"pCity",@"",@"pStore",@"",@"pPhone",@"",@"pResetPwd", nil];

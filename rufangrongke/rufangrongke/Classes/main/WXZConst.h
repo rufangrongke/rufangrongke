@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+// picBaseULR
+UIKIT_EXTERN NSString * const picBaseULR;
 
 // 0.基础URL
 UIKIT_EXTERN NSString * const OutNetBaseURL;
@@ -95,3 +97,9 @@ UIKIT_EXTERN NSString * const jingjirenxiugaimima_parameter;
 UIKIT_EXTERN NSString * const jinjirengongsibagding;
 UIKIT_EXTERN NSString * const jinjirengongsibagding_parameter;
 
+/******************************************************************/
+UIKIT_EXTERN NSString * const phoneNumber;
+UIKIT_EXTERN NSString * const password;
+
+// 用户信息沙河存储路径userinfo.plist
+UIKIT_EXTERN NSString * const userinfoFile;

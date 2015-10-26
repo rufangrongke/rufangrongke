@@ -1,5 +1,8 @@
 #import <UIKit/UIKit.h>
 
+// picBaseULR
+NSString * const picBaseULR = @"http://linshi.benbaodai.com/";
+
 // 0.基础URL
 NSString * const OutNetBaseURL = @"http://linshi.benbaodai.com/svs/";
 
@@ -87,3 +90,11 @@ NSString * const jingjirenxiugaimima_parameter = @"yzm=&mob=";
 NSString * const jinjirengongsibagding = @"UsLt.ashx";
 NSString * const jinjirengongsibagding_parameter = @"ltcid=&ltname=&picfile=";
 
+/************************************************************************************/
+// 用户名密码常量
+NSString * const phoneNumber = @"phoneNumber";
+NSString * const password = @"password";
+
+// 用户信息沙河存储路径userinfo.plist
+NSString * const userinfoFile = @"userinfo.plist";
+;
