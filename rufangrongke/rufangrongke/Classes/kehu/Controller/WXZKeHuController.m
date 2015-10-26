@@ -7,7 +7,6 @@
 //
 
 #import "WXZKeHuController.h"
-#import "UIBarButtonItem+XMGExtension.h"
 #import "WXZKeHuListCell.h"
 #import "WXZKHListHeaderView.h"
 #import "WXZKHListFooterView.h"

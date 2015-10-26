@@ -12,6 +12,8 @@
 #pragma 头文件
 // 控件尺寸
 #import "UIView+WXZFrame.h"
+// UIBarButtonItem扩展
+#import "UIBarButtonItem+WXZExtension.h"
 // const常量
 #import "WXZConst.h"
 
