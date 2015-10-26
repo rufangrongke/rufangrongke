@@ -26,8 +26,8 @@ static NSString *sex = @"男"; // 记录性别
     // 视图整体背景色
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     // 添加标题，设置标题的颜色和字号
-    self.navigationItem.title = @"修改姓名";
-    NSDictionary *titleAttributeDic = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:WXZ_SystemFont(17)};
+    self.navigationItem.title = @"修改性别";
+    NSDictionary *titleAttributeDic = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:WXZ_SystemFont(18)};
     [self.navigationController.navigationBar setTitleTextAttributes:titleAttributeDic];
     
     // 设置默认选中(首先判断里边是否有缓存)
@@ -48,14 +48,14 @@ static NSString *sex = @"男"; // 记录性别
 - (void)viewWillAppear:(BOOL)animated
 {
     // 返回按钮
-    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.frame = CGRectMake(0, 0, 40, 44);
-    [leftBtn setImage:[UIImage imageNamed:@"kh_rjt"] forState:UIControlStateNormal];
-    leftBtn.transform = CGAffineTransformMakeRotation(M_PI); // 图片旋转d
-    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)]; // 标题向左侧偏移
-    [leftBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+//    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    leftBtn.frame = CGRectMake(0, 0, 40, 44);
+//    [leftBtn setImage:[UIImage imageNamed:@"kh_rjt"] forState:UIControlStateNormal];
+//    leftBtn.transform = CGAffineTransformMakeRotation(M_PI); // 图片旋转d
+//    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)]; // 标题向左侧偏移
+//    [leftBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
 }
 
 // 性别选择事件
