@@ -29,14 +29,14 @@
     {
         self.backgroundColor = setting.colorDisable ? setting.colorDisable : [UIColor lightGrayColor];
         [self setEnabled:NO];
-        NSString* title = [NSString stringWithFormat:@"   %@%d%@   ",(setting.strPrefix ? setting.strPrefix : @""),setting.indexStart,(setting.strSuffix ? setting.strSuffix : @"")];
-        NSLog(@"%@",title);
+        NSString* title = [NSString stringWithFormat:@"   %@%ld%@   ",(setting.strPrefix ? setting.strPrefix : @""),(long)setting.indexStart,(setting.strSuffix ? setting.strSuffix : @"")];
+//        NSLog(@"%@",title);
         [self setTitle:title forState:UIControlStateNormal];
         [self setTitle:title forState:UIControlStateDisabled];
 
         __weak typeof (self) wSelf = self;
         [UIView animateWithDuration:1 animations:^{
-            self.titleLabel.transform = CGAffineTransformMakeScale(1.2, 1.2);
+            self.titleLabel.transform = CGAffineTransformMakeScale(1.1, 1.1);
             self.titleLabel.alpha     = 0.0;
         } completion:^(BOOL b){
             setting.indexStart--;

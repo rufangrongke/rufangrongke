@@ -9,6 +9,7 @@
 #import "WXZFindPasswordController.h"
 #import "JxbScaleButton.h"
 #import <SVProgressHUD.h>
+#import "AFNetworking.h"
 
 @interface WXZFindPasswordController ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumber;
@@ -23,7 +24,7 @@
 - (IBAction)getVerificationCode:(id)sender {
     // 0.请求路径
     // 基本URL
-    NSString *baseURL = OutNetBaseURL;
+    NSString *baseURL = @"http://192.168.1.21:34/Svs/";
     NSString *urlString = [baseURL stringByAppendingString:yanzhengma];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     // URL
@@ -37,33 +38,65 @@
     
     
     // 2.发送请求
-    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        // 3.解析服务器返回的数据（解析成字符串）
-//        WXZLog(@"%@", data);
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        // 获取用户信息
-        WXZLog(@"%@", dic);
+//    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//        // 3.解析服务器返回的数据（解析成字符串）
+////        WXZLog(@"%@", data);
+//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+//        // 获取用户信息
+//        WXZLog(@"%@", dic);
+//        
+//        if ([dic[@"msg"] isEqualToString:@"发送成功"]) {
+//            JxbScaleSetting* setting = [[JxbScaleSetting alloc] init];
+//            setting.strPrefix = @"";
+//            setting.strSuffix = @"秒";
+//            setting.strCommon = @"重新发送";
+//            setting.indexStart = [dic[@"timeout"] integerValue];
+//            [self.getVerificationCode_button startWithSetting:setting];
+////            [self.view setNeedsDisplay];
+//        }else{
+//            [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+//        }
+//        /*
+//         {
+//         status : 1,
+//         msg : 发送成功,
+//         timeout : 300
+//         }
+//         
+//         */
+//
+//    }];
+    
+    // AFNetworking
+    NSMutableDictionary *parameterS = [NSMutableDictionary dictionary];
+    parameterS[@"Act"] = @"GetPass";
+    parameterS[@"Mobile"] = self.phoneNumber.text;
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameterS success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *dic = (NSDictionary *)responseObject;
         
         if ([dic[@"msg"] isEqualToString:@"发送成功"]) {
-            JxbScaleSetting* setting = [[JxbScaleSetting alloc] init];
-            setting.strPrefix = @"";
-            setting.strSuffix = @"秒";
-            setting.strCommon = @"重新发送";
-            setting.indexStart = [dic[@"timeout"] integerValue];
-            [self.getVerificationCode_button startWithSetting:setting];
-//            [self.view setNeedsDisplay];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                 JxbScaleButton* btn = (JxbScaleButton*)sender;
+                JxbScaleSetting* setting = [[JxbScaleSetting alloc] init];
+                setting.strPrefix = @"";
+                setting.strSuffix = @"秒";
+                setting.strCommon = @"重新发送";
+                
+                setting.indexStart = [dic[@"timeout"] integerValue];
+                
+                [btn startWithSetting:setting];
+                [self.view setNeedsDisplay];
+//                [self.view layoutIfNeeded];
+//                WXZLog(@"%@", dic);
+            }];
+//            NSLog(@"hhhhhhhhhh");
+            
         }else{
             [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
         }
-        /*
-         {
-         status : 1,
-         msg : 发送成功,
-         timeout : 300
-         }
-         
-         */
-
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        WXZLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:@"请求失败"];
     }];
 
 }
