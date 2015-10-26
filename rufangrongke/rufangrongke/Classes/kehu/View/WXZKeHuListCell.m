@@ -17,6 +17,7 @@
 // 加载nib文件
 + (instancetype)initListCell
 {
+    NSLog(@"%@",[[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject]);
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
