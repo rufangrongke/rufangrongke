@@ -618,6 +618,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88770E3F1BDDCA0600B9C0C3 /* WXZPersonalDataCell.xib in Resources */,
+				88770E401BDDCA0600B9C0C3 /* WXZPersonalData2Cell.xib in Resources */,
+				88770E3E1BDDC9B500B9C0C3 /* WXZKHListFooterView.xib in Resources */,
+				88770E3D1BDDC9A300B9C0C3 /* WXZKHListHeaderView.xib in Resources */,
+				88770E3C1BDDC93100B9C0C3 /* WXZKeHuListCell.xib in Resources */,
 				885387F51BDCE5D3005DCF38 /* WXZRegisterController.xib in Resources */,
 				30D59AB41BD5E519003F0A0C /* WXZSeachView.xib in Resources */,
 				886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */,

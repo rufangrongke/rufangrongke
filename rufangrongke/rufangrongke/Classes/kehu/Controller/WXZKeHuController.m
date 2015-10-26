@@ -100,6 +100,7 @@
     
     if (!keHuInfoCell)
     {
+        NSLog(@"%@",[NSBundle mainBundle]);
         keHuInfoCell = [WXZKeHuListCell initListCell];
         keHuInfoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
