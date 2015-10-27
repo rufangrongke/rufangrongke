@@ -38,11 +38,10 @@
 		886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886388A91BD877AB00498AF0 /* WXZKeHuController.xib */; };
 		886388B81BD87AC200498AF0 /* WXZWoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 886388B61BD87AC200498AF0 /* WXZWoController.m */; };
 		886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886388B71BD87AC200498AF0 /* WXZWoController.xib */; };
+		886812201BDF0CB700AA61BE /* WXZPersonalInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8868121E1BDF0CB700AA61BE /* WXZPersonalInfoVC.m */; };
+		886812211BDF0CB700AA61BE /* WXZPersonalInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8868121F1BDF0CB700AA61BE /* WXZPersonalInfoVC.xib */; };
 		8870349B1BD9BDC300315D1A /* WXZWoHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 887034991BD9BDC300315D1A /* WXZWoHeadCell.m */; };
 		8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8870349A1BD9BDC300315D1A /* WXZWoHeadCell.xib */; };
-		887218D11BDC9BD800620080 /* WXZPersonalNameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 887218CF1BDC9BD800620080 /* WXZPersonalNameVC.m */; };
-		887218D21BDC9BD800620080 /* WXZPersonalNameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 887218D01BDC9BD800620080 /* WXZPersonalNameVC.xib */; };
-		887218D71BDCAD9C00620080 /* WXZPersonalSexVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 887218D51BDCAD9C00620080 /* WXZPersonalSexVC.xib */; };
 		88770E3C1BDDC93100B9C0C3 /* WXZKeHuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575B01BDB4679005E5AC4 /* WXZKeHuListCell.xib */; };
 		88770E3D1BDDC9A300B9C0C3 /* WXZKHListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575B61BDB472C005E5AC4 /* WXZKHListHeaderView.xib */; };
 		88770E3E1BDDC9B500B9C0C3 /* WXZKHListFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888575BB1BDB4AA2005E5AC4 /* WXZKHListFooterView.xib */; };
@@ -58,15 +57,12 @@
 		88770E541BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E521BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib */; };
 		88770E581BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E561BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m */; };
 		88770E591BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E571BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib */; };
-		88770E5D1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E5B1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m */; };
-		88770E5E1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E5C1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib */; };
 		88770E621BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E601BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.m */; };
 		88770E631BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E611BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.xib */; };
 		88770E661BDE466300B9C0C3 /* WXZPhoneTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E651BDE466300B9C0C3 /* WXZPhoneTipsView.m */; };
 		88770E681BDE467A00B9C0C3 /* WXZPhoneTipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E671BDE467A00B9C0C3 /* WXZPhoneTipsView.xib */; };
 		888115E21BDDCDD9003A0356 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */; };
 		888115E31BDDCDE0003A0356 /* WXZPersonalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889887B71BDB7CC100460FE3 /* WXZPersonalController.m */; };
-		888115E41BDDCDEC003A0356 /* WXZPersonalSexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */; };
 		888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */; };
 		888115E61BDDD288003A0356 /* WXZLoupanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888115E01BDDCA5F003A0356 /* WXZLoupanCell.xib */; };
 		888115E71BDDD293003A0356 /* WXZLoupanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DE1BDDCA3F003A0356 /* WXZLoupanCell.m */; };
@@ -157,15 +153,12 @@
 		886388B51BD87AC200498AF0 /* WXZWoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZWoController.h; sourceTree = "<group>"; };
 		886388B61BD87AC200498AF0 /* WXZWoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoController.m; sourceTree = "<group>"; };
 		886388B71BD87AC200498AF0 /* WXZWoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZWoController.xib; sourceTree = "<group>"; };
+		8868121D1BDF0CB700AA61BE /* WXZPersonalInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalInfoVC.h; sourceTree = "<group>"; };
+		8868121E1BDF0CB700AA61BE /* WXZPersonalInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalInfoVC.m; sourceTree = "<group>"; };
+		8868121F1BDF0CB700AA61BE /* WXZPersonalInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalInfoVC.xib; sourceTree = "<group>"; };
 		887034981BD9BDC300315D1A /* WXZWoHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZWoHeadCell.h; sourceTree = "<group>"; };
 		887034991BD9BDC300315D1A /* WXZWoHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoHeadCell.m; sourceTree = "<group>"; };
 		8870349A1BD9BDC300315D1A /* WXZWoHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZWoHeadCell.xib; sourceTree = "<group>"; };
-		887218CE1BDC9BD800620080 /* WXZPersonalNameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalNameVC.h; sourceTree = "<group>"; };
-		887218CF1BDC9BD800620080 /* WXZPersonalNameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalNameVC.m; sourceTree = "<group>"; };
-		887218D01BDC9BD800620080 /* WXZPersonalNameVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalNameVC.xib; sourceTree = "<group>"; };
-		887218D31BDCAD9C00620080 /* WXZPersonalSexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalSexVC.h; sourceTree = "<group>"; };
-		887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalSexVC.m; sourceTree = "<group>"; };
-		887218D51BDCAD9C00620080 /* WXZPersonalSexVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalSexVC.xib; sourceTree = "<group>"; };
 		88770E411BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalDeclarationVC.h; sourceTree = "<group>"; };
 		88770E421BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalDeclarationVC.m; sourceTree = "<group>"; };
 		88770E431BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalDeclarationVC.xib; sourceTree = "<group>"; };
@@ -181,9 +174,6 @@
 		88770E551BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalPhoneVC.h; sourceTree = "<group>"; };
 		88770E561BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalPhoneVC.m; sourceTree = "<group>"; };
 		88770E571BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalPhoneVC.xib; sourceTree = "<group>"; };
-		88770E5A1BDDF61E00B9C0C3 /* WXZResetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZResetPasswordVC.h; sourceTree = "<group>"; };
-		88770E5B1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZResetPasswordVC.m; sourceTree = "<group>"; };
-		88770E5C1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZResetPasswordVC.xib; sourceTree = "<group>"; };
 		88770E5F1BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalPhoneCell.h; sourceTree = "<group>"; };
 		88770E601BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalPhoneCell.m; sourceTree = "<group>"; };
 		88770E611BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalPhoneCell.xib; sourceTree = "<group>"; };
@@ -431,12 +421,6 @@
 				889887B61BDB7CC100460FE3 /* WXZPersonalController.h */,
 				889887B71BDB7CC100460FE3 /* WXZPersonalController.m */,
 				889887B81BDB7CC100460FE3 /* WXZPersonalController.xib */,
-				887218CE1BDC9BD800620080 /* WXZPersonalNameVC.h */,
-				887218CF1BDC9BD800620080 /* WXZPersonalNameVC.m */,
-				887218D01BDC9BD800620080 /* WXZPersonalNameVC.xib */,
-				887218D31BDCAD9C00620080 /* WXZPersonalSexVC.h */,
-				887218D41BDCAD9C00620080 /* WXZPersonalSexVC.m */,
-				887218D51BDCAD9C00620080 /* WXZPersonalSexVC.xib */,
 				88770E411BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.h */,
 				88770E421BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.m */,
 				88770E431BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.xib */,
@@ -452,9 +436,9 @@
 				88770E551BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.h */,
 				88770E561BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m */,
 				88770E571BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib */,
-				88770E5A1BDDF61E00B9C0C3 /* WXZResetPasswordVC.h */,
-				88770E5B1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m */,
-				88770E5C1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib */,
+				8868121D1BDF0CB700AA61BE /* WXZPersonalInfoVC.h */,
+				8868121E1BDF0CB700AA61BE /* WXZPersonalInfoVC.m */,
+				8868121F1BDF0CB700AA61BE /* WXZPersonalInfoVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -709,6 +693,7 @@
 				88770E3F1BDDCA0600B9C0C3 /* WXZPersonalDataCell.xib in Resources */,
 				88770E401BDDCA0600B9C0C3 /* WXZPersonalData2Cell.xib in Resources */,
 				88770E541BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib in Resources */,
+				886812211BDF0CB700AA61BE /* WXZPersonalInfoVC.xib in Resources */,
 				88770E4F1BDDF58900B9C0C3 /* WXZPersonalCityVC.xib in Resources */,
 				88770E3E1BDDC9B500B9C0C3 /* WXZKHListFooterView.xib in Resources */,
 				88770E3D1BDDC9A300B9C0C3 /* WXZKHListHeaderView.xib in Resources */,
@@ -718,15 +703,12 @@
 				886388B91BD87AC200498AF0 /* WXZWoController.xib in Resources */,
 				886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */,
 				88770E631BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.xib in Resources */,
-				887218D71BDCAD9C00620080 /* WXZPersonalSexVC.xib in Resources */,
 				8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */,
 				88770E591BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib in Resources */,
 				88770E4A1BDDF54000B9C0C3 /* WXZPersonalCertificationVC.xib in Resources */,
-				88770E5E1BDDF61E00B9C0C3 /* WXZResetPasswordVC.xib in Resources */,
 				88588DBC1BD8D031002B357D /* WXZWoTypeCell.xib in Resources */,
 				88770E681BDE467A00B9C0C3 /* WXZPhoneTipsView.xib in Resources */,
 				88588DC41BD8D097002B357D /* WXZWoListCell.xib in Resources */,
-				887218D21BDC9BD800620080 /* WXZPersonalNameVC.xib in Resources */,
 				88770E451BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.xib in Resources */,
 				889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
@@ -803,7 +785,6 @@
 				888115E71BDDD293003A0356 /* WXZLoupanCell.m in Sources */,
 				888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */,
 				88770E581BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m in Sources */,
-				888115E41BDDCDEC003A0356 /* WXZPersonalSexVC.m in Sources */,
 				888115E31BDDCDE0003A0356 /* WXZPersonalController.m in Sources */,
 				888115E21BDDCDD9003A0356 /* WXZKeHuListCell.m in Sources */,
 				88770E4E1BDDF58900B9C0C3 /* WXZPersonalCityVC.m in Sources */,
@@ -815,14 +796,13 @@
 				888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */,
 				889887C31BDB862F00460FE3 /* WXZPersonalDataCell.m in Sources */,
 				88EAA7191BD87C180072CD40 /* AFNetworkReachabilityManager.m in Sources */,
-				887218D11BDC9BD800620080 /* WXZPersonalNameVC.m in Sources */,
 				88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */,
+				886812201BDF0CB700AA61BE /* WXZPersonalInfoVC.m in Sources */,
 				88EAA71C1BD87C180072CD40 /* AFURLRequestSerialization.m in Sources */,
 				88588DBB1BD8D031002B357D /* WXZWoTypeCell.m in Sources */,
 				888115EA1BDE068C003A0356 /* UIViewController+WXZLogin.m in Sources */,
 				88EAA71B1BD87C180072CD40 /* AFURLConnectionOperation.m in Sources */,
 				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
-				88770E5D1BDDF61E00B9C0C3 /* WXZResetPasswordVC.m in Sources */,
 				88770E441BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,

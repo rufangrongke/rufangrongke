@@ -12,8 +12,12 @@
 @interface WXZPersonalPhoneVC () <UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
-@property (weak, nonatomic) IBOutlet UILabel *phoneNumLabel;
+
 @property (strong, nonatomic) IBOutlet UIView *tipsHeaderView;
+@property (strong, nonatomic) IBOutlet UIView *warningHeaderView;
+@property (strong, nonatomic) IBOutlet UIView *footerView;
+
+@property (weak, nonatomic) IBOutlet UILabel *currentPhoneNumLabel;
 
 @end
 
@@ -31,7 +35,7 @@
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
     
-    self.phoneNumLabel.text = @"17701261104";
+    self.currentPhoneNumLabel.text = @"17701261104";
     
 }
 
@@ -73,27 +77,54 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 62;
+    if (section == 0)
+    {
+        return 62;
+    }
+    else
+    {
+        return 45;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.1;
+    if (section == 1)
+    {
+        return 64;
+    }
+    else
+    {
+        return 0.1;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0)
     {
-        self.phoneNumLabel.text = @"17701261104";
+        self.currentPhoneNumLabel.text = @"17701261104";
         return self.tipsHeaderView;
     }
-    return self.tipsHeaderView;
+    else
+    {
+        return self.warningHeaderView;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
+    if (section == 1)
+    {
+        return self.footerView;
+    }
     return nil;
+}
+
+// 确定按钮事件
+- (IBAction)confirmBtnAction:(id)sender
+{
+    NSLog(@"确定");
 }
 
 - (void)didReceiveMemoryWarning {

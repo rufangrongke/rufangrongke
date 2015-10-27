@@ -10,14 +10,12 @@
 #import "WXZPersonalDataCell.h"
 #import "WXZPersonalData2Cell.h"
 #import <UIImageView+WebCache.h>
-#import "WXZPersonalNameVC.h"
-#import "WXZPersonalSexVC.h"
 #import "WXZPersonalDeclarationVC.h"
 #import "WXZPersonalCertificationVC.h"
 #import "WXZPersonalCityVC.h"
 #import "WXZPersonalStoreVC.h"
 #import "WXZPersonalPhoneVC.h"
-#import "WXZResetPasswordVC.h"
+#import "WXZPersonalInfoVC.h"
 
 @interface WXZPersonalController () <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -55,16 +53,6 @@
 {
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = NO;
-    
-    // 返回按钮
-//    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    leftBtn.frame = CGRectMake(0, 0, 40, 44);
-//    [leftBtn setImage:[UIImage imageNamed:@"kh_rjt"] forState:UIControlStateNormal];
-//    leftBtn.transform = CGAffineTransformMakeRotation(M_PI); // 图片旋转d
-//    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)]; // 标题向左侧偏移
-//    [leftBtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
 }
 
 // 初始化数据源
@@ -166,17 +154,28 @@
     NSLog(@"%ld",(long)indexPath.row);
     if (indexPath.row == 0)
     {
-        
         UIActionSheet *photosSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
         [photosSheet showInView:self.view];
     }
-    else if (indexPath.row == 1)
+    else if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 9)
     {
-        [self.navigationController pushViewController:[[WXZPersonalNameVC alloc] init] animated:YES];
-    }
-    else if (indexPath.row == 2)
-    {
-        [self.navigationController pushViewController:[[WXZPersonalSexVC alloc] init] animated:YES];
+        WXZPersonalInfoVC *personalInfo = [[WXZPersonalInfoVC alloc] init];
+        if (indexPath.row == 1)
+        {
+            personalInfo.whichController = @"ModifyPersonalName";
+            personalInfo.titleStr = @"修改姓名";
+        }
+        else if (indexPath.row == 2)
+        {
+            personalInfo.whichController = @"ModifyPersonalSex";
+            personalInfo.titleStr = @"修改性别";
+        }
+        else
+        {
+            personalInfo.whichController = @"ModifyPersonalPwd";
+            personalInfo.titleStr = @"修改密码";
+        }
+        [self.navigationController pushViewController:personalInfo animated:YES];
     }
     else if (indexPath.row == 4)
     {
@@ -197,10 +196,6 @@
     else if (indexPath.row == 8)
     {
         [self.navigationController pushViewController:[[WXZPersonalPhoneVC alloc] init] animated:YES];
-    }
-    else if (indexPath.row == 9)
-    {
-        [self.navigationController pushViewController:[[WXZResetPasswordVC alloc] init] animated:YES];
     }
 }
 

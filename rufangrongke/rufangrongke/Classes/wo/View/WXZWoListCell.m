@@ -27,16 +27,25 @@
     if (section == 1)
     {
         // section = 1 ,添加分割线
-        if (row < 2)
+        if (row < 3)
         {
             UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(12, 54.7, [UIScreen mainScreen].bounds.size.width-12, 0.3)];
             lineLabel.backgroundColor = WXZRGBColor(215, 213, 213);
             [self addSubview:lineLabel];
         }
         
+        if (row == 0)
+        {
+            self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else
+        {
+            self.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
         // 自定义信息
-        NSArray *listImgArr = @[@"wo_feedback",@"wo_paihangbang",@"wo_ask_best_answer"];
-        NSArray *listTitleArr = @[@"意见反馈",@"排行榜",@"百问百答"];
+        NSArray *listImgArr = @[@"wo_paihangbang",@"wo_feedback",@"wo_paihangbang",@"wo_ask_best_answer"];
+        NSArray *listTitleArr = @[@"我的推荐码",@"意见反馈",@"排行榜",@"百问百答"];
         // 赋值
         self.listImgView.image = [UIImage imageNamed:listImgArr[row]];
         self.listTitleLabel.text = listTitleArr[row];
@@ -46,6 +55,7 @@
         // section = 2 ,信息显示
         self.listImgView.image = [UIImage imageNamed:@"wo_help"];
         self.listTitleLabel.text = @"帮助";
+        self.accessoryType = UITableViewCellAccessoryNone;
     }
 }
 
