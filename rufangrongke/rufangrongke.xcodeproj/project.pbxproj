@@ -65,6 +65,7 @@
 		888115E61BDDD288003A0356 /* WXZLoupanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888115E01BDDCA5F003A0356 /* WXZLoupanCell.xib */; };
 		888115E71BDDD293003A0356 /* WXZLoupanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DE1BDDCA3F003A0356 /* WXZLoupanCell.m */; };
 		888115EA1BDE068C003A0356 /* UIViewController+WXZLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115E91BDE068C003A0356 /* UIViewController+WXZLogin.m */; };
+		888115ED1BDE4230003A0356 /* JxbScaleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115EC1BDE4230003A0356 /* JxbScaleButton.m */; };
 		888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575B41BDB46FB005E5AC4 /* WXZKHListHeaderView.m */; };
 		888575BA1BDB4A8E005E5AC4 /* WXZKHListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575B91BDB4A8E005E5AC4 /* WXZKHListFooterView.m */; };
 		889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889887B81BDB7CC100460FE3 /* WXZPersonalController.xib */; };
@@ -181,6 +182,8 @@
 		888115E01BDDCA5F003A0356 /* WXZLoupanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLoupanCell.xib; sourceTree = "<group>"; };
 		888115E81BDE068C003A0356 /* UIViewController+WXZLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WXZLogin.h"; sourceTree = "<group>"; };
 		888115E91BDE068C003A0356 /* UIViewController+WXZLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WXZLogin.m"; sourceTree = "<group>"; };
+		888115EB1BDE4230003A0356 /* JxbScaleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JxbScaleButton.h; sourceTree = "<group>"; };
+		888115EC1BDE4230003A0356 /* JxbScaleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JxbScaleButton.m; sourceTree = "<group>"; };
 		888575AE1BDB4679005E5AC4 /* WXZKeHuListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKeHuListCell.h; sourceTree = "<group>"; };
 		888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKeHuListCell.m; sourceTree = "<group>"; };
 		888575B01BDB4679005E5AC4 /* WXZKeHuListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKeHuListCell.xib; sourceTree = "<group>"; };
@@ -386,6 +389,8 @@
 		305784421BD3D35000169C44 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				888115EB1BDE4230003A0356 /* JxbScaleButton.h */,
+				888115EC1BDE4230003A0356 /* JxbScaleButton.m */,
 				30D59AB81BD5ECD6003F0A0C /* WXZTabBar.h */,
 				30D59AB91BD5ECD6003F0A0C /* WXZTabBar.m */,
 			);
@@ -802,6 +807,7 @@
 				888575BA1BDB4A8E005E5AC4 /* WXZKHListFooterView.m in Sources */,
 				305784491BD3D35000169C44 /* main.m in Sources */,
 				30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */,
+				888115ED1BDE4230003A0356 /* JxbScaleButton.m in Sources */,
 				885387F01BDCB958005DCF38 /* WXZConst.m in Sources */,
 				885387FC1BDD1591005DCF38 /* Foundation+Log.m in Sources */,
 				88770E491BDDF54000B9C0C3 /* WXZPersonalCertificationVC.m in Sources */,

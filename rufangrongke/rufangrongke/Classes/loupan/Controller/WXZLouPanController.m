@@ -19,6 +19,7 @@
 /** 所有团购数据 */
 @property (nonatomic, strong) NSArray *loupanLeibiaoS;
 
+@property (nonatomic, strong) UISearchBar *search;
 @end
 
 @implementation WXZLouPanController
@@ -58,6 +59,7 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     UISearchBar *search = [[UISearchBar alloc]init];
     search.placeholder = @"楼盘搜索";
     self.navigationItem.titleView = search;
+    self.search = search;
 
 }
 // 右上方按钮监听点击
@@ -127,4 +129,9 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 
 
 
+// 取消键盘
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.search resignFirstResponder];
+}
 @end
