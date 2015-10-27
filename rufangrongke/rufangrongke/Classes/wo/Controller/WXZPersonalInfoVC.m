@@ -7,8 +7,10 @@
 //
 
 #import "WXZPersonalInfoVC.h"
+#import "AFNetworking.h"
+#import "WXZDetermineString.h"
 
-@interface WXZPersonalInfoVC ()
+@interface WXZPersonalInfoVC () <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *personalNameView;
 @property (strong, nonatomic) IBOutlet UIView *personalSexView;
@@ -40,11 +42,17 @@ static NSString *sex = @"男"; // 记录性别
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = self.titleStr;
     
-    [self initsome];
+    [self initControl]; // 初始化控件
+    
+    self.nameTextField.delegate = self;
+    self.currentPwdTextField.delegate = self;
+    self.modifyPwdTextField.delegate = self;
 }
 
-- (void)initsome
+// 初始化控件
+- (void)initControl
 {
+    // 判断当前controller，从而确定显示哪个view以及frame
     CGRect rect;
     if ([self.whichController isEqualToString:@"ModifyPersonalName"])
     {
@@ -54,6 +62,7 @@ static NSString *sex = @"男"; // 记录性别
         self.personalNameView.frame = CGRectMake(0, 10, WXZ_ScreenWidth, 55);
         [self.view addSubview:self.personalNameView];
         rect = [self calculateRect:self.personalNameView.frame];
+        self.nameTextField.text = self.nameOrSex;
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
     {
@@ -63,9 +72,9 @@ static NSString *sex = @"男"; // 记录性别
         self.personalSexView.frame = CGRectMake(0, 10, WXZ_ScreenWidth, 110);
         [self.view addSubview:self.personalSexView];
         rect = [self calculateRect:self.personalSexView.frame];
-        
+        sex = self.nameOrSex;
         // 设置默认选中(首先判断里边是否有缓存)
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"pSex"] isEqualToString:@"女"])
+        if ([self.nameOrSex isEqualToString:@"女"])
         {
             self.menImgView.hidden = YES;
             self.womenImgView.hidden = NO;
@@ -136,9 +145,93 @@ static NSString *sex = @"男"; // 记录性别
     }
 }
 
+// 确定按钮事件
 - (IBAction)determineAction:(id)sender
 {
+    // 判断是哪个controller，并进行相应请求
+    if ([self.whichController isEqualToString:@"ModifyPersonalName"])
+    {
+        if (![WXZDetermineString determineString:self.nameTextField.text] && ![WXZDetermineString isBeyondTheScopeOf:4 string:self.nameTextField.text])
+        {
+            [self modifyRequestWithParameter1:self.nameTextField.text parameter:@""];
+        }
+    }
+    else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
+    {
+        if (![WXZDetermineString determineString:sex])
+        {
+            [self modifyRequestWithParameter1:sex parameter:@""];
+        }
+    }
+    else if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
+    {
+        if (![WXZDetermineString determineString:self.currentPwdTextField.text] && ![WXZDetermineString determineString:self.modifyPwdTextField.text])
+        {
+            [self modifyRequestWithParameter1:self.currentPwdTextField.text parameter:self.modifyPwdTextField.text];
+        }
+    }
+}
+
+// 修改姓名，性别，密码请求
+- (void)modifyRequestWithParameter1:(NSString *)param1 parameter:(NSString *)param2
+{
+    NSString *nameUrlStr;
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
+    {
+        nameUrlStr = [OutNetBaseURL stringByAppendingString:jingjirenxiugaimima];
+        [param setObject:param1 forKey:@"pasOld"];
+        [param setObject:param2 forKey:@"pasNew"];
+    }
+    else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
+    {
+        nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenziliaoxiugai];
+        [param setObject:@"Sex" forKey:@"lN"];
+        [param setObject:param1 forKey:@"lD"];
+    }
+    else
+    {
+        nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenziliaoxiugai];
+        [param setObject:@"TrueName" forKey:@"lN"];
+        [param setObject:param1 forKey:@"lD"];
+    }
     
+    [[AFHTTPSessionManager manager] POST:nameUrlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        if ([responseObject[@"ok"] integerValue] == 1)
+        {
+            if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
+            {
+                // 跳转到登录页面
+            }
+            else
+            {
+                NSLog(@"%@",responseObject[@"msg"]);
+                // 发送通知
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+                [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
+            }
+        }
+        else
+        {
+            NSLog(@"%@",responseObject[@"msg"]);
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+}
+
+#pragma mark - UITextFieldDelegate Methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.nameTextField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

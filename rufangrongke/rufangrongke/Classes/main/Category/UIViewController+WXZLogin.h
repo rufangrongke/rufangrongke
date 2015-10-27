@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^loginMessage)(id result);
+
 @interface UIViewController (WXZLogin)
 //- (void)login;
 - (NSDictionary *)loginMessage;
 
+- (void)loginRequest:(loginMessage)message;
+
 - (NSDictionary *)localUserInfo;
+
 @end

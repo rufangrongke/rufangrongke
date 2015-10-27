@@ -10,4 +10,6 @@
 
 @interface WXZPersonalPhoneVC : UIViewController
 
+@property (nonatomic,strong) NSString *phone;
+
 @end

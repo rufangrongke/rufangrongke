@@ -8,6 +8,8 @@
 
 #import "WXZPersonalPhoneVC.h"
 #import "WXZPersonalPhoneCell.h"
+#import "AFNetworking.h"
+#import "WXZDetermineString.h"
 
 @interface WXZPersonalPhoneVC () <UITableViewDataSource,UITableViewDelegate>
 
@@ -34,9 +36,33 @@
     
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
+}
+
+// 修改手机号请求
+- (void)modifyRequestWithParameter1:(NSString *)param1 parameter:(NSString *)param2
+{
+    NSString *nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param setObject:param1 forKey:@"yzm"]; // 就手机号发送的验证码
+    [param setObject:param2 forKey:@"mob"]; // 新手机号
     
-    self.currentPhoneNumLabel.text = @"17701261104";
-    
+    [[AFHTTPSessionManager manager] POST:nameUrlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+     {
+         if ([responseObject[@"ok"] integerValue] == 1)
+         {
+             NSLog(@"%@",responseObject[@"msg"]);
+             // 发送通知
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+             [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
+         }
+         else
+         {
+             NSLog(@"%@",responseObject[@"msg"]);
+         }
+         
+     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+         
+     }];
 }
 
 #pragma mark - 
@@ -103,7 +129,7 @@
 {
     if (section == 0)
     {
-        self.currentPhoneNumLabel.text = @"17701261104";
+        self.currentPhoneNumLabel.text = self.phone;
         return self.tipsHeaderView;
     }
     else

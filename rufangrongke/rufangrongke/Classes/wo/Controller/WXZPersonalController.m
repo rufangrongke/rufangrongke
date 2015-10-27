@@ -23,6 +23,8 @@
 @property (nonatomic,strong) NSMutableDictionary *dataArr;
 @property (nonatomic,strong) UIImageView *imageView;
 
+@property (nonatomic,strong) NSDictionary *personalInfoDic;
+
 @end
 
 @implementation WXZPersonalController
@@ -34,12 +36,9 @@
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"个人资料";
-    NSDictionary *titleAttributeDic = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:WXZ_SystemFont(18)};
-    [self.navigationController.navigationBar setTitleTextAttributes:titleAttributeDic];
     
-    // 初始化数据源
-    self.dataArr = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"",@"pName",@"",@"pSex",@"",@"pWorkingTime",@"",@"pDeclaration",@"",@"pCertification",@"",@"pCity",@"",@"pStore",@"",@"pPhone",@"",@"pResetPwd", nil];
-    [self sourceData]; //
+    // 获取缓存数据
+    self.personalInfoDic = [self localUserInfo];
     
     // 设置tableview 的数据源和代理
     self.myTableView.dataSource = self;
@@ -53,54 +52,18 @@
 {
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = NO;
-}
-
-// 初始化数据源
-- (void)sourceData
-{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pName"])
-    {
-        [self.dataArr setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"pName"] forKey:@"pName"];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pSex"])
-    {
-        [self.dataArr setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"pSex"] forKey:@"pSex"];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pWorkingTime"])
-    {
-        [self.dataArr setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"pWorkingTime"] forKey:@"pWorkingTime"];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pDeclaration"])
-    {
-        [self.dataArr setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"pDeclaration"] forKey:@"pDeclaration"];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pCertification"])
-    {
-        [self.dataArr setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"pCertification"] forKey:@"pCertification"];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pCity"])
-    {
-        [self.dataArr setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"pCity"] forKey:@"pCity"];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pStore"])
-    {
-        [self.dataArr setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"pStore"] forKey:@"pStore"];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pPhone"])
-    {
-        [self.dataArr setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"pPhone"] forKey:@"pPhone"];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pResetPwd"])
-    {
-        [self.dataArr setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"pResetPwd"] forKey:@"pResetPwd"];
-    }
+    
+    [self.myTableView reloadData];
 }
 
 // 刷新数据
 - (void)updatePersonalData:(NSNotification *)noti
 {
-    [self sourceData];
-    [self.myTableView reloadData];
+    [self loginRequest:^(id result) {
+        // 重新获取缓存数据
+        self.personalInfoDic = result;
+        [self.myTableView reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDataSource/Delegate Methods
@@ -121,7 +84,7 @@
         }
         
         [personalDataCell headBorder]; // 分割线
-        [personalDataCell updateHead]; // 刷新头像
+        [personalDataCell updateHead:self.personalInfoDic[@"TouXiang"]]; // 刷新头像
         
         return personalDataCell;
     }
@@ -137,7 +100,8 @@
         if (indexPath.row < 10)
         {
             // 初始化信息
-            [personalData2Cell personalDataInfo:indexPath.row data:self.dataArr];
+            [personalData2Cell personalDataInfo:indexPath.row];
+            [personalData2Cell updatePersonalDataInfo:indexPath.row data:self.personalInfoDic];
         }
         else
         {
@@ -164,11 +128,13 @@
         {
             personalInfo.whichController = @"ModifyPersonalName";
             personalInfo.titleStr = @"修改姓名";
+            personalInfo.nameOrSex = self.personalInfoDic[@"TrueName"];
         }
         else if (indexPath.row == 2)
         {
             personalInfo.whichController = @"ModifyPersonalSex";
             personalInfo.titleStr = @"修改性别";
+            personalInfo.nameOrSex = self.personalInfoDic[@"Sex"];
         }
         else
         {
@@ -179,23 +145,33 @@
     }
     else if (indexPath.row == 4)
     {
-        [self.navigationController pushViewController:[[WXZPersonalDeclarationVC alloc] init] animated:YES];
+        WXZPersonalDeclarationVC *declarationVC = [[WXZPersonalDeclarationVC alloc] init];
+        declarationVC.declarationContent = self.personalInfoDic[@"XuanYan"];
+        [self.navigationController pushViewController:declarationVC animated:YES];
     }
     else if (indexPath.row == 5)
     {
-        [self.navigationController pushViewController:[[WXZPersonalCertificationVC alloc] init] animated:YES];
+        WXZPersonalCertificationVC *certificationVC = [[WXZPersonalCertificationVC alloc] init];
+        certificationVC.certificationTitle = self.personalInfoDic[@"TrueName"];
+        [self.navigationController pushViewController:certificationVC animated:YES];
     }
     else if (indexPath.row == 6)
     {
-        [self.navigationController pushViewController:[[WXZPersonalCityVC alloc] init] animated:YES];
+        WXZPersonalCityVC *cityVC = [[WXZPersonalCityVC alloc] init];
+        cityVC.currentCity = self.personalInfoDic[@"cityName"];
+        [self.navigationController pushViewController:cityVC animated:YES];
     }
     else if (indexPath.row == 7)
     {
-        [self.navigationController pushViewController:[[WXZPersonalStoreVC alloc] init] animated:YES];
+        WXZPersonalStoreVC *storeVC = [[WXZPersonalStoreVC alloc] init];
+        storeVC.storeName = self.personalInfoDic[@"LtName"];
+        [self.navigationController pushViewController:storeVC animated:YES];
     }
     else if (indexPath.row == 8)
     {
-        [self.navigationController pushViewController:[[WXZPersonalPhoneVC alloc] init] animated:YES];
+        WXZPersonalPhoneVC *phoneVC = [[WXZPersonalPhoneVC alloc] init];
+        phoneVC.phone = self.personalInfoDic[@"Mobile"];
+        [self.navigationController pushViewController:phoneVC animated:YES];
     }
 }
 
@@ -230,6 +206,7 @@
                 imagePicker.delegate = self; // 设置代理
                 imagePicker.allowsEditing = YES; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera; // 设置源
+                imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto; // 设定图片选取器的摄像头捕获模式
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
             }
             else
@@ -266,16 +243,29 @@
 {
 //    http://www.lvtao.net/ios/509.html
     //http://blog.csdn.net/justinjing0612/article/details/8751269
+//    http://www.swifthumb.com/thread-2555-1-1.html
+//    http://www.cnblogs.com/skyblue/archive/2013/05/08/3067108.html
 //    if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage])
 //    {
 //        
 //    }
     
+    
+    
     UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-    // 缓存
-    [[NSUserDefaults standardUserDefaults] setObject:UIImageJPEGRepresentation(img, 1) forKey:@"pHead"];
+    NSData *data = UIImageJPEGRepresentation(img, 1.0f);
+    
+    UIImageView *imgs = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 30, 30)];
+    imgs.image = img;
+    [self.view addSubview:imgs];
+    
     [self.myTableView reloadData]; // 刷新tableview
     
+    [picker dismissViewControllerAnimated:YES completion:nil]; // 取消
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
     [picker dismissViewControllerAnimated:YES completion:nil]; // 取消
 }
 

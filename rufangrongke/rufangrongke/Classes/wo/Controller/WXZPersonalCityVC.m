@@ -7,6 +7,8 @@
 //
 
 #import "WXZPersonalCityVC.h"
+#import "AFNetworking.h"
+#import "WXZDetermineString.h"
 
 @interface WXZPersonalCityVC ()
 
@@ -22,6 +24,33 @@
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"所在城市";
+}
+
+// 修改城市请求
+- (void)modifyRequestWithParameter:(NSString *)param1
+{
+    NSString *nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenziliaoxiugai];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param setObject:@"XuanYan" forKey:@"lN"];
+    [param setObject:param1 forKey:@"lD"];
+    
+    [[AFHTTPSessionManager manager] POST:nameUrlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+     {
+         if ([responseObject[@"ok"] integerValue] == 1)
+         {
+             NSLog(@"%@",responseObject[@"msg"]);
+             // 发送通知
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+             [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
+         }
+         else
+         {
+             NSLog(@"%@",responseObject[@"msg"]);
+         }
+         
+     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+         
+     }];
 }
 
 - (void)didReceiveMemoryWarning {

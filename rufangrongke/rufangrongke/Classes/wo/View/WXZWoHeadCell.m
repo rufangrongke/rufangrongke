@@ -7,6 +7,7 @@
 //
 
 #import "WXZWoHeadCell.h"
+#import <UIImageView+WebCache.h>
 
 @implementation WXZWoHeadCell
 
@@ -36,29 +37,33 @@
     self.headImgView.layer.borderColor =  WXZRGBColor(104, 111, 111).CGColor;
 }
 
-- (void)updateWoInfo
+- (void)updateWoInfo:(NSDictionary *)headInfoDic
 {
-    // 判断是否有缓存
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pHead"])
+    // 拼接头像url
+    NSURL *headUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:headInfoDic[@"TouXiang"]]];
+    [self.headImgView sd_setImageWithURL:headUrl placeholderImage:[UIImage imageNamed:@"wo_head"]];
+    self.userNameLabel.text = headInfoDic[@"TrueName"]; // 用户名
+    if ([headInfoDic[@"TrueName"] isEqualToString:@""] || headInfoDic[@"TrueName"] == nil)
     {
-        self.headImgView.image = [UIImage imageWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"pHead"]]; // 贴头像
+        self.userNameLabel.text = @"添加用户名";
     }
-    else
+    // 未认证或已认证
+    self.certificationImgView.image = [UIImage imageNamed:@"wo_certification"];
+    if ([headInfoDic[@"IsShiMing"] isEqualToString:@"True"])
     {
-        self.headImgView.image = [UIImage imageNamed:@"wo_head"];
+        self.certificationImgView.image = [UIImage imageNamed:@"wo_certified"];
     }
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pName"])
+    // 门店
+    self.storeYardsLabel.text = headInfoDic[@"LtName"];
+    if ([headInfoDic[@"LtName"] isEqualToString:@""] || headInfoDic[@"LtName"] == nil)
     {
-        self.userNameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"pName"]; // 用户名
+        self.storeYardsLabel.text = @"尚未绑定门店码";
     }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pStore"])
+    // 服务宣言
+    self.declarationLabel.text = headInfoDic[@"XuanYan"];
+    if ([headInfoDic[@"XuanYan"] isEqualToString:@""] || headInfoDic[@"XuanYan"] == nil)
     {
-        self.storeYardsLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"pStore"]; // 门店
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pDeclaration"])
-    {
-        self.declarationLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"pDeclaration"]; // 服务宣言
+        self.declarationLabel.text = @"一句话喊出你的精气神儿！~编辑你的服务宣言";
     }
 }
 

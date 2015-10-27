@@ -10,4 +10,6 @@
 
 @interface WXZPersonalCertificationVC : UIViewController
 
+@property (nonatomic,strong) NSString *certificationTitle;
+
 @end

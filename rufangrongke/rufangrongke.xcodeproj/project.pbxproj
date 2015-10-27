@@ -82,6 +82,7 @@
 		88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7151BD87C180072CD40 /* AFURLSessionManager.m */; };
 		88EAA7221BD88DA40072CD40 /* WXZLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7201BD88DA40072CD40 /* WXZLoginController.m */; };
 		88EAA7231BD88DA40072CD40 /* WXZLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88EAA7211BD88DA40072CD40 /* WXZLoginController.xib */; };
+		88F3F1781BDF6D7E00768422 /* WXZDetermineString.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F3F1771BDF6D7E00768422 /* WXZDetermineString.m */; };
 		EC7F4BA2BF9782D90A9E7AA8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E4B58BBB8C86BCD96EA8CF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -224,6 +225,8 @@
 		88EAA71F1BD88DA40072CD40 /* WXZLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLoginController.h; sourceTree = "<group>"; };
 		88EAA7201BD88DA40072CD40 /* WXZLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLoginController.m; sourceTree = "<group>"; };
 		88EAA7211BD88DA40072CD40 /* WXZLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLoginController.xib; sourceTree = "<group>"; };
+		88F3F1761BDF6D7E00768422 /* WXZDetermineString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZDetermineString.h; path = Tool/WXZDetermineString.h; sourceTree = "<group>"; };
+		88F3F1771BDF6D7E00768422 /* WXZDetermineString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZDetermineString.m; path = Tool/WXZDetermineString.m; sourceTree = "<group>"; };
 		90E4B58BBB8C86BCD96EA8CF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -400,6 +403,7 @@
 		305784431BD3D35000169C44 /* wo */ = {
 			isa = PBXGroup;
 			children = (
+				88F3F1751BDF6D2A00768422 /* Tool */,
 				305784441BD3D35000169C44 /* Controller */,
 				305784451BD3D35000169C44 /* Model */,
 				305784461BD3D35000169C44 /* View */,
@@ -578,6 +582,15 @@
 				88EAA7151BD87C180072CD40 /* AFURLSessionManager.m */,
 			);
 			name = NetWorkingTools;
+			sourceTree = "<group>";
+		};
+		88F3F1751BDF6D2A00768422 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				88F3F1761BDF6D7E00768422 /* WXZDetermineString.h */,
+				88F3F1771BDF6D7E00768422 /* WXZDetermineString.m */,
+			);
+			name = Tool;
 			sourceTree = "<group>";
 		};
 		9472ED2A46F6C39A66F33F89 /* Pods */ = {
@@ -801,6 +814,7 @@
 				30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */,
 				3057845D1BD3DA3100169C44 /* UIView+WXZFrame.m in Sources */,
 				889887CD1BDB99A000460FE3 /* WXZPersonalData2Cell.m in Sources */,
+				88F3F1781BDF6D7E00768422 /* WXZDetermineString.m in Sources */,
 				305784561BD3D54900169C44 /* WXZKeHuController.m in Sources */,
 				305784531BD3D52D00169C44 /* WXZLouPanController.m in Sources */,
 				8870349B1BD9BDC300315D1A /* WXZWoHeadCell.m in Sources */,

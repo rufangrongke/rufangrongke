@@ -45,8 +45,8 @@
     
     // 0.请求路径
     // 基本URL
-    NSString *baseURL = @"http://linshi.benbaodai.com/svs/";
-    NSString *urlString = [baseURL stringByAppendingString:@"Uslogin.ashx"];
+//    NSString *baseURL = @"http://linshi.benbaodai.com/svs/";
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:@"Uslogin.ashx"];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     // URL
     NSURL *url = [NSURL URLWithString:urlString];
@@ -63,7 +63,27 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         // 3.解析服务器返回的数据（解析成字符串）
         NSDictionary *loginContentDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//        WXZLog(@"%@", loginContentDic);
+        WXZLog(@"%@", loginContentDic);
+        /*
+         {
+         id : 5,
+         Mobile : 18833198077,
+         sfzid : 222222222222222222,
+         tjm : A00001,
+         cityName : 临沂,
+         sfzPic : /upFile/jjr/sfzPic/qxchqmqo.njb.jpg,
+         cityid : 2,
+         LtName : ,
+         CongYeTime : 1999/1/1 0:00:00,
+         TrueName : 王话1,
+         XuanYan : qwewqesaa,
+         Sex : 先生,
+         LtCid : ,
+         TouXiang : /upFile/jjr/TouXiang/m2o1qury.ux4.jpg,
+         IsShiMing : True
+         },
+
+         */
         // 获取沙河路径
 //        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 //        path = [path stringByAppendingString:@"userinfo.plist"];

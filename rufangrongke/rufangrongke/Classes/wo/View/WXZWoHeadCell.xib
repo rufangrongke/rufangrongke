@@ -14,6 +14,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_headbg" translatesAutoresizingMaskIntoConstraints="NO" id="6Wd-DU-gxA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
+                    </imageView>
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_head" translatesAutoresizingMaskIntoConstraints="NO" id="cnY-e8-onQ">
                         <rect key="frame" x="126" y="17" width="123" height="123"/>
                         <constraints>
@@ -81,9 +84,6 @@
                             </mask>
                         </variation>
                     </button>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_headbg" translatesAutoresizingMaskIntoConstraints="NO" id="6Wd-DU-gxA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="6Wd-DU-gxA" secondAttribute="trailing" id="1gJ-fU-Bno"/>
@@ -94,6 +94,7 @@
                     <constraint firstItem="cnY-e8-onQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="DCr-Ps-EFG"/>
                     <constraint firstItem="9TQ-23-gzX" firstAttribute="top" secondItem="LMv-cd-87n" secondAttribute="bottom" constant="18" id="Gs7-Tk-OPc"/>
                     <constraint firstAttribute="centerX" secondItem="ptl-Mh-GXE" secondAttribute="centerX" constant="33" id="KMO-gL-iHB"/>
+                    <constraint firstItem="ptl-Mh-GXE" firstAttribute="centerY" secondItem="yjY-Yj-nZd" secondAttribute="centerY" id="Kqq-kv-XdE"/>
                     <constraint firstItem="agU-md-HcP" firstAttribute="top" secondItem="ptl-Mh-GXE" secondAttribute="bottom" constant="7" id="NXO-r4-CsY"/>
                     <constraint firstAttribute="centerX" secondItem="cnY-e8-onQ" secondAttribute="centerX" constant="0.5" id="OnC-pT-15z"/>
                     <constraint firstAttribute="centerX" secondItem="WeH-xV-xWk" secondAttribute="centerX" constant="18" id="QuA-fA-JSI"/>
@@ -107,6 +108,7 @@
                     <constraint firstItem="ptl-Mh-GXE" firstAttribute="top" secondItem="WeH-xV-xWk" secondAttribute="bottom" constant="10" id="hcw-af-gEZ"/>
                     <constraint firstItem="yjY-Yj-nZd" firstAttribute="leading" secondItem="ptl-Mh-GXE" secondAttribute="trailing" constant="10" id="n5e-S9-dB5"/>
                     <constraint firstItem="agU-md-HcP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="nX7-6I-cLR"/>
+                    <constraint firstItem="agU-md-HcP" firstAttribute="top" secondItem="yjY-Yj-nZd" secondAttribute="bottom" constant="4" id="ooE-EL-ENV"/>
                     <constraint firstItem="yjY-Yj-nZd" firstAttribute="top" secondItem="9TQ-23-gzX" secondAttribute="bottom" constant="10" id="uJV-Lv-kQM"/>
                     <constraint firstItem="9TQ-23-gzX" firstAttribute="leading" secondItem="WeH-xV-xWk" secondAttribute="trailing" constant="7" id="wPA-RK-NFo"/>
                     <constraint firstAttribute="trailing" secondItem="agU-md-HcP" secondAttribute="trailing" constant="10" id="z8q-Yb-DCr"/>
@@ -135,7 +137,7 @@
     </objects>
     <resources>
         <image name="wo_certification" width="29" height="12"/>
-        <image name="wo_head" width="74" height="74"/>
+        <image name="wo_head" width="111" height="111"/>
         <image name="wo_headbg" width="375" height="249"/>
     </resources>
 </document>

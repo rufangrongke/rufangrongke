@@ -19,7 +19,9 @@
 + (instancetype)initPersonalData2Cell;
 
 // 初始化信息
-- (void)personalDataInfo:(NSInteger)row data:(NSMutableDictionary *)dic;
+- (void)personalDataInfo:(NSInteger)row;
+// 刷新数据
+- (void)updatePersonalDataInfo:(NSInteger)row data:(NSDictionary *)personalInfodic;
 //
 - (void)buttonWithTarget:(id)target action:(SEL)action;
 

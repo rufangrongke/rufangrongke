@@ -10,4 +10,6 @@
 
 @interface WXZPersonalDeclarationVC : UIViewController
 
+@property (nonatomic,strong) NSString *declarationContent;
+
 @end
