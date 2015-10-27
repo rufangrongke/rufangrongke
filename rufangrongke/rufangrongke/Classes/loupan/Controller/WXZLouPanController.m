@@ -14,8 +14,9 @@
 #import "WXZTableViewCell.h"
 #import <MJExtension.h>
 #import "WXZLoupanCell.h"
+#import "WXZLouPanMessageController.h"
 
-@interface WXZLouPanController ()
+@interface WXZLouPanController ()<UITableViewDataSource, UITableViewDelegate>
 /** 所有团购数据 */
 @property (nonatomic, strong) NSArray *loupanLeibiaoS;
 
@@ -66,11 +67,15 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 - (void)queDing_click{
 //    WXZLogFunc;
     WXZLog(@"%@", [self localUserInfo]);
+    // 取消键盘
+    [self.search resignFirstResponder];
 }
 // 左上方按钮监听点击
 - (void)quDu_click{
 //    WXZLogFunc;
     WXZLog(@"%@", [self loginMessage]);
+    // 取消键盘
+    [self.search resignFirstResponder];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -84,6 +89,7 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     
     // 显示指示器
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+//    [SVProgressHUD s];
     
     // 发送请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
@@ -119,7 +125,7 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WXZTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WXZLoupanCellID];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
     cell.loupan = self.loupanLeibiaoS[indexPath.row];
 //    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
@@ -129,9 +135,25 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //
+    WXZLog(@"%ld", indexPath.row);
+    WXZLouPanMessageController *louPanMessage = [[WXZLouPanMessageController alloc] init];
+    [self.navigationController pushViewController:louPanMessage animated:YES];
+    
+}
+
+#pragma 取消键盘
 // 取消键盘
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+//    UITableView
+    [self.search resignFirstResponder];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // 取消键盘
     [self.search resignFirstResponder];
 }
 @end

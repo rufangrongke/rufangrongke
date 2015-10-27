@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WXZLoginController">
             <connections>
                 <outlet property="pwdField" destination="1xb-UU-DCY" id="2xs-GG-w6p"/>
+                <outlet property="showHideCode_Button" destination="FhZ-nY-OYw" id="Hcq-qK-jLh"/>
                 <outlet property="usernameField" destination="YNQ-Hl-rLD" id="XpR-N2-tSU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -57,7 +58,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="540" height="40"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6U1-v0-f9g">
-                            <rect key="frame" x="46" y="9" width="39" height="21"/>
+                            <rect key="frame" x="46" y="9" width="39" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -69,8 +70,8 @@
                                 <constraint firstAttribute="height" constant="20" id="aCP-BF-Cdd"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入用户名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YNQ-Hl-rLD">
-                            <rect key="frame" x="98" y="5" width="429" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入用户名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YNQ-Hl-rLD">
+                            <rect key="frame" x="98" y="11.5" width="429" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
@@ -97,7 +98,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="540" height="40"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEm-pC-yr8">
-                            <rect key="frame" x="46" y="10" width="39" height="21"/>
+                            <rect key="frame" x="46" y="10" width="39" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -109,11 +110,23 @@
                                 <constraint firstAttribute="height" constant="20" id="n00-cD-x6X"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="1xb-UU-DCY">
-                            <rect key="frame" x="98" y="5" width="429" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="1xb-UU-DCY">
+                            <rect key="frame" x="98" y="10" width="421" height="19"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhZ-nY-OYw" userLabel="眼睛">
+                            <rect key="frame" x="518" y="14" width="21" height="11"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="21" id="AlN-zm-IWe"/>
+                                <constraint firstAttribute="height" constant="11" id="gQ4-L1-66h"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="zc_yanjing"/>
+                            <state key="selected" backgroundImage="zc_yanjingx"/>
+                            <connections>
+                                <action selector="showHideCode:" destination="-1" eventType="touchUpInside" id="TeP-pt-yk4"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="1xb-UU-DCY" firstAttribute="leading" secondItem="HEm-pC-yr8" secondAttribute="trailing" constant="13" id="3Hl-5R-6bo"/>
@@ -124,9 +137,11 @@
                         <constraint firstAttribute="centerY" secondItem="1xb-UU-DCY" secondAttribute="centerY" id="NPB-4v-5mY"/>
                         <constraint firstAttribute="centerY" secondItem="2Qj-sU-NAv" secondAttribute="centerY" id="QSJ-Ac-zO1"/>
                         <constraint firstAttribute="trailing" secondItem="ydU-Tf-ABg" secondAttribute="trailing" id="RnF-hh-Hnz"/>
-                        <constraint firstAttribute="trailing" secondItem="1xb-UU-DCY" secondAttribute="trailing" constant="13" id="RvQ-fF-GnI"/>
+                        <constraint firstAttribute="trailing" secondItem="1xb-UU-DCY" secondAttribute="trailing" constant="21" id="RvQ-fF-GnI"/>
                         <constraint firstAttribute="height" constant="40" id="bxa-IF-OHD"/>
                         <constraint firstItem="2Qj-sU-NAv" firstAttribute="leading" secondItem="TD8-qq-8p8" secondAttribute="leading" constant="13" id="e3b-Mr-J8P"/>
+                        <constraint firstItem="1xb-UU-DCY" firstAttribute="centerY" secondItem="FhZ-nY-OYw" secondAttribute="centerY" id="hcB-dT-X0z"/>
+                        <constraint firstAttribute="trailing" secondItem="FhZ-nY-OYw" secondAttribute="trailing" constant="1" id="wZW-j7-7up"/>
                         <constraint firstItem="ydU-Tf-ABg" firstAttribute="leading" secondItem="TD8-qq-8p8" secondAttribute="leading" id="ylu-Fj-fOP"/>
                     </constraints>
                 </view>
@@ -182,11 +197,13 @@
     </objects>
     <resources>
         <image name="NavBg" width="36" height="12"/>
-        <image name="denglu" width="214" height="29"/>
+        <image name="denglu" width="11" height="29"/>
         <image name="dl_biankuang" width="321" height="41"/>
         <image name="logo" width="84" height="84"/>
         <image name="mima" width="20" height="24"/>
         <image name="rongkebao" width="106" height="34"/>
         <image name="yonghu" width="20" height="24"/>
+        <image name="zc_yanjing" width="21" height="11"/>
+        <image name="zc_yanjingx" width="21" height="11"/>
     </resources>
 </document>

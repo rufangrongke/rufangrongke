@@ -22,6 +22,8 @@
 @implementation WXZFindPasswordController
 // 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
+    
+//    phoneNumber.
     // 0.请求路径
     // 基本URL
     NSString *baseURL = @"http://192.168.1.21:34/Svs/";
@@ -135,14 +137,16 @@
     // 显示导航栏
     [self.navigationController setNavigationBarHidden:NO];
     
+    // 设置导航栏标题
+    self.navigationItem.title = @"找回密码";
     // 倒计时按钮
-    self.getVerificationCode_button = [[JxbScaleButton alloc] init];
+//    self.getVerificationCode_button = [[JxbScaleButton alloc] init];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 // 取消键盘
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -152,14 +156,6 @@
     [self.resetPassword resignFirstResponder];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -21,6 +21,8 @@
 		30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2741BD2B3B4006A8090 /* Images.xcassets */; };
 		30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2761BD2B3B4006A8090 /* LaunchScreen.xib */; };
 		30ECA2841BD2B3B5006A8090 /* rufangrongkeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30ECA2831BD2B3B5006A8090 /* rufangrongkeTests.m */; };
+		8801C53D1BDF28B800F05FA0 /* WXZLouPanMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8801C53C1BDF28B800F05FA0 /* WXZLouPanMessageController.m */; };
+		8801C5411BDF28EC00F05FA0 /* WXZLouPanMessageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8801C5401BDF28EC00F05FA0 /* WXZLouPanMessageController.xib */; };
 		885387F01BDCB958005DCF38 /* WXZConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387EF1BDCB958005DCF38 /* WXZConst.m */; };
 		885387F41BDCE5D3005DCF38 /* WXZRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387F21BDCE5D3005DCF38 /* WXZRegisterController.m */; };
 		885387F51BDCE5D3005DCF38 /* WXZRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 885387F31BDCE5D3005DCF38 /* WXZRegisterController.xib */; };
@@ -130,6 +132,9 @@
 		30ECA2821BD2B3B5006A8090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30ECA2831BD2B3B5006A8090 /* rufangrongkeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rufangrongkeTests.m; sourceTree = "<group>"; };
 		39928E051B59D36C45248CC0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8801C53B1BDF28B800F05FA0 /* WXZLouPanMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanMessageController.h; sourceTree = "<group>"; };
+		8801C53C1BDF28B800F05FA0 /* WXZLouPanMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanMessageController.m; sourceTree = "<group>"; };
+		8801C5401BDF28EC00F05FA0 /* WXZLouPanMessageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanMessageController.xib; sourceTree = "<group>"; };
 		885387EE1BDCB852005DCF38 /* WXZConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXZConst.h; sourceTree = "<group>"; };
 		885387EF1BDCB958005DCF38 /* WXZConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZConst.m; sourceTree = "<group>"; };
 		885387F11BDCE5D3005DCF38 /* WXZRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZRegisterController.h; sourceTree = "<group>"; };
@@ -494,6 +499,9 @@
 			children = (
 				305784511BD3D52C00169C44 /* WXZLouPanController.h */,
 				305784521BD3D52C00169C44 /* WXZLouPanController.m */,
+				8801C53B1BDF28B800F05FA0 /* WXZLouPanMessageController.h */,
+				8801C53C1BDF28B800F05FA0 /* WXZLouPanMessageController.m */,
+				8801C5401BDF28EC00F05FA0 /* WXZLouPanMessageController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -723,6 +731,7 @@
 				889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
 				885388011BDD1DC0005DCF38 /* WXZTableViewCell.xib in Resources */,
+				8801C5411BDF28EC00F05FA0 /* WXZLouPanMessageController.xib in Resources */,
 				88EAA7231BD88DA40072CD40 /* WXZLoginController.xib in Resources */,
 				885387FA1BDD01D6005DCF38 /* WXZFindPasswordController.xib in Resources */,
 				30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */,
@@ -801,6 +810,7 @@
 				305784471BD3D35000169C44 /* AppDelegate.m in Sources */,
 				30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */,
 				88EAA7181BD87C180072CD40 /* AFHTTPSessionManager.m in Sources */,
+				8801C53D1BDF28B800F05FA0 /* WXZLouPanMessageController.m in Sources */,
 				30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */,
 				888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */,
 				889887C31BDB862F00460FE3 /* WXZPersonalDataCell.m in Sources */,

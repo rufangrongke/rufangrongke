@@ -17,10 +17,27 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 
 @property (weak, nonatomic) IBOutlet UITextField *pwdField;
+@property (weak, nonatomic) IBOutlet UIButton *showHideCode_Button;
 
 @end
 
 @implementation WXZLoginController
+
+// 隐藏或者显示密码
+- (IBAction)showHideCode:(id)sender {
+    // 隐藏或者显示密码
+    // 默认是隐藏
+    UIButton *btn = (UIButton *)sender;
+    if (self.pwdField.secureTextEntry) {
+        self.pwdField.secureTextEntry = NO;
+        btn.selected = YES;
+    }else{
+        self.pwdField.secureTextEntry = YES;
+        btn.selected = NO;
+    }
+}
+
+
 - (IBAction)login:(id)sender {
     
 //    // 检测用户名

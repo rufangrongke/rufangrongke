@@ -34,7 +34,7 @@
     // 1.创建请求对象
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
-    NSString *parameter = [NSString stringWithFormat:@"Act=GetPass&Mobile=%@",self.phoneNumber.text];
+    NSString *parameter = [NSString stringWithFormat:@"Act=Reg&Mobile=%@",self.phoneNumber.text];
     request.HTTPBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
     
     // AFNetworking
