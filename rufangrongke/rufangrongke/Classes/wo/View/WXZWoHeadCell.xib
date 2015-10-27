@@ -14,9 +14,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_headbg" translatesAutoresizingMaskIntoConstraints="NO" id="6Wd-DU-gxA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
-                    </imageView>
                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_head" translatesAutoresizingMaskIntoConstraints="NO" id="cnY-e8-onQ">
                         <rect key="frame" x="126" y="17" width="123" height="123"/>
                         <constraints>
@@ -54,20 +51,20 @@
                             <constraint firstAttribute="width" constant="29" id="bj4-hf-5NL"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="尚未绑定门店码" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptl-Mh-GXE">
-                        <rect key="frame" x="109" y="186" width="91" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尚未绑定门店码" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptl-Mh-GXE">
+                        <rect key="frame" x="113" y="186" width="84" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="一句话喊出你的精气神儿！~编辑你的服务宣言" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agU-md-HcP">
-                        <rect key="frame" x="10" y="213" width="355" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一句话喊出你的精气神儿！~编辑你的服务宣言" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agU-md-HcP">
+                        <rect key="frame" x="10" y="212" width="355" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjY-Yj-nZd">
-                        <rect key="frame" x="210" y="180" width="53" height="28"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjY-Yj-nZd">
+                        <rect key="frame" x="207" y="180" width="53" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="VnE-gj-B49"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="53" id="hfy-Ov-2fQ"/>
@@ -84,6 +81,9 @@
                             </mask>
                         </variation>
                     </button>
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_headbg" translatesAutoresizingMaskIntoConstraints="NO" id="6Wd-DU-gxA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="6Wd-DU-gxA" secondAttribute="trailing" id="1gJ-fU-Bno"/>
