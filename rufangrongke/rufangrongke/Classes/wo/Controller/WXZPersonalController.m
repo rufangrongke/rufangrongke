@@ -10,6 +10,7 @@
 #import "WXZPersonalDataCell.h"
 #import "WXZPersonalData2Cell.h"
 #import <UIImageView+WebCache.h>
+#import "AFNetworking.h"
 #import "WXZPersonalDeclarationVC.h"
 #import "WXZPersonalCertificationVC.h"
 #import "WXZPersonalCityVC.h"
@@ -238,30 +239,49 @@
     }
 }
 
-#pragma UIImagePickerController Delegate
+#pragma UIImagePickerController Delegate (相机和拍照)
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 //    http://www.lvtao.net/ios/509.html
     //http://blog.csdn.net/justinjing0612/article/details/8751269
 //    http://www.swifthumb.com/thread-2555-1-1.html
 //    http://www.cnblogs.com/skyblue/archive/2013/05/08/3067108.html
-//    if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(__bridge NSString *)kUTTypeImage])
-//    {
-//        
-//    }
-    
-    
-    
-    UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-    NSData *data = UIImageJPEGRepresentation(img, 1.0f);
-    
-    UIImageView *imgs = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 30, 30)];
-    imgs.image = img;
-    [self.view addSubview:imgs];
-    
-    [self.myTableView reloadData]; // 刷新tableview
+    if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.image"])
+    {
+        // 如果是则从info字典参数中获取原图片
+        UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+        //如果图片选取器的源类型为摄像头
+        if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+            //将图片存入系统相册
+            UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
+        }
+        NSData *imgData;
+//        imgData = UIImagePNGRepresentation(img);
+        imgData = UIImageJPEGRepresentation(img, 1.0f);
+//        if (UIImagePNGRepresentation(img))
+//        {
+//            imgData = UIImagePNGRepresentation(img);
+//        }
+//        else
+//        {
+//            imgData = UIImageJPEGRepresentation(img, 1.0f);
+//        }
+        
+//        [self saveImage:img];
+        [self upLoadHead:imgData]; // 请求
+    }
+    else
+    {
+        NSLog(@"不是图片");
+    }
     
     [picker dismissViewControllerAnimated:YES completion:nil]; // 取消
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+//    [self saveImage:image];
+    [self upLoadHead:UIImageJPEGRepresentation(image, 1.0f)];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -269,15 +289,103 @@
     [picker dismissViewControllerAnimated:YES completion:nil]; // 取消
 }
 
-// 返回button 事件
-- (void)backAction:(id)sender
+//剪裁图片
+- (UIImage *)scaleImage:(UIImage *)img ToSize:(CGSize)size
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+    // 绘制改变大小的图片
+    [img drawInRect:CGRectMake(0,0, size.width, size.height)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage =UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    //返回新的改变大小后的图片
+    return scaledImage;
+}
+
+//保存和上传照片
+-(void)saveImage:(UIImage *)image
+{
+    NSData *data=UIImagePNGRepresentation(image);
+    
+    NSString *docPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"headImg.plist"];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:data,@"imgData", nil];
+    [dic writeToFile:docPath atomically:YES];
+    
+    //选择头像完成后上传头像
+    [self upLoadHead:nil]; // 请求
+}
+
+- (void)upLoadHead:(NSData *)head
+{
+    NSString *url = [OutNetBaseURL stringByAppendingString:shangchuangtupian];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@"TouXiang" forKey:@"lx"];
+    [params setObject:head forKey:@"File"];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+
+        [formData appendPartWithFileData:head name:@"headFile" fileName:fileName mimeType:@"image/png"];
+
+    } success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        [operation start];
+        [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite)
+        {
+            CGFloat progress = ((float)totalBytesWritten) / totalBytesExpectedToWrite;
+            NSLog(@"%lf",progress);
+        }];
+
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"上传成功");
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"上传失败");
+        }];
+
+        NSString *mm=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"upload = %@",mm);
+        
+        [self loginRequest:^(id result) {
+            // 重新获取缓存数据
+            self.personalInfoDic = result;
+            [self.myTableView reloadData];
+        }];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+    }];
+}
+
+// 返回button 事件
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // 发送通知，更新“我”界面信息
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateWoPage" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dfa
+{
+    
 }
 
 /*

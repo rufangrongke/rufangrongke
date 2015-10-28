@@ -23,7 +23,7 @@
     // 视图整体背景色
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     // 添加标题，设置标题的颜色和字号
-    self.navigationItem.title = @"所在城市";
+    self.navigationItem.title = @"设定城市";
 }
 
 // 修改城市请求

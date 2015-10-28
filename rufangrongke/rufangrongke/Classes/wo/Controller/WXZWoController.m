@@ -55,8 +55,11 @@
     [self.myTableView reloadData];
 }
 
+// 刷新“我”界面数据（通知方法）
 - (void)updateWoData:(NSNotification *)noti
 {
+    // 获取缓存数据
+    self.woHeadInfoDic = [self localUserInfo];
     [self.myTableView reloadData];
 }
 

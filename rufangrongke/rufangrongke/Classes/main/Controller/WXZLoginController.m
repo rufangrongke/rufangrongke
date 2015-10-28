@@ -73,7 +73,9 @@
     // 1.创建请求对象
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
-    request.HTTPBody = [@"mob=18833198077&pas=123456" dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *pwdStr = [NSString stringWithFormat:@"mob=18833198077&pas=%@",self.pwdField.text];
+    request.HTTPBody = [pwdStr dataUsingEncoding:NSUTF8StringEncoding];
 
     
     // 2.发送请求

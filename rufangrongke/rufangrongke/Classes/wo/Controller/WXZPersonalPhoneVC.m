@@ -92,6 +92,7 @@
     }
     
     [phoneCell phoneInfo:indexPath];
+    [phoneCell.codeBtn addTarget:self action:@selector(confirmBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
     return phoneCell;
 }
@@ -150,7 +151,16 @@
 // 确定按钮事件
 - (IBAction)confirmBtnAction:(id)sender
 {
-    NSLog(@"确定");
+    UIButton *btn = (UIButton *)sender;
+    if (btn.tag == 100009)
+    {
+        NSLog(@"验证码");
+    }
+    else
+    {
+        NSLog(@"确定");
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

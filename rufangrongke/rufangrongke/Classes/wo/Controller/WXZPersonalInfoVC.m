@@ -9,6 +9,7 @@
 #import "WXZPersonalInfoVC.h"
 #import "AFNetworking.h"
 #import "WXZDetermineString.h"
+#import "WXZLoginController.h"
 
 @interface WXZPersonalInfoVC () <UITextFieldDelegate>
 
@@ -203,6 +204,8 @@ static NSString *sex = @"男"; // 记录性别
             if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
             {
                 // 跳转到登录页面
+                WXZLoginController *loginVC = [[WXZLoginController alloc] init];
+                [self.navigationController pushViewController:loginVC animated:YES];
             }
             else
             {
