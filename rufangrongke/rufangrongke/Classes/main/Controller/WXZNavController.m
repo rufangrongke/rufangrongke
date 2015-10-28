@@ -43,7 +43,7 @@
 {
     if (self.childViewControllers.count > 0) { // 如果push进来的不是第一个控制器
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"返回" forState:UIControlStateNormal];
+//        [button setTitle:@"返回" forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateHighlighted];
         button.size = CGSizeMake(70, 30);
@@ -52,8 +52,8 @@
         //        [button sizeToFit];
         // 让按钮的内容往左边偏移10
         button.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+//        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         
         // 修改导航栏左边的item
