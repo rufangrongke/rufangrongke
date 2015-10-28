@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WXZLouPanMessageController : UITableViewController
-
+/* 楼盘参数 */
+@property(nonatomic,copy) NSString *fyhao;
 @end

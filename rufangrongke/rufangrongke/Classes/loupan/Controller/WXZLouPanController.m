@@ -17,7 +17,7 @@
 #import "WXZLouPanMessageController.h"
 
 @interface WXZLouPanController ()<UITableViewDataSource, UITableViewDelegate>
-/** 所有团购数据 */
+/** 楼盘模型字典 */
 @property (nonatomic, strong) NSArray *loupanLeibiaoS;
 
 @property (nonatomic, strong) UISearchBar *search;
@@ -63,20 +63,28 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     self.search = search;
 
 }
-// 右上方按钮监听点击
+
+/**
+ *  右上方按钮监听点击
+ */
 - (void)queDing_click{
 //    WXZLogFunc;
     WXZLog(@"%@", [self localUserInfo]);
     // 取消键盘
     [self.search resignFirstResponder];
 }
-// 左上方按钮监听点击
+
+/**
+ *  左上方按钮监听点击
+ */
 - (void)quDu_click{
 //    WXZLogFunc;
     WXZLog(@"%@", [self loginMessage]);
     // 取消键盘
     [self.search resignFirstResponder];
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 初始化信息
@@ -89,11 +97,10 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     
     // 显示指示器
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-//    [SVProgressHUD s];
     
     // 发送请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
-//    WXZLog(@"%@", url);
+//    WXZLog(@"%@", url); // 测试
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"inp"] = @1;
     [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -101,11 +108,11 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
         [SVProgressHUD dismiss];
         
 //        WXZLog(@"%@", responseObject);
-//        // 服务器返回的JSON数据
+        // 服务器返回的JSON数据
         self.loupanLeibiaoS = [WXZLouPan objectArrayWithKeyValuesArray:responseObject[@"fys"]];
-        NSLog(@"%@", self.loupanLeibiaoS);
-        WXZLouPan *loupan =self.loupanLeibiaoS[0];
-        WXZLog(@"%@", loupan.YiXiangKeHuNum);
+//        NSLog(@"%@", self.loupanLeibiaoS);
+//        WXZLouPan *loupan =self.loupanLeibiaoS[0];
+//        WXZLog(@"%@", loupan.YiXiangKeHuNum);
         // 刷新表格
         [self.tableView reloadData];
         
@@ -126,7 +133,7 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 {
     WXZTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WXZLoupanCellID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
+//    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
     cell.loupan = self.loupanLeibiaoS[indexPath.row];
 //    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
     
@@ -134,12 +141,16 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 }
 
 
-
+/**
+ *  点击cell
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //
-    WXZLog(@"%ld", indexPath.row);
     WXZLouPanMessageController *louPanMessage = [[WXZLouPanMessageController alloc] init];
+    // 标题
+    louPanMessage.navigationItem.title = [self.loupanLeibiaoS[indexPath.row] xiaoqu];
+    // 楼盘编号,楼盘号
+    louPanMessage.fyhao = [self.loupanLeibiaoS[indexPath.row] fyhao];
     [self.navigationController pushViewController:louPanMessage animated:YES];
     
 }

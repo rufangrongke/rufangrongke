@@ -21,7 +21,7 @@
 {
     // 当导航栏用在XMGNavigationController中, appearance设置才会生效
     //    UINavigationBar *bar = [UINavigationBar appearanceWhenContainedIn:[self class], nil];
-    UINavigationBar *bar = [UINavigationBar appearance];
+//    UINavigationBar *bar = [UINavigationBar appearance];
     // 设置导航栏背景图片,背景色
 //    [bar setBackgroundImage:[UIImage imageNamed:@"navigationbarBackgroundWhite"] forBarMetrics:UIBarMetricsDefault];
     

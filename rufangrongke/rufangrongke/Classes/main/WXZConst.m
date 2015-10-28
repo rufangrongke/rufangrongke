@@ -1,7 +1,8 @@
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 // picBaseULR
-NSString * const picBaseULR = @"http://linshi.benbaodai.com/";
+NSString * const picBaseULR = @"http://linshi.benbaodai.com";
 
 // 0.基础URL
 NSString * const OutNetBaseURL = @"http://linshi.benbaodai.com/svs/";
@@ -97,4 +98,3 @@ NSString * const password = @"password";
 
 // 用户信息沙河存储路径userinfo.plist
 NSString * const userinfoFile = @"userinfo.plist";
-;

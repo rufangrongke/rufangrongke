@@ -48,4 +48,9 @@
 //NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 //path = [path stringByAppendingString:@"userinfo.plist"];
 
+// 主屏幕尺寸
+#define mainScreen_width  [UIScreen mainScreen].bounds.size.width;
+#define mainScreen_height  [UIScreen mainScreen].bounds.size.height;
+#define mainScreen_widthToHeigth mainScreen_width / mainScreen_height;
+
 #endif

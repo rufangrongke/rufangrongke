@@ -28,7 +28,7 @@
 
 @property(nonatomic ,copy) NSString *PicUrl;
 //@property(nonatomic ,copy) NSString *TJHX;
-//@property(nonatomic ,strong) NSNumber *fyhao;
+@property(nonatomic ,copy) NSString *fyhao;
 //@property(nonatomic ,copy) NSString *addtime;
 @property(nonatomic ,copy) NSString *YiXiangKeHuNum;
 @property(nonatomic ,copy) NSString *xiaoqu;
