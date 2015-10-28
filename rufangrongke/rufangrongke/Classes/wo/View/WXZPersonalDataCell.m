@@ -7,6 +7,7 @@
 //
 
 #import "WXZPersonalDataCell.h"
+#import <UIImageView+WebCache.h>
 
 @implementation WXZPersonalDataCell
 
@@ -34,18 +35,11 @@
     [self.contentView addSubview:lineImgView];
 }
 
-- (void)updateHead
+- (void)updateHead:(NSString *)headUrl
 {
-    // 判断是否有缓存
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"pHead"])
-    {
-        self.headImgView.image = [UIImage imageWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"pHead"]]; // 贴头像
-    }
-    else
-    {
-        // 默认头像
-        self.headImgView.image = [UIImage imageNamed:@"wo_personaldata_head"];
-    }
+    // 拼接头像url
+    NSURL *personalHeadUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:headUrl]];
+    [self.headImgView sd_setImageWithURL:personalHeadUrl placeholderImage:[UIImage imageNamed:@"wo_personaldata_head"]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

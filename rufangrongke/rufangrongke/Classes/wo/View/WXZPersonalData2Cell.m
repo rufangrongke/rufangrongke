@@ -21,41 +21,51 @@
 }
 
 // 初始化信息
-- (void)personalDataInfo:(NSInteger)row data:(NSMutableDictionary *)dic;
+- (void)personalDataInfo:(NSInteger)row
 {
     NSArray *titleArr = @[@"真实姓名",@"性别",@"从业时间",@"服务宣言",@"实名认证",@"所在城市",@"修改绑定门店",@"修改绑定手机",@"修改密码"];
-    NSArray *tipArr = @[@"",@"",@"添加年限",@"编辑服务宣言",@"未认证",@"",@"绑定门店",@"",@""];
     
     self.titleLabel.text = titleArr[row-1]; // 设置标题
+    
+    // 添加分割线
+    if (row <10)
+    {
+        UIImageView *lineImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 54, WXZ_ScreenWidth-20, 1)];
+        lineImgView.image = [UIImage imageNamed:@"wo_personaldata_divider"];
+        [self.contentView addSubview:lineImgView];
+    }
+}
+
+- (void)updatePersonalDataInfo:(NSInteger)row data:(NSDictionary *)personalInfodic
+{
+    NSArray *tipArr = @[@"",@"",@"添加年限",@"编辑服务宣言",@"未认证",@"",@"绑定门店",@"",@""];
+    
     NSString *tipStr = @"";
     switch (row)
     {
         case 1:
-            tipStr = dic[@"pName"];
+            tipStr = personalInfodic[@"TrueName"];
             break;
         case 2:
-            tipStr = dic[@"pSex"];
+            tipStr = personalInfodic[@"Sex"];
             break;
         case 3:
-            tipStr = dic[@"pWorkingTime"];
+            tipStr = personalInfodic[@"CongYeTime"];
             break;
         case 4:
-            tipStr = dic[@"pDeclaration"];
+            tipStr = personalInfodic[@"XuanYan"];
             break;
         case 5:
-            tipStr = dic[@"pCertification"];
+            tipStr = personalInfodic[@"IsShiMing"];
             break;
         case 6:
-            tipStr = dic[@"pCity"];
+            tipStr = personalInfodic[@"cityName"];
             break;
         case 7:
-            tipStr = dic[@"pStore"];
+            tipStr = personalInfodic[@"LtName"];
             break;
         case 8:
-            tipStr = dic[@"pPhone"];
-            break;
-        case 9:
-            tipStr = dic[@"pResetPwd"];
+            tipStr = personalInfodic[@"Mobile"];
             break;
             
         default:
@@ -80,18 +90,14 @@
         self.tipLabel.hidden = YES;
         self.certificationImgView.hidden = NO;
         self.certificationLabel.hidden = NO;
-        if ([tipStr isEqualToString:@""] || tipStr == nil)
+        if ([tipStr isEqualToString:@"True"])
+        {
+            self.certificationLabel.text = @"已认证";
+        }
+        else
         {
             self.certificationLabel.text = tipArr[row-1];
         }
-    }
-    
-    // 添加分割线
-    if (row <10)
-    {
-        UIImageView *lineImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 54, WXZ_ScreenWidth-20, 1)];
-        lineImgView.image = [UIImage imageNamed:@"wo_personaldata_divider"];
-        [self.contentView addSubview:lineImgView];
     }
 }
 

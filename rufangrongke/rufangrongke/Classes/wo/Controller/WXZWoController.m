@@ -16,6 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView; // 底层TableView
 
+@property (nonatomic,strong) NSDictionary *woHeadInfoDic; // 关于头像，姓名等的信息字典
+
 @end
 
 @implementation WXZWoController
@@ -32,9 +34,14 @@
     statusView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wo_status_bar"]];
     [self.view addSubview:statusView];
     
+    // 获取缓存数据
+    self.woHeadInfoDic = [self localUserInfo];
+    
     // 设置数据源，遵循协议
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.myTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWoData:) name:@"UpdateWoPage" object:nil];
@@ -48,8 +55,11 @@
     [self.myTableView reloadData];
 }
 
+// 刷新“我”界面数据（通知方法）
 - (void)updateWoData:(NSNotification *)noti
 {
+    // 获取缓存数据
+    self.woHeadInfoDic = [self localUserInfo];
     [self.myTableView reloadData];
 }
 
@@ -99,7 +109,7 @@
             }
             
             [headCell headBorder]; // 设置头像边框
-            [headCell updateWoInfo]; // 更新信息
+            [headCell updateWoInfo:self.woHeadInfoDic]; // 更新信息
             
             // 添加立即绑定button 响应事件
             [headCell buttonWithTarget:self withAction:@selector(immediatelyBindingAction:)];

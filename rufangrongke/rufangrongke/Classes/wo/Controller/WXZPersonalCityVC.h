@@ -10,4 +10,6 @@
 
 @interface WXZPersonalCityVC : UIViewController
 
+@property (nonatomic,strong) NSString *currentCity;
+
 @end
