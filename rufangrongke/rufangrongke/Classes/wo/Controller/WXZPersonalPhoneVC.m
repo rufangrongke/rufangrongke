@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "WXZDetermineString.h"
 
-@interface WXZPersonalPhoneVC () <UITableViewDataSource,UITableViewDelegate>
+@interface WXZPersonalPhoneVC () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -20,6 +20,9 @@
 @property (strong, nonatomic) IBOutlet UIView *footerView;
 
 @property (weak, nonatomic) IBOutlet UILabel *currentPhoneNumLabel;
+
+@property (nonatomic,strong) UITextField *PhoneTextField;
+@property (nonatomic,strong) UITextField *renewPhoneTextField;
 
 @end
 
@@ -36,17 +39,30 @@
     
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
+    
+    self.PhoneTextField.delegate = self;
+    self.renewPhoneTextField.delegate = self;
 }
 
 // 修改手机号请求
-- (void)modifyRequestWithParameter1:(NSString *)param1 parameter:(NSString *)param2
+- (void)modifyRequestWithParameter1:(NSString *)parm1 parameter:(NSString *)parm2 isCode:(BOOL)iscode;
 {
-    NSString *nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao];
+    NSString *url;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [param setObject:param1 forKey:@"yzm"]; // 就手机号发送的验证码
-    [param setObject:param2 forKey:@"mob"]; // 新手机号
+    if (iscode)
+    {
+        url = [OutNetBaseURL stringByAppendingString:yanzhengma];
+        [param setObject:parm1 forKey:@"Act"]; // 验证码类型
+        [param setObject:parm2 forKey:@"Mobile"]; // 手机号
+    }
+    else
+    {
+        url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao];
+        [param setObject:parm1 forKey:@"yzm"]; // 旧手机号发送的验证码
+        [param setObject:parm2 forKey:@"mob"]; // 新手机号
+    }
     
-    [[AFHTTPSessionManager manager] POST:nameUrlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+    [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
@@ -91,6 +107,7 @@
         phoneCell = [WXZPersonalPhoneCell initPersonalPhoneCell];
     }
     
+    self.PhoneTextField = phoneCell.phoneTextField;
     [phoneCell phoneInfo:indexPath];
     [phoneCell.codeBtn addTarget:self action:@selector(confirmBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -155,10 +172,12 @@
     if (btn.tag == 100009)
     {
         NSLog(@"验证码");
+        [self modifyRequestWithParameter1:@"ChageMobile" parameter:self.currentPhoneNumLabel.text isCode:YES];
     }
     else
     {
         NSLog(@"确定");
+        [self modifyRequestWithParameter1:self.currentPhoneNumLabel.text parameter:self.currentPhoneNumLabel.text isCode:YES];
     }
     
 }

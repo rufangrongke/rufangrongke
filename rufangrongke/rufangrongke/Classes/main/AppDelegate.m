@@ -10,6 +10,7 @@
 #import "WXZTabBarController.h"
 #import "WXZLoginController.h"
 #import "WXZNavController.h"
+#import "WXZWoController.h"
 
 @interface AppDelegate ()
 
@@ -28,8 +29,13 @@
     // 创建Nav控制器
 //    WXZLoginController *loginVC = [[WXZLoginController alloc]init];
 //    loginVC.
-    WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZLoginController alloc] init]];
+//    WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZLoginController alloc] init]];
     
+    // 我界面
+    [[[UIViewController alloc] init] loginRequest:^(id result) {
+        
+    }];
+    WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZWoController alloc] init]];
     // 设置窗口的根控制器
     self.window.rootViewController = nav;
     
