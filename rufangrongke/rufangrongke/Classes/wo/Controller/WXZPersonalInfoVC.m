@@ -31,7 +31,7 @@
 
 @end
 
-static NSString *sex = @"男"; // 记录性别
+static NSString *sex = @"先生"; // 记录性别
 
 @implementation WXZPersonalInfoVC
 
@@ -75,17 +75,17 @@ static NSString *sex = @"男"; // 记录性别
         rect = [self calculateRect:self.personalSexView.frame];
         sex = self.nameOrSex;
         // 设置默认选中(首先判断里边是否有缓存)
-        if ([self.nameOrSex isEqualToString:@"女"])
+        if ([self.nameOrSex isEqualToString:@"女士"])
         {
             self.menImgView.hidden = YES;
             self.womenImgView.hidden = NO;
-            sex = @"女";
+            sex = @"女士";
         }
         else
         {
             self.menImgView.hidden = NO;
             self.womenImgView.hidden = YES;
-            sex = @"男";
+            sex = @"先生";
         }
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
@@ -122,13 +122,13 @@ static NSString *sex = @"男"; // 记录性别
     {
         self.menImgView.hidden = NO;
         self.womenImgView.hidden = YES;
-        sex = @"男";
+        sex = @"先生";
     }
     else if (sexBtn.tag == 100008)
     {
         self.menImgView.hidden = YES;
         self.womenImgView.hidden = NO;
-        sex = @"女";
+        sex = @"女士";
     }
 }
 // 密码显示

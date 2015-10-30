@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+//@protocol PassCityNameDelegate
+//
+//- (void)passCityNames:(NSString *)values;
+//
+//@end
+
 @interface WXZPersonalCityVC : UIViewController
 
 @property (nonatomic,strong) NSString *currentCity;
+
+//@property (nonatomic,assign) id<PassCityNameDelegate> cityDelegate;
 
 @end

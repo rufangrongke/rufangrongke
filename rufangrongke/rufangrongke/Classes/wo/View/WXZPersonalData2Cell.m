@@ -38,7 +38,7 @@
 
 - (void)updatePersonalDataInfo:(NSInteger)row data:(NSDictionary *)personalInfodic
 {
-    NSArray *tipArr = @[@"",@"",@"添加年限",@"编辑服务宣言",@"未认证",@"",@"绑定门店",@"",@""];
+    NSArray *tipArr = @[@"录入真实姓名",@"选择性别",@"添加年限",@"编辑服务宣言",@"未认证",@"设置城市",@"绑定门店",@"绑定手机",@""];
     
     NSString *tipStr = @"";
     switch (row)
@@ -77,13 +77,18 @@
     self.certificationImgView.hidden = YES;
     
     self.tipLabel.text = tipStr;
+    if ([tipStr isEqualToString:@""] || tipStr == nil)
+    {
+        self.tipLabel.text = tipArr[row-1];
+    }
+    
     if (row == 3 || row == 4 || row == 7)
     {
-        self.tipLabel.hidden = NO;
-        if ([tipStr isEqualToString:@""] || tipStr == nil)
-        {
-            self.tipLabel.text = tipArr[row-1];
-        }
+//        self.tipLabel.hidden = NO;
+//        if ([tipStr isEqualToString:@""] || tipStr == nil)
+//        {
+//            self.tipLabel.text = tipArr[row-1];
+//        }
     }
     else if (row == 5)
     {

@@ -15,15 +15,18 @@
 #import "WXZPersonalCertificationVC.h"
 #import "WXZPersonalCityVC.h"
 #import "WXZPersonalStoreVC.h"
-#import "WXZPersonalPhoneVC.h"
+#import "WXZModifyPhoneVC.h"
 #import "WXZPersonalInfoVC.h"
+#import "WXZWorkingTimeView.h"
 
 @interface WXZPersonalController () <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
-@property (nonatomic,strong) NSMutableDictionary *dataArr;
-@property (nonatomic,strong) UIImageView *imageView;
 
+@property (nonatomic,strong) UIImageView *imageView;
+@property (nonatomic,strong) WXZWorkingTimeView *workingTimeView;
+
+@property (nonatomic,strong) NSMutableDictionary *dataArr;
 @property (nonatomic,strong) NSDictionary *personalInfoDic;
 
 @end
@@ -119,6 +122,7 @@
     NSLog(@"%ld",(long)indexPath.row);
     if (indexPath.row == 0)
     {
+        // 头像
         UIActionSheet *photosSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
         [photosSheet showInView:self.view];
     }
@@ -144,33 +148,45 @@
         }
         [self.navigationController pushViewController:personalInfo animated:YES];
     }
+    else if (indexPath.row == 3)
+    {
+        _workingTimeView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZWorkingTimeView class]) owner:nil options:nil].lastObject;
+        _workingTimeView.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight);
+        [self.view addSubview:_workingTimeView];
+        
+    }
     else if (indexPath.row == 4)
     {
+        // 服务宣言
         WXZPersonalDeclarationVC *declarationVC = [[WXZPersonalDeclarationVC alloc] init];
         declarationVC.declarationContent = self.personalInfoDic[@"XuanYan"];
         [self.navigationController pushViewController:declarationVC animated:YES];
     }
     else if (indexPath.row == 5)
     {
+        // 实名认证
         WXZPersonalCertificationVC *certificationVC = [[WXZPersonalCertificationVC alloc] init];
         certificationVC.certificationTitle = self.personalInfoDic[@"TrueName"];
         [self.navigationController pushViewController:certificationVC animated:YES];
     }
     else if (indexPath.row == 6)
     {
+        // 设置城市
         WXZPersonalCityVC *cityVC = [[WXZPersonalCityVC alloc] init];
         cityVC.currentCity = self.personalInfoDic[@"cityName"];
         [self.navigationController pushViewController:cityVC animated:YES];
     }
     else if (indexPath.row == 7)
     {
+        // 绑定门店
         WXZPersonalStoreVC *storeVC = [[WXZPersonalStoreVC alloc] init];
         storeVC.storeName = self.personalInfoDic[@"LtName"];
         [self.navigationController pushViewController:storeVC animated:YES];
     }
     else if (indexPath.row == 8)
     {
-        WXZPersonalPhoneVC *phoneVC = [[WXZPersonalPhoneVC alloc] init];
+        // 修改手机号
+        WXZModifyPhoneVC *phoneVC = [[WXZModifyPhoneVC alloc] init];
         phoneVC.phone = self.personalInfoDic[@"Mobile"];
         [self.navigationController pushViewController:phoneVC animated:YES];
     }
