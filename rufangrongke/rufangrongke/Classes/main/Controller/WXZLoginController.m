@@ -67,14 +67,14 @@
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     // URL
     NSURL *url = [NSURL URLWithString:urlString];
-    //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://192.168.1.21:34/Svs/Uslogin.ashx?mob=18833198077&pas=123456"]];
+//        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://192.168.1.21:34/Svs/Uslogin.ashx?mob=18833198077&pas=123456"]];
     //    NSLog(@"%@", url);
     
     // 1.创建请求对象
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
     
-    NSString *pwdStr = [NSString stringWithFormat:@"mob=18833198077&pas=%@",self.pwdField.text];
+    NSString *pwdStr = [NSString stringWithFormat:@"mob=18833198077&pas=123456"];
     request.HTTPBody = [pwdStr dataUsingEncoding:NSUTF8StringEncoding];
 
     
@@ -82,7 +82,7 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         // 3.解析服务器返回的数据（解析成字符串）
         NSDictionary *loginContentDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        WXZLog(@"%@", loginContentDic);
+        WXZLog(@"-----%@", loginContentDic);
         /*
          {
          id : 5,

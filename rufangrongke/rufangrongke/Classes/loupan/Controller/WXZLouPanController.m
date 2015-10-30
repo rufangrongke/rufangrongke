@@ -107,7 +107,7 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
         // 隐藏指示器
         [SVProgressHUD dismiss];
         
-//        WXZLog(@"%@", responseObject);
+        WXZLog(@"%@", responseObject);
         // 服务器返回的JSON数据
         self.loupanLeibiaoS = [WXZLouPan objectArrayWithKeyValuesArray:responseObject[@"fys"]];
 //        NSLog(@"%@", self.loupanLeibiaoS);

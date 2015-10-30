@@ -38,6 +38,15 @@ static CGFloat carouselPic_height = 226;
 - (void)phone_click
 {
     WXZLogFunc;
+     NSString *telUrl = [NSString stringWithFormat:@"tel://%@",@13399603478];
+    NSURL *url = [[NSURL alloc] initWithString:telUrl];
+    
+    
+    
+    [[UIApplication sharedApplication] openURL:url];
+    
+    
+//    [[UIApplication sharedApplication] ];
 }
 
 - (void)viewDidLoad {
@@ -134,9 +143,6 @@ static CGFloat carouselPic_height = 226;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    WXZLog(@"%ld组,%ld组",indexPath.row, indexPath.section);
-    
-    UITableViewCell *headCell = [[UITableViewCell alloc] init];
     // 设置每组的行高
     if (indexPath.section == 0)
     {
