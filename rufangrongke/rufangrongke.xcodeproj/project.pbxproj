@@ -44,6 +44,8 @@
 		886812211BDF0CB700AA61BE /* WXZPersonalInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8868121F1BDF0CB700AA61BE /* WXZPersonalInfoVC.xib */; };
 		8870349B1BD9BDC300315D1A /* WXZWoHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 887034991BD9BDC300315D1A /* WXZWoHeadCell.m */; };
 		8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8870349A1BD9BDC300315D1A /* WXZWoHeadCell.xib */; };
+		8875A6191BE34118004901BC /* WXZModifyPhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8875A6171BE34118004901BC /* WXZModifyPhoneVC.m */; };
+		8875A61A1BE34118004901BC /* WXZModifyPhoneVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8875A6181BE34118004901BC /* WXZModifyPhoneVC.xib */; };
 		8876D5D01BE1B81A001A7EAF /* WXZPersonalCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8876D5CE1BE1B81A001A7EAF /* WXZPersonalCityCell.m */; };
 		8876D5D11BE1B81A001A7EAF /* WXZPersonalCityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8876D5CF1BE1B81A001A7EAF /* WXZPersonalCityCell.xib */; };
 		8876D5D41BE1B8E9001A7EAF /* WXZiMuTableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8876D5D31BE1B8E9001A7EAF /* WXZiMuTableObject.m */; };
@@ -65,12 +67,6 @@
 		88770E4F1BDDF58900B9C0C3 /* WXZPersonalCityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E4D1BDDF58900B9C0C3 /* WXZPersonalCityVC.xib */; };
 		88770E531BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E511BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m */; };
 		88770E541BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E521BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib */; };
-		88770E581BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E561BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m */; };
-		88770E591BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E571BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib */; };
-		88770E621BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E601BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.m */; };
-		88770E631BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E611BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.xib */; };
-		88770E661BDE466300B9C0C3 /* WXZPhoneTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88770E651BDE466300B9C0C3 /* WXZPhoneTipsView.m */; };
-		88770E681BDE467A00B9C0C3 /* WXZPhoneTipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88770E671BDE467A00B9C0C3 /* WXZPhoneTipsView.xib */; };
 		888115E21BDDCDD9003A0356 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888575AF1BDB4679005E5AC4 /* WXZKeHuListCell.m */; };
 		888115E31BDDCDE0003A0356 /* WXZPersonalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889887B71BDB7CC100460FE3 /* WXZPersonalController.m */; };
 		888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */; };
@@ -184,6 +180,9 @@
 		887034981BD9BDC300315D1A /* WXZWoHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZWoHeadCell.h; sourceTree = "<group>"; };
 		887034991BD9BDC300315D1A /* WXZWoHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZWoHeadCell.m; sourceTree = "<group>"; };
 		8870349A1BD9BDC300315D1A /* WXZWoHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZWoHeadCell.xib; sourceTree = "<group>"; };
+		8875A6161BE34118004901BC /* WXZModifyPhoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZModifyPhoneVC.h; sourceTree = "<group>"; };
+		8875A6171BE34118004901BC /* WXZModifyPhoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZModifyPhoneVC.m; sourceTree = "<group>"; };
+		8875A6181BE34118004901BC /* WXZModifyPhoneVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZModifyPhoneVC.xib; sourceTree = "<group>"; };
 		8876D5CD1BE1B81A001A7EAF /* WXZPersonalCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalCityCell.h; sourceTree = "<group>"; };
 		8876D5CE1BE1B81A001A7EAF /* WXZPersonalCityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalCityCell.m; sourceTree = "<group>"; };
 		8876D5CF1BE1B81A001A7EAF /* WXZPersonalCityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalCityCell.xib; sourceTree = "<group>"; };
@@ -209,15 +208,6 @@
 		88770E501BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalStoreVC.h; sourceTree = "<group>"; };
 		88770E511BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalStoreVC.m; sourceTree = "<group>"; };
 		88770E521BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalStoreVC.xib; sourceTree = "<group>"; };
-		88770E551BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalPhoneVC.h; sourceTree = "<group>"; };
-		88770E561BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalPhoneVC.m; sourceTree = "<group>"; };
-		88770E571BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalPhoneVC.xib; sourceTree = "<group>"; };
-		88770E5F1BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPersonalPhoneCell.h; sourceTree = "<group>"; };
-		88770E601BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPersonalPhoneCell.m; sourceTree = "<group>"; };
-		88770E611BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPersonalPhoneCell.xib; sourceTree = "<group>"; };
-		88770E641BDE466300B9C0C3 /* WXZPhoneTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZPhoneTipsView.h; sourceTree = "<group>"; };
-		88770E651BDE466300B9C0C3 /* WXZPhoneTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZPhoneTipsView.m; sourceTree = "<group>"; };
-		88770E671BDE467A00B9C0C3 /* WXZPhoneTipsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZPhoneTipsView.xib; sourceTree = "<group>"; };
 		888115DA1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WXZExtension.h"; sourceTree = "<group>"; };
 		888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WXZExtension.m"; sourceTree = "<group>"; };
 		888115DD1BDDCA3F003A0356 /* WXZLoupanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLoupanCell.h; sourceTree = "<group>"; };
@@ -499,9 +489,9 @@
 				88770E501BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.h */,
 				88770E511BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m */,
 				88770E521BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.xib */,
-				88770E551BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.h */,
-				88770E561BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m */,
-				88770E571BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib */,
+				8875A6161BE34118004901BC /* WXZModifyPhoneVC.h */,
+				8875A6171BE34118004901BC /* WXZModifyPhoneVC.m */,
+				8875A6181BE34118004901BC /* WXZModifyPhoneVC.xib */,
 				8868121D1BDF0CB700AA61BE /* WXZPersonalInfoVC.h */,
 				8868121E1BDF0CB700AA61BE /* WXZPersonalInfoVC.m */,
 				8868121F1BDF0CB700AA61BE /* WXZPersonalInfoVC.xib */,
@@ -534,12 +524,6 @@
 				889887CA1BDB99A000460FE3 /* WXZPersonalData2Cell.h */,
 				889887CB1BDB99A000460FE3 /* WXZPersonalData2Cell.m */,
 				889887CC1BDB99A000460FE3 /* WXZPersonalData2Cell.xib */,
-				88770E5F1BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.h */,
-				88770E601BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.m */,
-				88770E611BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.xib */,
-				88770E641BDE466300B9C0C3 /* WXZPhoneTipsView.h */,
-				88770E651BDE466300B9C0C3 /* WXZPhoneTipsView.m */,
-				88770E671BDE467A00B9C0C3 /* WXZPhoneTipsView.xib */,
 				8876D5CD1BE1B81A001A7EAF /* WXZPersonalCityCell.h */,
 				8876D5CE1BE1B81A001A7EAF /* WXZPersonalCityCell.m */,
 				8876D5CF1BE1B81A001A7EAF /* WXZPersonalCityCell.xib */,
@@ -809,13 +793,11 @@
 				8876D5E01BE22782001A7EAF /* WXZCitySectionHeader.xib in Resources */,
 				886332341BDF4EE000218E4B /* WXZLouPanMessageController.xib in Resources */,
 				886388AA1BD877AB00498AF0 /* WXZKeHuController.xib in Resources */,
-				88770E631BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.xib in Resources */,
+				8875A61A1BE34118004901BC /* WXZModifyPhoneVC.xib in Resources */,
 				8876D5E51BE238EB001A7EAF /* WXZWorkingTimeView.xib in Resources */,
 				8870349C1BD9BDC300315D1A /* WXZWoHeadCell.xib in Resources */,
-				88770E591BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.xib in Resources */,
 				88770E4A1BDDF54000B9C0C3 /* WXZPersonalCertificationVC.xib in Resources */,
 				88588DBC1BD8D031002B357D /* WXZWoTypeCell.xib in Resources */,
-				88770E681BDE467A00B9C0C3 /* WXZPhoneTipsView.xib in Resources */,
 				88588DC41BD8D097002B357D /* WXZWoListCell.xib in Resources */,
 				88770E451BDDD5DD00B9C0C3 /* WXZPersonalDeclarationVC.xib in Resources */,
 				889887BA1BDB7CC100460FE3 /* WXZPersonalController.xib in Resources */,
@@ -895,7 +877,6 @@
 				8876D5D41BE1B8E9001A7EAF /* WXZiMuTableObject.m in Sources */,
 				888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */,
 				889FD67B1BDF99A200A9742C /* XMGInfiniteScrollView.m in Sources */,
-				88770E581BDDF5DD00B9C0C3 /* WXZPersonalPhoneVC.m in Sources */,
 				888115E31BDDCDE0003A0356 /* WXZPersonalController.m in Sources */,
 				888115E21BDDCDD9003A0356 /* WXZKeHuListCell.m in Sources */,
 				88770E4E1BDDF58900B9C0C3 /* WXZPersonalCityVC.m in Sources */,
@@ -922,6 +903,7 @@
 				88AE89321BE07E9A00407ECF /* WXZLouPanMessageCell_0_0.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,
 				885387F41BDCE5D3005DCF38 /* WXZRegisterController.m in Sources */,
+				8875A6191BE34118004901BC /* WXZModifyPhoneVC.m in Sources */,
 				886332331BDF4EE000218E4B /* WXZLouPanMessageController.m in Sources */,
 				88588DC31BD8D097002B357D /* WXZWoListCell.m in Sources */,
 				30D59AB71BD5EAEE003F0A0C /* WXZNavController.m in Sources */,
@@ -945,11 +927,9 @@
 				88EAA7171BD87C180072CD40 /* AFHTTPRequestOperationManager.m in Sources */,
 				88EAA7221BD88DA40072CD40 /* WXZLoginController.m in Sources */,
 				886388B81BD87AC200498AF0 /* WXZWoController.m in Sources */,
-				88770E661BDE466300B9C0C3 /* WXZPhoneTipsView.m in Sources */,
 				88AE89411BE07ED200407ECF /* WXZLouPanMessageCell_2_0.m in Sources */,
 				88AE893C1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m in Sources */,
 				885388001BDD1DC0005DCF38 /* WXZTableViewCell.m in Sources */,
-				88770E621BDE3B0700B9C0C3 /* WXZPersonalPhoneCell.m in Sources */,
 				88770E531BDDF5BC00B9C0C3 /* WXZPersonalStoreVC.m in Sources */,
 				88EAA71D1BD87C180072CD40 /* AFURLResponseSerialization.m in Sources */,
 			);

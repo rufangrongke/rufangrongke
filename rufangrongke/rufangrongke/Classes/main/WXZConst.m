@@ -2,7 +2,8 @@
 #import <Foundation/Foundation.h>
 
 // picBaseULR
-NSString * const picBaseULR = @"http://linshi.benbaodai.com";
+//NSString * const picBaseULR = @"http://linshi.benbaodai.com";
+NSString * const picBaseULR = @"http://192.168.1.21:34";
 
 // 0.基础URL
 //NSString * const OutNetBaseURL = @"http://linshi.benbaodai.com/svs/";

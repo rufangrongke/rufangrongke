@@ -15,7 +15,7 @@
 #import "WXZPersonalCertificationVC.h"
 #import "WXZPersonalCityVC.h"
 #import "WXZPersonalStoreVC.h"
-#import "WXZPersonalPhoneVC.h"
+#import "WXZModifyPhoneVC.h"
 #import "WXZPersonalInfoVC.h"
 #import "WXZWorkingTimeView.h"
 
@@ -186,7 +186,7 @@
     else if (indexPath.row == 8)
     {
         // 修改手机号
-        WXZPersonalPhoneVC *phoneVC = [[WXZPersonalPhoneVC alloc] init];
+        WXZModifyPhoneVC *phoneVC = [[WXZModifyPhoneVC alloc] init];
         phoneVC.phone = self.personalInfoDic[@"Mobile"];
         [self.navigationController pushViewController:phoneVC animated:YES];
     }
