@@ -97,6 +97,10 @@ UIKIT_EXTERN NSString * const jingjirenxiugaimima_parameter;
 UIKIT_EXTERN NSString * const jinjirengongsibagding;
 UIKIT_EXTERN NSString * const jinjirengongsibagding_parameter;
 
+// 22.经纪人实名认证 --
+UIKIT_EXTERN NSString * const jingjirenshimingrenzheng;
+UIKIT_EXTERN NSString * const jingjirenshimingrenzheng_parameter;
+
 /******************************************************************/
 UIKIT_EXTERN NSString * const phoneNumber;
 UIKIT_EXTERN NSString * const password;

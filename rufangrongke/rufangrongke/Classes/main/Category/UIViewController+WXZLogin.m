@@ -64,19 +64,27 @@
     request.HTTPBody = [@"mob=18833198077&pas=123456" dataUsingEncoding:NSUTF8StringEncoding];
     
     // 2.发送请求
-    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        // 3.解析服务器返回的数据（解析成字符串）
-        NSDictionary *loginContentDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        WXZLog(@"%@", loginContentDic);
-        
-        // 获取沙河路径
-        NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
-        // 获取用户信息
-        NSDictionary *userinfo = loginContentDic[@"u"];
-        // 讲用户信息写入字典
-        [userinfo writeToFile:userinfoPath atomically:YES];
-        
-        message(userinfo);
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+    {
+        if (data != nil)
+        {
+            // 3.解析服务器返回的数据（解析成字符串）
+            NSDictionary *loginContentDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            WXZLog(@"%@", loginContentDic);
+            
+            // 获取沙河路径
+            NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
+            // 获取用户信息
+            NSDictionary *userinfo = loginContentDic[@"u"];
+            // 讲用户信息写入字典
+            [userinfo writeToFile:userinfoPath atomically:YES];
+            
+            message(userinfo);
+        }
+        else
+        {
+            message(@"请求失败");
+        }
     }];
 }
 

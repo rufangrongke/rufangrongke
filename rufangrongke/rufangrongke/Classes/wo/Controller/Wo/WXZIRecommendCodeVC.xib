@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WXZIRecommendCodeVC">
+            <connections>
+                <outlet property="customerNameLabel" destination="Xxd-OG-B98" id="OFU-0G-ivd"/>
+                <outlet property="headImgView" destination="vdl-Ue-l1o" id="hW7-IP-Ek8"/>
+                <outlet property="recommendCodeLabel" destination="AQB-jc-knG" id="Ejp-iD-yKY"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_head" translatesAutoresizingMaskIntoConstraints="NO" id="vdl-Ue-l1o">
+                    <rect key="frame" x="250" y="45" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="38w-PS-Q2H"/>
+                        <constraint firstAttribute="width" constant="100" id="u0i-DX-m5P"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxd-OG-B98">
+                    <rect key="frame" x="276" y="153" width="48" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_recommendedcode" translatesAutoresizingMaskIntoConstraints="NO" id="5SB-lr-ybI">
+                    <rect key="frame" x="142" y="225" width="317" height="94"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="317" id="cfs-mp-f1f"/>
+                        <constraint firstAttribute="height" constant="94" id="gsO-95-j3t"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DASDFA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQB-jc-knG">
+                    <rect key="frame" x="183" y="235" width="236" height="74"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="62"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="5SB-lr-ybI" firstAttribute="top" secondItem="Xxd-OG-B98" secondAttribute="bottom" constant="52" id="2tB-0N-1Y3"/>
+                <constraint firstItem="vdl-Ue-l1o" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="45" id="EFz-b0-8Jt"/>
+                <constraint firstItem="Xxd-OG-B98" firstAttribute="top" secondItem="vdl-Ue-l1o" secondAttribute="bottom" constant="8" id="EG3-Jm-PkY"/>
+                <constraint firstItem="5SB-lr-ybI" firstAttribute="centerX" secondItem="AQB-jc-knG" secondAttribute="centerX" id="N1v-He-YFl"/>
+                <constraint firstAttribute="centerX" secondItem="vdl-Ue-l1o" secondAttribute="centerX" id="hx5-fw-Wvb"/>
+                <constraint firstAttribute="centerX" secondItem="5SB-lr-ybI" secondAttribute="centerX" id="kcE-Kv-5IU"/>
+                <constraint firstItem="Xxd-OG-B98" firstAttribute="centerX" secondItem="vdl-Ue-l1o" secondAttribute="centerX" id="m1s-we-TUJ"/>
+                <constraint firstItem="5SB-lr-ybI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="28" id="mMb-hy-dhU"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5SB-lr-ybI" secondAttribute="trailing" constant="28" id="oRP-bv-ynQ"/>
+                <constraint firstItem="5SB-lr-ybI" firstAttribute="centerY" secondItem="AQB-jc-knG" secondAttribute="centerY" id="tUa-3A-pAa"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="wo_head" width="111" height="111"/>
+        <image name="wo_recommendedcode" width="317" height="94"/>
+    </resources>
+</document>

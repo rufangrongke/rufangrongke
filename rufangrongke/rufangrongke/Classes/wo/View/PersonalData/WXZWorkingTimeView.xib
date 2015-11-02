@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WXZWorkingTimeView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="67t-b2-uQC">
+                    <rect key="frame" x="137" y="136" width="327" height="328"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="4uC-4H-qxo">
+                            <rect key="frame" x="195" y="74" width="40" height="180"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="zmB-B5-LUH"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="467811839.12188703">
+                                <!--2015-10-29 11:43:59 +0000-->
+                            </date>
+                        </datePicker>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入行时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sp-NA-UKz">
+                            <rect key="frame" x="131" y="17" width="64" height="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="fhV-5F-epA">
+                            <rect key="frame" x="44" y="74" width="66" height="180"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="66" id="IgH-we-dZU"/>
+                                <constraint firstAttribute="height" constant="192" id="tJS-vV-TFJ"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="467811839.12188703">
+                                <!--2015-10-29 11:43:59 +0000-->
+                            </date>
+                        </datePicker>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paf-J8-Pn4">
+                            <rect key="frame" x="131" y="153" width="18" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.10980392156862745" green="0.66274509803921566" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3AU-IG-nKX">
+                            <rect key="frame" x="246" y="154" width="18" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.10980392156862745" green="0.66274509803921566" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cm-Bv-FX8">
+                            <rect key="frame" x="3" y="287" width="155" height="38"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="38" id="KdI-D9-HVz"/>
+                                <constraint firstAttribute="width" constant="155" id="p0J-FS-7WE"/>
+                            </constraints>
+                            <state key="normal" title="取消" backgroundImage="wo_cancel">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdI-H3-Xkg">
+                            <rect key="frame" x="169" y="287" width="155" height="38"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="38" id="d1D-bv-auw"/>
+                                <constraint firstAttribute="width" constant="155" id="hpF-6E-LjS"/>
+                            </constraints>
+                            <state key="normal" title="确定" backgroundImage="wo_cancel">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_viewbg" translatesAutoresizingMaskIntoConstraints="NO" id="rjv-kD-CiM">
+                            <rect key="frame" x="0.0" y="0.0" width="327" height="328"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="327" id="WYe-X8-VsP"/>
+                                <constraint firstAttribute="height" constant="328" id="bkr-gl-pZr"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="paf-J8-Pn4" secondAttribute="centerY" id="4eq-eu-7er"/>
+                        <constraint firstAttribute="trailing" secondItem="3AU-IG-nKX" secondAttribute="trailing" constant="63" id="6NY-mk-N9T"/>
+                        <constraint firstItem="4uC-4H-qxo" firstAttribute="top" secondItem="fhV-5F-epA" secondAttribute="top" id="713-aj-OC4"/>
+                        <constraint firstAttribute="bottom" secondItem="4Cm-Bv-FX8" secondAttribute="bottom" constant="3" id="ADt-l3-j4Y"/>
+                        <constraint firstAttribute="trailing" secondItem="rjv-kD-CiM" secondAttribute="trailing" id="ATS-MZ-iyf"/>
+                        <constraint firstAttribute="bottom" secondItem="SdI-H3-Xkg" secondAttribute="bottom" constant="3" id="Ccp-gS-cLM"/>
+                        <constraint firstAttribute="trailing" secondItem="SdI-H3-Xkg" secondAttribute="trailing" constant="3" id="EPI-9X-FQ8"/>
+                        <constraint firstItem="6sp-NA-UKz" firstAttribute="top" secondItem="67t-b2-uQC" secondAttribute="top" constant="17" id="Fre-aJ-y7G"/>
+                        <constraint firstAttribute="centerY" secondItem="4uC-4H-qxo" secondAttribute="centerY" id="I50-ar-uNS"/>
+                        <constraint firstItem="4Cm-Bv-FX8" firstAttribute="leading" secondItem="67t-b2-uQC" secondAttribute="leading" constant="3" id="P2Z-pe-8pQ"/>
+                        <constraint firstAttribute="height" constant="328" id="P95-DN-rC0"/>
+                        <constraint firstAttribute="centerX" secondItem="6sp-NA-UKz" secondAttribute="centerX" id="RpK-Hm-d84"/>
+                        <constraint firstAttribute="width" constant="327" id="SpG-CD-SZs"/>
+                        <constraint firstItem="rjv-kD-CiM" firstAttribute="leading" secondItem="67t-b2-uQC" secondAttribute="leading" id="W1X-eD-Wfb"/>
+                        <constraint firstAttribute="centerY" secondItem="fhV-5F-epA" secondAttribute="centerY" id="XGP-IY-UYn"/>
+                        <constraint firstItem="4uC-4H-qxo" firstAttribute="bottom" secondItem="fhV-5F-epA" secondAttribute="bottom" id="c7W-LI-x9S"/>
+                        <constraint firstItem="paf-J8-Pn4" firstAttribute="leading" secondItem="fhV-5F-epA" secondAttribute="trailing" constant="21" id="cwf-XH-me2"/>
+                        <constraint firstItem="fhV-5F-epA" firstAttribute="leading" secondItem="67t-b2-uQC" secondAttribute="leading" constant="44" id="edX-08-xhk"/>
+                        <constraint firstItem="rjv-kD-CiM" firstAttribute="top" secondItem="67t-b2-uQC" secondAttribute="top" id="mV7-hT-d9p"/>
+                        <constraint firstAttribute="centerY" secondItem="3AU-IG-nKX" secondAttribute="centerY" constant="-1" id="mbg-Xz-hn3"/>
+                        <constraint firstItem="4uC-4H-qxo" firstAttribute="leading" secondItem="paf-J8-Pn4" secondAttribute="trailing" constant="46" id="npn-t5-BwW"/>
+                        <constraint firstAttribute="bottom" secondItem="rjv-kD-CiM" secondAttribute="bottom" id="r1L-R2-JNG"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="67t-b2-uQC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="137" id="2mK-Z0-afP"/>
+                <constraint firstItem="67t-b2-uQC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="136" id="BCn-ic-Ig5"/>
+                <constraint firstAttribute="bottom" secondItem="67t-b2-uQC" secondAttribute="bottom" constant="136" id="N7s-A3-ZGI"/>
+                <constraint firstAttribute="bottom" secondItem="67t-b2-uQC" secondAttribute="bottom" constant="136" id="eV1-Cx-E9B"/>
+                <constraint firstAttribute="centerY" secondItem="67t-b2-uQC" secondAttribute="centerY" id="oq6-I5-v5s"/>
+                <constraint firstAttribute="trailing" secondItem="67t-b2-uQC" secondAttribute="trailing" constant="136" id="pYh-Ff-VMh"/>
+                <constraint firstAttribute="centerX" secondItem="67t-b2-uQC" secondAttribute="centerX" id="xIm-qa-YUP"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="2mK-Z0-afP"/>
+                    <exclude reference="BCn-ic-Ig5"/>
+                    <exclude reference="N7s-A3-ZGI"/>
+                    <exclude reference="pYh-Ff-VMh"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="bgImgView" destination="rjv-kD-CiM" id="VcC-Mv-jo8"/>
+                <outlet property="bgView" destination="67t-b2-uQC" id="z4z-mV-vR5"/>
+                <outlet property="cancelBtn" destination="4Cm-Bv-FX8" id="F2h-Hf-7e7"/>
+                <outlet property="determineBtn" destination="SdI-H3-Xkg" id="Zci-vI-B2p"/>
+                <outlet property="monthDatePicker" destination="4uC-4H-qxo" id="KMg-CC-kda"/>
+                <outlet property="yearDatePicker" destination="fhV-5F-epA" id="W8A-vF-8eb"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="wo_cancel" width="155" height="38"/>
+        <image name="wo_viewbg" width="327" height="328"/>
+    </resources>
+</document>
