@@ -38,8 +38,16 @@
 - (void)updateHead:(NSString *)headUrl
 {
     // 拼接头像url
-    NSURL *personalHeadUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:headUrl]];
-    [self.headImgView sd_setImageWithURL:personalHeadUrl placeholderImage:[UIImage imageNamed:@"wo_personaldata_head"]];
+    if (headUrl != nil)
+    {
+        NSURL *personalHeadUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:headUrl]];
+        [self.headImgView sd_setImageWithURL:personalHeadUrl placeholderImage:[UIImage imageNamed:@"wo_personaldata_head"]];
+    }
+    else
+    {
+        NSURL *personalHeadUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:@""]];
+        [self.headImgView sd_setImageWithURL:personalHeadUrl placeholderImage:[UIImage imageNamed:@"wo_personaldata_head"]];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

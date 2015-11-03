@@ -40,8 +40,17 @@
 - (void)updateWoInfo:(NSDictionary *)headInfoDic
 {
     // 拼接头像url
-    NSURL *headUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:headInfoDic[@"TouXiang"]]];
-    [self.headImgView sd_setImageWithURL:headUrl placeholderImage:[UIImage imageNamed:@"wo_head"]];
+    if (headInfoDic[@"TouXiang"] != nil)
+    {
+        NSURL *headUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:headInfoDic[@"TouXiang"]]];
+        [self.headImgView sd_setImageWithURL:headUrl placeholderImage:[UIImage imageNamed:@"wo_head"]];
+    }
+    else
+    {
+        NSURL *headUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:@""]];
+        [self.headImgView sd_setImageWithURL:headUrl placeholderImage:[UIImage imageNamed:@"wo_head"]];
+    }
+    
     self.userNameLabel.text = headInfoDic[@"TrueName"]; // 用户名
     if ([headInfoDic[@"TrueName"] isEqualToString:@""] || headInfoDic[@"TrueName"] == nil)
     {

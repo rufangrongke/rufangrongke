@@ -22,19 +22,19 @@
 
 #import "SRMonthPicker.h"
 
-#define MONTH_ROW_MULTIPLIER 340
+#define MONTH_ROW_MULTIPLIER 40 // 月行乘数,原来是340(数大内容少，则不会循环滚动)
 #define DEFAULT_MINIMUM_YEAR 1 // 默认年的最小范围值
 #define DEFAULT_MAXIMUM_YEAR 99999 // 默认年的最大范围值
-#define DATE_COMPONENT_FLAGS NSMonthCalendarUnit | NSYearCalendarUnit // 年月
+#define DATE_COMPONENT_FLAGS NSMonthCalendarUnit | NSYearCalendarUnit // 获取日历的年月
 
 @interface SRMonthPicker()
 
-@property (nonatomic) int monthComponent;
-@property (nonatomic) int yearComponent;
-@property (nonatomic, readonly) NSArray* monthStrings;
+@property (nonatomic) int monthComponent; // 月的内容
+@property (nonatomic) int yearComponent; // 年的内容
+@property (nonatomic, readonly) NSArray* monthStrings; // 存储月的数据
 
--(int)yearFromRow:(NSUInteger)row;
--(NSUInteger)rowFromYear:(int)year;
+-(int)yearFromRow:(NSUInteger)row; //
+-(NSUInteger)rowFromYear:(int)year; //
 
 @end
 
@@ -53,7 +53,7 @@
     {
         [self prepare];
         [self setDate:date];
-        self.showsSelectionIndicator = YES;
+        self.showsSelectionIndicator = YES; // 是否显示选择指示器
     }
     
     return self;
@@ -126,30 +126,34 @@
         [super setDataSource:dataSource];
 }
 
+// 一年几个月
 -(int)monthComponent
 {
     return self.yearComponent ^ 1;
 }
 
+// 一个布尔值来决定今年是否显示在前面
 -(int)yearComponent
 {
     return !self.yearFirst;
 }
 
+// 获取月份
 -(NSArray *)monthStrings
 {
-    return [[NSDateFormatter alloc] init].monthSymbols;
+    return [[NSDateFormatter alloc] init].veryShortMonthSymbols; // 获取月份
 }
 
 -(void)setYearFirst:(BOOL)yearFirst
 {
     _yearFirst = yearFirst;
     NSDate* date = self.date;
-    [self reloadAllComponents];
-    [self setNeedsLayout];
-    [self setDate:date];
+    [self reloadAllComponents]; // 刷新所有内容
+    [self setNeedsLayout]; // 允许你在画周期发生之前进行布局
+    [self setDate:date]; //
 }
 
+// 设置年的最小范围值
 -(void)setMinimumYear:(NSNumber *)minimumYear
 {
     NSDate* currentDate = self.date;
@@ -164,6 +168,7 @@
     [self setDate:[[NSCalendar currentCalendar] dateFromComponents:components]];
 }
 
+// 设置年的最大范围值
 -(void)setMaximumYear:(NSNumber *)maximumYear
 {
     NSDate* currentDate = self.date;
@@ -180,8 +185,8 @@
 
 -(void)setWrapMonths:(BOOL)wrapMonths
 {
-    _wrapMonths = wrapMonths;
-    [self reloadAllComponents];
+    _wrapMonths = wrapMonths; // 一个布尔值,确定包装
+    [self reloadAllComponents]; // 刷新所有组件
 }
 
 -(int)yearFromRow:(NSUInteger)row
@@ -244,11 +249,13 @@
     [self didChangeValueForKey:@"date"];
 }
 
+// 选取器如果有多个滚轮，就返回滚轮的数量，我们这里有两个，就返回2
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 2;
 }
 
+// 返回给定的组件有多少行数据
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if (component == self.monthComponent && !self.wrapMonths)
@@ -263,23 +270,33 @@
     return [self rowFromYear:maxYear] + 1;
 }
 
+// 设置每列的宽度
 -(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
     if (component == self.monthComponent)
-        return 150.0f;
+    {
+        NSLog(@"monthWidth = %f",self.monthWidth);
+        return self.monthWidth; // 返回月的宽度（126.0f）
+    }
     else
-        return 76.0f;
+    {
+        NSLog(@"yearWidth = %f",self.yearWidth);
+        return self.yearWidth; // 返回年的宽度（80.0f）
+    }
 }
 
+// 替换text居中
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     CGFloat width = [self pickerView:self widthForComponent:component];
     CGRect frame = CGRectMake(0.0f, 0.0f, width, 45.0f);
     
+    // 计算frame
     if (component == self.monthComponent)
     {
         const CGFloat padding = 9.0f;
-        if (component) {
+        if (component)
+        {
             frame.origin.x += padding;
             frame.size.width -= padding;
         }
@@ -291,20 +308,24 @@
     
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     
-    if (component == self.monthComponent) {
+    // 判断内容是月，还是年
+    if (component == self.monthComponent)
+    {
         label.text = [self.monthStrings objectAtIndex:(row % self.monthStrings.count)];
-        formatter.dateFormat = @"MMMM";
-        label.textAlignment = component ? NSTextAlignmentLeft : NSTextAlignmentRight;
-    } else {
-        label.text = [NSString stringWithFormat:@"%d", [self yearFromRow:row]];
+        formatter.dateFormat = @"MM";
+//        label.textAlignment = component ? NSTextAlignmentLeft : NSTextAlignmentRight;
         label.textAlignment = NSTextAlignmentCenter;
-        formatter.dateFormat = @"y";
+    } else
+    {
+        label.text = [NSString stringWithFormat:@"%d", [self yearFromRow:row]];
+        label.textAlignment = NSTextAlignmentLeft;
+        formatter.dateFormat = @"yyyy";
     }
     
     if (_enableColourRow && [[formatter stringFromDate:[NSDate date]] isEqualToString:label.text])
         label.textColor = [UIColor colorWithRed:0.0f green:0.35f blue:0.91f alpha:1.0f];
     
-    label.font = [UIFont boldSystemFontOfSize:24.0f];
+    label.font = [UIFont boldSystemFontOfSize:18.0f];
     label.backgroundColor = [UIColor clearColor];
     label.shadowOffset = CGSizeMake(0.0f, 0.1f);
     label.shadowColor = [UIColor whiteColor];

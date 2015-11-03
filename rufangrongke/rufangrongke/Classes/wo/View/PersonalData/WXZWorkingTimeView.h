@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SRMonthPicker.h"
 
-@interface WXZWorkingTimeView : UIView
+@interface WXZWorkingTimeView : UIView<SRMonthPickerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *bgView;
-@property (weak, nonatomic) IBOutlet UIImageView *bgImgView;
-@property (weak, nonatomic) IBOutlet UIDatePicker *monthDatePicker;
-@property (weak, nonatomic) IBOutlet UIDatePicker *yearDatePicker;
-@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
-@property (weak, nonatomic) IBOutlet UIButton *determineBtn;
+@property (weak, nonatomic) IBOutlet UIView *bgView; // 背景view
+
+@property (weak, nonatomic) IBOutlet UIImageView *bgImgView; // 背景图片
+
+@property (weak, nonatomic) IBOutlet SRMonthPicker *timePickerView; // 时间选择
+
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn; // 取消按钮
+@property (weak, nonatomic) IBOutlet UIButton *determineBtn; // 确定按钮
 
 @end

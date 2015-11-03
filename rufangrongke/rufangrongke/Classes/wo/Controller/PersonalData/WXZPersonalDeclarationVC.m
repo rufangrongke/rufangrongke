@@ -30,8 +30,8 @@
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"服务宣言";
     
-    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 300);
-    
+    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 300); // 设置scrollView的contentSize
+    // 赋值，遵循协议
     self.declarationTextView.text = self.declarationContent;
     self.declarationTextView.delegate = self;
 }
@@ -81,43 +81,21 @@
 #pragma mark - UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-//    bool isChinese;//判断当前输入法是否是中文
-//    if ([[[UITextInputMode currentInputMode] primaryLanguage] isEqualToString: @"en-US"]) {
-//        isChinese = false;
-//    }
-//    else
-//    {
-//        isChinese = true;
-//    }
-//    
-//    if(sender == self.txtName) {
-//        // 8位
-//        NSString *str = [[self.txtName text] stringByReplacingOccurrencesOfString:@"?" withString:@""];
-//        if (isChinese) { //中文输入法下
-//            UITextRange *selectedRange = [self.txtName markedTextRange];
-//            //获取高亮部分
-//            UITextPosition *position = [self.txtName positionFromPosition:selectedRange.start offset:0];
-//            // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
-//            if (!position) {
-//                NSLog(@"汉字");
-//                if ( str.length>=9) {
-//                    NSString *strNew = [NSString stringWithString:str];
-//                    [self.txtName setText:[strNew substringToIndex:8]];
-//                }
-//            }
-//            else
-//            {
-//                NSLog(@"输入的英文还没有转化为汉字的状态");
-//                
-//            }
-//        }else{
-//            NSLog(@"str=%@; 本次长度=%d",str,[str length]);
-//            if ([str length]>=9) {
-//                NSString *strNew = [NSString stringWithString:str];
-//                [self.txtName setText:[strNew substringToIndex:8]];
-//            }
-//        }
-//    }
+    // 显示输入的字数
+    self.declarationWordPromptLabel.text = [NSString stringWithFormat:@"%d/30",range.location];
+    if (range.location >= 30)
+    {
+        NSString *wordNumStr = [NSString stringWithFormat:@"%d/30",range.location];
+        
+        NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:wordNumStr];
+        NSDictionary *inFanWeiDic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor],NSForegroundColorAttributeName, nil];
+        NSDictionary *outFanWeiDic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName, nil];
+        [attributedStr addAttributes:inFanWeiDic range:NSMakeRange(0, wordNumStr.length-3)];
+        [attributedStr addAttributes:inFanWeiDic range:NSMakeRange(wordNumStr.length-3, 3)];
+        
+        self.declarationWordPromptLabel.attributedText = attributedStr;
+    }
+    
     
     return YES;
 }

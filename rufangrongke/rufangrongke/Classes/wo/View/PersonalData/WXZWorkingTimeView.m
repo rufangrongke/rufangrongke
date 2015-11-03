@@ -10,6 +10,16 @@
 
 @implementation WXZWorkingTimeView
 
+- (void)awakeFromNib
+{
+    if ([UIScreen mainScreen].bounds.size.width == 320)
+    {
+        self.bgView.frame = CGRectMake(12, 40, 320-24, 320-24+1);
+    }
+
+}
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

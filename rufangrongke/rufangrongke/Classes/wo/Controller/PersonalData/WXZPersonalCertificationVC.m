@@ -11,6 +11,7 @@
 #import <UIImageView+WebCache.h>
 #import <SVProgressHUD.h>
 #import "WXZChectObject.h"
+#import "CDPMonitorKeyboard.h"
 
 @interface WXZPersonalCertificationVC () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 
@@ -44,6 +45,7 @@
     NSString *imgUrlStr = [OutNetBaseURL stringByAppendingString:self.idCardImg];
     [self.idCardImgView sd_setImageWithURL:[NSURL URLWithString:imgUrlStr] placeholderImage:[UIImage imageNamed:@"wo_personal_idcard"]];
     
+    // 设置代理
     self.nameTextField.delegate = self;
     self.idCardTextField.delegate = self;
     
@@ -53,10 +55,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    // 导航栏右侧按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"wo_complete" highImage:@"" target:self action:@selector(completeAction:)];
     // 已认证则不显示按钮，所有东西不可修改
-    if (![self.isCertification isEqualToString:@"True"])
+    if ([self.isCertification isEqualToString:@"True"])
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"" highImage:@"" target:self action:@selector(completeAction:)];
         
@@ -66,16 +68,20 @@
     }
 }
 
+// 初始化控件
 - (void)initControl
 {
+    // UIProgress 的相关设置
     self.uploadProgress.progress = 0;
     self.uploadProgress.progressTintColor = [UIColor blueColor];
     self.uploadProgress.trackTintColor = [UIColor grayColor];
 }
 
+// 添加身份证正面照的按钮事件
 - (IBAction)idCardAction:(id)sender
 {
     NSLog(@"身份证照");
+    // 添加UIActionSheet
     UIActionSheet *photosSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
     [photosSheet showInView:self.view];
 }
@@ -191,11 +197,8 @@
     [param setObject:sfzid forKey:@"sfzid"]; // 身份证号码
     [param setObject:sfzPic forKey:@"sfzPic"]; // 身份证图片
     
-    // http://www.itstrike.cn/Question/11b43d03-1586-410c-87d9-30c0fdf94cdd.html
-    // 1. Create `AFHTTPRequestSerializer` which will create your request
-    AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
-    // 2. Create an `NSMutableURLRequest`
-    NSMutableURLRequest *request = [serializer multipartFormRequestWithMethod:@"POST" URLString:requestUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    /*
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:requestUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
@@ -205,32 +208,67 @@
         [formData appendPartWithFileData:sfzPic name:@"headFile" fileName:fileName mimeType:@"image/png"];
         
     } error:nil];
-    // 3. Create and use `AFHTTPRequestOperationManager` to create an `AFHTTPRequestOperation` from the `NSMutableURLRequest` that we just created
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    AFHTTPRequestOperation *operation = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject)
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSProgress *progress = nil;
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
     {
-        NSLog(@"Success %@", responseObject);
-        [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
-        [SVProgressHUD dismiss]; // 取消菊花
+        if (error)
+        {
+            NSLog(@"Error: %@", error);
+        } else
+        {
+            NSLog(@"\n response = %@  \n responseObject = %@", response, responseObject);
+            
+//
+//            response = <NSHTTPURLResponse: 0x7fe52841c040> { URL: http://192.168.1.21:34/Svs/UsRz.ashx } { status code: 200, headers {
+//                Server : Microsoft-IIS/8.5,
+//                Content-Type : application/json; charset=utf-8,
+//                X-Powered-By : ASP.NET,
+//                Date : Mon, 02 Nov 2015 12:17:45 GMT,
+//                Content-Length : 33,
+//                Cache-Control : private,
+//                X-AspNet-Version : 4.0.30319
+//            } }  
+//            responseObject = {
+//                msg : 提交失败,
+//                ok : 0
+//            }
+        }
+    }];
+    
+    [uploadTask resume]; */
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [manager POST:requestUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error)
-    {
-        NSLog(@"Failure %@", error.description);
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
-        [SVProgressHUD dismiss]; // 取消菊花
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        
+        [formData appendPartWithFileData:sfzPic name:@"headFile" fileName:fileName mimeType:@"image/png"];
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
     }];
     
-    // 4. Set the progress block of the operation
-    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite)
+    // 上传
+    [manager setTaskDidSendBodyDataBlock:^(NSURLSession *session, NSURLSessionTask *task, int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend)
     {
-        NSLog(@"Wrote %lld/%lld", totalBytesWritten, totalBytesExpectedToWrite);
-        // 设置上传进度
-        self.uploadProgress.progress = totalBytesWritten / totalBytesExpectedToWrite;
+        // bytesSent本次上传了多少字节,totalBytesSent累计上传了多少字节,totalBytesExpectedToSend文件有多大,应该上传多少
+        NSLog(@"task %@ progress is %f ", task, totalBytesSent*1.0/totalBytesExpectedToSend);
+        
+        // 设置当前进度值
+        CGFloat uploadProportion = totalBytesSent*1.0 / totalBytesExpectedToSend;
+        self.uploadProgress.progress = uploadProportion;
     }];
-    
-    // 5. 开始（Begin）
-    [operation start];
 }
 
 - (void)completeAction:(id)sender
@@ -240,7 +278,7 @@
     if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text] && ![WXZChectObject checkWhetherStringIsEmpty:self.idCardTextField.text] && imgData != nil)
     {
         // 显示菊花
-        [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+//        [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
         [self modifyRequestWithParameter1:self.nameTextField.text parameter2:self.idCardTextField.text parameter3:imgData]; // 请求
     }
     else
@@ -249,6 +287,7 @@
     }
 }
 
+// 取消第一响应
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.nameTextField resignFirstResponder];

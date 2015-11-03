@@ -93,6 +93,16 @@
 @property (nonatomic) BOOL enableColourRow;
 
 /**
+  Set the width of the year.
+ */
+@property (nonatomic, assign) CGFloat yearWidth;
+
+/**
+  The width of the set the month.
+ */
+@property (nonatomic, assign) CGFloat monthWidth;
+
+/**
   Designated initialiser.
 
   Initializes and returns a newly allocated month picker with the current month 

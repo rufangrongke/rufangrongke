@@ -14,21 +14,21 @@
 
 @interface WXZPersonalInfoVC () <UITextFieldDelegate>
 
-@property (strong, nonatomic) IBOutlet UIView *personalNameView;
-@property (strong, nonatomic) IBOutlet UIView *personalSexView;
-@property (strong, nonatomic) IBOutlet UIView *modifyPwdView;
+@property (strong, nonatomic) IBOutlet UIView *personalNameView; // 姓名view
+@property (strong, nonatomic) IBOutlet UIView *personalSexView; // 性别view
+@property (strong, nonatomic) IBOutlet UIView *modifyPwdView; // 修改密码view
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *currentPwdTextField;
-@property (weak, nonatomic) IBOutlet UITextField *modifyPwdTextField;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField; // 姓名输入框
+@property (weak, nonatomic) IBOutlet UITextField *currentPwdTextField; // 旧密码输入框
+@property (weak, nonatomic) IBOutlet UITextField *modifyPwdTextField; // 新密码输入框
 
-@property (weak, nonatomic) IBOutlet UIImageView *menImgView;
-@property (weak, nonatomic) IBOutlet UIImageView *womenImgView;
-@property (weak, nonatomic) IBOutlet UIImageView *pwdShowImgView;
+@property (weak, nonatomic) IBOutlet UIImageView *menImgView; // ‘男’选中图片
+@property (weak, nonatomic) IBOutlet UIImageView *womenImgView; // ‘女’选中图片
+@property (weak, nonatomic) IBOutlet UIImageView *pwdShowImgView; // 密码显示明文/密文图片
 
-@property (weak, nonatomic) IBOutlet UIButton *menBtn;
-@property (weak, nonatomic) IBOutlet UIButton *womenBtn;
-@property (strong, nonatomic) IBOutlet UIButton *determineBtn;
+@property (weak, nonatomic) IBOutlet UIButton *menBtn; // ‘男’选择按钮
+@property (weak, nonatomic) IBOutlet UIButton *womenBtn; // ‘女’选择按钮
+@property (strong, nonatomic) IBOutlet UIButton *determineBtn; // 确定按钮
 
 @end
 
@@ -46,6 +46,7 @@ static NSString *sex = @"先生"; // 记录性别
     
     [self initControl]; // 初始化控件
     
+    // 遵循协议
     self.nameTextField.delegate = self;
     self.currentPwdTextField.delegate = self;
     self.modifyPwdTextField.delegate = self;
@@ -58,22 +59,28 @@ static NSString *sex = @"先生"; // 记录性别
     CGRect rect;
     if ([self.whichController isEqualToString:@"ModifyPersonalName"])
     {
+        // 姓名相关设置
         self.personalNameView.hidden = NO;
         self.personalSexView.hidden = YES;
         self.modifyPwdView.hidden = YES;
         self.personalNameView.frame = CGRectMake(0, 10, WXZ_ScreenWidth, 55);
         [self.view addSubview:self.personalNameView];
+        
         rect = [self calculateRect:self.personalNameView.frame];
+        
         self.nameTextField.text = self.nameOrSex;
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
     {
+        // 性别相关设置
         self.personalNameView.hidden = YES;
         self.personalSexView.hidden = NO;
         self.modifyPwdView.hidden = YES;
         self.personalSexView.frame = CGRectMake(0, 10, WXZ_ScreenWidth, 110);
         [self.view addSubview:self.personalSexView];
+        
         rect = [self calculateRect:self.personalSexView.frame];
+        
         sex = self.nameOrSex;
         // 设置默认选中(首先判断里边是否有缓存)
         if ([self.nameOrSex isEqualToString:@"女士"])
@@ -91,14 +98,16 @@ static NSString *sex = @"先生"; // 记录性别
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
     {
+        // 修改密码相关设置
         self.personalNameView.hidden = YES;
         self.personalSexView.hidden = YES;
         self.modifyPwdView.hidden = NO;
         self.modifyPwdView.frame = CGRectMake(0, 10, WXZ_ScreenWidth, 110);
         [self.view addSubview:self.modifyPwdView];
+        
         rect = [self calculateRect:self.modifyPwdView.frame];
     }
-    self.determineBtn.frame = rect;
+    self.determineBtn.frame = rect; // 设置确定按钮的位置
     [self.view addSubview:self.determineBtn];
 }
 
@@ -187,18 +196,21 @@ static NSString *sex = @"先生"; // 记录性别
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
     {
+        // 修改密码
         nameUrlStr = [OutNetBaseURL stringByAppendingString:jingjirenxiugaimima];
         [param setObject:param1 forKey:@"pasOld"];
         [param setObject:param2 forKey:@"pasNew"];
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
     {
+        // 修改性别
         nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenziliaoxiugai];
         [param setObject:@"Sex" forKey:@"lN"];
         [param setObject:param1 forKey:@"lD"];
     }
     else
     {
+        // 修改姓名
         nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenziliaoxiugai];
         [param setObject:@"TrueName" forKey:@"lN"];
         [param setObject:param1 forKey:@"lD"];
@@ -210,7 +222,7 @@ static NSString *sex = @"先生"; // 记录性别
         {
             if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
             {
-                // 跳转到登录页面
+                // 跳转到登录页面（修改密码）
                 WXZLoginController *loginVC = [[WXZLoginController alloc] init];
                 [self.navigationController pushViewController:loginVC animated:YES];
             }

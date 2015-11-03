@@ -14,7 +14,7 @@
 #import "WXZPersonalCityCell.h"
 #import "WXZCitySectionHeader.h"
 
-@interface WXZPersonalCityVC () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate> // PassCityNameDelegate
+@interface WXZPersonalCityVC () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
     NSTimer *_removeIndexLargeTitle; // 定时器
 }
@@ -123,8 +123,7 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     self.citySearchBar.delegate = self;
 }
 
-#pragma mark - Data Request
-// 城市列表请求
+#pragma mark - City List Data Request
 - (void)cityListRequest
 {
     // 请求链接
@@ -167,9 +166,6 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
 - (void)modifyRequestWithParameter:(NSString *)param1
 {
     NSString *nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenziliaoxiugai];
-    
-//    //把汉字进行UTF8转码
-//    NSString *utfText=(NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)param1, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
     
     NSString *cityId = self.sourceDic[param1];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -222,18 +218,12 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
 // 选择行
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    [self.cityDelegate passCityNames:[[self.allCitysDic objectForKey:[self.ziMuAllKeys objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row]]; // 选中传给上一页
     selectedCurrentCityName = [[self.allCitysDic objectForKey:[self.ziMuAllKeys objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
     
     // 显示菊花
     [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
     [self modifyRequestWithParameter:selectedCurrentCityName]; // 修改城市数据请求
 }
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    return [self.ziMuAllKeys objectAtIndex:section]; // 返回每个索引的内容
-//}
 
 // 自定义headerView
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -248,7 +238,6 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
 // tableview索引
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-//    return self.indexZimuAllKeys; // 索引的标题数组（有几个显示几个）
     return [NSArray arrayWithObjects:@"#",@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z", nil];
 }
 
