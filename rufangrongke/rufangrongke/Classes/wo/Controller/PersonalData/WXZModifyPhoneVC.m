@@ -134,7 +134,7 @@
          {
              NSDictionary *dic = (NSDictionary *)responseObject;
              WXZLog(@"%@",dic);
-             if ([responseObject[@"status"] integerValue] == 1)
+             if ([dic[@"status"] integerValue] == 1)
              {
                  NSLog(@"%@",responseObject[@"msg"]);
                  // 倒计时

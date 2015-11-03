@@ -62,34 +62,16 @@
     [SVProgressHUD showWithStatus:@"登录中..." maskType:SVProgressHUDMaskTypeBlack];
     
     
-    // afn
-    NSString *url = [OutNetBaseURL stringByAppendingString:denglu];
+    // 1.创建请求对象
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:denglu];
+    
+    
+    // 18833198077   18311281581   17701261104 18310532603
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-//    parameters[@"mob"] = @"18833198077";
-//    parameters[@"pas"] = @"1234567";
     parameters[@"mob"] = @"18311281581";
     parameters[@"pas"] = @"1234567";
-    [[AFHTTPSessionManager manager] POST:url parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        /*
-         {
-         id : 5,
-         Mobile : 18833198077,
-         sfzid : 222222222222222222,
-         tjm : A00001,
-         cityName : 临沂,
-         sfzPic : /upFile/jjr/sfzPic/qxchqmqo.njb.jpg,
-         cityid : 2,
-         LtName : ,
-         CongYeTime : 1999/1/1 0:00:00,
-         TrueName : 王话1,
-         XuanYan : qwewqesaa,
-         Sex : 先生,
-         LtCid : ,
-         TouXiang : /upFile/jjr/TouXiang/m2o1qury.ux4.jpg,
-         IsShiMing : True
-         },
-         
-         */
+    // afn
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;
         // 获取沙河路径
         NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
@@ -118,7 +100,7 @@
             [SVProgressHUD showErrorWithStatus:@"登陆超时,请重新登陆." maskType:SVProgressHUDMaskTypeBlack];
         }];
     }];
-    
+
 }
 
 - (void)viewDidLoad {
