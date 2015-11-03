@@ -93,6 +93,10 @@ NSString * const jingjirenxiugaimima_parameter = @"yzm=&mob=";
 NSString * const jinjirengongsibagding = @"UsLt.ashx";
 NSString * const jinjirengongsibagding_parameter = @"ltcid=&ltname=&picfile=";
 
+// 22.经纪人实名认证 --
+NSString * const jingjirenshimingrenzheng = @"UsRz.ashx";
+NSString * const jingjirenshimingrenzheng_parameter = @"truename=&sfzid=&sfzPic=";
+
 /************************************************************************************/
 // 用户名密码常量
 NSString * const phoneNumber = @"phoneNumber";
