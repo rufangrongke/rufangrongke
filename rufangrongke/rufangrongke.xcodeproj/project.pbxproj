@@ -94,6 +94,7 @@
 		88AE893D1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AE893B1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.xib */; };
 		88AE89411BE07ED200407ECF /* WXZLouPanMessageCell_2_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AE893F1BE07ED200407ECF /* WXZLouPanMessageCell_2_0.m */; };
 		88AE89421BE07ED200407ECF /* WXZLouPanMessageCell_2_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AE89401BE07ED200407ECF /* WXZLouPanMessageCell_2_0.xib */; };
+		88DB2EC11BE8846500003A77 /* CDPMonitorKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */; };
 		88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7041BD87C180072CD40 /* AFHTTPRequestOperation.m */; };
 		88EAA7171BD87C180072CD40 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7061BD87C180072CD40 /* AFHTTPRequestOperationManager.m */; };
 		88EAA7181BD87C180072CD40 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EAA7081BD87C180072CD40 /* AFHTTPSessionManager.m */; };
@@ -262,6 +263,8 @@
 		88AE893E1BE07ED200407ECF /* WXZLouPanMessageCell_2_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanMessageCell_2_0.h; sourceTree = "<group>"; };
 		88AE893F1BE07ED200407ECF /* WXZLouPanMessageCell_2_0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanMessageCell_2_0.m; sourceTree = "<group>"; };
 		88AE89401BE07ED200407ECF /* WXZLouPanMessageCell_2_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanMessageCell_2_0.xib; sourceTree = "<group>"; };
+		88DB2EBF1BE8846500003A77 /* CDPMonitorKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDPMonitorKeyboard.h; path = Tool/NotificationKeyboard/CDPMonitorKeyboard.h; sourceTree = "<group>"; };
+		88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDPMonitorKeyboard.m; path = Tool/NotificationKeyboard/CDPMonitorKeyboard.m; sourceTree = "<group>"; };
 		88EAA7031BD87C180072CD40 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		88EAA7041BD87C180072CD40 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		88EAA7051BD87C180072CD40 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -685,6 +688,15 @@
 			name = LouPanMessageCell;
 			sourceTree = "<group>";
 		};
+		88DB2EBE1BE883FA00003A77 /* NotificationKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				88DB2EBF1BE8846500003A77 /* CDPMonitorKeyboard.h */,
+				88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */,
+			);
+			name = NotificationKeyboard;
+			sourceTree = "<group>";
+		};
 		88EAA7021BD87BE60072CD40 /* NetWorkingTools */ = {
 			isa = PBXGroup;
 			children = (
@@ -714,6 +726,7 @@
 		88F3F1751BDF6D2A00768422 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				88DB2EBE1BE883FA00003A77 /* NotificationKeyboard */,
 				882902C41BE74E5300BA7D24 /* CustomPickerView */,
 				888588741BE715430015A69C /* WXZChectObject.h */,
 				888588751BE715430015A69C /* WXZChectObject.m */,
@@ -958,6 +971,7 @@
 				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
 				882902B81BE73CFE00BA7D24 /* WXZWorkingTimeView.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
+				88DB2EC11BE8846500003A77 /* CDPMonitorKeyboard.m in Sources */,
 				88AE89321BE07E9A00407ECF /* WXZLouPanMessageCell_0_0.m in Sources */,
 				3057844C1BD3D3A900169C44 /* WXZTabBarController.m in Sources */,
 				885387F41BDCE5D3005DCF38 /* WXZRegisterController.m in Sources */,
@@ -1038,7 +1052,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhixin shan (H4B5ZPSRLT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhixin shan (H4B5ZPSRLT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1060,6 +1075,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "20768911-9460-4685-b23c-11dc7eef9fa1";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1096,6 +1112,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "20768911-9460-4685-b23c-11dc7eef9fa1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1106,12 +1123,14 @@
 			baseConfigurationReference = 39928E051B59D36C45248CC0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhixin shan (H4B5ZPSRLT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = rufangrongke/Classes/main/PrefixHeader.pch;
 				INFOPLIST_FILE = rufangrongke/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "20768911-9460-4685-b23c-11dc7eef9fa1";
 			};
 			name = Debug;
 		};
@@ -1126,6 +1145,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "20768911-9460-4685-b23c-11dc7eef9fa1";
 			};
 			name = Release;
 		};

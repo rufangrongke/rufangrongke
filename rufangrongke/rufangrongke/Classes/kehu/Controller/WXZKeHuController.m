@@ -7,11 +7,14 @@
 //
 
 #import "WXZKeHuController.h"
+#import "AFNetworking.h"
 #import "WXZKeHuListCell.h"
 #import "WXZKHListHeaderView.h"
 #import "WXZKHListFooterView.h"
 
 @interface WXZKeHuController ()
+
+@property (nonatomic,strong) NSMutableDictionary *dataDic;
 
 @end
 
@@ -40,7 +43,6 @@
         //    self.navigationItem.leftBarButtonItem = leftItem;
     }
     // 左边按钮
-    //    [UIBarButtonItem];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_shaixuan" highImage:@"kh_shaixuan" target:self action:@selector(quDu_click)];
     // 右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
@@ -70,45 +72,40 @@
     searchBar.placeholder = @"请输入客户姓名";
     self.navigationItem.titleView = searchBar;
     
+    // 初始化
+    self.dataDic = [NSMutableDictionary dictionary];
+    
+    // 请求列表
+    [self keHuListRequest:@"1" numberEachPage:@"" handsomeChooseCategory:@"" handsomeChooseConditions:@""];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    // 设置导航栏左右两侧的 button
-//    UIView *leftBtnView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-//    // 标题
-//    UILabel *leftTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 32, leftBtnView.height)];
-//    leftTitleLabel.text = @"筛选";
-//    leftTitleLabel.textAlignment = NSTextAlignmentLeft;
-//    leftTitleLabel.textColor = [UIColor whiteColor];
-//    leftTitleLabel.font = WXZ_SystemFont(16);
-//    [leftBtnView addSubview:leftTitleLabel];
-//    // 箭头图片
-//    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(leftTitleLabel.x+leftTitleLabel.width, (leftBtnView.height-6)/2, 12, 6)];
-//    imgView.image = [UIImage imageNamed:@"kh_ip_jt"];
-//    imgView.userInteractionEnabled = YES;
-//    [leftBtnView addSubview:imgView];
-//    // 添加轻击手势
-//    UITapGestureRecognizer *leftTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screeningAction:)];
-//    [leftBtnView addGestureRecognizer:leftTap];
-//    
-//    // 右侧按钮
-//    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    rightBtn.frame = CGRectMake(0, 0, 40, 44);
-//    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
-//    [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    rightBtn.titleLabel.font = WXZ_SystemFont(16);
-//    [rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)]; // 标题向左侧偏移
-//    [rightBtn addTarget:self action:@selector(determineAction:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtnView];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    
 }
 
 #pragma mark - Data Request Methods
-- (void)request
+- (void)keHuListRequest:(NSString *)page numberEachPage:(NSString *)eachPage handsomeChooseCategory:(NSString *)chooseCategory handsomeChooseConditions:(NSString *)chooseConditions
 {
-       
+    NSString *urlStr = [OutNetBaseURL stringByAppendingString:kehuliebiao];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param setObject:page forKey:@"inp"];
+    [param setObject:eachPage forKey:@"ps"];
+    [param setObject:chooseCategory forKey:@"zt"];
+    [param setObject:chooseConditions forKey:@"key"];
+    
+    [[AFHTTPSessionManager manager] POST:urlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        if ([responseObject[@"ok"] integerValue] == 1)
+        {
+            
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -74,7 +74,8 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
     
-    NSString *pwdStr = [NSString stringWithFormat:@"mob=18833198077&pas=%@",self.pwdField.text];
+    // 18833198077   18311281581   17701261104 18310532603
+    NSString *pwdStr = [NSString stringWithFormat:@"mob=%@&pas=%@",@"18311281581",@"1234567"];
     request.HTTPBody = [pwdStr dataUsingEncoding:NSUTF8StringEncoding];
 
     

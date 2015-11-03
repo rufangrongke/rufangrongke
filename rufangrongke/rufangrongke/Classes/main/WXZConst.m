@@ -7,7 +7,8 @@ NSString * const picBaseULR = @"http://192.168.1.21:34";
 
 // 0.基础URL
 //NSString * const OutNetBaseURL = @"http://linshi.benbaodai.com/svs/";
-NSString * const OutNetBaseURL = @"http://192.168.1.21:34/Svs/";
+NSString * const OutNetBaseURL = @"http://192.168.1.61/Svs/";
+// @"http://192.168.1.21:34/Svs/";
 
 // 1.城市列表
 NSString * const chengshileibiao = @"allcity.ashx";

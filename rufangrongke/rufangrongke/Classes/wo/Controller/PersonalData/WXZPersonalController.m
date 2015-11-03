@@ -19,16 +19,15 @@
 #import "WXZModifyPhoneVC.h"
 #import "WXZPersonalInfoVC.h"
 #import "WXZWorkingTimeView.h"
+#import "SRMonthPicker.h"
 
-@interface WXZPersonalController () <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface WXZPersonalController () <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SRMonthPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
-@property (nonatomic,strong) UIImageView *imageView;
-@property (nonatomic,strong) WXZWorkingTimeView *workingTimeView;
+@property (nonatomic,strong) WXZWorkingTimeView *workingTimeView; // 从业时间view
 
-@property (nonatomic,strong) NSMutableDictionary *dataArr;
-@property (nonatomic,strong) NSDictionary *personalInfoDic;
+@property (nonatomic,strong) NSDictionary *personalInfoDic; // 获取登录的缓存数据（即个人资料信息）
 
 @end
 
@@ -58,25 +57,25 @@
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = NO;
     
-    [self.myTableView reloadData];
+    [self.myTableView reloadData]; // 刷新列表
 }
 
-// 刷新数据
+// 通知事件（刷新数据）
 - (void)updatePersonalData:(NSNotification *)noti
 {
-    // 显示HUD
+    // 显示菊花
     [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
     
     [self loginRequest:^(id result) {
         if (![result isEqualToString:@"请求失败"])
         {
-            // 重新获取缓存数据
-            self.personalInfoDic = result;
-            [self.myTableView reloadData];
-            return;
+            self.personalInfoDic = result; // 获取最新数据
+            [self.myTableView reloadData]; // 刷新列表
         }
-        [SVProgressHUD showErrorWithStatus:result];
-        
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:result];
+        }
         [SVProgressHUD dismiss]; // 结束菊花
     }];
 }
@@ -133,7 +132,7 @@
     NSLog(@"%ld",(long)indexPath.row);
     if (indexPath.row == 0)
     {
-        // 头像
+        // 头像 - 添加UIActionSheet
         UIActionSheet *photosSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
         [photosSheet showInView:self.view];
     }
@@ -166,9 +165,10 @@
     {
         // 从业时间
         _workingTimeView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZWorkingTimeView class]) owner:nil options:nil].lastObject;
-        _workingTimeView.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight);
+        _workingTimeView.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight); // 设置view的位置
         [self.view addSubview:_workingTimeView];
         
+        [self initWorkingTime]; // 调用初始化方法
     }
     else if (indexPath.row == 4)
     {
@@ -223,11 +223,6 @@
     }
 }
 
-- (void)logOutAction:(id)sender
-{
-    NSLog(@"退出登录");
-}
-
 #pragma UIActionSheet Delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -277,10 +272,6 @@
 #pragma UIImagePickerController Delegate (相机和拍照)
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-//    http://www.lvtao.net/ios/509.html
-    //http://blog.csdn.net/justinjing0612/article/details/8751269
-//    http://www.swifthumb.com/thread-2555-1-1.html
-//    http://www.cnblogs.com/skyblue/archive/2013/05/08/3067108.html
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.image"])
     {
         // 如果是则从info字典参数中获取原图片
@@ -318,50 +309,167 @@
     [params setObject:@"TouXiang" forKey:@"lx"];
     [params setObject:head forKey:@"File"];
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
-    {
+    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];
         NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-
+        
         [formData appendPartWithFileData:head name:@"headFile" fileName:fileName mimeType:@"image/png"];
-
-    } success:^(AFHTTPRequestOperation *operation, id responseObject)
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject)
     {
-        [operation start];
-        [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite)
-        {
-            CGFloat progress = ((float)totalBytesWritten) / totalBytesExpectedToWrite;
-            NSLog(@"%lf",progress);
-        }];
-
-        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"上传成功");
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"上传失败");
-        }];
-
         NSString *mm=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"upload = %@",mm);
-        
-        // 发送通知
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
-        
         [SVProgressHUD showErrorWithStatus:mm];
         
-        [SVProgressHUD dismiss]; // 取消菊花
-
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        // 刷新界面
+        [self loginRequest:^(id result) {
+            if (![result isEqualToString:@"请求失败"])
+            {
+                // 重新获取缓存数据
+                self.personalInfoDic = result;
+                [self.myTableView reloadData];
+                return;
+            }
+            [SVProgressHUD showErrorWithStatus:result];
+            
+            [SVProgressHUD dismiss]; // 结束菊花
+        }];
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
         [SVProgressHUD dismiss]; // 取消菊花
     }];
+}
+
+#pragma mark - WorkingTime Start
+- (void)initWorkingTime
+{
+    if ([UIScreen mainScreen].bounds.size.width == 320)
+    {
+        _workingTimeView.bgView.frame = CGRectMake(12, 40, 320-24, 320-24+1);
+    }
+    
+    // 遵循协议
+    _workingTimeView.timePickerView.monthPickerDelegate = self;
+    
+    // 设置年的范围
+    NSString *maximunYearStr = [self formatDate:[NSDate date] dateFormat:@"yyyy"]; // 获取当前年
+    _workingTimeView.timePickerView.maximumYear = [NSNumber numberWithInt:maximunYearStr.intValue]; // 设置年的最大值
+    _workingTimeView.timePickerView.minimumYear = @1980; // 设置年的最小值
+    _workingTimeView.timePickerView.yearFirst = YES; // 今年是否显示在前面
+    
+    // 设置显示年月的text的宽度
+    _workingTimeView.timePickerView.monthWidth = 126.f;
+    _workingTimeView.timePickerView.yearWidth = 81.f;
+    if ([UIScreen mainScreen].bounds.size.width == 320)
+    {
+        _workingTimeView.timePickerView.monthWidth = 120.f;
+        _workingTimeView.timePickerView.yearWidth = 70.f;
+    }
+    
+    // 添加事件
+    [_workingTimeView.determineBtn addTarget:self action:@selector(cancelOrDetrmineAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_workingTimeView.cancelBtn addTarget:self action:@selector(cancelOrDetrmineAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+// 日期格式化方法
+- (NSString*)formatDate:(NSDate *)date dateFormat:(NSString *)format
+{
+    // A convenience method that formats the date in Year/Month-Year format
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = format;
+    return [formatter stringFromDate:date];
+}
+
+// 取消/确定按钮单击事件
+- (void)cancelOrDetrmineAction:(UIButton *)sender
+{
+    if (sender.tag == 100017)
+    {
+        // All this GCD stuff is here so that the label change on -[self monthPickerWillChangeDate] will be visible
+        dispatch_queue_t delayQueue = dispatch_queue_create("com.simonrice.SRMonthPickerExample.DelayQueue", 0);
+        
+        dispatch_async(delayQueue, ^{
+            // Wait 1 second
+            sleep(1);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                // 显示菊花
+                [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+                [self workingTimeRequest:[self formatDate:_workingTimeView.timePickerView.date dateFormat:@"yyyy-MM-dd"]]; // 修改从业时间请求
+            });
+        });
+    }
+    else
+    {
+        [self removeWorkingTimeView]; // 从父view移除该view
+    }
+}
+
+// 从父view移除该view
+- (void)removeWorkingTimeView
+{
+    if (_workingTimeView)
+    {
+        [_workingTimeView removeFromSuperview];
+    }
+}
+
+#pragma mark - WorkingTime Request
+- (void)workingTimeRequest:(NSString *)date
+{
+    NSString *url = [OutNetBaseURL stringByAppendingString:jinjirenziliaoxiugai];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param setObject:@"CongYeTime" forKey:@"lN"]; // 修改的属性名
+    [param setObject:date forKey:@"lD"]; // 从业时间（yyyy-MM-dd）nsdate形式
+    
+    [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        if ([responseObject[@"ok"] integerValue] == 1)
+        {
+            [self removeWorkingTimeView]; // 把view从父view上移除
+            
+            // 刷新界面
+            [self loginRequest:^(id result) {
+                if (![result isEqualToString:@"请求失败"])
+                {
+                    // 重新获取缓存数据
+                    self.personalInfoDic = result;
+                    [self.myTableView reloadData];
+                    return;
+                }
+                [SVProgressHUD showErrorWithStatus:result];
+                
+                [SVProgressHUD dismiss]; // 结束菊花
+            }];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+        }
+        [SVProgressHUD dismiss]; // 取消菊花
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"请求失败"];
+        [SVProgressHUD dismiss]; // 取消菊花
+    }];
+}
+#pragma mark - WorkingTime End
+
+// 退出登录
+- (void)logOutAction:(id)sender
+{
+    NSLog(@"退出登录");
 }
 
 // 返回button 事件
@@ -370,6 +478,8 @@
     [super viewWillDisappear:animated];
     // 发送通知，更新“我”界面信息
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateWoPage" object:nil];
+    
+    [self removeWorkingTimeView]; // 从父view移除该view
 }
 
 - (void)didReceiveMemoryWarning {

@@ -10,14 +10,15 @@
 #import "AFNetworking.h"
 #import <SVProgressHUD.h>
 #import "WXZChectObject.h"
+#import "CDPMonitorKeyboard.h"
 
-@interface WXZPersonalStoreVC () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface WXZPersonalStoreVC () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *cardImgView;
-@property (weak, nonatomic) IBOutlet UIProgressView *uploadProgress;
-@property (weak, nonatomic) IBOutlet UITextField *storeNameTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *cardImgView; // 名片imgView
+@property (weak, nonatomic) IBOutlet UIProgressView *uploadProgress; // 上传进度条
+@property (weak, nonatomic) IBOutlet UITextField *storeNameTextField; // 新门店输入框
 
 @end
 
@@ -32,13 +33,20 @@
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"修改绑定门店";
     
-    self.storeNameTextField.text = self.storeName;
+    self.storeNameTextField.text = self.storeName; // 赋值
+    self.storeNameTextField.delegate = self; // 遵循协议
     
-    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 350);
+    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 350); // 设置scrollView的contentSize
     
     [self initControl]; // 初始化progress
+    
+    //增加监听，当键盘出现或改变时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    //增加监听，当键退出时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+// 初始化控件
 - (void)initControl
 {
     self.uploadProgress.progress = 0;
@@ -46,13 +54,16 @@
     self.uploadProgress.trackTintColor = [UIColor grayColor];
 }
 
+// 选择名片单击事件
 - (IBAction)uploadCard:(id)sender
 {
     NSLog(@"上传名片");
+    // 添加UIActionSheet
     UIActionSheet *photosSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
     [photosSheet showInView:self.view];
 }
 
+// 提交审核按钮事件
 - (IBAction)submitAuditAction:(id)sender
 {
     NSLog(@"提交审核");
@@ -118,10 +129,6 @@
 #pragma UIImagePickerController Delegate (相机和拍照)
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    //    http://www.lvtao.net/ios/509.html
-    //http://blog.csdn.net/justinjing0612/article/details/8751269
-    //    http://www.swifthumb.com/thread-2555-1-1.html
-    //    http://www.cnblogs.com/skyblue/archive/2013/05/08/3067108.html
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.image"])
     {
         // 如果是则从info字典参数中获取原图片
@@ -193,12 +200,48 @@
     // 4. Set the progress block of the operation
     [opration setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite)
     {
-        NSLog(@"Wrote %lld/%lld", totalBytesWritten, totalBytesExpectedToWrite);
         // 设置上传进度
-        self.uploadProgress.progress = totalBytesWritten / totalBytesExpectedToWrite;
+        CGFloat uploadProportion = totalBytesWritten / totalBytesExpectedToWrite;
+        self.uploadProgress.progress = uploadProportion;
     }];
     // 5. Begin
     [opration start];
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+#pragma mark 键盘监听方法设置
+//当键盘出现时调用
+-(void)keyboardWillShow:(NSNotification *)aNotification
+{
+    //如果想不通输入view获得不同高度，可自己在此方法里分别判断区别
+    [[CDPMonitorKeyboard defaultMonitorKeyboard] keyboardWillShowWithSuperView:self.view andNotification:aNotification higherThanKeyboard:10];
+}
+
+//当键退出时调用
+-(void)keyboardWillHide:(NSNotification *)aNotification
+{
+    [[CDPMonitorKeyboard defaultMonitorKeyboard] keyboardWillHide];
+}
+
+// 取消第一响应
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.storeNameTextField resignFirstResponder];
+}
+
+// dealloc中需要移除监听
+-(void)dealloc{
+    //移除监听，当键盘出现或改变时收出消息
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    
+    //移除监听，当键退出时收出消息
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

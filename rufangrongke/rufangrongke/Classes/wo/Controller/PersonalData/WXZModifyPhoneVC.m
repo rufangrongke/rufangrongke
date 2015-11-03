@@ -11,6 +11,8 @@
 #import "WXZChectObject.h"
 #import "JxbScaleButton.h"
 #import <SVProgressHUD.h>
+#import "CDPMonitorKeyboard.h"
+#import "WXZLoginController.h"
 
 @interface WXZModifyPhoneVC () <UITextFieldDelegate>
 
@@ -42,6 +44,11 @@
     
     // 赋值
     self.currentPhoneNumLabel.text = self.phone;
+    
+    //增加监听，当键盘出现或改变时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    //增加监听，当键退出时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 // 修改手机号请求
@@ -58,9 +65,9 @@
          if ([responseObject[@"ok"] integerValue] == 1)
          {
              NSLog(@"%@",responseObject[@"msg"]);
-             // 发送通知
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
-             [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
+             // 跳转到登录页面（修改密码）
+             WXZLoginController *loginVC = [[WXZLoginController alloc] init];
+             [self.navigationController pushViewController:loginVC animated:YES];
          }
          else
          {
@@ -74,7 +81,8 @@
      }];
 }
 
-- (IBAction)codeBtnAction:(id)sender
+// 获取验证码事件及请求
+- (IBAction)codeBtnAction:(JxbScaleButton *)sender
 {
     NSLog(@"验证码");
     // 判断有没有手机号
@@ -85,26 +93,19 @@
         NSString *url = [OutNetBaseURL stringByAppendingString:yanzhengma];
         
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
-        [param setObject:@"ChageMobile" forKey:@"Act"]; // 验证码类型
+        [param setObject:@"ChangMobile" forKey:@"Act"]; // 验证码类型
         [param setObject:self.currentPhoneNumLabel.text forKey:@"Mobile"]; // 当前手机号
         
         [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
          {
              NSDictionary *dic = (NSDictionary *)responseObject;
-             if ([responseObject[@"ok"] integerValue] == 1)
+             WXZLog(@"%@",dic);
+             if ([dic[@"status"] integerValue] == 1)
              {
                  NSLog(@"%@",responseObject[@"msg"]);
                  // 倒计时
                  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                     JxbScaleButton* btn = (JxbScaleButton *)sender;
-                     JxbScaleSetting* setting = [[JxbScaleSetting alloc] init];
-                     setting.strPrefix = @"";
-                     setting.strSuffix = @"秒";
-                     setting.strCommon = @"重新发送";
-                     
-                     setting.indexStart = [dic[@"timeout"] integerValue];
-                     
-                     [btn startWithSetting:setting];
+                     [self countdownWithTimeOut:dic[@"timeout"]]; // 倒计时
                      [self.view setNeedsDisplay];
                  }];
              }
@@ -121,6 +122,41 @@
     }
 }
 
+// 倒计时
+- (void)countdownWithTimeOut:(NSString *)timeOutStr
+{
+    int timeOut2 = timeOutStr.intValue;
+    __block int timeout = timeOut2; //倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        
+        if(timeout <= 0)
+        {
+            //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+                _codeBtn.userInteractionEnabled = YES;
+            });
+        }
+        else
+        {
+            int seconds = timeout % 60; // 或 timeout % 300 或 timeout（计算分几次，每次60秒）
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+//                NSLog(@"____%@",strTime);
+                [_codeBtn setTitle:[NSString stringWithFormat:@"%@秒",strTime] forState:UIControlStateNormal];
+                _codeBtn.userInteractionEnabled = NO;
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
+}
+
 // 确定按钮单击事件
 - (IBAction)determineBtn:(id)sender
 {
@@ -133,14 +169,13 @@
             {
                 // 显示菊花
                 [SVProgressHUD showWithStatus:@"发送中..." maskType:SVProgressHUDMaskTypeBlack];
-                [self modifyRequestWithParameter1:self.currentPhoneNumLabel.text parameter:self.currentPhoneNumLabel.text];
+                [self modifyRequestWithParameter1:self.codeTextField.text parameter:self.xinPhoneTextField.text];
             }
             else
             {
                 NSLog(@"两次手机号不一致，请重新输入");
             }
         }
-        
     }
     else
     {
@@ -177,12 +212,35 @@
     return YES;
 }
 
+#pragma mark 键盘监听方法设置
+//当键盘出现时调用
+-(void)keyboardWillShow:(NSNotification *)aNotification
+{
+    //如果想不通输入view获得不同高度，可自己在此方法里分别判断区别
+    [[CDPMonitorKeyboard defaultMonitorKeyboard] keyboardWillShowWithSuperView:self.view andNotification:aNotification higherThanKeyboard:0];
+}
+
+//当键退出时调用
+-(void)keyboardWillHide:(NSNotification *)aNotification
+{
+    [[CDPMonitorKeyboard defaultMonitorKeyboard] keyboardWillHide];
+}
+
 // 取消第一响应
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.codeTextField resignFirstResponder];
     [self.xinPhoneTextField resignFirstResponder];
     [self.erPhoneTextField resignFirstResponder];
+}
+
+// dealloc中需要移除监听
+-(void)dealloc{
+    //移除监听，当键盘出现或改变时收出消息
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    
+    //移除监听，当键退出时收出消息
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

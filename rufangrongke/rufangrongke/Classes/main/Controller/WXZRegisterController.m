@@ -22,6 +22,7 @@
 @end
 
 @implementation WXZRegisterController
+
 - (IBAction)huoquyanzhengma:(id)sender {
     // 0.请求路径
     // 基本URL
@@ -43,7 +44,7 @@
     parameterS[@"Mobile"] = self.phoneNumber.text;
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameterS success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dic = (NSDictionary *)responseObject;
-        
+        WXZLog(@"%@", responseObject);
         if ([dic[@"msg"] isEqualToString:@"发送成功"]) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 JxbScaleButton* btn = (JxbScaleButton*)sender;

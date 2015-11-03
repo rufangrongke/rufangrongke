@@ -61,7 +61,7 @@
     // 1.创建请求对象
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
-    request.HTTPBody = [@"mob=18833198077&pas=123456" dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = [@"mob=17701261104&pas=123456" dataUsingEncoding:NSUTF8StringEncoding];
     
     // 2.发送请求
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
