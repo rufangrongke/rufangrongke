@@ -41,12 +41,7 @@ static CGFloat carouselPic_height = 226;
      NSString *telUrl = [NSString stringWithFormat:@"tel://%@",@13399603478];
     NSURL *url = [[NSURL alloc] initWithString:telUrl];
     
-    
-    
-    [[UIApplication sharedApplication] openURL:url];
-    
-    
-//    [[UIApplication sharedApplication] ];
+
 }
 
 - (void)viewDidLoad {

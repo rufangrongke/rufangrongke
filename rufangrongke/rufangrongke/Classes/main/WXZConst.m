@@ -3,11 +3,11 @@
 
 // picBaseULR
 //NSString * const picBaseULR = @"http://linshi.benbaodai.com";
-NSString * const picBaseULR = @"http://192.168.1.21:34";
+NSString * const picBaseULR = @"http://192.168.1.61";
 
 // 0.基础URL
 //NSString * const OutNetBaseURL = @"http://linshi.benbaodai.com/svs/";
-NSString * const OutNetBaseURL = @"http://192.168.1.21:34/Svs/";
+NSString * const OutNetBaseURL = @"http://192.168.1.61/Svs/";
 
 // 1.城市列表
 NSString * const chengshileibiao = @"allcity.ashx";

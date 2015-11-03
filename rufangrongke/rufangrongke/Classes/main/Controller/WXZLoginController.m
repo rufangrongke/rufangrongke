@@ -11,6 +11,7 @@
 #import "WXZTabBarController.h"
 #import "WXZRegisterController.h"
 #import "WXZFindPasswordController.h"
+#import "AFNetworking.h"
 
 @interface WXZLoginController ()
 
@@ -60,29 +61,15 @@
     // 显示HUD
     [SVProgressHUD showWithStatus:@"登录中..." maskType:SVProgressHUDMaskTypeBlack];
     
-    // 0.请求路径
-    // 基本URL
-//    NSString *baseURL = @"http://linshi.benbaodai.com/svs/";
-    NSString *urlString = [OutNetBaseURL stringByAppendingString:@"Uslogin.ashx"];
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    // URL
-    NSURL *url = [NSURL URLWithString:urlString];
-//        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://192.168.1.21:34/Svs/Uslogin.ashx?mob=18833198077&pas=123456"]];
-    //    NSLog(@"%@", url);
     
-    // 1.创建请求对象
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    
-    NSString *pwdStr = [NSString stringWithFormat:@"mob=18833198077&pas=123456"];
-    request.HTTPBody = [pwdStr dataUsingEncoding:NSUTF8StringEncoding];
-
-    
-    // 2.发送请求
-    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        // 3.解析服务器返回的数据（解析成字符串）
-        NSDictionary *loginContentDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        WXZLog(@"-----%@", loginContentDic);
+    // afn
+    NSString *url = [OutNetBaseURL stringByAppendingString:denglu];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+//    parameters[@"mob"] = @"18833198077";
+//    parameters[@"pas"] = @"123456";
+    parameters[@"mob"] = @"18311281581";
+    parameters[@"pas"] = @"1234567";
+    [[AFHTTPSessionManager manager] POST:url parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         /*
          {
          id : 5,
@@ -101,11 +88,10 @@
          TouXiang : /upFile/jjr/TouXiang/m2o1qury.ux4.jpg,
          IsShiMing : True
          },
-
+         
          */
+        NSDictionary *loginContentDic = (NSDictionary *)responseObject;
         // 获取沙河路径
-//        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-//        path = [path stringByAppendingString:@"userinfo.plist"];
         NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
         // 获取用户信息
         NSDictionary *userinfo = loginContentDic[@"u"];
@@ -125,7 +111,11 @@
             }else{ //登陆失败
                 [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];
             }
-           
+            
+        }];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [SVProgressHUD showErrorWithStatus:@"登陆超时,请重新登陆." maskType:SVProgressHUDMaskTypeBlack];
         }];
     }];
     

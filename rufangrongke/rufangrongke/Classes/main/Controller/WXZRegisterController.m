@@ -25,7 +25,7 @@
 - (IBAction)huoquyanzhengma:(id)sender {
     // 0.请求路径
     // 基本URL
-    NSString *baseURL = @"http://192.168.1.21:34/Svs/";
+    NSString *baseURL = OutNetBaseURL;
     NSString *urlString = [baseURL stringByAppendingString:yanzhengma];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     // URL
@@ -56,10 +56,9 @@
                 
                 [btn startWithSetting:setting];
                 [self.view setNeedsDisplay];
-                //                [self.view layoutIfNeeded];
-                //                WXZLog(@"%@", dic);
+//                WXZLog(@"%@", dic);
             }];
-            //            NSLog(@"hhhhhhhhhh");
+//                NSLog(@"hhhhhhhhhh");
             
         }else{
             [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
@@ -89,8 +88,6 @@
     
     // 隐藏导航栏
     [self.navigationController setNavigationBarHidden:NO];
-//    self.navigationItem set
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (IBAction)register:(id)sender {
