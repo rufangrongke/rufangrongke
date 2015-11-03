@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *erPhoneTextField; // 再次输入手机号
 
 @property (weak, nonatomic) IBOutlet UILabel *currentPhoneNumLabel; // 当前手机号
-@property (weak, nonatomic) IBOutlet UIButton *codeBtn; // 发送验证码按钮
+@property (weak, nonatomic) IBOutlet JxbScaleButton *codeBtn; // 发送验证码按钮
 @end
 
 @implementation WXZModifyPhoneVC
@@ -80,18 +80,53 @@
     // 判断有没有手机号
     if (![WXZChectObject checkWhetherStringIsEmpty:self.currentPhoneNumLabel.text])
     {
+//        // 请求路径
+//        NSString *urlString = [OutNetBaseURL stringByAppendingString:yanzhengma];
+//        // AFNetworking
+//        NSMutableDictionary *parameterS = [NSMutableDictionary dictionary];
+//        parameterS[@"Act"] = @"ChangMobile";
+//        parameterS[@"Mobile"] = self.currentPhoneNumLabel.text;
+//        [[AFHTTPSessionManager manager] POST:urlString parameters:parameterS success:^(NSURLSessionDataTask *task, id responseObject) {
+//            NSDictionary *dic = (NSDictionary *)responseObject;
+//            WXZLog(@"%@", responseObject);
+//            if ([dic[@"msg"] isEqualToString:@"发送成功"]) {
+//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                    JxbScaleButton* btn = (JxbScaleButton*)sender;
+//                    JxbScaleSetting* setting = [[JxbScaleSetting alloc] init];
+//                    setting.strPrefix = @"";
+//                    setting.strSuffix = @"秒";
+//                    setting.strCommon = @"重新发送";
+//                    
+//                    setting.indexStart = [dic[@"timeout"] integerValue];
+//                    WXZLog(@"%@", btn);
+//                    [btn startWithSetting:setting];
+//                    [self.view setNeedsDisplay];
+//                    //                [self.view layoutIfNeeded];
+//                    //                WXZLog(@"%@", dic);
+//                }];
+//                //            NSLog(@"hhhhhhhhhh");
+//                
+//            }else{
+//                [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+//            }
+//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//            //        WXZLog(@"%@", error);
+//            [SVProgressHUD showErrorWithStatus:@"请求失败"];
+//        }];
+
         // 显示菊花
         [SVProgressHUD showWithStatus:@"发送中..." maskType:SVProgressHUDMaskTypeBlack];
         NSString *url = [OutNetBaseURL stringByAppendingString:yanzhengma];
         
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
-        [param setObject:@"ChageMobile" forKey:@"Act"]; // 验证码类型
+        [param setObject:@"ChangMobile" forKey:@"Act"]; // 验证码类型
         [param setObject:self.currentPhoneNumLabel.text forKey:@"Mobile"]; // 当前手机号
         
         [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
          {
              NSDictionary *dic = (NSDictionary *)responseObject;
-             if ([responseObject[@"ok"] integerValue] == 1)
+             WXZLog(@"%@",dic);
+             if ([responseObject[@"status"] integerValue] == 1)
              {
                  NSLog(@"%@",responseObject[@"msg"]);
                  // 倒计时

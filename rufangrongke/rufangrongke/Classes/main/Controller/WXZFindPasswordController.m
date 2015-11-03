@@ -26,17 +26,17 @@
 //    phoneNumber.
     // 0.请求路径
     // 基本URL
-    NSString *baseURL = @"http://192.168.1.21:34/Svs/";
-    NSString *urlString = [baseURL stringByAppendingString:yanzhengma];
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    // URL
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    // 1.创建请求对象
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    NSString *parameter = [NSString stringWithFormat:@"Act=GetPass&Mobile=%@",self.phoneNumber.text];
-    request.HTTPBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
+//    NSString *baseURL = @"http://192.168.1.21:34/Svs/";
+//    NSString *urlString = [baseURL stringByAppendingString:yanzhengma];
+//    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    // URL
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    
+//    // 1.创建请求对象
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//    request.HTTPMethod = @"POST";
+//    NSString *parameter = [NSString stringWithFormat:@"Act=GetPass&Mobile=%@",self.phoneNumber.text];
+//    request.HTTPBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
     
     
     // 2.发送请求
@@ -68,14 +68,15 @@
 //         */
 //
 //    }];
-    
+    // 请求路径
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:yanzhengma];
     // AFNetworking
     NSMutableDictionary *parameterS = [NSMutableDictionary dictionary];
     parameterS[@"Act"] = @"GetPass";
     parameterS[@"Mobile"] = self.phoneNumber.text;
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameterS success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dic = (NSDictionary *)responseObject;
-        
+        WXZLog(@"%@", responseObject);
         if ([dic[@"msg"] isEqualToString:@"发送成功"]) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                  JxbScaleButton* btn = (JxbScaleButton*)sender;

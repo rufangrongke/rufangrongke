@@ -413,9 +413,9 @@
 				885387FB1BDD1591005DCF38 /* Foundation+Log.m */,
 				3057845A1BD3D96B00169C44 /* PrefixHeader.pch */,
 				885387ED1BDCB824005DCF38 /* Const */,
-				3057843C1BD3D35000169C44 /* Category */,
 				3057843F1BD3D35000169C44 /* Controller */,
 				305784421BD3D35000169C44 /* View */,
+				3057843C1BD3D35000169C44 /* Category */,
 				88EAA7021BD87BE60072CD40 /* NetWorkingTools */,
 			);
 			path = main;

@@ -66,7 +66,7 @@
     NSString *url = [OutNetBaseURL stringByAppendingString:denglu];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 //    parameters[@"mob"] = @"18833198077";
-//    parameters[@"pas"] = @"123456";
+//    parameters[@"pas"] = @"1234567";
     parameters[@"mob"] = @"18311281581";
     parameters[@"pas"] = @"1234567";
     [[AFHTTPSessionManager manager] POST:url parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
