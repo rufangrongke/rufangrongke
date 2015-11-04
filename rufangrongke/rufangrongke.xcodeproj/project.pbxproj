@@ -56,6 +56,7 @@
 		882902C21BE73F7500BA7D24 /* WXZIRecommendCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 882902C01BE73F7500BA7D24 /* WXZIRecommendCodeVC.m */; };
 		882902C31BE73F7500BA7D24 /* WXZIRecommendCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882902C11BE73F7500BA7D24 /* WXZIRecommendCodeVC.xib */; };
 		882902C71BE74EA100BA7D24 /* SRMonthPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 882902C61BE74EA100BA7D24 /* SRMonthPicker.m */; };
+		882EBEE21BE9B56E000FB1D7 /* MLKMenuPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EBEE11BE9B56E000FB1D7 /* MLKMenuPopover.m */; };
 		885387F01BDCB958005DCF38 /* WXZConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387EF1BDCB958005DCF38 /* WXZConst.m */; };
 		885387F41BDCE5D3005DCF38 /* WXZRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387F21BDCE5D3005DCF38 /* WXZRegisterController.m */; };
 		885387F51BDCE5D3005DCF38 /* WXZRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 885387F31BDCE5D3005DCF38 /* WXZRegisterController.xib */; };
@@ -203,6 +204,8 @@
 		882902C11BE73F7500BA7D24 /* WXZIRecommendCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WXZIRecommendCodeVC.xib; path = Wo/WXZIRecommendCodeVC.xib; sourceTree = "<group>"; };
 		882902C51BE74EA100BA7D24 /* SRMonthPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRMonthPicker.h; path = Tool/CustomPickerView/SRMonthPicker.h; sourceTree = "<group>"; };
 		882902C61BE74EA100BA7D24 /* SRMonthPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRMonthPicker.m; path = Tool/CustomPickerView/SRMonthPicker.m; sourceTree = "<group>"; };
+		882EBEE01BE9B56E000FB1D7 /* MLKMenuPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKMenuPopover.h; sourceTree = "<group>"; };
+		882EBEE11BE9B56E000FB1D7 /* MLKMenuPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKMenuPopover.m; sourceTree = "<group>"; };
 		885387EE1BDCB852005DCF38 /* WXZConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXZConst.h; sourceTree = "<group>"; };
 		885387EF1BDCB958005DCF38 /* WXZConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZConst.m; sourceTree = "<group>"; };
 		885387F11BDCE5D3005DCF38 /* WXZRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZRegisterController.h; sourceTree = "<group>"; };
@@ -366,6 +369,7 @@
 		305784351BD3D35000169C44 /* loupan */ = {
 			isa = PBXGroup;
 			children = (
+				882EBF3B1BE9E7CD000FB1D7 /* CityPopverView */,
 				88AE89241BE066B000407ECF /* LouPanMessageCell */,
 				305784501BD3D51D00169C44 /* Controller */,
 				305784371BD3D35000169C44 /* Model */,
@@ -386,6 +390,8 @@
 		305784381BD3D35000169C44 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				882EBEE01BE9B56E000FB1D7 /* MLKMenuPopover.h */,
+				882EBEE11BE9B56E000FB1D7 /* MLKMenuPopover.m */,
 				88AE892A1BE0733F00407ECF /* XMGPageView.h */,
 				88AE892B1BE0733F00407ECF /* XMGPageView.m */,
 				88AE892C1BE0733F00407ECF /* XMGPageView.xib */,
@@ -658,6 +664,13 @@
 				882902C61BE74EA100BA7D24 /* SRMonthPicker.m */,
 			);
 			name = CustomPickerView;
+			sourceTree = "<group>";
+		};
+		882EBF3B1BE9E7CD000FB1D7 /* CityPopverView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CityPopverView;
 			sourceTree = "<group>";
 		};
 		885387ED1BDCB824005DCF38 /* Const */ = {
@@ -958,6 +971,7 @@
 				888575B51BDB46FB005E5AC4 /* WXZKHListHeaderView.m in Sources */,
 				88EAA7191BD87C180072CD40 /* AFNetworkReachabilityManager.m in Sources */,
 				88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */,
+				882EBEE21BE9B56E000FB1D7 /* MLKMenuPopover.m in Sources */,
 				88EAA71C1BD87C180072CD40 /* AFURLRequestSerialization.m in Sources */,
 				882902881BE73C6400BA7D24 /* WXZPersonalController.m in Sources */,
 				8829026B1BE73C5200BA7D24 /* WXZWoController.m in Sources */,

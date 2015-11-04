@@ -53,7 +53,7 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     }
     // 左边按钮
 //    [UIBarButtonItem];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_quyutu" highImage:@"lp_quyutu" target:self action:@selector(quDu_click)];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_quyutu" highImage:@"lp_quyutu" target:self action:@selector(quYu_click)];
     // 右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
     // 添加一个系统的搜索框
@@ -77,9 +77,9 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 /**
  *  左上方按钮监听点击
  */
-- (void)quDu_click{
+- (void)quYu_click{
 //    WXZLogFunc;
-    WXZLog(@"%@", [self loginMessage]);
+    WXZLog(@"%@", [self localUserInfo]);
     // 取消键盘
     [self.search resignFirstResponder];
 }
@@ -107,7 +107,7 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
         // 隐藏指示器
         [SVProgressHUD dismiss];
         
-        WXZLog(@"%@", responseObject);
+//        WXZLog(@"%@", responseObject);
         // 服务器返回的JSON数据
         self.loupanLeibiaoS = [WXZLouPan objectArrayWithKeyValuesArray:responseObject[@"fys"]];
 //        NSLog(@"%@", self.loupanLeibiaoS);
@@ -135,7 +135,6 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
     cell.loupan = self.loupanLeibiaoS[indexPath.row];
-//    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
     
     return cell;
 }
