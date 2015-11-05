@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WXZLouPanMessageCell_1_0 : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *yongJin;
 
 @end

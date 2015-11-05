@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface WXZLouPanMessageCell_0_0 : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *loupanJunJia;
+@property (weak, nonatomic) IBOutlet UILabel *loupanWeiZhi;
+@property (weak, nonatomic) IBOutlet UILabel *shouCangNum;
+
+/* WXZLouPanMessageCell_0_0_Dic */
+//@property (nonatomic , strong) NSNumber *shouCan;
 
 @end

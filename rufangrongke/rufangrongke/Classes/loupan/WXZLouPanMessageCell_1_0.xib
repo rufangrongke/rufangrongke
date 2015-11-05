@@ -1,33 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WXZLouPanMessageCell_1_0">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="WXZLouPanMessageCell_1_0">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1_0" translatesAutoresizingMaskIntoConstraints="NO" id="M2J-qy-Mop">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="佣金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJ6-Cd-7vN">
+                        <rect key="frame" x="10" y="9" width="35" height="24.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24.5" id="blL-L3-dqX"/>
+                            <constraint firstAttribute="width" constant="35" id="vb0-QK-rlL"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kh_rbjt" translatesAutoresizingMaskIntoConstraints="NO" id="CeP-Pq-7Ff">
+                        <rect key="frame" x="299" y="14" width="8" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="RBv-69-Y0b"/>
+                            <constraint firstAttribute="width" constant="8" id="bAk-lX-fXW"/>
+                        </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6f-Ki-lFE">
+                        <rect key="frame" x="249" y="12" width="39.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="M2J-qy-Mop" secondAttribute="bottom" id="25f-ji-FUr"/>
-                    <constraint firstItem="M2J-qy-Mop" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="IGE-qK-nTm"/>
-                    <constraint firstItem="M2J-qy-Mop" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="oU5-mQ-N0f"/>
-                    <constraint firstAttribute="trailing" secondItem="M2J-qy-Mop" secondAttribute="trailing" id="q19-TU-ULD"/>
+                    <constraint firstItem="CeP-Pq-7Ff" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5z6-jX-qQY"/>
+                    <constraint firstItem="tJ6-Cd-7vN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="IHb-fF-Ejf"/>
+                    <constraint firstItem="tJ6-Cd-7vN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="LRF-WC-u66"/>
+                    <constraint firstItem="CeP-Pq-7Ff" firstAttribute="leading" secondItem="x6f-Ki-lFE" secondAttribute="trailing" constant="10" id="Shg-YI-5zF"/>
+                    <constraint firstItem="x6f-Ki-lFE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fKd-Ic-FY4"/>
+                    <constraint firstAttribute="trailing" secondItem="CeP-Pq-7Ff" secondAttribute="trailing" constant="13" id="i9C-2h-osF"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="yongJin" destination="x6f-Ki-lFE" id="Ad1-tk-hdZ"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="1_0" width="882" height="116"/>
+        <image name="kh_rbjt" width="11" height="20"/>
     </resources>
 </document>

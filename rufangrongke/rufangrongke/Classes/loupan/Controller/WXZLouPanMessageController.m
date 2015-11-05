@@ -7,21 +7,31 @@
 //
 
 #import "WXZLouPanMessageController.h"
-#import "XMGInfiniteScrollView.h"
 #import "XMGPageView.h"
 #import "AFNetworking.h"
 #import <UIImageView+WebCache.h>
 #import "WXZLouPanMessageCell_0_0.h"
 #import "WXZLouPanMessageCell_0_1.h"
 #import "WXZLouPanMessageCell_1_0.h"
-#import "WXZLouPanMessageCell_2_0.h"
+#import "WXZLiandong.h"
 
 @interface WXZLouPanMessageController ()<UITableViewDataSource, UITableViewDelegate>
 /*轮播图片URL*/
 @property(nonatomic, strong) NSArray *PicUrls;
+/* 楼盘详情 */
+@property (nonatomic , copy) NSDictionary *loupanxiangqingDIC;
 @end
 
 @implementation WXZLouPanMessageController
+
+
+// 添加底部栏
+- (void)setUpBottomBar{
+    UIView *bottomBar = [[UIView alloc] init];
+    bottomBar.frame = CGRectMake(0, 0, 200, 300);
+    bottomBar.backgroundColor = [UIColor redColor];
+    [self.tableView addSubview:bottomBar];
+}
 // 轮播图片 宽 / 高
 static CGFloat carouselPic_width = 375;
 static CGFloat carouselPic_height = 226;
@@ -31,6 +41,11 @@ static CGFloat carouselPic_height = 226;
 - (void)setUp{
     // 右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"loupan-callout" highImage:@"kh_dianhua" target:self action:@selector(phone_click)];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.backgroundColor = [UIColor redColor];
+    self.tableView.sectionIndexBackgroundColor = [UIColor redColor];
+//    self.tableView.sectionFooterHeight = 1000;
+    self.tableView.tintColor = [UIColor redColor];
 }
 /**
  *  右上角打电话按钮,点击监听
@@ -38,10 +53,6 @@ static CGFloat carouselPic_height = 226;
 - (void)phone_click
 {
     WXZLogFunc;
-     NSString *telUrl = [NSString stringWithFormat:@"tel://%@",@13399603478];
-    NSURL *url = [[NSURL alloc] initWithString:telUrl];
-    
-
 }
 
 - (void)viewDidLoad {
@@ -50,32 +61,15 @@ static CGFloat carouselPic_height = 226;
     [self setUp];
     // 尺寸
     // 主屏幕尺寸mainScreen_height;mainScreen_width;
-//    CGFloat mainScreenHeight = mainScreen_height;
+    CGFloat mainScreenHeight = mainScreen_height;
     CGFloat mainScreenWeight = mainScreen_width;
     // 轮播图片 宽 / 高
     CGFloat carouselPic_x = 0;
     CGFloat carouselPic_y = 0;
     CGFloat carouselPic_width = 375;
     CGFloat carouselPic_height = 226;
-    
     CGFloat carouselPic_widthToHeigth = carouselPic_width / carouselPic_height;
     carouselPic_height = mainScreenWeight / carouselPic_widthToHeigth;
-    
-    // XMGInfiniteScrollView
-    {
-//     XMGInfiniteScrollView *scrollView = [[XMGInfiniteScrollView alloc] init];
-//    scrollView.frame = CGRectMake(0, 0, 375, 226);
-//    scrollView.images = @[
-//                          [UIImage imageNamed:@"loupan-banner"],
-//                          [UIImage imageNamed:@"loupan-banner"],
-//                          [UIImage imageNamed:@"loupan-banner"],
-//                          [UIImage imageNamed:@"loupan-banner"],
-//                          [UIImage imageNamed:@"loupan-banner"]
-//                          ];
-//    scrollView.pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
-//    scrollView.pageControl.pageIndicatorTintColor = [UIColor grayColor];
-//    self.tableView.tableHeaderView = scrollView;
-    }
     
     // XMGPageView
     XMGPageView *pageView = [XMGPageView pageView];
@@ -83,7 +77,6 @@ static CGFloat carouselPic_height = 226;
     pageView.imageNames = @[@"loupan-banner", @"loupan-banner", @"loupan-banner"];
     pageView.otherColor = [UIColor grayColor];
     pageView.currentColor = [UIColor orangeColor];
-    //    pageView.currentColor = [UIColor blueColor];
     self.tableView.tableHeaderView = pageView;
 
     // 网络请求
@@ -92,7 +85,12 @@ static CGFloat carouselPic_height = 226;
     parameters[@"fy"] = self.fyhao;
     [[AFHTTPSessionManager manager] POST:url parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dic = (NSDictionary *)responseObject;
-//        WXZLog(@"%@", dic);
+        
+        // 刷新数据源
+        [self.tableView reloadData];
+        WXZLog(@"%@", dic);
+        // 将服务器返回数据存储
+        self.loupanxiangqingDIC = dic;
         NSDictionary *view = dic[@"view"];
         NSArray *pics = view[@"pics"];
 //        WXZLog(@"%@",pics);
@@ -110,13 +108,39 @@ static CGFloat carouselPic_height = 226;
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
     }];
+    
+    // 添加底部栏
+//    [self setUpBottomBar];
+    
+    // 添加footView
+    UIViewController *vc01 = [[UIViewController alloc] init];
+    vc01.view.backgroundColor = [UIColor greenColor];
+    vc01.title = @"户型";
+    
+    UIViewController *vc02 = [[UIViewController alloc] init];
+    vc02.view.backgroundColor = [UIColor yellowColor];
+    vc02.title = @"卖点";
+    
+    UIViewController *vc03 = [[UIViewController alloc] init];
+    vc03.view.backgroundColor = [UIColor purpleColor];
+    vc03.title = @"详情";
+    //    WXZLiandong *liandong = [[WXZLiandong alloc] init];
+    WXZLiandong *liandong = [WXZLiandong makeLiandongView:[NSMutableArray arrayWithObjects:vc01, vc02, vc03, nil]];
+    
+    
+    liandong.backgroundColor = [UIColor yellowColor];
+    
+    liandong.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 300);
+    self.tableView.tableFooterView = liandong;
+    
+    
 }
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // 返回分组
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -126,10 +150,6 @@ static CGFloat carouselPic_height = 226;
     {
         return 2;
     }
-    else if (section == 1)
-    {
-        return 1;
-    }
     else
     {
         return 1;
@@ -138,25 +158,41 @@ static CGFloat carouselPic_height = 226;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 数据
+    NSDictionary *dic = self.loupanxiangqingDIC[@"view"];
+    
     // 设置每组的行高
     if (indexPath.section == 0)
     {
         if (indexPath.row == 0)
         {
             WXZLouPanMessageCell_0_0 *Cell_0_0 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMessageCell_0_0 class]) owner:nil options:nil] lastObject];
+            // 楼盘均价
+            Cell_0_0.loupanJunJia.text = [NSString stringWithFormat:@"%@元/平", dic[@"JunJia"]];;
+            [Cell_0_0.loupanJunJia setTextColor:[UIColor redColor]];
+            // 楼盘位置
+            Cell_0_0.loupanWeiZhi.text = dic[@"WeiZhi"];
+            [Cell_0_0.loupanWeiZhi setTextColor:[UIColor darkGrayColor]];
+            // 楼盘收藏人数
+            Cell_0_0.shouCangNum.text = [NSString stringWithFormat:@"%@", dic[@"ShouCangNum"]];
+        
             return Cell_0_0;
         }else{
             WXZLouPanMessageCell_0_1 *Cell_0_1 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMessageCell_0_1 class]) owner:nil options:nil] lastObject];
+            // YiXiangKeHuNum HeZuoJJrNum ChengJiaoNum
+            Cell_0_1.yixiangkehuNum.text = [NSString stringWithFormat:@"%@", dic[@"YiXiangKeHuNum"]];
+            Cell_0_1.hezuojingjirenNum.text = [NSString stringWithFormat:@"%@", dic[@"HeZuoJJrNum"]];
+            Cell_0_1.zuijinchengjiaoNum.text = [NSString stringWithFormat:@"%@", dic[@"ChengJiaoNum"]];
+            
             return Cell_0_1;
         }
     }
-    else if(indexPath.section == 1)
-    {
+    else{
         WXZLouPanMessageCell_1_0 *Cell_1_0 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMessageCell_1_0 class]) owner:nil options:nil] lastObject];
+        // YongJin 21 137 226
+        Cell_1_0.yongJin.text = [NSString stringWithFormat:@"%@元/套", dic[@"YongJin"]];
+        [Cell_1_0.yongJin setTextColor:[UIColor colorWithRed:21/255.0 green:137/255.0 blue:226/255.0 alpha:1.0]];
         return Cell_1_0;
-    }else{
-        WXZLouPanMessageCell_2_0 *Cell_2_0 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMessageCell_2_0 class]) owner:nil options:nil] lastObject];
-        return Cell_2_0;
     }
 }
 
@@ -174,32 +210,53 @@ static CGFloat carouselPic_height = 226;
             return height_0_1;
         }
     }
-    else if(indexPath.section == 1)
+    else
     {
         CGFloat height_1_0 = 49;
         return height_1_0;
-    }else{
-        return 220;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+//    return 10;
     // 返回每组的header高
     if (section == 0)
     {
-        return 0.1;
+        return 0;
     }
     else
     {
-        return 8;
+        return 10;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     // 返回每组的footer高
-    return 0.1;
+    // 返回每组的header高
+    if (section == 1)
+    {
+        return 10;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+/**
+ 修改sectionHeadView, sectionFootView的背景颜色
+ */
+static int colorNum = 215;
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(nonnull UIView *)view forSection:(NSInteger)section
+{
+    view.tintColor = [UIColor colorWithRed:colorNum/255.0 green:colorNum/255.0 blue:colorNum/255.0 alpha:1.0];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section{
+    view.tintColor = [UIColor colorWithRed:colorNum/255.0 green:colorNum/255.0 blue:colorNum/255.0 alpha:1.0];
 }
 
 - (void)didReceiveMemoryWarning {

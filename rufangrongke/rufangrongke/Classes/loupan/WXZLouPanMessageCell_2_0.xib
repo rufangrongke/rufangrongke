@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="WXZLouPanMessageCell_2_0">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="134" id="KGk-i7-Jjw" customClass="WXZLouPanMessageCell_2_0">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="134"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="133.5"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2_0" translatesAutoresizingMaskIntoConstraints="NO" id="JXX-Mm-mnx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                    </imageView>
-                </subviews>
-                <constraints>
-                    <constraint firstItem="JXX-Mm-mnx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="1Vx-be-Pss"/>
-                    <constraint firstAttribute="bottom" secondItem="JXX-Mm-mnx" secondAttribute="bottom" id="1zQ-hr-YYJ"/>
-                    <constraint firstAttribute="trailing" secondItem="JXX-Mm-mnx" secondAttribute="trailing" id="7BP-L7-5W2"/>
-                    <constraint firstItem="JXX-Mm-mnx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rtP-aE-huR"/>
-                </constraints>
             </tableViewCellContentView>
+            <point key="canvasLocation" x="404" y="322"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="2_0" width="882" height="534"/>
-    </resources>
 </document>

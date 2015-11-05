@@ -7,11 +7,13 @@
 //
 
 #import "WXZLouPanMessageCell_2_0.h"
+#import "WXZLiandong.h"
+
 
 @implementation WXZLouPanMessageCell_2_0
 
 - (void)awakeFromNib {
-    // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
