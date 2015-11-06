@@ -12,8 +12,9 @@
 #import "WXZKhdUserInfoCell.h"
 #import "WXZGouFangYiXiangCell.h"
 #import "WXZHousingDetailsCell.h"
+#import <MessageUI/MessageUI.h> //
 
-@interface WXZCustomerDetailsVC () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface WXZCustomerDetailsVC () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MFMessageComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -21,6 +22,8 @@
 
 @property (nonatomic,strong) UITextField *nameTextField;
 @property (nonatomic,strong) UITextField *phoneNumTextField;
+
+@property (nonatomic,strong) NSDictionary *cdDic; // 客户详情信息
 
 @end
 
@@ -35,6 +38,9 @@
     
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [self customerDetailRequest:self.customerId];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -43,17 +49,110 @@
     
 }
 
-// 编辑事件
-- (void)editAction:(id)sender
+#pragma mark - Request
+- (void)customerDetailRequest:(NSString *)cId
 {
-    self.nameTextField.enabled = YES;
-    self.phoneNumTextField.enabled = YES;
+    // 详情页信息请求
+    NSString *url = [OutNetBaseURL stringByAppendingString:kehuxiangqing];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param setObject:cId forKey:@"id"];
+    
+    [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        if ([responseObject[@"ok"] integerValue] == 1)
+        {
+            self.cdDic = responseObject[@"kehu"];
+            [self.myTableView reloadData];
+            WXZLog(@"%@",self.cdDic);
+            /*
+            id : 6,
+            Mobile : 16891958995,
+            bbTime : 10/15/2015 20:09:51,
+            uid : 2,
+            JiaGeS : <null>,
+            LastLookTime : <null>,
+            typeBig : 添加,
+            XingMing : ,
+            QuYu : ,
+            fyhao : <null>,
+            YiXiang : <null>,
+            JiaGeE : <null>,
+            cityid : 3,
+            Hx : ,
+            xiaoqu : 石府小区,
+            AddTime : 10/15/2015 19:31:16,
+            Sex : 女士,
+            typeSmall : */
+        }
+        else
+        {
+            
+        }
+        [SVProgressHUD dismiss];
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [SVProgressHUD dismiss];
+    }];
+}
+
+- (void)modifyDetailRequest:(NSString *)cid
+{
+    // 修改客户详情请求
+    NSString *url = [OutNetBaseURL stringByAppendingString:kehuxiugai];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param setObject:cid forKey:@"id"];
+    
+    [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+     {
+         if ([responseObject[@"ok"] integerValue] == 1)
+         {
+             
+         }
+     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+         
+     }];
+}
+
+// 编辑事件
+- (void)editAction:(UIButton *)sender
+{
+    // 判断按钮当前图片
+    if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_detailedit"]])
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"wo_complete"] forState:UIControlStateNormal]; // 完成
+        
+        self.nameTextField.enabled = YES; // 可用
+        self.phoneNumTextField.enabled = YES; // 可用
+        if ([self.cdDic[@"XingMing"] isEqualToString:@""])
+        {
+            self.nameTextField.placeholder = @"请输入姓名";
+        }
+        if ([self.cdDic[@"Mobile"] isEqualToString:@""])
+        {
+            self.phoneNumTextField.placeholder = @"请输入11位手机号";
+        }
+    }
+    else
+    {
+        [sender setBackgroundImage:[UIImage imageNamed:@"kh_detailedit"] forState:UIControlStateNormal]; // 编辑
+        
+        self.nameTextField.enabled = NO; // 不可用
+        self.phoneNumTextField.enabled = NO; // 不可用
+        if ([self.nameTextField.text isEqualToString:@""])
+        {
+            self.nameTextField.placeholder = @"";
+        }
+        if ([self.phoneNumTextField.text isEqualToString:@""])
+        {
+            self.phoneNumTextField.placeholder = @"";
+        }
+    }
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -81,7 +180,8 @@
         }
         self.nameTextField = userInfoCell.nameTextField;
         self.phoneNumTextField = userInfoCell.phoneNumTextField;
-        [userInfoCell showInfo:self.nameStr phone:self.phoneStr];
+        [userInfoCell showInfo:self.cdDic[@"XingMing"] phone:self.cdDic[@"Mobile"]];
+        [userInfoCell.smsBtn addTarget:self action:@selector(sendSmsAction:) forControlEvents:UIControlEventTouchUpInside];
         
         return userInfoCell;
     }
@@ -92,6 +192,7 @@
         {
             gfyxCell = [WXZGouFangYiXiangCell initGouFangYiXiangCell];
         }
+        gfyxCell.controller = self; // 权限
         
         return gfyxCell;
     }
@@ -102,6 +203,8 @@
         {
             hdCell = [WXZHousingDetailsCell initHousingDetailsCell];
         }
+        [hdCell updateInfo];
+        [hdCell showInfo:self.cdDic];
         
         return hdCell;
     }
@@ -161,6 +264,62 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.01;
+}
+
+#pragma mark - 
+- (void)sendSmsAction:(id)sender
+{
+    //方法一
+    //    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"sms://13888888888"]];
+    
+    [self showMessageView:[NSArray arrayWithObjects:self.phoneNumTextField.text, nil] title:@"test" body:@"哈哈，么么哒！"];
+}
+
+// 展示消息的view
+- (void)showMessageView:(NSArray *)phones title:(NSString *)title body:(NSString *)body
+{
+    if ([MFMessageComposeViewController canSendText])
+    {
+        // 初始化消息控制器
+        MFMessageComposeViewController *messageVC = [[MFMessageComposeViewController alloc] init];
+        messageVC.recipients = phones;
+        messageVC.navigationBar.tintColor = [UIColor redColor];
+        messageVC.body = body;
+        messageVC.messageComposeDelegate = self;
+        [self presentViewController:messageVC animated:YES completion:nil];
+        [[[[messageVC viewControllers] lastObject] navigationItem] setTitle:title]; // 修改短信界面标题
+    }
+    else
+    {
+        NSLog(@"设备不支持");
+    }
+}
+
+#pragma mark - MFMessageComposeViewController
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    switch (result)
+    {
+        case MessageComposeResultSent:
+        {
+            NSLog(@"//信息传送成功");
+        }
+            break;
+        case MessageComposeResultFailed:
+        {
+            NSLog(@"//信息传送失败");
+        }
+            break;
+        case MessageComposeResultCancelled:
+        {
+            NSLog(@"//信息被用户取消传送");
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

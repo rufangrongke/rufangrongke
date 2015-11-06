@@ -9,6 +9,7 @@
 #import "WXZKeHuListCell.h"
 #import "WXZChectObject.h"
 #import "WXZStringObject.h"
+#import "WXZReportPreparationVC.h"
 
 @implementation WXZKeHuListCell
 
@@ -39,46 +40,29 @@
     
     /**
      *  房源信息：
-     *  1. 判断内容是否为空
-     *  2. 判断内容里是否包含“/”,并进行替换
-     *  3. 拼接字符串
      */
-    NSString *houseStr = @"";
-    if (![WXZChectObject checkWhetherStringIsEmpty:dic[@"QuYu"]])
-    {
-        NSString *quyu = dic[@"QuYu"];
-        if ([WXZStringObject whetherStringContainsCharacter:quyu character:@"/"])
-        {
-            quyu = [WXZStringObject replacementString:quyu replace:@"/" replaced:@"|"];
-        }
-        houseStr = [houseStr stringByAppendingFormat:@"%@，",quyu];
-    }
-    if (![WXZChectObject checkWhetherStringIsEmpty:dic[@"Hx"]])
-    {
-        NSString *hx = dic[@"Hx"];
-        if ([WXZStringObject whetherStringContainsCharacter:hx character:@"/"])
-        {
-            hx = [WXZStringObject replacementString:hx replace:@"/" replaced:@"|"];
-        }
-        houseStr = [houseStr stringByAppendingFormat:@"%@|",hx];
-    }
-    if (![WXZChectObject checkWhetherStringIsEmpty:dic[@"loupan"]])
-    {
-        NSString *loupan = dic[@"loupan"];
-        if ([WXZStringObject whetherStringContainsCharacter:loupan character:@"/"])
-        {
-            loupan = [WXZStringObject replacementString:loupan replace:@"/" replaced:@"|"];
-        }
-        houseStr = [houseStr stringByAppendingFormat:@"%@，",dic[@"loupan"]];
-    }
-    if (![WXZChectObject checkWhetherStringIsEmpty:dic[@"YiXiang"]])
-    {
-        houseStr = [houseStr stringByAppendingFormat:@"%@万",dic[@"YiXiang"]];
-    }
-    self.houseInfoLabel.text = houseStr;
+    self.houseInfoLabel.text = dic[@"YiXiang"];
     
     self.reportedBtn.hidden = YES;
     self.callBtn.hidden = NO;
+}
+
+// 报备/打电话事件
+- (IBAction)reportedOrCallAction:(UIButton *)sender
+{
+    if (sender.tag == 100024)
+    {
+        NSLog(@"报备事件");
+        WXZReportPreparationVC *reportVC = [[WXZReportPreparationVC alloc] init];
+        [_controller.navigationController pushViewController:reportVC animated:YES];
+    }
+    else
+    {
+        NSLog(@"打电话事件:%@",self.customerPhoneLabel.text);
+        // 打电话
+        NSString *phoneNumStr = [NSString stringWithFormat:@"telprompt://%@",self.customerPhoneLabel.text];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumStr]];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

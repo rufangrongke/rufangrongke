@@ -151,10 +151,7 @@
         keHuInfoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    // 添加单击事件
-    [keHuInfoCell buttonWithTarget:self action:@selector(reportedOrCallAction:)];
-    keHuInfoCell.reportedBtn.tag = 1000010+indexPath.section;
-    keHuInfoCell.callBtn.tag = 1000020+indexPath.section;
+    keHuInfoCell.controller = self; // 权限
     
     // 赋值
     [keHuInfoCell showKeHuListInfo:self.dataArr[indexPath.section]];
@@ -164,11 +161,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"click %ld row",(long)indexPath.row);
     // 客户详情页
     WXZCustomerDetailsVC *customerDetailsVC = [[WXZCustomerDetailsVC alloc] init];
-    customerDetailsVC.nameStr = self.dataArr[indexPath.section][@"XingMing"];
-    customerDetailsVC.phoneStr = self.dataArr[indexPath.section][@"Mobile"];
+    customerDetailsVC.customerId = self.dataArr[indexPath.section][@"id"];
     [self.navigationController pushViewController:customerDetailsVC animated:YES];
 }
 
@@ -194,14 +189,8 @@
     // 首先判断有没有值
     if (![WXZChectObject checkWhetherStringIsEmpty:self.dataArr[section][@"hdTime"]] || ![WXZChectObject checkWhetherStringIsEmpty:self.dataArr[section][@"typeSmall"]])
     {
-        NSString *dateStr = self.dataArr[section][@"hdTime"]; // 获取时间
-        dateStr = [WXZStringObject replacementString:dateStr replace:@"/" replaced:@"-"]; // 替换字符
-        NSDate *date = [WXZDateObject formatDate1:dateStr dateFormat:@"yyyy-MM-dd HH:mm:ss"]; // 格式化为NSDate
-        NSString *dateStr2 = [WXZDateObject formatDate2:date dateFormat:@"yy-MM-dd HH:mm"]; // 格式化为NSString
-        // 格式化字符串（最终结果）
-        NSString *footerStr = [NSString stringWithFormat:@"%@ %@",dateStr2,self.dataArr[section][@"typeSmall"]];
         WXZKHListFooterView *footerView = [WXZKHListFooterView initListFooterView]; // footer背景 view
-        [footerView footerInfoLabel:footerStr]; // footer 信息
+        [footerView footerInfoLabel:self.dataArr[section]]; // footer 信息
         
         return footerView;
     }
@@ -231,7 +220,20 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 75;
+    return [self calculateHeightOfRow:self.dataArr[indexPath.section]]; // 75
+}
+
+// 计算行高
+- (NSInteger)calculateHeightOfRow:(NSDictionary *)dic
+{
+    NSString *yixiangStr = dic[@"YiXiang"];
+    NSInteger yixiang = 0;
+    if (![WXZChectObject checkWhetherStringIsEmpty:yixiangStr])
+    {
+        yixiang = 18;
+    }
+    
+    return 20 + 20 + 12 + yixiang; // 返回行高
 }
 
 // 添加新客户事件
@@ -241,29 +243,6 @@
     // 添加新客户页
     WXZAddCustomerVC *addCustomerVC = [[WXZAddCustomerVC alloc] init];
     [self.navigationController pushViewController:addCustomerVC animated:YES];
-}
-
-// 报备/打电话事件
-- (void)reportedOrCallAction:(UIButton *)sender
-{
-    NSString *sectionStr = [NSString stringWithFormat:@"%ld",(long)sender.tag];
-    sectionStr = [sectionStr substringWithRange:NSMakeRange(0, 6)];
-    
-    if (sectionStr.integerValue == 100001)
-    {
-        NSLog(@"报备事件");
-//        NSInteger section = sender.tag - 1000010;
-        WXZReportPreparationVC *reportVC = [[WXZReportPreparationVC alloc] init];
-        [self.navigationController pushViewController:reportVC animated:YES];
-    }
-    else
-    {
-        NSLog(@"打电话事件");
-        NSInteger section = sender.tag - 1000020; // 单击的是哪一行
-        // 打电话
-        NSString *phoneNumStr = [NSString stringWithFormat:@"telprompt://%@",self.dataArr[section][@"Mobile"]];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumStr]];
-    }
 }
 
 #pragma mark - Navigation BarButtonItem Click Event

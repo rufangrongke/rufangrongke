@@ -61,7 +61,7 @@
                             <constraint firstAttribute="height" constant="1" id="X2c-mY-Zhe"/>
                         </constraints>
                     </imageView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MKT-rP-K2Z">
+                    <textField opaque="NO" clipsSubviews="YES" tag="100021" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MKT-rP-K2Z">
                         <rect key="frame" x="61" y="10" width="302" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="XzX-ZZ-Upa"/>
@@ -69,13 +69,13 @@
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入11位手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iwh-JD-ncf">
+                    <textField opaque="NO" clipsSubviews="YES" tag="100022" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入11位手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iwh-JD-ncf">
                         <rect key="frame" x="76" y="68" width="287" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="HPr-Gx-yT2"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                 </subviews>
                 <constraints>

@@ -14,6 +14,6 @@
 + (instancetype)initListFooterView;
 
 // footer信息
-- (void)footerInfoLabel:(NSString *)info;
+- (void)footerInfoLabel:(NSDictionary *)info;
 
 @end

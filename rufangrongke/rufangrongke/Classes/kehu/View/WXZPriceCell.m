@@ -8,10 +8,16 @@
 
 #import "WXZPriceCell.h"
 
+@interface WXZPriceCell () <UITextFieldDelegate>
+
+@end
+
 @implementation WXZPriceCell
 
 - (void)awakeFromNib {
     // Initialization code
+    self.pricefTextField.delegate = self;
+    self.priceeTextField.delegate = self;
 }
 
 + (instancetype)initPriceCell
@@ -22,6 +28,21 @@
 - (void)updateInfo
 {
     self.noLimitBtn.backgroundColor = [UIColor lightGrayColor];
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    // 发送通知更新意向价格
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BackPriceInfoAndUpdate" object:nil];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // 发送通知更新意向价格
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BackPriceInfoAndUpdate" object:nil];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

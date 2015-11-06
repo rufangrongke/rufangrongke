@@ -55,9 +55,26 @@
     }
 }
 
+// 判断字符串最后是否为某个字符
++ (NSString *)whetherStringContainsCharacter2:(NSString *)str character:(NSString *)character
+{
+    NSString *endStr = @"";
+    if ([[str substringWithRange:NSMakeRange(str.length-1, 1)] isEqualToString:character])
+    {
+        endStr = [str substringWithRange:NSMakeRange(0, str.length-1)]; // 舍弃“,”
+        return endStr;
+    }
+    else
+    {
+        endStr = str;
+        return endStr;
+    }
+}
+
 // 遍历并拼接字符串
 + (NSString *)pinJieString1:(NSMutableArray *)arr
 {
+    // 排序
     [arr sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return obj1 > obj2;
     }];
@@ -67,8 +84,6 @@
     {
         for (int i = 0; i < arr.count; i++)
         {
-//            NSSortDescriptor* sortByA = [NSSortDescriptor sortDescriptorWithKey:keystring ascending:isAscending];
-//            NSMutableArray * arrm = [[NSMutableArray alloc]initWithArray:[self.sourceArry sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortByA]]];
             if (i == arr.count-1)
             {
                 str = [str stringByAppendingFormat:@"%@,",arr[i]];

@@ -194,9 +194,9 @@
     int minYear = DEFAULT_MINIMUM_YEAR;
     
     if (self.minimumYear)
-        minYear = self.minimumYear.integerValue;
+        minYear = (int)self.minimumYear.integerValue; // 强转int型
     
-    return row + minYear;
+    return (int)row + minYear; // 强转int型
 }
 
 -(NSUInteger)rowFromYear:(int)year
@@ -204,7 +204,7 @@
     int minYear = DEFAULT_MINIMUM_YEAR;
     
     if (self.minimumYear)
-        minYear = self.minimumYear.integerValue;
+        minYear = (int)self.minimumYear.integerValue; // 强转int型
     
     return year - minYear;
 }
@@ -220,14 +220,14 @@
         components.year = self.maximumYear.integerValue;
     
     if(self.wrapMonths){
-        int monthMidpoint = self.monthStrings.count * (MONTH_ROW_MULTIPLIER / 2);
+        int monthMidpoint = (int)self.monthStrings.count * (MONTH_ROW_MULTIPLIER / 2); // 强转int型
         
         [self selectRow:(components.month - 1 + monthMidpoint) inComponent:self.monthComponent animated:NO];
     }
     else {
         [self selectRow:(components.month - 1) inComponent:self.monthComponent animated:NO];
     }
-    [self selectRow:[self rowFromYear:components.year] inComponent:self.yearComponent animated:NO];
+    [self selectRow:[self rowFromYear:(int)components.year] inComponent:self.yearComponent animated:NO]; // 强转int型
     
     _date = [[NSCalendar currentCalendar] dateFromComponents:components];
 }
@@ -265,7 +265,7 @@
     
     int maxYear = DEFAULT_MAXIMUM_YEAR;
     if (self.maximumYear)
-        maxYear = self.maximumYear.integerValue;
+        maxYear = (int)self.maximumYear.integerValue; // 强转int型
     
     return [self rowFromYear:maxYear] + 1;
 }
@@ -275,12 +275,10 @@
 {
     if (component == self.monthComponent)
     {
-        NSLog(@"monthWidth = %f",self.monthWidth);
         return self.monthWidth; // 返回月的宽度（126.0f）
     }
     else
     {
-        NSLog(@"yearWidth = %f",self.yearWidth);
         return self.yearWidth; // 返回年的宽度（80.0f）
     }
 }

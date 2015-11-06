@@ -10,9 +10,10 @@
 
 @interface WXZGouFangYiXiangCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UITapGestureRecognizer *gfyxTap;
-@property (weak, nonatomic) IBOutlet UITapGestureRecognizer *bblpTap;
+@property (nonatomic,strong) UIViewController *controller;
 
 + (instancetype)initGouFangYiXiangCell;
+
+- (void)updateInfo;
 
 @end

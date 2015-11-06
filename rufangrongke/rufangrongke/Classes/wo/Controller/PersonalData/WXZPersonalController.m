@@ -447,6 +447,7 @@
                     // 重新获取缓存数据
                     self.personalInfoDic = [self localUserInfo];
                     [self.myTableView reloadData];
+                    [SVProgressHUD dismiss];
                     return;
                 }
                 [SVProgressHUD showErrorWithStatus:result];
@@ -458,7 +459,6 @@
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
-        [SVProgressHUD dismiss]; // 取消菊花
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];

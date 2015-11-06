@@ -79,25 +79,22 @@
 }
 
 #pragma mark - UITextViewDelegate
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+- (void)textViewDidChange:(UITextView *)textView
 {
     // 显示输入的字数
-    self.declarationWordPromptLabel.text = [NSString stringWithFormat:@"%d/30",range.location];
-    if (range.location >= 30)
+    self.declarationWordPromptLabel.text = [NSString stringWithFormat:@"%lu/30",(unsigned long)textView.text.length];
+    if (textView.text.length >= 30)
     {
-        NSString *wordNumStr = [NSString stringWithFormat:@"%d/30",range.location];
+        NSString *wordNumStr = [NSString stringWithFormat:@"%lu/30",(unsigned long)textView.text.length];
         
         NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:wordNumStr];
         NSDictionary *inFanWeiDic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor],NSForegroundColorAttributeName, nil];
         NSDictionary *outFanWeiDic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName, nil];
-        [attributedStr addAttributes:inFanWeiDic range:NSMakeRange(0, wordNumStr.length-3)];
+        [attributedStr addAttributes:outFanWeiDic range:NSMakeRange(0, wordNumStr.length-3)];
         [attributedStr addAttributes:inFanWeiDic range:NSMakeRange(wordNumStr.length-3, 3)];
         
         self.declarationWordPromptLabel.attributedText = attributedStr;
     }
-    
-    
-    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

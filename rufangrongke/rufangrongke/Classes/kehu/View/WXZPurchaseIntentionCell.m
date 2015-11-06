@@ -84,7 +84,7 @@
         btnTag = 1000050;
     }
     
-    WXZLog(@"%@",houseArr);
+//    WXZLog(@"%@",houseArr);
     
     NSInteger limit = 0; // 每行显示的个数
     NSInteger spacing = 0; // 间距
@@ -140,12 +140,6 @@
             self.typeBtn.backgroundColor = [UIColor lightGrayColor];
             [self.typeBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:self.typeBtn];
-            // 默认第一个选中
-//            if (i == 0 && j == 0)
-//            {
-//                self.typeBtn.backgroundColor = WXZRGBColor(2, 135, 227);
-//                [self.typeBtn setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
-//            }
         }
     }
 }

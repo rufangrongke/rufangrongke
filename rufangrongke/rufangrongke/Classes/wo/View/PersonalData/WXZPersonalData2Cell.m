@@ -7,6 +7,8 @@
 //
 
 #import "WXZPersonalData2Cell.h"
+#import "WXZDateObject.h"
+#import "WXZStringObject.h"
 
 @implementation WXZPersonalData2Cell
 
@@ -50,7 +52,13 @@
             tipStr = personalInfodic[@"Sex"];
             break;
         case 3:
-            tipStr = personalInfodic[@"CongYeTime"];
+        {
+            // 时间的转换
+            NSString *time = personalInfodic[@"CongYeTime"];
+            time = [WXZStringObject replacementString:time replace:@"/" replaced:@"-"];
+            NSDate *date = [WXZDateObject formatDate1:time dateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            tipStr = [WXZDateObject formatDate2:date dateFormat:@"yyyy-MM"];
+        }
             break;
         case 4:
             tipStr = personalInfodic[@"XuanYan"];

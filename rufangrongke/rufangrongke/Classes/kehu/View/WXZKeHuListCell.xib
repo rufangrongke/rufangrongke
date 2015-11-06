@@ -32,7 +32,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" tag="1000020" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-OG-scV">
+                    <button hidden="YES" opaque="NO" tag="100023" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2D-OG-scV">
                         <rect key="frame" x="280" y="10" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="3Le-3V-5T5"/>
@@ -41,8 +41,11 @@
                         <state key="normal" image="kh_bodaliebiaoye">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="reportedOrCallAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4d2-x4-TMQ"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" tag="1000010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="erf-6Y-EBw">
+                    <button opaque="NO" tag="100024" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="erf-6Y-EBw">
                         <rect key="frame" x="280" y="20" width="28" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="2In-HE-lnG"/>
@@ -51,6 +54,9 @@
                         <state key="normal" image="kh_reported_deselect">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="reportedOrCallAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MbX-ZD-OPt"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

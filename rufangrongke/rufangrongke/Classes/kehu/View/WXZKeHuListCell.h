@@ -30,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *reportedBtn;
 @property (weak, nonatomic) IBOutlet UIButton *callBtn;
 
+// 传controller
+@property (nonatomic,strong) UIViewController *controller;
+
 // 加载nib文件
 + (instancetype)initListCell;
 

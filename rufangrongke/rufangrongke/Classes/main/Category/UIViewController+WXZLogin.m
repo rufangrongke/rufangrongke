@@ -57,7 +57,7 @@
     NSString *urlString = [OutNetBaseURL stringByAppendingString:denglu];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"mob"] = @"18311281581";
+    parameters[@"mob"] = @"17701261104";
     parameters[@"pas"] = @"123456";
 //    parameters[@"mob"] = @"18833198077";
 //    parameters[@"pas"] = @"123456";

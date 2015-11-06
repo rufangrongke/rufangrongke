@@ -39,4 +39,7 @@
 
 + (instancetype)initHousingDetailsCell;
 
+- (void)updateInfo;
+- (void)showInfo:(NSDictionary *)dic;
+
 @end

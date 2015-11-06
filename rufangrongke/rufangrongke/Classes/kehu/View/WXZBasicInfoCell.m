@@ -8,7 +8,7 @@
 
 #import "WXZBasicInfoCell.h"
 
-@interface WXZBasicInfoCell ()
+@interface WXZBasicInfoCell () <UITextFieldDelegate>
 
 @end
 
@@ -16,11 +16,30 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.nameTextField.delegate = self;
+    self.phoneNumTextField.delegate = self;
 }
 
 + (instancetype)initBasicInfoCell
 {
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.tag == 100022 && range.location >= 11)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
