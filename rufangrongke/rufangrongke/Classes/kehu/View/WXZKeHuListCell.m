@@ -7,6 +7,8 @@
 //
 
 #import "WXZKeHuListCell.h"
+#import "WXZChectObject.h"
+#import "WXZStringObject.h"
 
 @implementation WXZKeHuListCell
 
@@ -17,7 +19,6 @@
 // 加载nib文件
 + (instancetype)initListCell
 {
-    NSLog(@"%@",[[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject]);
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
@@ -25,11 +26,59 @@
 - (void)buttonWithTarget:(id)target action:(SEL)action
 {
     // 添加单击事件
-    [self.reportedBtn setImage:[UIImage imageNamed:@"kh_reported_select"] forState:UIControlStateHighlighted];
     [self.reportedBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     
-    [self.reportedOrCallBtn setImage:[UIImage imageNamed:@"kh_dianhua"] forState:UIControlStateHighlighted];
-    [self.reportedOrCallBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    [self.callBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+}
+
+// 更新数据
+- (void)showKeHuListInfo:(NSDictionary *)dic
+{
+    self.customerNameLabel.text = dic[@"XingMing"]; // 姓名
+    self.customerPhoneLabel.text = dic[@"Mobile"]; // 电话
+    
+    /**
+     *  房源信息：
+     *  1. 判断内容是否为空
+     *  2. 判断内容里是否包含“/”,并进行替换
+     *  3. 拼接字符串
+     */
+    NSString *houseStr = @"";
+    if (![WXZChectObject checkWhetherStringIsEmpty:dic[@"QuYu"]])
+    {
+        NSString *quyu = dic[@"QuYu"];
+        if ([WXZStringObject whetherStringContainsCharacter:quyu character:@"/"])
+        {
+            quyu = [WXZStringObject replacementString:quyu replace:@"/" replaced:@"|"];
+        }
+        houseStr = [houseStr stringByAppendingFormat:@"%@，",quyu];
+    }
+    if (![WXZChectObject checkWhetherStringIsEmpty:dic[@"Hx"]])
+    {
+        NSString *hx = dic[@"Hx"];
+        if ([WXZStringObject whetherStringContainsCharacter:hx character:@"/"])
+        {
+            hx = [WXZStringObject replacementString:hx replace:@"/" replaced:@"|"];
+        }
+        houseStr = [houseStr stringByAppendingFormat:@"%@|",hx];
+    }
+    if (![WXZChectObject checkWhetherStringIsEmpty:dic[@"loupan"]])
+    {
+        NSString *loupan = dic[@"loupan"];
+        if ([WXZStringObject whetherStringContainsCharacter:loupan character:@"/"])
+        {
+            loupan = [WXZStringObject replacementString:loupan replace:@"/" replaced:@"|"];
+        }
+        houseStr = [houseStr stringByAppendingFormat:@"%@，",dic[@"loupan"]];
+    }
+    if (![WXZChectObject checkWhetherStringIsEmpty:dic[@"YiXiang"]])
+    {
+        houseStr = [houseStr stringByAppendingFormat:@"%@万",dic[@"YiXiang"]];
+    }
+    self.houseInfoLabel.text = houseStr;
+    
+    self.reportedBtn.hidden = YES;
+    self.callBtn.hidden = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

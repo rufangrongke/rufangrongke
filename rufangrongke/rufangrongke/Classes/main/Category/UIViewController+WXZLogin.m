@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+WXZLogin.h"
+#import "AFNetworking.h"
 
 @implementation UIViewController (WXZLogin)
 - (NSDictionary *)loginMessage
@@ -52,31 +53,25 @@
 
 - (void)loginRequest:(loginMessage)message
 {
-    // 基本URL
-    NSString *urlString = [OutNetBaseURL stringByAppendingString:@"Uslogin.ashx"];
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    // URL
-    NSURL *url = [NSURL URLWithString:urlString];
-    
     // 1.创建请求对象
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    request.HTTPBody = [@"mob=17701261104&pas=123456" dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:denglu];
     
-    // 2.发送请求
-    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"mob"] = @"18311281581";
+    parameters[@"pas"] = @"123456";
+//    parameters[@"mob"] = @"18833198077";
+//    parameters[@"pas"] = @"123456";
+    
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject)
     {
-        if (data != nil)
+        if ([responseObject[@"ok"] integerValue] == 1)
         {
-            // 3.解析服务器返回的数据（解析成字符串）
-            NSDictionary *loginContentDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-            WXZLog(@"%@", loginContentDic);
-            
+            NSDictionary *loginContentDic = (NSDictionary *)responseObject;
             // 获取沙河路径
             NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
             // 获取用户信息
             NSDictionary *userinfo = loginContentDic[@"u"];
-            // 讲用户信息写入字典
+            // 将用户信息写入字典
             [userinfo writeToFile:userinfoPath atomically:YES];
             
             message(userinfo);
@@ -85,6 +80,9 @@
         {
             message(@"请求失败");
         }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        message(@"请求失败");
     }];
 }
 

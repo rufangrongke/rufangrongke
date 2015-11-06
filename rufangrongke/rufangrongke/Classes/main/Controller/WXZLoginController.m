@@ -68,10 +68,10 @@
     
     // 18833198077   18311281581   17701261104 18310532603
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"mob"] = @"18311281581";
-    parameters[@"pas"] = @"123456";
-//    parameters[@"mob"] = @"18833198077";
+//    parameters[@"mob"] = @"18310532603";
 //    parameters[@"pas"] = @"123456";
+    parameters[@"mob"] = @"17701261104"; // 18833198077
+    parameters[@"pas"] = @"123456";
     // afn
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;
@@ -79,6 +79,7 @@
         NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
         // 获取用户信息
         NSDictionary *userinfo = loginContentDic[@"u"];
+        WXZLog(@"%@",loginContentDic[@"u"]);
         // 讲用户信息写入字典
         [userinfo writeToFile:userinfoPath atomically:YES];
         

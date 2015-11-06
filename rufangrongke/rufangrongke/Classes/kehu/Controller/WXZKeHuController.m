@@ -8,13 +8,20 @@
 
 #import "WXZKeHuController.h"
 #import "AFNetworking.h"
+#import "WXZChectObject.h"
+#import "WXZStringObject.h"
+#import "WXZDateObject.h"
+#import <SVProgressHUD.h>
 #import "WXZKeHuListCell.h"
 #import "WXZKHListHeaderView.h"
 #import "WXZKHListFooterView.h"
+#import "WXZAddCustomerVC.h"
+#import "WXZCustomerDetailsVC.h"
+#import "WXZReportPreparationVC.h"
 
-@interface WXZKeHuController ()
+@interface WXZKeHuController () <UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic,strong) NSMutableDictionary *dataDic;
+@property (nonatomic,strong) NSArray *dataArr;
 
 @end
 
@@ -72,9 +79,14 @@
     searchBar.placeholder = @"请输入客户姓名";
     self.navigationItem.titleView = searchBar;
     
-    // 初始化
-    self.dataDic = [NSMutableDictionary dictionary];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
+    // 初始化
+    self.dataArr = [NSArray array];
+    
+    // 显示菊花
+    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
     // 请求列表
     [self keHuListRequest:@"1" numberEachPage:@"" handsomeChooseCategory:@"" handsomeChooseConditions:@""];
     
@@ -99,8 +111,15 @@
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
+            WXZLog(@"%@",responseObject);
+            self.dataArr = responseObject[@"list"];
+            [self.tableView reloadData];
+        }
+        else
+        {
             
         }
+        [SVProgressHUD dismiss];
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
@@ -108,30 +127,18 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return self.dataArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    if (section == 0)
-    {
-        return 2;
-    }
-    else
-    {
-        return 3;
-    }
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -146,13 +153,11 @@
     
     // 添加单击事件
     [keHuInfoCell buttonWithTarget:self action:@selector(reportedOrCallAction:)];
-    keHuInfoCell.reportedBtn.hidden = YES;
-    keHuInfoCell.reportedOrCallBtn.hidden = NO;
+    keHuInfoCell.reportedBtn.tag = 1000010+indexPath.section;
+    keHuInfoCell.callBtn.tag = 1000020+indexPath.section;
     
     // 赋值
-    keHuInfoCell.customerNameLabel.text = @"刘丽莎";
-    keHuInfoCell.customerPhoneLabel.text = @"13921754683";
-    keHuInfoCell.houseInfoLabel.text = @"急售新华区｜裕华区，｜三室｜别墅，440-1000万";
+    [keHuInfoCell showKeHuListInfo:self.dataArr[indexPath.section]];
     
     return keHuInfoCell;
 }
@@ -160,6 +165,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"click %ld row",(long)indexPath.row);
+    // 客户详情页
+    WXZCustomerDetailsVC *customerDetailsVC = [[WXZCustomerDetailsVC alloc] init];
+    customerDetailsVC.nameStr = self.dataArr[indexPath.section][@"XingMing"];
+    customerDetailsVC.phoneStr = self.dataArr[indexPath.section][@"Mobile"];
+    [self.navigationController pushViewController:customerDetailsVC animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -181,10 +191,24 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    WXZKHListFooterView *footerView = [WXZKHListFooterView initListFooterView]; // footer背景 view
-    [footerView footerInfoLabel:@"15-10-21 10:10 带看裕华区6号楼 590-1000W,阿萨德和积分卡"]; // footer 信息
-    
-    return footerView;
+    // 首先判断有没有值
+    if (![WXZChectObject checkWhetherStringIsEmpty:self.dataArr[section][@"hdTime"]] || ![WXZChectObject checkWhetherStringIsEmpty:self.dataArr[section][@"typeSmall"]])
+    {
+        NSString *dateStr = self.dataArr[section][@"hdTime"]; // 获取时间
+        dateStr = [WXZStringObject replacementString:dateStr replace:@"/" replaced:@"-"]; // 替换字符
+        NSDate *date = [WXZDateObject formatDate1:dateStr dateFormat:@"yyyy-MM-dd HH:mm:ss"]; // 格式化为NSDate
+        NSString *dateStr2 = [WXZDateObject formatDate2:date dateFormat:@"yy-MM-dd HH:mm"]; // 格式化为NSString
+        // 格式化字符串（最终结果）
+        NSString *footerStr = [NSString stringWithFormat:@"%@ %@",dateStr2,self.dataArr[section][@"typeSmall"]];
+        WXZKHListFooterView *footerView = [WXZKHListFooterView initListFooterView]; // footer背景 view
+        [footerView footerInfoLabel:footerStr]; // footer 信息
+        
+        return footerView;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -214,18 +238,31 @@
 - (void)addNewKeHuAction:(id)sender
 {
     NSLog(@"添加新客户!");
+    // 添加新客户页
+    WXZAddCustomerVC *addCustomerVC = [[WXZAddCustomerVC alloc] init];
+    [self.navigationController pushViewController:addCustomerVC animated:YES];
 }
 
 // 报备/打电话事件
 - (void)reportedOrCallAction:(UIButton *)sender
 {
-    if (sender.tag == 100001)
+    NSString *sectionStr = [NSString stringWithFormat:@"%ld",(long)sender.tag];
+    sectionStr = [sectionStr substringWithRange:NSMakeRange(0, 6)];
+    
+    if (sectionStr.integerValue == 100001)
     {
         NSLog(@"报备事件");
+//        NSInteger section = sender.tag - 1000010;
+        WXZReportPreparationVC *reportVC = [[WXZReportPreparationVC alloc] init];
+        [self.navigationController pushViewController:reportVC animated:YES];
     }
     else
     {
         NSLog(@"打电话事件");
+        NSInteger section = sender.tag - 1000020; // 单击的是哪一行
+        // 打电话
+        NSString *phoneNumStr = [NSString stringWithFormat:@"telprompt://%@",self.dataArr[section][@"Mobile"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumStr]];
     }
 }
 
@@ -240,6 +277,11 @@
 {
     // 确定
     NSLog(@"确定");
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*
