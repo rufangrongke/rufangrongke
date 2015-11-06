@@ -14,6 +14,7 @@
 #import "WXZLouPanMessageCell_0_1.h"
 #import "WXZLouPanMessageCell_1_0.h"
 #import "WXZLiandong.h"
+#import "WXZXiangQingController.h"
 
 @interface WXZLouPanMessageController ()<UITableViewDataSource, UITableViewDelegate>
 /*轮播图片URL*/
@@ -88,7 +89,7 @@ static CGFloat carouselPic_height = 226;
         
         // 刷新数据源
         [self.tableView reloadData];
-        WXZLog(@"%@", dic);
+//        WXZLog(@"%@", dic);
         // 将服务器返回数据存储
         self.loupanxiangqingDIC = dic;
         NSDictionary *view = dic[@"view"];
@@ -113,24 +114,25 @@ static CGFloat carouselPic_height = 226;
 //    [self setUpBottomBar];
     
     // 添加footView
-    UIViewController *vc01 = [[UIViewController alloc] init];
+    WXZXiangQingController *vc01 = [[WXZXiangQingController alloc] init];
     vc01.view.backgroundColor = [UIColor greenColor];
     vc01.title = @"户型";
     
-    UIViewController *vc02 = [[UIViewController alloc] init];
+    WXZXiangQingController *vc02 = [[WXZXiangQingController alloc] init];
     vc02.view.backgroundColor = [UIColor yellowColor];
     vc02.title = @"卖点";
     
-    UIViewController *vc03 = [[UIViewController alloc] init];
+    WXZXiangQingController *vc03 = [[WXZXiangQingController alloc] init];
     vc03.view.backgroundColor = [UIColor purpleColor];
     vc03.title = @"详情";
     //    WXZLiandong *liandong = [[WXZLiandong alloc] init];
     WXZLiandong *liandong = [WXZLiandong makeLiandongView:[NSMutableArray arrayWithObjects:vc01, vc02, vc03, nil]];
     
     
-    liandong.backgroundColor = [UIColor yellowColor];
+    liandong.backgroundColor = [UIColor clearColor];
     
-    liandong.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 300);
+    liandong.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 600);
+    
     self.tableView.tableFooterView = liandong;
     
     
