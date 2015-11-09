@@ -198,7 +198,10 @@
     [param setObject:sfzPic forKey:@"sfzPic"]; // 身份证图片
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     [manager POST:requestUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
@@ -218,15 +221,15 @@
     }];
     
     // 上传
-    [manager setTaskDidSendBodyDataBlock:^(NSURLSession *session, NSURLSessionTask *task, int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend)
-    {
-        // bytesSent本次上传了多少字节,totalBytesSent累计上传了多少字节,totalBytesExpectedToSend文件有多大,应该上传多少
-//        NSLog(@"task %@ progress is %f ", task, totalBytesSent*1.0/totalBytesExpectedToSend);
-        
-        // 设置当前进度值
-        CGFloat uploadProportion = totalBytesSent*1.0 / totalBytesExpectedToSend;
-        self.uploadProgress.progress = uploadProportion;
-    }];
+//    [manager setTaskDidSendBodyDataBlock:^(NSURLSession *session, NSURLSessionTask *task, int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend)
+//    {
+//        // bytesSent本次上传了多少字节,totalBytesSent累计上传了多少字节,totalBytesExpectedToSend文件有多大,应该上传多少
+////        NSLog(@"task %@ progress is %f ", task, totalBytesSent*1.0/totalBytesExpectedToSend);
+//        
+//        // 设置当前进度值
+//        CGFloat uploadProportion = totalBytesSent*1.0 / totalBytesExpectedToSend;
+//        self.uploadProgress.progress = uploadProportion;
+//    }];
 }
 
 - (void)completeAction:(id)sender

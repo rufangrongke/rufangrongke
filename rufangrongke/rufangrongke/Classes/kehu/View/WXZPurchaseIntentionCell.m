@@ -43,26 +43,19 @@
 {
     NSMutableArray *houseArr = [NSMutableArray array];
     NSInteger btnTag = 0;
+    [houseArr removeAllObjects];
     if (row == 0)
     {
-        [houseArr removeAllObjects];
-//        NSArray *keyArr = @[@"nolimit",@"oneh",@"twoh",@"threeh",@"fourh",@"moreh"];
-//        NSArray *valueArr = @[@"长安区",@"新华区",@"桥西区",@"桥东区",@"裕华区",@"长安区",@"桥西区",@"裕华区"];
-//        for (int i = 0; i < typeArr.count; i++)
-//        {
-//            NSMutableDictionary *doorModelDic = [NSMutableDictionary dictionary];
-//            [doorModelDic setObject:typeArr[i] forKey:@"q"];
-//            [houseArr addObject:doorModelDic];
-//        }
+//        [houseArr removeAllObjects];
         [houseArr addObjectsFromArray:typeArr];
         btnTag = 1000030;
     }
     else if (row == 1)
     {
-        [houseArr removeAllObjects];
+//        [houseArr removeAllObjects];
 //        NSArray *keyArr = @[@"nolimit",@"oneh",@"twoh",@"threeh",@"fourh",@"moreh"];
         NSArray *valueArr = @[@"不限户型",@"一室",@"二室",@"三室",@"四室",@"五室及以上"];
-        for (int i = 0; i < valueArr.count; i++)
+        for (int i = 0; i < typeArr.count; i++)
         {
             NSMutableDictionary *doorModelDic = [NSMutableDictionary dictionary];
             [doorModelDic setObject:valueArr[i] forKey:@"q"];
@@ -72,10 +65,10 @@
     }
     else if (row == 2)
     {
-        [houseArr removeAllObjects];
+//        [houseArr removeAllObjects];
 //        NSArray *keyArr = @[@"multicellular",@"residential",@"villa",@"shops"];
         NSArray *valueArr = @[@"复室",@"住宅",@"别墅",@"商铺"];
-        for (int i = 0; i < valueArr.count; i++)
+        for (int i = 0; i < typeArr.count; i++)
         {
             NSMutableDictionary *houseTypeDic = [NSMutableDictionary dictionary];
             [houseTypeDic setObject:valueArr[i] forKey:@"q"];
@@ -83,8 +76,6 @@
         }
         btnTag = 1000050;
     }
-    
-//    WXZLog(@"%@",houseArr);
     
     NSInteger limit = 0; // 每行显示的个数
     NSInteger spacing = 0; // 间距

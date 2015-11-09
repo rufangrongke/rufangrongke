@@ -168,11 +168,14 @@
     [param setObject:ltname forKey:@"ltname"]; // 公司名称
     [param setObject:picfile forKey:@"picfile"]; // 公司图片
     
-    // 1. Create `AFHTTPRequestSerializer` which will create your request
-    AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
-    // 2. Create an `NSMutableURLRequest`
-    NSMutableURLRequest *request = [serializer multipartFormRequestWithMethod:@"POST" URLString:nameUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
-    {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager POST:nameUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";
         NSString *str = [formatter stringFromDate:[NSDate date]];
@@ -180,32 +183,13 @@
         
         [formData appendPartWithFileData:picfile name:@"headFile" fileName:fileName mimeType:@"image/png"];
         
-    } error:nil];
-    // 3. Create and use `AFHTTPRequestOperationManager` to create an `AFHTTPRequestOperation` from the `NSMutableURLRequest` that we just created
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    AFHTTPRequestOperation *opration = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSLog(@"Success %@", responseObject);
-        [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
-        [SVProgressHUD dismiss]; // 取消菊花
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error)
-    {
-        NSLog(@"Failure %@", error.description);
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
-        [SVProgressHUD dismiss]; // 取消菊花
-    }];
-    
-    // 4. Set the progress block of the operation
-    [opration setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite)
-    {
-        // 设置上传进度
-        CGFloat uploadProportion = totalBytesWritten / totalBytesExpectedToWrite;
-        self.uploadProgress.progress = uploadProportion;
-    }];
-    // 5. Begin
-    [opration start];
+    } success:^(NSURLSessionDataTask *task, id responseObject)
+     {
+         WXZLog(@"%@",responseObject);
+     } failure:^(NSURLSessionDataTask *task, NSError *error)
+     {
+         
+     }];
 }
 
 #pragma mark - UITextFieldDelegate

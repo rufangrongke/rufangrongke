@@ -28,6 +28,7 @@
 - (IBAction)goufangyixiangAction:(id)sender
 {
     NSLog(@"购房意向");
+    
 }
 
 - (IBAction)baobeiloupanAction:(id)sender
