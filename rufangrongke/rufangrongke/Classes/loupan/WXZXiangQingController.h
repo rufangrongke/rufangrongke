@@ -10,4 +10,6 @@
 
 @interface WXZXiangQingController : UIViewController
 
+/* 楼盘参数 */
+@property(nonatomic,copy) NSString *fyhao;
 @end
