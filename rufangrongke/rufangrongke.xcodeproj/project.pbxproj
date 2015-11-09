@@ -253,7 +253,6 @@
 		8860234E1BEC4FA300C0D75E /* WXZAddCustomerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZAddCustomerVC.h; sourceTree = "<group>"; };
 		8860234F1BEC4FA300C0D75E /* WXZAddCustomerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZAddCustomerVC.m; sourceTree = "<group>"; };
 		886023501BEC4FA300C0D75E /* WXZAddCustomerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZAddCustomerVC.xib; sourceTree = "<group>"; };
-		886023531BEC4FE800C0D75E /* WXZRealEstateListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZRealEstateListCell.h; sourceTree = "<group>"; };
 		886023541BEC4FE800C0D75E /* WXZRealEstateListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZRealEstateListCell.m; sourceTree = "<group>"; };
 		886023551BEC4FE800C0D75E /* WXZRealEstateListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZRealEstateListCell.xib; sourceTree = "<group>"; };
 		886023581BEC4FF800C0D75E /* WXZGouFangYiXiangCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZGouFangYiXiangCell.h; sourceTree = "<group>"; };
@@ -846,7 +845,6 @@
 		886023431BEC4F3A00C0D75E /* ReportPreparationView */ = {
 			isa = PBXGroup;
 			children = (
-				886023531BEC4FE800C0D75E /* WXZRealEstateListCell.h */,
 				886023541BEC4FE800C0D75E /* WXZRealEstateListCell.m */,
 				886023551BEC4FE800C0D75E /* WXZRealEstateListCell.xib */,
 			);
