@@ -17,11 +17,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="DuO-6c-n3M">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="hOO-Fl-qmQ"/>
-                    </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wgk-Mn-coZ">
+                    <rect key="frame" x="0.0" y="5" width="600" height="595"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wgk-Mn-coZ">
                         <size key="itemSize" width="110" height="95"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -35,9 +32,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="DuO-6c-n3M" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="08L-nn-1Ke"/>
-                <constraint firstItem="DuO-6c-n3M" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qe2-dR-4Gv"/>
-                <constraint firstAttribute="trailing" secondItem="DuO-6c-n3M" secondAttribute="trailing" id="fNe-Th-EFY"/>
+                <constraint firstAttribute="trailing" secondItem="DuO-6c-n3M" secondAttribute="trailing" id="2p9-GU-F6Q"/>
+                <constraint firstAttribute="bottom" secondItem="DuO-6c-n3M" secondAttribute="bottom" id="RK9-ch-Us9"/>
+                <constraint firstItem="DuO-6c-n3M" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SLI-Xn-zUW"/>
+                <constraint firstItem="DuO-6c-n3M" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="i9o-8q-5OQ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

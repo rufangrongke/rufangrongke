@@ -80,7 +80,7 @@
         NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
         // 获取用户信息
         NSDictionary *userinfo = loginContentDic[@"u"];
-        WXZLog(@"%@",loginContentDic[@"u"]);
+//        WXZLog(@"%@",loginContentDic[@"u"]);
         // 讲用户信息写入字典
         [userinfo writeToFile:userinfoPath atomically:YES];
         
