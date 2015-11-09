@@ -150,6 +150,7 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     louPanMessage.navigationItem.title = [self.loupanLeibiaoS[indexPath.row] xiaoqu];
     // 楼盘编号,楼盘号
     louPanMessage.fyhao = [self.loupanLeibiaoS[indexPath.row] fyhao];
+    WXZLog(@"%@", louPanMessage.fyhao);
     [self.navigationController pushViewController:louPanMessage animated:YES];
     
 }

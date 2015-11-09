@@ -18,6 +18,7 @@
 #import "WXZMaiDianController.h"
 #import "WXZLouPanBottomBar.h"
 #import "WXZLouPanHuXingController.h"
+#import "WXZLouPanYongJinController.h"
 
 
 @interface WXZLouPanMessageController ()<UITableViewDataSource, UITableViewDelegate, LouPanHuXingControllerDelegate>
@@ -232,7 +233,9 @@ static CGFloat carouselPic_height = 226;
         return height_1_0;
     }
 }
-
+/**
+ *  heightForHeaderInSection
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 //    return 10;
@@ -247,6 +250,9 @@ static CGFloat carouselPic_height = 226;
     }
 }
 
+/**
+ *  heightForFooterInSection
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     // 返回每组的footer高
@@ -260,7 +266,6 @@ static CGFloat carouselPic_height = 226;
         return 0;
     }
 }
-
 
 /**
  修改sectionHeadView, sectionFootView的背景颜色
@@ -280,6 +285,17 @@ static int colorNum = 235;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WXZLog(@"%zd--%zd", indexPath.section, indexPath.row);
+    if (indexPath.section == 1) {
+        WXZLouPanYongJinController *yongJinVc = [[WXZLouPanYongJinController alloc] init];
+        yongJinVc.fyhao = self.fyhao;
+        WXZLog(@"%@", yongJinVc.fyhao);
+        [self.navigationController pushViewController:yongJinVc animated:YES];
+    }
+}
 #pragma LouPanHuXingControllerDelegate
 - (void)louPanHuXingControllerDelegate:(UIViewController *)vc
 {
