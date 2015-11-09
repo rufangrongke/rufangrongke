@@ -92,7 +92,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = YES; // 设置可以编辑
+                imagePicker.allowsEditing = NO; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera; // 设置源
                 imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto; // 设定图片选取器的摄像头捕获模式
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
@@ -110,7 +110,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = YES; // 设置可以编辑
+                imagePicker.allowsEditing = NO; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; // 设置源
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
             }
@@ -138,7 +138,7 @@
             //将图片存入系统相册
             UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
         }
-        NSData *imgData = UIImagePNGRepresentation(img);
+        NSData *imgData = UIImageJPEGRepresentation(img, 0.4f);
         // 缓存
         [[NSUserDefaults standardUserDefaults] setObject:imgData forKey:@"companyImg"];
         
@@ -174,18 +174,26 @@
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    [manager POST:nameUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyyMMddHHmmss";
-        NSString *str = [formatter stringFromDate:[NSDate date]];
-        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+    [manager POST:nameUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    {
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", @"modifyStore"];
         
         [formData appendPartWithFileData:picfile name:@"headFile" fileName:fileName mimeType:@"image/png"];
         
     } success:^(NSURLSessionDataTask *task, id responseObject)
      {
-         WXZLog(@"%@",responseObject);
+//         NSString *mm=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//         WXZLog(@"%@",responseObject);
+//         NSLog(@"%@",mm);
+         
+         if ([responseObject[@"ok"] integerValue] == 1)
+         {
+             // 发送通知
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+             [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
+         }
+         
+         [SVProgressHUD dismiss];
      } failure:^(NSURLSessionDataTask *task, NSError *error)
      {
          

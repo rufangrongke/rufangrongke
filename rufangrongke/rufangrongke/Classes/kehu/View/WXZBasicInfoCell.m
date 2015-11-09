@@ -25,6 +25,27 @@
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
+- (void)modifyInfo:(NSDictionary *)dic isModify:(BOOL)ismodify
+{
+    if (ismodify)
+    {
+        self.nameTextField.text = dic[@"XingMing"];
+        self.phoneNumTextField.text = dic[@"Mobile"];
+        if ([dic[@"Sex"] isEqualToString:@"先生"])
+        {
+            [self.menBtn setImage:[UIImage imageNamed:@"kh_nvbzhu"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.womenBtn setImage:[UIImage imageNamed:@"kh_nvbzhu"] forState:UIControlStateNormal];
+        }
+    }
+    else
+    {
+       [self.menBtn setImage:[UIImage imageNamed:@"kh_nvbzhu"] forState:UIControlStateNormal]; 
+    }
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {

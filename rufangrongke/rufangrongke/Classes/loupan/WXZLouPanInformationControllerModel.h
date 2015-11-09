@@ -49,7 +49,7 @@
 
 @property (nonatomic, copy) NSString *ChengJiaoNum;
 
-@property (nonatomic, strong) NSArray<OthersModel *> *others;
+@property (nonatomic, strong) NSArray/*<OthersModel *>*/ *others;
 
 @property (nonatomic, copy) NSString *YouHui;
 

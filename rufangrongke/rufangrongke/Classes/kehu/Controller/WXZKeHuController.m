@@ -21,6 +21,8 @@
 
 @interface WXZKeHuController () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
+@property (nonatomic,strong) UISearchBar *searchBar;
+
 @property (nonatomic,strong) NSArray *dataArr;
 
 @end
@@ -62,7 +64,9 @@
     // 右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
     // 添加一个系统的搜索框
-    self.navigationItem.titleView = [[UISearchBar alloc]init];
+    _searchBar = [[UISearchBar alloc] init];
+    _searchBar.delegate = self;
+    self.navigationItem.titleView = _searchBar;
     
 }
 
@@ -76,7 +80,12 @@
     [param setObject:chooseCategory forKey:@"zt"];
     [param setObject:chooseConditions forKey:@"key"];
     
-    [[AFHTTPSessionManager manager] POST:urlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:urlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
@@ -205,7 +214,11 @@
     return 20 + 20 + 12 + yixiang; // 返回行高
 }
 
-#pragma mark - 
+#pragma mark - UISearchBarDelegate
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    NSLog(@"%@",searchBar.text);
+}
 
 // 添加新客户事件
 - (void)addNewKeHuAction:(id)sender
@@ -213,6 +226,7 @@
     NSLog(@"添加新客户!");
     // 添加新客户页
     WXZAddCustomerVC *addCustomerVC = [[WXZAddCustomerVC alloc] init];
+    addCustomerVC.titleStr = @"添加客户";
     [self.navigationController pushViewController:addCustomerVC animated:YES];
 }
 
@@ -221,6 +235,11 @@
 - (void)queDing_click
 {
     WXZLogFunc;
+    NSLog(@"%@",_searchBar.text);
+    // 显示菊花
+    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+    // 请求列表
+    [self keHuListRequest:@"1" numberEachPage:@"" handsomeChooseCategory:@"" handsomeChooseConditions:_searchBar.text];
 }
 // 左上方按钮监听点击
 - (void)quDu_click

@@ -116,7 +116,6 @@
 		888115EA1BDE068C003A0356 /* UIViewController+WXZLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115E91BDE068C003A0356 /* UIViewController+WXZLogin.m */; };
 		888115ED1BDE4230003A0356 /* JxbScaleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115EC1BDE4230003A0356 /* JxbScaleButton.m */; };
 		888588761BE715430015A69C /* WXZChectObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 888588751BE715430015A69C /* WXZChectObject.m */; };
-		88916B451BF043F700981258 /* WXZLouPanInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88916B431BF043F700981258 /* WXZLouPanInformationTableViewController.m */; };
 		88916B461BF043F700981258 /* WXZLouPanInformationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88916B441BF043F700981258 /* WXZLouPanInformationTableViewController.xib */; };
 		88AE892D1BE0733F00407ECF /* XMGPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AE892B1BE0733F00407ECF /* XMGPageView.m */; };
 		88AE892E1BE0733F00407ECF /* XMGPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AE892C1BE0733F00407ECF /* XMGPageView.xib */; };
@@ -132,6 +131,7 @@
 		88DBC1031BF0436C00425B81 /* WXZMessagePrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1021BF0436C00425B81 /* WXZMessagePrompt.m */; };
 		88DBC1081BF0442900425B81 /* WXZDateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1051BF0442900425B81 /* WXZDateObject.m */; };
 		88DBC1091BF0442900425B81 /* WXZStringObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1071BF0442900425B81 /* WXZStringObject.m */; };
+		88DBC10B1BF04E4100425B81 /* WXZLouPanInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88916B431BF043F700981258 /* WXZLouPanInformationTableViewController.m */; };
 		88DDCAD51BEB50EE001A9F56 /* WXZLianDongLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DDCAD41BEB50EE001A9F56 /* WXZLianDongLabelView.m */; };
 		88DDCAD71BEB50FA001A9F56 /* WXZLianDongLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88DDCAD61BEB50FA001A9F56 /* WXZLianDongLabelView.xib */; };
 		88DDCADA1BEB6BCE001A9F56 /* WXZLouPanXiangQingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DDCAD91BEB6BCE001A9F56 /* WXZLouPanXiangQingModel.m */; };
@@ -371,6 +371,7 @@
 		88DBC1051BF0442900425B81 /* WXZDateObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZDateObject.m; path = Tool/WXZDateObject.m; sourceTree = "<group>"; };
 		88DBC1061BF0442900425B81 /* WXZStringObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZStringObject.h; path = Tool/WXZStringObject.h; sourceTree = "<group>"; };
 		88DBC1071BF0442900425B81 /* WXZStringObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZStringObject.m; path = Tool/WXZStringObject.m; sourceTree = "<group>"; };
+		88DBC10A1BF04DA300425B81 /* WXZRealEstateListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXZRealEstateListCell.h; sourceTree = "<group>"; };
 		88DDCAD31BEB50EE001A9F56 /* WXZLianDongLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLianDongLabelView.h; sourceTree = "<group>"; };
 		88DDCAD41BEB50EE001A9F56 /* WXZLianDongLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLianDongLabelView.m; sourceTree = "<group>"; };
 		88DDCAD61BEB50FA001A9F56 /* WXZLianDongLabelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLianDongLabelView.xib; sourceTree = "<group>"; };
@@ -927,6 +928,7 @@
 		886023431BEC4F3A00C0D75E /* ReportPreparationView */ = {
 			isa = PBXGroup;
 			children = (
+				88DBC10A1BF04DA300425B81 /* WXZRealEstateListCell.h */,
 				886023541BEC4FE800C0D75E /* WXZRealEstateListCell.m */,
 				886023551BEC4FE800C0D75E /* WXZRealEstateListCell.xib */,
 			);
@@ -1295,6 +1297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88DBC10B1BF04E4100425B81 /* WXZLouPanInformationTableViewController.m in Sources */,
 				8826186E1BF049EA00FAD6E9 /* WXZGouFangYiXiangCell.m in Sources */,
 				8826186D1BF049BD00FAD6E9 /* WXZKeHuListCell.m in Sources */,
 				8826186C1BF049A800FAD6E9 /* WXZCustomerDetailsVC.m in Sources */,
@@ -1383,7 +1386,6 @@
 				88EAA71D1BD87C180072CD40 /* AFURLResponseSerialization.m in Sources */,
 				8829029A1BE73CDD00BA7D24 /* WXZWoHeadCell.m in Sources */,
 				88DBC1081BF0442900425B81 /* WXZDateObject.m in Sources */,
-				886023611BEC4FF800C0D75E /* WXZGouFangYiXiangCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

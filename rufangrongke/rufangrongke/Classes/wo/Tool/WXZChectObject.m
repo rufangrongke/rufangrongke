@@ -13,7 +13,7 @@
 // 判断字符串是否为空
 + (BOOL)checkWhetherStringIsEmpty:(NSString *)str
 {
-    if ([str isEqualToString:@""] || str == nil || [str isEqual:[NSNull null]])
+    if ([str isEqualToString:@""] || str == nil || [str isEqual:[NSNull null]] || [str isEqualToString:@"<null>"])
     {
         NSLog(@"字符串不能为空");
         return YES;

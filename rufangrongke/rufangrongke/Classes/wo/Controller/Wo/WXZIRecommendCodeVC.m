@@ -49,6 +49,8 @@
     
     // 设置用户名
     self.customerNameLabel.text = self.userName;
+    // 推荐码
+    self.recommendCodeLabel.text = self.recommendedCodeStr;
 }
 
 - (void)didReceiveMemoryWarning {

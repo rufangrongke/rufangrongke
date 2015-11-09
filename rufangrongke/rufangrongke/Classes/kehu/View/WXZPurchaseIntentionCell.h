@@ -13,6 +13,6 @@
 + (instancetype)initPurchaseIntentionCell;
 
 - (void)showTypeName:(NSInteger)row;
-- (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row;
+- (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row  isModify:(BOOL)ismodify yuanData:(NSDictionary *)dic;
 
 @end

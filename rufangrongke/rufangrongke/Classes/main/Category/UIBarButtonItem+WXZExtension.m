@@ -19,4 +19,18 @@
     return [[self alloc] initWithCustomView:button];
 }
 
++ (instancetype)itemWithImage2:(NSString *)image highImage:(NSString *)highImage title:(NSString *)title target:(id)target action:(SEL)action isEnable:(BOOL)enable
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:highImage] forState:UIControlStateHighlighted];
+    button.size = button.currentBackgroundImage.size;
+    button.titleLabel.font = WXZ_SystemFont(16);
+    button.enabled = enable;
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    return [[self alloc] initWithCustomView:button];
+}
+
 @end

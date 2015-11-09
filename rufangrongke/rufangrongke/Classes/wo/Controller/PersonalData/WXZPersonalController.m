@@ -282,7 +282,9 @@
             //将图片存入系统相册
             UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
         }
-        NSData *imgData = UIImagePNGRepresentation(img);
+        
+        // 图片压缩
+        NSData *imgData = UIImageJPEGRepresentation(img, 0.4f);
         
         // 添加转圈
         [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
@@ -311,39 +313,40 @@
     [params setObject:head forKey:@"File"];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyyMMddHHmmss";
-        NSString *str = [formatter stringFromDate:[NSDate date]];
-        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    {
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", @"customerHead"];
         
         [formData appendPartWithFileData:head name:@"headFile" fileName:fileName mimeType:@"image/png"];
         
     } success:^(NSURLSessionDataTask *task, id responseObject)
     {
-        NSString *mm=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"upload = %@",mm);
-        [SVProgressHUD showErrorWithStatus:mm];
-        
-        // 刷新界面
-        [self loginRequest:^(id result) {
-            if (![result isEqual:@"请求失败"])
-            {
-                // 重新获取缓存数据
-                self.personalInfoDic = [self localUserInfo];
-                [self.myTableView reloadData];
-                return;
-            }
-            [SVProgressHUD showErrorWithStatus:result];
-            
-            [SVProgressHUD dismiss]; // 结束菊花
-        }];
+        WXZLog(@"%@",responseObject);
+        if ([responseObject[@"ok"] integerValue] == 1)
+        {
+            // 刷新界面
+            [self loginRequest:^(id result) {
+                if (![result isEqual:@"请求失败"])
+                {
+                    // 重新获取缓存数据
+                    self.personalInfoDic = [self localUserInfo];
+                    [self.myTableView reloadData];
+                }
+                else
+                    [SVProgressHUD showErrorWithStatus:result];
+                
+                [SVProgressHUD dismiss]; // 结束菊花
+            }];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:responseObject];
+        }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];

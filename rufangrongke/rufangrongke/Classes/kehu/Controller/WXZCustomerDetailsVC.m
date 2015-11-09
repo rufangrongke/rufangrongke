@@ -9,10 +9,12 @@
 #import "WXZCustomerDetailsVC.h"
 #import "AFNetworking.h"
 #import <SVProgressHUD.h>
+#import <MessageUI/MessageUI.h> //
 #import "WXZKhdUserInfoCell.h"
 #import "WXZGouFangYiXiangCell.h"
 #import "WXZHousingDetailsCell.h"
-#import <MessageUI/MessageUI.h> //
+#import "WXZAddCustomerVC.h"
+
 
 @interface WXZCustomerDetailsVC () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MFMessageComposeViewControllerDelegate>
 
@@ -116,43 +118,49 @@
 // 编辑事件
 - (void)editAction:(UIButton *)sender
 {
+    // 跳转到修改客户信息页面
+    WXZAddCustomerVC *addVC = [[WXZAddCustomerVC alloc] init];
+    addVC.isModifyCustomerInfo = YES;
+    addVC.titleStr = @"修改客户信息";
+    addVC.detailDic = self.cdDic;
+    [self.navigationController pushViewController:addVC animated:YES];
     // 判断按钮当前图片
-    if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_detailedit"]])
-    {
-        [sender setBackgroundImage:[UIImage imageNamed:@"wo_complete"] forState:UIControlStateNormal]; // 完成
-        
-        self.nameTextField.enabled = YES; // 可用
-        self.phoneNumTextField.enabled = YES; // 可用
-        if ([self.cdDic[@"XingMing"] isEqualToString:@""])
-        {
-            self.nameTextField.placeholder = @"请输入姓名";
-        }
-        if ([self.cdDic[@"Mobile"] isEqualToString:@""])
-        {
-            self.phoneNumTextField.placeholder = @"请输入11位手机号";
-        }
-    }
-    else
-    {
-        [sender setBackgroundImage:[UIImage imageNamed:@"kh_detailedit"] forState:UIControlStateNormal]; // 编辑
-        
-        self.nameTextField.enabled = NO; // 不可用
-        self.phoneNumTextField.enabled = NO; // 不可用
-        if ([self.nameTextField.text isEqualToString:@""])
-        {
-            self.nameTextField.placeholder = @"";
-        }
-        if ([self.phoneNumTextField.text isEqualToString:@""])
-        {
-            self.phoneNumTextField.placeholder = @"";
-        }
-    }
+//    if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_detailedit"]])
+//    {
+//        [sender setBackgroundImage:[UIImage imageNamed:@"wo_complete"] forState:UIControlStateNormal]; // 完成
+//        
+//        self.nameTextField.enabled = YES; // 可用
+//        self.phoneNumTextField.enabled = YES; // 可用
+//        if ([self.cdDic[@"XingMing"] isEqualToString:@""])
+//        {
+//            self.nameTextField.placeholder = @"请输入姓名";
+//        }
+//        if ([self.cdDic[@"Mobile"] isEqualToString:@""])
+//        {
+//            self.phoneNumTextField.placeholder = @"请输入11位手机号";
+//        }
+//    }
+//    else
+//    {
+//        [sender setBackgroundImage:[UIImage imageNamed:@"kh_detailedit"] forState:UIControlStateNormal]; // 编辑
+//        
+//        self.nameTextField.enabled = NO; // 不可用
+//        self.phoneNumTextField.enabled = NO; // 不可用
+//        if ([self.nameTextField.text isEqualToString:@""])
+//        {
+//            self.nameTextField.placeholder = @"";
+//        }
+//        if ([self.phoneNumTextField.text isEqualToString:@""])
+//        {
+//            self.phoneNumTextField.placeholder = @"";
+//        }
+//    }
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -193,6 +201,7 @@
             gfyxCell = [WXZGouFangYiXiangCell initGouFangYiXiangCell];
         }
         gfyxCell.controller = self; // 权限
+        [gfyxCell updateInfo:self.cdDic];
         
         return gfyxCell;
     }
@@ -266,7 +275,7 @@
     return 0.01;
 }
 
-#pragma mark - 
+#pragma mark - 发送短信功能
 - (void)sendSmsAction:(id)sender
 {
     //方法一

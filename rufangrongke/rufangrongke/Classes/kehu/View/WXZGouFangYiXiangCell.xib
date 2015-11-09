@@ -23,12 +23,6 @@
                                 <color key="textColor" red="0.10588235294117647" green="0.10980392156862745" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="（完善购房意向可获得额外积分）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwf-d8-sHz">
-                                <rect key="frame" x="75" y="4" width="232" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0078431372549019607" green="0.53725490196078429" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kh_rbjt" translatesAutoresizingMaskIntoConstraints="NO" id="hkA-RW-Z5I">
                                 <rect key="frame" x="347" y="5" width="11" height="20"/>
                                 <constraints>
@@ -57,6 +51,7 @@
                             <constraint firstAttribute="centerY" secondItem="JJE-4X-uks" secondAttribute="centerY" id="ip3-dB-dA3"/>
                             <constraint firstItem="tI7-TU-hy2" firstAttribute="top" secondItem="meK-cY-kOp" secondAttribute="top" id="rn3-G5-sQo"/>
                             <constraint firstItem="tI7-TU-hy2" firstAttribute="leading" secondItem="meK-cY-kOp" secondAttribute="leading" id="w40-U5-QXl"/>
+                            <constraint firstItem="hkA-RW-Z5I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JJE-4X-uks" secondAttribute="trailing" constant="10" id="yRf-WW-Pud"/>
                             <constraint firstAttribute="height" constant="29" id="z1o-OB-I3H"/>
                         </constraints>
                     </view>
@@ -120,6 +115,9 @@
                     <constraint firstItem="IJt-YS-0w5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ysj-U0-Mzs"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="yixiangLabel" destination="JJE-4X-uks" id="2oV-0x-HjC"/>
+            </connections>
             <point key="canvasLocation" x="532.5" y="339"/>
         </tableViewCell>
     </objects>
