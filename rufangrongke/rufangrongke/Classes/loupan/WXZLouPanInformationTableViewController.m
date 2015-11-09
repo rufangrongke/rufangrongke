@@ -8,15 +8,29 @@
 
 #import "WXZLouPanInformationTableViewController.h"
 #import "WXZLouPanInformationControllerModel.h"
+#import "WXZLouPanInformationControllerCell_0_0.h"
+#import "WXZLouPanInformationControllerCell_0_1.h"
+#import "WXZLouPanInformationControllerCell_1_0.h"
+#import "WXZLouPanInformationControllerCell_1_1.h"
+#import "WXZLouPanInformationControllerCell_1_2.h"
+#import "WXZLouPanInformationControllerCell_1_3.h"
+#import "WXZLouPanInfoVC_footTableView_footView.h"
+#import "WXZLouPanInfoVC_footTableView_Cell.h"
+#import "WXZLouPanInfoVC_footTableView_Cell_2_0.h"
 
 @interface WXZLouPanInformationTableViewController ()
 /* 模型数组 */
 @property (nonatomic , strong) WXZLouPanInformationControllerModel *louPanInformationControllerModel;
 
+/* 其他户型数组 */
+@property (nonatomic , strong) NSArray *othersArray;
+
+/* footTableView */
+@property (nonatomic , strong) UITableView *footTableView;
 @end
 
 @implementation WXZLouPanInformationTableViewController
-
+static NSString *WXZLouPanInfoVC_footTableView_Cell_ID = @"WXZLouPanInfoVC_footTableView_Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 楼盘详情初始化
@@ -31,7 +45,7 @@
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dic = (NSDictionary *)responseObject;
         NSDictionary *hxview = dic[@"hxview"];
-        WXZLog(@"%@", hxview);
+//        WXZLog(@"%@", hxview);
         [WXZLouPanInformationControllerModel setupObjectClassInArray:^NSDictionary *{
             return @{
                      @"others" : @"OthersModel",
@@ -40,6 +54,10 @@
         }];
         
         self.louPanInformationControllerModel = [WXZLouPanInformationControllerModel objectWithKeyValues:hxview];
+        
+        // 刷新表格
+        [self.tableView reloadData];
+//        WXZLog(@"%@", self.louPanInformationControllerModel.others);
         // 4.回到主线程
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             // 加载headView
@@ -67,7 +85,7 @@
 - (void)setUp{
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"WXZLouPanInformationControllerCell"];
+//    [self.tableView registerClass:[WXZLouPanInfoVC_footTableView_Cell class] forCellReuseIdentifier:@"WXZLouPanInfoVC_footTableView_Cell"];
 }
 /**
  * 加载headView
@@ -91,10 +109,22 @@
     [image sd_setImageWithURL:[NSURL URLWithString:[picBaseULR stringByAppendingString:picUrlString]] placeholderImage:[UIImage imageNamed:@"loupan-banner"]];
     
     self.tableView.tableHeaderView = image;
-    //    self.view.tableHeaderView = image;
     
 }
-
+/**
+ *  添加footTableView
+ */
+- (void)setUpfootTableView:(WXZLouPanInformationControllerModel *)model{
+    UITableView *footTableView = [[UITableView alloc] init];
+    footTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 200);
+    footTableView.delegate = self;
+//    footTableView.backgroundColor = [UIColor redColor];
+    // headView
+    UIView *view = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanInfoVC_footTableView_footView class]) owner:nil options:nil].lastObject;
+    view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30);
+    footTableView.tableHeaderView = view;
+    self.tableView.tableFooterView = footTableView;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -103,27 +133,124 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 4;
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     if (section == 0) {
         return 2;
-    }else{
+    }else if (section == 1){
         return 4;
+    }else if (section == 2){
+        return 1;
+    }else{
+        return self.louPanInformationControllerModel.others.count;
     }
 }
 
-
+/*
+ WXZLouPanInfoVC_footTableView_Cell *cell = [tableView dequeueReusableCellWithIdentifier:WXZLouPanInfoVC_footTableView_Cell_ID forIndexPath:indexPath];
+ cell.footTableView_Cell_Model = self.louPanInformationControllerModel.others[indexPath.row];
+ return cell;
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WXZLouPanInformationControllerCell" forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            WXZLouPanInformationControllerCell_0_0 *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanInformationControllerCell_0_0 class]) owner:nil options:nil].lastObject;
+            
+            cell.model_0_0 = self.louPanInformationControllerModel;
+            
+            return cell;
+        }else{
+            WXZLouPanInformationControllerCell_0_1 *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanInformationControllerCell_0_1 class]) owner:nil options:nil].lastObject;
+            
+            cell.model_0_1 = self.louPanInformationControllerModel;
+            
+            return cell;
+        }
+        
+    }else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            WXZLouPanInformationControllerCell_1_0 *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanInformationControllerCell_1_0 class]) owner:nil options:nil].lastObject;
+            
+            cell.model_1_0 = self.louPanInformationControllerModel;
+            
+            
+            return cell;
+        }else if (indexPath.row == 1) {
+            WXZLouPanInformationControllerCell_1_1 *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanInformationControllerCell_1_1 class]) owner:nil options:nil].lastObject;
+            
+            cell.model_1_1 = self.louPanInformationControllerModel;
+            
+            return cell;
+        }else if (indexPath.row == 2) {
+            WXZLouPanInformationControllerCell_1_2 *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanInformationControllerCell_1_2 class]) owner:nil options:nil].lastObject;
+            
+            cell.model_1_2 = self.louPanInformationControllerModel;
+            
+            return cell;
+        }else{
+            WXZLouPanInformationControllerCell_1_3 *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanInformationControllerCell_1_3 class]) owner:nil options:nil].lastObject;
+            
+            cell.model_1_3 = self.louPanInformationControllerModel;
+            
+            return cell;
+        }
+    }else if (indexPath.section == 2){
+        WXZLouPanInfoVC_footTableView_Cell_2_0 *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanInfoVC_footTableView_Cell_2_0 class]) owner:nil options:nil].lastObject;
+        return cell;
+    }else{
+        WXZLouPanInfoVC_footTableView_Cell *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanInfoVC_footTableView_Cell class]) owner:nil options:nil].lastObject;;
+        cell.footTableView_Cell_Model = self.louPanInformationControllerModel.others[indexPath.row];
+        return cell;
+    }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%zd -- %zd", indexPath.section, indexPath.row];
+}
+
+/**
+ *  行高
+ */
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 3)
+    {
+        return 75;
+    }
+    else if (indexPath.section == 2)
+    {
+        return 30;
+    }else if (indexPath.section == 1 && indexPath.row == 3)
+    {
+        return 55;
+    }else{
+        return 45;
+    }
     
-    return cell;
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    // 返回每组的footer高
+    // 返回每组的header高
+    if (section == 2)
+    {
+        return 0;
+    }
+    else
+    {
+        return 10;
+    }
+}
+/**
+ 修改sectionHeadView, sectionFootView的背景颜色
+ */
+static int colorNum = 235;
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section{
+    view.tintColor = [UIColor colorWithRed:colorNum/255.0 green:colorNum/255.0 blue:colorNum/255.0 alpha:1.0];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

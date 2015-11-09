@@ -265,7 +265,7 @@ static CGFloat carouselPic_height = 226;
 /**
  修改sectionHeadView, sectionFootView的背景颜色
  */
-static int colorNum = 215;
+static int colorNum = 235;
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(nonnull UIView *)view forSection:(NSInteger)section
 {
     view.tintColor = [UIColor colorWithRed:colorNum/255.0 green:colorNum/255.0 blue:colorNum/255.0 alpha:1.0];
