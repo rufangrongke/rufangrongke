@@ -20,6 +20,7 @@
 #import "WXZPersonalInfoVC.h"
 #import "WXZWorkingTimeView.h"
 #import "SRMonthPicker.h"
+#import "WXZLoginController.h"
 
 @interface WXZPersonalController () <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SRMonthPickerDelegate>
 
@@ -67,9 +68,9 @@
     [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
     
     [self loginRequest:^(id result) {
-        if (![result isEqualToString:@"请求失败"])
+        if (![result isEqual:@"请求失败"])
         {
-            self.personalInfoDic = result; // 获取最新数据
+            self.personalInfoDic = [self localUserInfo]; // 获取最新数据
             [self.myTableView reloadData]; // 刷新列表
         }
         else
@@ -332,10 +333,10 @@
         
         // 刷新界面
         [self loginRequest:^(id result) {
-            if (![result isEqualToString:@"请求失败"])
+            if (![result isEqual:@"请求失败"])
             {
                 // 重新获取缓存数据
-                self.personalInfoDic = result;
+                self.personalInfoDic = [self localUserInfo];
                 [self.myTableView reloadData];
                 return;
             }
@@ -441,11 +442,12 @@
             
             // 刷新界面
             [self loginRequest:^(id result) {
-                if (![result isEqualToString:@"请求失败"])
+                if (![result isEqual:@"请求失败"])
                 {
                     // 重新获取缓存数据
-                    self.personalInfoDic = result;
+                    self.personalInfoDic = [self localUserInfo];
                     [self.myTableView reloadData];
+                    [SVProgressHUD dismiss];
                     return;
                 }
                 [SVProgressHUD showErrorWithStatus:result];
@@ -457,7 +459,6 @@
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
-        [SVProgressHUD dismiss]; // 取消菊花
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
@@ -470,6 +471,9 @@
 - (void)logOutAction:(id)sender
 {
     NSLog(@"退出登录");
+    // 跳到登录页面
+    WXZLoginController *loginController = [[WXZLoginController alloc]init];
+    [[[[UIApplication sharedApplication] delegate] window] setRootViewController:loginController];
 }
 
 // 返回button 事件

@@ -8,13 +8,20 @@
 
 #import "WXZKeHuController.h"
 #import "AFNetworking.h"
+#import "WXZChectObject.h"
+#import "WXZStringObject.h"
+#import "WXZDateObject.h"
+#import <SVProgressHUD.h>
 #import "WXZKeHuListCell.h"
 #import "WXZKHListHeaderView.h"
 #import "WXZKHListFooterView.h"
+#import "WXZAddCustomerVC.h"
+#import "WXZCustomerDetailsVC.h"
+#import "WXZReportPreparationVC.h"
 
-@interface WXZKeHuController ()
+@interface WXZKeHuController () <UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic,strong) NSMutableDictionary *dataDic;
+@property (nonatomic,strong) NSArray *dataArr;
 
 @end
 
@@ -72,9 +79,14 @@
     searchBar.placeholder = @"请输入客户姓名";
     self.navigationItem.titleView = searchBar;
     
-    // 初始化
-    self.dataDic = [NSMutableDictionary dictionary];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
+    // 初始化
+    self.dataArr = [NSArray array];
+    
+    // 显示菊花
+    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
     // 请求列表
     [self keHuListRequest:@"1" numberEachPage:@"" handsomeChooseCategory:@"" handsomeChooseConditions:@""];
     
@@ -99,8 +111,15 @@
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
+            WXZLog(@"%@",responseObject);
+            self.dataArr = responseObject[@"list"];
+            [self.tableView reloadData];
+        }
+        else
+        {
             
         }
+        [SVProgressHUD dismiss];
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
@@ -108,30 +127,18 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return self.dataArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    if (section == 0)
-    {
-        return 2;
-    }
-    else
-    {
-        return 3;
-    }
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,22 +151,20 @@
         keHuInfoCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    // 添加单击事件
-    [keHuInfoCell buttonWithTarget:self action:@selector(reportedOrCallAction:)];
-    keHuInfoCell.reportedBtn.hidden = YES;
-    keHuInfoCell.reportedOrCallBtn.hidden = NO;
+    keHuInfoCell.controller = self; // 权限
     
     // 赋值
-    keHuInfoCell.customerNameLabel.text = @"刘丽莎";
-    keHuInfoCell.customerPhoneLabel.text = @"13921754683";
-    keHuInfoCell.houseInfoLabel.text = @"急售新华区｜裕华区，｜三室｜别墅，440-1000万";
+    [keHuInfoCell showKeHuListInfo:self.dataArr[indexPath.section]];
     
     return keHuInfoCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"click %ld row",(long)indexPath.row);
+    // 客户详情页
+    WXZCustomerDetailsVC *customerDetailsVC = [[WXZCustomerDetailsVC alloc] init];
+    customerDetailsVC.customerId = self.dataArr[indexPath.section][@"id"];
+    [self.navigationController pushViewController:customerDetailsVC animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -181,10 +186,18 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    WXZKHListFooterView *footerView = [WXZKHListFooterView initListFooterView]; // footer背景 view
-    [footerView footerInfoLabel:@"15-10-21 10:10 带看裕华区6号楼 590-1000W,阿萨德和积分卡"]; // footer 信息
-    
-    return footerView;
+    // 首先判断有没有值
+    if (![WXZChectObject checkWhetherStringIsEmpty:self.dataArr[section][@"hdTime"]] || ![WXZChectObject checkWhetherStringIsEmpty:self.dataArr[section][@"typeSmall"]])
+    {
+        WXZKHListFooterView *footerView = [WXZKHListFooterView initListFooterView]; // footer背景 view
+        [footerView footerInfoLabel:self.dataArr[section]]; // footer 信息
+        
+        return footerView;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -207,26 +220,29 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 75;
+    return [self calculateHeightOfRow:self.dataArr[indexPath.section]]; // 75
+}
+
+// 计算行高
+- (NSInteger)calculateHeightOfRow:(NSDictionary *)dic
+{
+    NSString *yixiangStr = dic[@"YiXiang"];
+    NSInteger yixiang = 0;
+    if (![WXZChectObject checkWhetherStringIsEmpty:yixiangStr])
+    {
+        yixiang = 18;
+    }
+    
+    return 20 + 20 + 12 + yixiang; // 返回行高
 }
 
 // 添加新客户事件
 - (void)addNewKeHuAction:(id)sender
 {
     NSLog(@"添加新客户!");
-}
-
-// 报备/打电话事件
-- (void)reportedOrCallAction:(UIButton *)sender
-{
-    if (sender.tag == 100001)
-    {
-        NSLog(@"报备事件");
-    }
-    else
-    {
-        NSLog(@"打电话事件");
-    }
+    // 添加新客户页
+    WXZAddCustomerVC *addCustomerVC = [[WXZAddCustomerVC alloc] init];
+    [self.navigationController pushViewController:addCustomerVC animated:YES];
 }
 
 #pragma mark - Navigation BarButtonItem Click Event
@@ -240,6 +256,11 @@
 {
     // 确定
     NSLog(@"确定");
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*

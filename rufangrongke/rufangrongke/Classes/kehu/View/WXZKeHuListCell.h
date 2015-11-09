@@ -28,12 +28,18 @@
  *  reportedOrCallBtn   打电话
  */
 @property (weak, nonatomic) IBOutlet UIButton *reportedBtn;
-@property (weak, nonatomic) IBOutlet UIButton *reportedOrCallBtn;
+@property (weak, nonatomic) IBOutlet UIButton *callBtn;
+
+// 传controller
+@property (nonatomic,strong) UIViewController *controller;
 
 // 加载nib文件
 + (instancetype)initListCell;
 
 // 添加 button 单击事件
 - (void)buttonWithTarget:(id)target action:(SEL)action;
+
+// 更新数据
+- (void)showKeHuListInfo:(NSDictionary *)dic;
 
 @end

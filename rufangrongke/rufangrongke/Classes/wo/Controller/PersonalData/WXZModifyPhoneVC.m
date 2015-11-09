@@ -88,40 +88,6 @@
     // 判断有没有手机号
     if (![WXZChectObject checkWhetherStringIsEmpty:self.currentPhoneNumLabel.text])
     {
-//        // 请求路径
-//        NSString *urlString = [OutNetBaseURL stringByAppendingString:yanzhengma];
-//        // AFNetworking
-//        NSMutableDictionary *parameterS = [NSMutableDictionary dictionary];
-//        parameterS[@"Act"] = @"ChangMobile";
-//        parameterS[@"Mobile"] = self.currentPhoneNumLabel.text;
-//        [[AFHTTPSessionManager manager] POST:urlString parameters:parameterS success:^(NSURLSessionDataTask *task, id responseObject) {
-//            NSDictionary *dic = (NSDictionary *)responseObject;
-//            WXZLog(@"%@", responseObject);
-//            if ([dic[@"msg"] isEqualToString:@"发送成功"]) {
-//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                    JxbScaleButton* btn = (JxbScaleButton*)sender;
-//                    JxbScaleSetting* setting = [[JxbScaleSetting alloc] init];
-//                    setting.strPrefix = @"";
-//                    setting.strSuffix = @"秒";
-//                    setting.strCommon = @"重新发送";
-//                    
-//                    setting.indexStart = [dic[@"timeout"] integerValue];
-//                    WXZLog(@"%@", btn);
-//                    [btn startWithSetting:setting];
-//                    [self.view setNeedsDisplay];
-//                    //                [self.view layoutIfNeeded];
-//                    //                WXZLog(@"%@", dic);
-//                }];
-//                //            NSLog(@"hhhhhhhhhh");
-//                
-//            }else{
-//                [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
-//            }
-//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//            //        WXZLog(@"%@", error);
-//            [SVProgressHUD showErrorWithStatus:@"请求失败"];
-//        }];
-
         // 显示菊花
         [SVProgressHUD showWithStatus:@"发送中..." maskType:SVProgressHUDMaskTypeBlack];
         NSString *url = [OutNetBaseURL stringByAppendingString:yanzhengma];
@@ -177,11 +143,10 @@
         }
         else
         {
-            int seconds = timeout % 60; // 或 timeout % 300 或 timeout（计算分几次，每次60秒）
+            int seconds = timeout; // 或 timeout % 300 或 timeout（计算分几次，每次60秒）
             NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-//                NSLog(@"____%@",strTime);
                 [_codeBtn setTitle:[NSString stringWithFormat:@"%@秒",strTime] forState:UIControlStateNormal];
                 _codeBtn.userInteractionEnabled = NO;
             });

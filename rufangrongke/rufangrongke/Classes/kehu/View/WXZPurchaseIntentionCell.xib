@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PurchaseIntentionCell" rowHeight="106" id="KGk-i7-Jjw" customClass="WXZPurchaseIntentionCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="106"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="期望区域：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fb-Fo-Qp9">
+                        <rect key="frame" x="11" y="17" width="75" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_personal_divider" translatesAutoresizingMaskIntoConstraints="NO" id="TLg-30-6IU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="QWK-tL-kdj"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="TLg-30-6IU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5hY-AT-423"/>
+                    <constraint firstItem="6Fb-Fo-Qp9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="8xI-Cc-ZlT"/>
+                    <constraint firstItem="6Fb-Fo-Qp9" firstAttribute="top" secondItem="TLg-30-6IU" secondAttribute="bottom" constant="16" id="FHd-mA-Udm"/>
+                    <constraint firstAttribute="trailing" secondItem="TLg-30-6IU" secondAttribute="trailing" id="ZgA-71-Ls7"/>
+                    <constraint firstItem="TLg-30-6IU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mGq-yo-dTm"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="lineImgView" destination="TLg-30-6IU" id="oLT-GH-c1d"/>
+                <outlet property="typeLabel" destination="6Fb-Fo-Qp9" id="woA-ry-OM6"/>
+            </connections>
+            <point key="canvasLocation" x="532.5" y="358"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="wo_personal_divider" width="375" height="1"/>
+    </resources>
+</document>

@@ -197,50 +197,6 @@
     [param setObject:sfzid forKey:@"sfzid"]; // 身份证号码
     [param setObject:sfzPic forKey:@"sfzPic"]; // 身份证图片
     
-    /*
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:requestUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
-    {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyyMMddHHmmss";
-        NSString *str = [formatter stringFromDate:[NSDate date]];
-        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
-        
-        [formData appendPartWithFileData:sfzPic name:@"headFile" fileName:fileName mimeType:@"image/png"];
-        
-    } error:nil];
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    NSProgress *progress = nil;
-    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
-    {
-        if (error)
-        {
-            NSLog(@"Error: %@", error);
-        } else
-        {
-            NSLog(@"\n response = %@  \n responseObject = %@", response, responseObject);
-            
-//
-//            response = <NSHTTPURLResponse: 0x7fe52841c040> { URL: http://192.168.1.21:34/Svs/UsRz.ashx } { status code: 200, headers {
-//                Server : Microsoft-IIS/8.5,
-//                Content-Type : application/json; charset=utf-8,
-//                X-Powered-By : ASP.NET,
-//                Date : Mon, 02 Nov 2015 12:17:45 GMT,
-//                Content-Length : 33,
-//                Cache-Control : private,
-//                X-AspNet-Version : 4.0.30319
-//            } }  
-//            responseObject = {
-//                msg : 提交失败,
-//                ok : 0
-//            }
-        }
-    }];
-    
-    [uploadTask resume]; */
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     
@@ -253,9 +209,11 @@
         
         [formData appendPartWithFileData:sfzPic name:@"headFile" fileName:fileName mimeType:@"image/png"];
         
-    } success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    } success:^(NSURLSessionDataTask *task, id responseObject)
+    {
+        WXZLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error)
+    {
         
     }];
     
@@ -263,7 +221,7 @@
     [manager setTaskDidSendBodyDataBlock:^(NSURLSession *session, NSURLSessionTask *task, int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend)
     {
         // bytesSent本次上传了多少字节,totalBytesSent累计上传了多少字节,totalBytesExpectedToSend文件有多大,应该上传多少
-        NSLog(@"task %@ progress is %f ", task, totalBytesSent*1.0/totalBytesExpectedToSend);
+//        NSLog(@"task %@ progress is %f ", task, totalBytesSent*1.0/totalBytesExpectedToSend);
         
         // 设置当前进度值
         CGFloat uploadProportion = totalBytesSent*1.0 / totalBytesExpectedToSend;
