@@ -40,14 +40,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 1.创建请求对象
-    NSString *urlString = [OutNetBaseURL stringByAppendingString:@"HnView.ashx"];
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:loupanxiangqing];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"fy"] = @4;
+    parameters[@"fy"] = self.fyhao;
     // afn
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dic = (NSDictionary *)responseObject;
-//        NSDictionary *view = dic[@"view"];
+//        WXZLog(@"%@", dic[@"view"]);
         self.louPanXiangQingModel = [WXZLouPanXiangQingModel objectWithKeyValues:dic[@"view"]];
 
         // 4.回到主线程
@@ -100,24 +100,42 @@
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             [dateFormat setDateFormat:@"MM/dd/yyyy HH:mm:ss"];
             NSDate *date =[dateFormat dateFromString:self.louPanXiangQingModel.KaiPanTime];
-            [dateFormat setDateFormat:@"yyyyn年MM月dd日 HH:mm:ss"];
-            NSString *kaiPanTime = [dateFormat stringFromDate:date];
-            NSLog(@"%@", kaiPanTime);
-//            self.kaipanshijian.text = self.louPanXiangQingModel.KaiPanTime;
-//            self.jiaofangshijian.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.kaifashangpinpai.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.wuyegongsi.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.jianzhumianji.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.zonghushu.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.rongjilv.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.lvhualv.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.cheweishu.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.cheweibi.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.junjia.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.wuyefei.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.jianzhuleixing.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.zhuangxiuleixing.text = self.louPanXiangQingModel.JiaoFangTime;
-//            self.chanquannianxian.text = self.louPanXiangQingModel.JiaoFangTime;
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+            NSString *wxzTime = [dateFormatter stringFromDate:date];
+            // 开盘时间
+            self.kaipanshijian.text = wxzTime;
+            // 交房时间
+            date =[dateFormat dateFromString:self.louPanXiangQingModel.JiaoFangTime];
+            wxzTime = [dateFormatter stringFromDate:date];
+            self.jiaofangshijian.text = wxzTime;
+            // 开发商品牌
+            self.kaifashangpinpai.text = self.louPanXiangQingModel.KaiFaShangPiPai;
+            // 物业公司
+            self.wuyegongsi.text = self.louPanXiangQingModel.WuYeGongSi;
+            // 建筑面积
+            self.jianzhumianji.text = [NSString stringWithFormat:@"%zd平米", self.louPanXiangQingModel.Area_JianZhu];
+            // 总户数
+            self.zonghushu.text = [NSString stringWithFormat:@"%zd", self.louPanXiangQingModel.ZongHuShu];
+            // 容积率
+            self.rongjilv.text = [NSString stringWithFormat:@"%.1f", self.louPanXiangQingModel.RongJiLv];
+            // 绿化率
+            self.lvhualv.text = [NSString stringWithFormat:@"%.1f", self.louPanXiangQingModel.LvHuaLv];
+            // 车位数
+            self.cheweishu.text = [NSString stringWithFormat:@"%zd", self.louPanXiangQingModel.CheWeiShu];
+            // 车位比
+            self.cheweibi.text = self.louPanXiangQingModel.CheWeiBi;
+            
+            // 均价
+            self.junjia.text = [NSString stringWithFormat:@"%zd元", self.louPanXiangQingModel.JunJia];
+            // 物业费
+            self.wuyefei.text = [NSString stringWithFormat:@"%.1f", self.louPanXiangQingModel.WuYeFei];
+            // 建筑类型
+            self.jianzhuleixing.text = self.louPanXiangQingModel.JianZhuLeiXing;
+            // 装修类型
+            self.zhuangxiuleixing.text = self.louPanXiangQingModel.ZhuangXiu;
+            // 产权年限
+            self.chanquannianxian.text = [NSString stringWithFormat:@"%zd", self.louPanXiangQingModel.ChanQuanNianXian];
             
             
         }];

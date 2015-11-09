@@ -183,8 +183,8 @@
     // 将控制器的view添加到contentScrollView中
     UIViewController *showVC = self.VC_array[index];
     
-//    // 如果当前位置的位置已经显示过了，就直接返回
-//    if ([showVC isViewLoaded]) return;
+    // 如果当前位置的位置已经显示过了，就直接返回
+    if ([showVC isViewLoaded]) return;
     
     showVC.view.frame = CGRectMake(scrollView.contentOffset.x, 0, scrollView.frame.size.width, scrollView.frame.size.height);
     [scrollView addSubview:showVC.view];

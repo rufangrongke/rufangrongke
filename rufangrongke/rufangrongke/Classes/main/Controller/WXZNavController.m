@@ -33,7 +33,7 @@
     NSDictionary *titleAttributeDic = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:WXZ_SystemFont(20)};
     [self.navigationBar setTitleTextAttributes:titleAttributeDic];
 
-        [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"NavBg"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"NavBg"] forBarMetrics:UIBarMetricsDefault];
 }
 
 /**

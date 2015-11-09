@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WXZMaiDianController : UIViewController
+@interface WXZMaiDianController : UITableViewController
 
+/* 楼盘参数 */
+@property(nonatomic,copy) NSString *fyhao;
 @end

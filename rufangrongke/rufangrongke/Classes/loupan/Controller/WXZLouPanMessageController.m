@@ -15,8 +15,12 @@
 #import "WXZLouPanMessageCell_1_0.h"
 #import "WXZLiandong.h"
 #import "WXZXiangQingController.h"
+#import "WXZMaiDianController.h"
+#import "WXZLouPanBottomBar.h"
+#import "WXZLouPanHuXingController.h"
 
-@interface WXZLouPanMessageController ()<UITableViewDataSource, UITableViewDelegate>
+
+@interface WXZLouPanMessageController ()<UITableViewDataSource, UITableViewDelegate, LouPanHuXingControllerDelegate>
 /*轮播图片URL*/
 @property(nonatomic, strong) NSArray *PicUrls;
 /* 楼盘详情 */
@@ -28,9 +32,24 @@
 
 // 添加底部栏
 - (void)setUpBottomBar{
-    UIView *bottomBar = [[UIView alloc] init];
-    bottomBar.frame = CGRectMake(0, 0, 200, 300);
-    bottomBar.backgroundColor = [UIColor redColor];
+    // 尺寸
+    CGFloat bottomBarH = 52;
+    CGFloat bottomBarW = 375;
+    CGFloat bottomBarX = 0;
+    CGFloat bottomBarY = 0;
+    CGFloat mainViewW = self.tableView.frame.size.width;
+    CGFloat mainViewH = self.tableView.frame.size.height;
+    CGFloat mainScreenW = [UIScreen mainScreen].bounds.size.width;
+    CGFloat mainScreenH = [UIScreen mainScreen].bounds.size.height;
+    
+    bottomBarH = 52 ;
+    bottomBarW = 375;
+    bottomBarX = 0;
+    bottomBarY = mainViewH - bottomBarH;
+    
+    WXZLouPanBottomBar *bottomBar = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanBottomBar class]) owner:nil options:nil].firstObject;
+    bottomBar.frame = CGRectMake(bottomBarX, bottomBarY, bottomBarW, bottomBarH);
+//    bottomBar.backgroundColor = [UIColor redColor];
     [self.tableView addSubview:bottomBar];
 }
 // 轮播图片 宽 / 高
@@ -43,10 +62,6 @@ static CGFloat carouselPic_height = 226;
     // 右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"loupan-callout" highImage:@"kh_dianhua" target:self action:@selector(phone_click)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.tableView.backgroundColor = [UIColor redColor];
-    self.tableView.sectionIndexBackgroundColor = [UIColor redColor];
-//    self.tableView.sectionFooterHeight = 1000;
-    self.tableView.tintColor = [UIColor redColor];
 }
 /**
  *  右上角打电话按钮,点击监听
@@ -104,37 +119,36 @@ static CGFloat carouselPic_height = 226;
         self.PicUrls = PicUrls;
         // 非轮播图片
         pageView.imageNames = self.PicUrls;
-//        // 轮播图片
-//        scrollView.images = PicUrls;
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
     }];
     
-    // 添加底部栏
-//    [self setUpBottomBar];
-    
     // 添加footView
-    WXZXiangQingController *vc01 = [[WXZXiangQingController alloc] init];
-    vc01.view.backgroundColor = [UIColor greenColor];
+    WXZLouPanHuXingController *vc01 = [[WXZLouPanHuXingController alloc] init];
+//    vc01.view.backgroundColor = [UIColor greenColor];
     vc01.title = @"户型";
+    vc01.fyhao = self.fyhao;
+    // 设置户型代理
+    vc01.delegate = self;
     
-    WXZXiangQingController *vc02 = [[WXZXiangQingController alloc] init];
-    vc02.view.backgroundColor = [UIColor yellowColor];
+    WXZMaiDianController *vc02 = [[WXZMaiDianController alloc] init];
+//    vc02.view.backgroundColor = [UIColor yellowColor];
     vc02.title = @"卖点";
+    vc01.fyhao = self.fyhao;
     
     WXZXiangQingController *vc03 = [[WXZXiangQingController alloc] init];
-    vc03.view.backgroundColor = [UIColor purpleColor];
+//    vc03.view.backgroundColor = [UIColor purpleColor];
     vc03.title = @"详情";
-    //    WXZLiandong *liandong = [[WXZLiandong alloc] init];
+    vc01.fyhao = self.fyhao;
+    
     WXZLiandong *liandong = [WXZLiandong makeLiandongView:[NSMutableArray arrayWithObjects:vc01, vc02, vc03, nil]];
-    
-    
     liandong.backgroundColor = [UIColor clearColor];
-    
-    liandong.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 600);
-    
+    liandong.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 350);
     self.tableView.tableFooterView = liandong;
     
+    // 添加底部栏
+//    [self setUpBottomBar];
+    self.navigationController.hidesBottomBarWhenPushed = NO;
     
 }
 
@@ -266,87 +280,12 @@ static int colorNum = 215;
     // Dispose of any resources that can be recreated.
 }
 
-
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    // Return the number of sections.
-//    return 0;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+#pragma LouPanHuXingControllerDelegate
+- (void)louPanHuXingControllerDelegate:(UIViewController *)vc
+{
+    [self.navigationController pushViewController:vc animated:YES];
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

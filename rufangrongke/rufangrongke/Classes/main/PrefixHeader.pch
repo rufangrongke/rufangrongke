@@ -24,6 +24,13 @@
 // 控制器登陆扩展
 #import "UIViewController+WXZLogin.h"
 
+// 第三方控件
+#import <SVProgressHUD.h>
+#import <MJRefresh.h>
+#import <MJExtension.h>
+#import <UIImageView+WebCache.h>
+#import "AFNetworking.h"
+
 #endif
 
 #pragma 自定义日志输出
