@@ -20,4 +20,12 @@
     // Configure the view for the selected state
 }
 
+- (void)setModel:(View *)model
+{
+    _model = model;
+    self.yixiangkehuNum.text = [NSString stringWithFormat:@"%zd", model.YiXiangKeHuNum];
+    self.hezuojingjirenNum.text = [NSString stringWithFormat:@"%zd", model.HeZuoJJrNum];
+    self.zuijinchengjiaoNum.text = [NSString stringWithFormat:@"%zd", model.ChengJiaoNum];
+
+}
 @end

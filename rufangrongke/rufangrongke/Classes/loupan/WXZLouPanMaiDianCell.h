@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WXZLouPanMessageModel.h"
 @interface WXZLouPanMaiDianCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *louPanMaiDianLabel;
-
+/* model */
+@property (nonatomic , strong) WXZLouPanMessageModel *model;
 @end

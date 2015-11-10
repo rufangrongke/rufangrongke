@@ -40,7 +40,7 @@
     
     // AFNetworking
     NSMutableDictionary *parameterS = [NSMutableDictionary dictionary];
-    parameterS[@"Act"] = @"GetPass";
+    parameterS[@"Act"] = @"Reg";
     parameterS[@"Mobile"] = self.phoneNumber.text;
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameterS success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dic = (NSDictionary *)responseObject;

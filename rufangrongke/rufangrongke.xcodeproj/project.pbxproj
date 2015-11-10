@@ -30,6 +30,7 @@
 		8808690E1BF0C58300128610 /* WXZLouPanYongJinCell_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8808690C1BF0C58300128610 /* WXZLouPanYongJinCell_0.xib */; };
 		880869121BF0C59800128610 /* WXZLouPanYongJinCell_1.m in Sources */ = {isa = PBXBuildFile; fileRef = 880869101BF0C59800128610 /* WXZLouPanYongJinCell_1.m */; };
 		880869131BF0C59800128610 /* WXZLouPanYongJinCell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 880869111BF0C59800128610 /* WXZLouPanYongJinCell_1.xib */; };
+		880869161BF1DCCB00128610 /* WXZLouPanMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 880869151BF1DCCB00128610 /* WXZLouPanMessageModel.m */; };
 		8826186C1BF049A800FAD6E9 /* WXZCustomerDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8860234A1BEC4F9300C0D75E /* WXZCustomerDetailsVC.m */; };
 		8826186D1BF049BD00FAD6E9 /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 886023831BEC510400C0D75E /* WXZKeHuListCell.m */; };
 		8826186E1BF049EA00FAD6E9 /* WXZGouFangYiXiangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 886023591BEC4FF800C0D75E /* WXZGouFangYiXiangCell.m */; };
@@ -140,8 +141,6 @@
 		8876D5D41BE1B8E9001A7EAF /* WXZiMuTableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8876D5D31BE1B8E9001A7EAF /* WXZiMuTableObject.m */; };
 		8876D5DA1BE1BD03001A7EAF /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 8876D5D81BE1BD03001A7EAF /* pinyin.c */; };
 		888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */; };
-		888115E61BDDD288003A0356 /* WXZLoupanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888115E01BDDCA5F003A0356 /* WXZLoupanCell.xib */; };
-		888115E71BDDD293003A0356 /* WXZLoupanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115DE1BDDCA3F003A0356 /* WXZLoupanCell.m */; };
 		888115EA1BDE068C003A0356 /* UIViewController+WXZLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115E91BDE068C003A0356 /* UIViewController+WXZLogin.m */; };
 		888115ED1BDE4230003A0356 /* JxbScaleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115EC1BDE4230003A0356 /* JxbScaleButton.m */; };
 		888588761BE715430015A69C /* WXZChectObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 888588751BE715430015A69C /* WXZChectObject.m */; };
@@ -154,8 +153,6 @@
 		88AE89381BE07EA800407ECF /* WXZLouPanMessageCell_0_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AE89361BE07EA800407ECF /* WXZLouPanMessageCell_0_1.xib */; };
 		88AE893C1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AE893A1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m */; };
 		88AE893D1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AE893B1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.xib */; };
-		88AE89411BE07ED200407ECF /* WXZLouPanMessageCell_2_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AE893F1BE07ED200407ECF /* WXZLouPanMessageCell_2_0.m */; };
-		88AE89421BE07ED200407ECF /* WXZLouPanMessageCell_2_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AE89401BE07ED200407ECF /* WXZLouPanMessageCell_2_0.xib */; };
 		88C108931BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C108911BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.m */; };
 		88C108941BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C108921BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.xib */; };
 		88C1089C1BF0A85800337E09 /* WXZLouPanYongJinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C1089A1BF0A85800337E09 /* WXZLouPanYongJinController.m */; };
@@ -243,6 +240,8 @@
 		8808690F1BF0C59800128610 /* WXZLouPanYongJinCell_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanYongJinCell_1.h; sourceTree = "<group>"; };
 		880869101BF0C59800128610 /* WXZLouPanYongJinCell_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanYongJinCell_1.m; sourceTree = "<group>"; };
 		880869111BF0C59800128610 /* WXZLouPanYongJinCell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanYongJinCell_1.xib; sourceTree = "<group>"; };
+		880869141BF1DCCB00128610 /* WXZLouPanMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanMessageModel.h; sourceTree = "<group>"; };
+		880869151BF1DCCB00128610 /* WXZLouPanMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanMessageModel.m; sourceTree = "<group>"; };
 		882618741BF050AC00FAD6E9 /* WXZLouPanInformationControllerCell_0_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanInformationControllerCell_0_0.h; sourceTree = "<group>"; };
 		882618751BF050AC00FAD6E9 /* WXZLouPanInformationControllerCell_0_0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanInformationControllerCell_0_0.m; sourceTree = "<group>"; };
 		882618761BF050AC00FAD6E9 /* WXZLouPanInformationControllerCell_0_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanInformationControllerCell_0_0.xib; sourceTree = "<group>"; };
@@ -415,9 +414,6 @@
 		8876D5D91BE1BD03001A7EAF /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pinyin.h; path = Tool/pinyin.h; sourceTree = "<group>"; };
 		888115DA1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+WXZExtension.h"; sourceTree = "<group>"; };
 		888115DB1BDDC12D003A0356 /* UIBarButtonItem+WXZExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+WXZExtension.m"; sourceTree = "<group>"; };
-		888115DD1BDDCA3F003A0356 /* WXZLoupanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLoupanCell.h; sourceTree = "<group>"; };
-		888115DE1BDDCA3F003A0356 /* WXZLoupanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLoupanCell.m; sourceTree = "<group>"; };
-		888115E01BDDCA5F003A0356 /* WXZLoupanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLoupanCell.xib; sourceTree = "<group>"; };
 		888115E81BDE068C003A0356 /* UIViewController+WXZLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WXZLogin.h"; sourceTree = "<group>"; };
 		888115E91BDE068C003A0356 /* UIViewController+WXZLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WXZLogin.m"; sourceTree = "<group>"; };
 		888115EB1BDE4230003A0356 /* JxbScaleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JxbScaleButton.h; sourceTree = "<group>"; };
@@ -439,9 +435,6 @@
 		88AE89391BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanMessageCell_1_0.h; sourceTree = "<group>"; };
 		88AE893A1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanMessageCell_1_0.m; sourceTree = "<group>"; };
 		88AE893B1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanMessageCell_1_0.xib; sourceTree = "<group>"; };
-		88AE893E1BE07ED200407ECF /* WXZLouPanMessageCell_2_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanMessageCell_2_0.h; sourceTree = "<group>"; };
-		88AE893F1BE07ED200407ECF /* WXZLouPanMessageCell_2_0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanMessageCell_2_0.m; sourceTree = "<group>"; };
-		88AE89401BE07ED200407ECF /* WXZLouPanMessageCell_2_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanMessageCell_2_0.xib; sourceTree = "<group>"; };
 		88C108901BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanInfoVC_footTableView_Cell_2_0.h; sourceTree = "<group>"; };
 		88C108911BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanInfoVC_footTableView_Cell_2_0.m; sourceTree = "<group>"; };
 		88C108921BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanInfoVC_footTableView_Cell_2_0.xib; sourceTree = "<group>"; };
@@ -601,12 +594,6 @@
 				885387FD1BDD1DC0005DCF38 /* WXZTableViewCell.h */,
 				885387FE1BDD1DC0005DCF38 /* WXZTableViewCell.m */,
 				885387FF1BDD1DC0005DCF38 /* WXZTableViewCell.xib */,
-				888115DD1BDDCA3F003A0356 /* WXZLoupanCell.h */,
-				888115DE1BDDCA3F003A0356 /* WXZLoupanCell.m */,
-				888115E01BDDCA5F003A0356 /* WXZLoupanCell.xib */,
-				886332351BDF5F5D00218E4B /* WXZLouPan_ViwepagerCell.h */,
-				886332361BDF5F5D00218E4B /* WXZLouPan_ViwepagerCell.m */,
-				886332371BDF5F5D00218E4B /* WXZLouPan_ViwepagerCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -793,6 +780,8 @@
 				8827936E1BEC757300218F13 /* WXZLouPanMaiDianModel.m */,
 				882793C61BEC9A9900218F13 /* WXZLouPanHuXingModel.h */,
 				882793C71BEC9A9900218F13 /* WXZLouPanHuXingModel.m */,
+				880869141BF1DCCB00128610 /* WXZLouPanMessageModel.h */,
+				880869151BF1DCCB00128610 /* WXZLouPanMessageModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1168,9 +1157,6 @@
 				88AE89391BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.h */,
 				88AE893A1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m */,
 				88AE893B1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.xib */,
-				88AE893E1BE07ED200407ECF /* WXZLouPanMessageCell_2_0.h */,
-				88AE893F1BE07ED200407ECF /* WXZLouPanMessageCell_2_0.m */,
-				88AE89401BE07ED200407ECF /* WXZLouPanMessageCell_2_0.xib */,
 				8827935E1BEC540900218F13 /* WXZLouPanMaiDianCell.h */,
 				8827935F1BEC540900218F13 /* WXZLouPanMaiDianCell.m */,
 				882793601BEC540900218F13 /* WXZLouPanMaiDianCell.xib */,
@@ -1369,8 +1355,6 @@
 			files = (
 				8808690E1BF0C58300128610 /* WXZLouPanYongJinCell_0.xib in Resources */,
 				882793741BEC804D00218F13 /* WXZLouPanBottomBar.xib in Resources */,
-				888115E61BDDD288003A0356 /* WXZLoupanCell.xib in Resources */,
-				88AE89421BE07ED200407ECF /* WXZLouPanMessageCell_2_0.xib in Resources */,
 				886023751BEC500A00C0D75E /* WXZPurchaseIntentionCell.xib in Resources */,
 				8829028B1BE73C6400BA7D24 /* WXZPersonalDeclarationVC.xib in Resources */,
 				8829029F1BE73CDD00BA7D24 /* WXZWoTypeCell.xib in Resources */,
@@ -1415,7 +1399,6 @@
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
 				885388011BDD1DC0005DCF38 /* WXZTableViewCell.xib in Resources */,
 				882793671BEC55DC00218F13 /* WXZLouPanMaiDianCell_1.xib in Resources */,
-				886332391BDF5F5D00218E4B /* WXZLouPan_ViwepagerCell.xib in Resources */,
 				8829029D1BE73CDD00BA7D24 /* WXZWoListCell.xib in Resources */,
 				882902B11BE73CFE00BA7D24 /* WXZCitySectionHeader.xib in Resources */,
 				88700EED1BF1C14A003F2224 /* WXZScreeningView.xib in Resources */,
@@ -1506,7 +1489,6 @@
 				8826186D1BF049BD00FAD6E9 /* WXZKeHuListCell.m in Sources */,
 				8826186C1BF049A800FAD6E9 /* WXZCustomerDetailsVC.m in Sources */,
 				8852738A1BF048D5008803EF /* WXZRealEstateListCell.m in Sources */,
-				888115E71BDDD293003A0356 /* WXZLoupanCell.m in Sources */,
 				8860238D1BEC510400C0D75E /* WXZKHListFooterView.m in Sources */,
 				882902C71BE74EA100BA7D24 /* SRMonthPicker.m in Sources */,
 				8876D5D41BE1B8E9001A7EAF /* WXZiMuTableObject.m in Sources */,
@@ -1514,6 +1496,7 @@
 				888115E51BDDCEE9003A0356 /* UIBarButtonItem+WXZExtension.m in Sources */,
 				886023701BEC500A00C0D75E /* WXZBasicInfoCell.m in Sources */,
 				88DDCAD51BEB50EE001A9F56 /* WXZLianDongLabelView.m in Sources */,
+				880869161BF1DCCB00128610 /* WXZLouPanMessageModel.m in Sources */,
 				8826188B1BF050F100FAD6E9 /* WXZLouPanInformationControllerCell_1_2.m in Sources */,
 				882902B61BE73CFE00BA7D24 /* WXZPersonalDataCell.m in Sources */,
 				8829028E1BE73C6400BA7D24 /* WXZPersonalStoreVC.m in Sources */,
@@ -1585,7 +1568,6 @@
 				882902B01BE73CFE00BA7D24 /* WXZCitySectionHeader.m in Sources */,
 				888115ED1BDE4230003A0356 /* JxbScaleButton.m in Sources */,
 				88E30FB41BEA340F002F5FF1 /* WXZMaiDianController.m in Sources */,
-				886332381BDF5F5D00218E4B /* WXZLouPan_ViwepagerCell.m in Sources */,
 				885387F01BDCB958005DCF38 /* WXZConst.m in Sources */,
 				8829028A1BE73C6400BA7D24 /* WXZPersonalDeclarationVC.m in Sources */,
 				882618771BF050AC00FAD6E9 /* WXZLouPanInformationControllerCell_0_0.m in Sources */,
@@ -1594,7 +1576,6 @@
 				88EAA71A1BD87C180072CD40 /* AFSecurityPolicy.m in Sources */,
 				88EAA7171BD87C180072CD40 /* AFHTTPRequestOperationManager.m in Sources */,
 				88EAA7221BD88DA40072CD40 /* WXZLoginController.m in Sources */,
-				88AE89411BE07ED200407ECF /* WXZLouPanMessageCell_2_0.m in Sources */,
 				88DDCADA1BEB6BCE001A9F56 /* WXZLouPanXiangQingModel.m in Sources */,
 				88C1089C1BF0A85800337E09 /* WXZLouPanYongJinController.m in Sources */,
 				88AE893C1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m in Sources */,

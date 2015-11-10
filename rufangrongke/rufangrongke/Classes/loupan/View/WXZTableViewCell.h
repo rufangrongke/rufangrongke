@@ -10,5 +10,5 @@
 #import "WXZLouPan.h"
 @interface WXZTableViewCell : UITableViewCell
 /** 楼盘模型 */
-@property (nonatomic, strong) WXZLouPan *loupan;
+@property (nonatomic, strong) Fys *fys;
 @end

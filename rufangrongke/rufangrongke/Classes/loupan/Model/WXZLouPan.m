@@ -10,4 +10,13 @@
 
 @implementation WXZLouPan
 
+
++ (NSDictionary *)objectClassInArray{
+    return @{@"fys" : [Fys class]};
+}
 @end
+@implementation Fys
+
+@end
+
+
