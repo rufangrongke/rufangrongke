@@ -218,7 +218,10 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
 // 选择行
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 获取选中的城市名
     selectedCurrentCityName = [[self.allCitysDic objectForKey:[self.ziMuAllKeys objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    
+    [self.cityDelegate backCityName:selectedCurrentCityName]; // 代理方法
     
     // 显示菊花
     [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];

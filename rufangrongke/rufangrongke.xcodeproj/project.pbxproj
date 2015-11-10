@@ -33,7 +33,6 @@
 		8826186E1BF049EA00FAD6E9 /* WXZGouFangYiXiangCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 886023591BEC4FF800C0D75E /* WXZGouFangYiXiangCell.m */; };
 		882618771BF050AC00FAD6E9 /* WXZLouPanInformationControllerCell_0_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 882618751BF050AC00FAD6E9 /* WXZLouPanInformationControllerCell_0_0.m */; };
 		882618781BF050AC00FAD6E9 /* WXZLouPanInformationControllerCell_0_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882618761BF050AC00FAD6E9 /* WXZLouPanInformationControllerCell_0_0.xib */; };
-		8826187C1BF050BF00FAD6E9 /* WXZLouPanInformationControllerCell_0_1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8826187A1BF050BF00FAD6E9 /* WXZLouPanInformationControllerCell_0_1.m */; };
 		8826187D1BF050BF00FAD6E9 /* WXZLouPanInformationControllerCell_0_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8826187B1BF050BF00FAD6E9 /* WXZLouPanInformationControllerCell_0_1.xib */; };
 		882618811BF050CF00FAD6E9 /* WXZLouPanInformationControllerCell_1_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 8826187F1BF050CF00FAD6E9 /* WXZLouPanInformationControllerCell_1_0.m */; };
 		882618821BF050CF00FAD6E9 /* WXZLouPanInformationControllerCell_1_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882618801BF050CF00FAD6E9 /* WXZLouPanInformationControllerCell_1_0.xib */; };
@@ -97,6 +96,7 @@
 		882E47011BF07CD60022378F /* WXZLouPanInfoVC_footTableView_footView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882E47001BF07CD60022378F /* WXZLouPanInfoVC_footTableView_footView.xib */; };
 		882E47051BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 882E47031BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.m */; };
 		882E47061BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882E47041BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.xib */; };
+		88465A9D1BF0D6BA006B75F9 /* WXZLouPanInformationControllerCell_0_1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8826187A1BF050BF00FAD6E9 /* WXZLouPanInformationControllerCell_0_1.m */; };
 		8852738A1BF048D5008803EF /* WXZRealEstateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 886023541BEC4FE800C0D75E /* WXZRealEstateListCell.m */; };
 		885387F01BDCB958005DCF38 /* WXZConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387EF1BDCB958005DCF38 /* WXZConst.m */; };
 		885387F41BDCE5D3005DCF38 /* WXZRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387F21BDCE5D3005DCF38 /* WXZRegisterController.m */; };
@@ -1460,6 +1460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88465A9D1BF0D6BA006B75F9 /* WXZLouPanInformationControllerCell_0_1.m in Sources */,
 				88DBC10B1BF04E4100425B81 /* WXZLouPanInformationTableViewController.m in Sources */,
 				8826186E1BF049EA00FAD6E9 /* WXZGouFangYiXiangCell.m in Sources */,
 				8826186D1BF049BD00FAD6E9 /* WXZKeHuListCell.m in Sources */,
