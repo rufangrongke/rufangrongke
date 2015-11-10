@@ -92,7 +92,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = YES; // 设置可以编辑
+                imagePicker.allowsEditing = NO; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera; // 设置源
                 imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto; // 设定图片选取器的摄像头捕获模式
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
@@ -110,7 +110,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = YES; // 设置可以编辑
+                imagePicker.allowsEditing = NO; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; // 设置源
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
             }
@@ -138,7 +138,7 @@
             //将图片存入系统相册
             UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
         }
-        NSData *imgData = UIImagePNGRepresentation(img);
+        NSData *imgData = UIImageJPEGRepresentation(img, 0.4f);
         // 缓存
         [[NSUserDefaults standardUserDefaults] setObject:imgData forKey:@"companyImg"];
         
@@ -168,44 +168,36 @@
     [param setObject:ltname forKey:@"ltname"]; // 公司名称
     [param setObject:picfile forKey:@"picfile"]; // 公司图片
     
-    // 1. Create `AFHTTPRequestSerializer` which will create your request
-    AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
-    // 2. Create an `NSMutableURLRequest`
-    NSMutableURLRequest *request = [serializer multipartFormRequestWithMethod:@"POST" URLString:nameUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager POST:nameUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyyMMddHHmmss";
-        NSString *str = [formatter stringFromDate:[NSDate date]];
-        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", @"modifyStore"];
         
         [formData appendPartWithFileData:picfile name:@"headFile" fileName:fileName mimeType:@"image/png"];
         
-    } error:nil];
-    // 3. Create and use `AFHTTPRequestOperationManager` to create an `AFHTTPRequestOperation` from the `NSMutableURLRequest` that we just created
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    AFHTTPRequestOperation *opration = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSLog(@"Success %@", responseObject);
-        [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
-        [SVProgressHUD dismiss]; // 取消菊花
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error)
-    {
-        NSLog(@"Failure %@", error.description);
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
-        [SVProgressHUD dismiss]; // 取消菊花
-    }];
-    
-    // 4. Set the progress block of the operation
-    [opration setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite)
-    {
-        // 设置上传进度
-        CGFloat uploadProportion = totalBytesWritten / totalBytesExpectedToWrite;
-        self.uploadProgress.progress = uploadProportion;
-    }];
-    // 5. Begin
-    [opration start];
+    } success:^(NSURLSessionDataTask *task, id responseObject)
+     {
+//         NSString *mm=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//         WXZLog(@"%@",responseObject);
+//         NSLog(@"%@",mm);
+         
+         if ([responseObject[@"ok"] integerValue] == 1)
+         {
+             // 发送通知
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+             [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
+         }
+         
+         [SVProgressHUD dismiss];
+     } failure:^(NSURLSessionDataTask *task, NSError *error)
+     {
+         
+     }];
 }
 
 #pragma mark - UITextFieldDelegate

@@ -213,6 +213,7 @@
                 WXZIRecommendCodeVC *recommendCodeVC = [[WXZIRecommendCodeVC alloc] init];
                 recommendCodeVC.headUrl = self.woHeadInfoDic[@"TouXiang"];
                 recommendCodeVC.userName = self.woHeadInfoDic[@"TrueName"];
+                recommendCodeVC.recommendedCodeStr = self.woHeadInfoDic[@"tjm"];
                 [self.navigationController pushViewController:recommendCodeVC animated:YES];
             }
             else if (indexPath.row == 1)

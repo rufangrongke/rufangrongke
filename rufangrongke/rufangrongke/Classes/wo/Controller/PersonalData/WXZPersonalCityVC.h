@@ -8,16 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-//@protocol PassCityNameDelegate
-//
-//- (void)passCityNames:(NSString *)values;
-//
-//@end
+#pragma mark - 返货城市名称的代理方法
+@protocol BackCityNameDelegate <NSObject>
+
+- (void)backCityName:(NSString *)cityName;
+
+@end
 
 @interface WXZPersonalCityVC : UIViewController
 
 @property (nonatomic,strong) NSString *currentCity;
 
-//@property (nonatomic,assign) id<PassCityNameDelegate> cityDelegate;
+@property (nonatomic,assign) id<BackCityNameDelegate> cityDelegate;
 
 @end

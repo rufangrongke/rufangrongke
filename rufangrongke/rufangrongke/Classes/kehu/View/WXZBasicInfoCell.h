@@ -18,4 +18,6 @@
 
 + (instancetype)initBasicInfoCell;
 
+- (void)modifyInfo:(NSDictionary *)dic isModify:(BOOL)ismodify;
+
 @end

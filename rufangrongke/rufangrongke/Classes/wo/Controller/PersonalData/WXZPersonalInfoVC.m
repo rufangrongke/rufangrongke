@@ -223,8 +223,8 @@ static NSString *sex = @"先生"; // 记录性别
             if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
             {
                 // 跳转到登录页面（修改密码）
-                WXZLoginController *loginVC = [[WXZLoginController alloc] init];
-                [self.navigationController pushViewController:loginVC animated:YES];
+                WXZLoginController *loginController = [[WXZLoginController alloc]init];
+                [[[[UIApplication sharedApplication] delegate] window] setRootViewController:loginController];
             }
             else
             {

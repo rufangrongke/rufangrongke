@@ -14,6 +14,6 @@
 
 + (instancetype)initGouFangYiXiangCell;
 
-- (void)updateInfo;
+- (void)updateInfo:(NSDictionary *)dic;
 
 @end

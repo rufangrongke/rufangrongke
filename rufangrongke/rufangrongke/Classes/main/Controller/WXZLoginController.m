@@ -71,8 +71,8 @@
 //    parameters[@"mob"] = @"18311281581";
 //    parameters[@"pas"] = @"123456";
     // 17701261104
-    parameters[@"mob"] = @"18833198078";
-    parameters[@"pas"] = @"123123";
+    parameters[@"mob"] = @"17701261104"; // 18833198078
+    parameters[@"pas"] = @"123456";
     // afn
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;

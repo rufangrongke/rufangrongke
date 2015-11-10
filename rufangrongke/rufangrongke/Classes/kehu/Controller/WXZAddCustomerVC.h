@@ -10,8 +10,10 @@
 
 @interface WXZAddCustomerVC : UIViewController
 
-@property (nonatomic,strong) NSString *nameStr;
-@property (nonatomic,strong) NSString *telStr;
-@property (nonatomic,strong) NSString *sexStr;
+@property (nonatomic,strong) NSString *titleStr;
+
+@property (nonatomic,strong) NSDictionary *detailDic;
+
+@property (nonatomic,assign) BOOL isModifyCustomerInfo;
 
 @end

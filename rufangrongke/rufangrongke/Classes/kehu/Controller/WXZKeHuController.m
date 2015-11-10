@@ -19,52 +19,15 @@
 #import "WXZCustomerDetailsVC.h"
 #import "WXZReportPreparationVC.h"
 
-@interface WXZKeHuController () <UITableViewDataSource,UITableViewDelegate>
+@interface WXZKeHuController () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+
+@property (nonatomic,strong) UISearchBar *searchBar;
 
 @property (nonatomic,strong) NSArray *dataArr;
 
 @end
 
 @implementation WXZKeHuController
-
-#pragma 初始化项目
-- (void)setUp{
-    // 设置导航栏左边按钮
-    {
-        //    // 右边
-        //    UIButton *button_right = [UIButton buttonWithType:UIButtonTypeCustom];
-        //    [button_right setBackgroundImage:[UIImage imageNamed:@"lp_qd"] forState:UIControlStateNormal];
-        //    [button_right setBackgroundImage:[UIImage imageNamed:@"lp_qd"] forState:UIControlStateHighlighted];
-        //    button_right.size = button_right.currentBackgroundImage.size;
-        //    [button_right addTarget:self action:@selector(queDing_click) forControlEvents:UIControlEventTouchUpInside];
-        //    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button_right];
-        //    self.navigationItem.rightBarButtonItem = rightItem;
-        //
-        //    // 左边
-        //    UIButton *button_left = [UIButton buttonWithType:UIButtonTypeCustom];
-        //    [button_left setBackgroundImage:[UIImage imageNamed:@"lp_quyutu"] forState:UIControlStateNormal];
-        //    [button_left setBackgroundImage:[UIImage imageNamed:@"lp_quyutu"] forState:UIControlStateHighlighted];
-        //    button_left.size = button_left.currentBackgroundImage.size;
-        //    [button_left addTarget:self action:@selector(quDu_click) forControlEvents:UIControlEventTouchUpInside];
-        //    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:button_left];
-        //    self.navigationItem.leftBarButtonItem = leftItem;
-    }
-    // 左边按钮
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_shaixuan" highImage:@"kh_shaixuan" target:self action:@selector(quDu_click)];
-    // 右边按钮
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
-    // 添加一个系统的搜索框
-    self.navigationItem.titleView = [[UISearchBar alloc]init];
-    
-}
-// 右上方按钮监听点击
-- (void)queDing_click{
-    WXZLogFunc;
-}
-// 左上方按钮监听点击
-- (void)quDu_click{
-    WXZLogFunc;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,16 +37,12 @@
     // 初始化信息
     [self setUp];
     
-    // 设置搜索框
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
-    searchBar.placeholder = @"请输入客户姓名";
-    self.navigationItem.titleView = searchBar;
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     // 初始化
     self.dataArr = [NSArray array];
+    NSArray *shaixuanArr = @[];
     
     // 显示菊花
     [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
@@ -97,6 +56,20 @@
     
 }
 
+#pragma 初始化项目
+- (void)setUp
+{
+    // 左边按钮
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_shaixuan" highImage:@"kh_shaixuan" target:self action:@selector(quDu_click)];
+    // 右边按钮
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
+    // 添加一个系统的搜索框
+    _searchBar = [[UISearchBar alloc] init];
+    _searchBar.delegate = self;
+    self.navigationItem.titleView = _searchBar;
+    
+}
+
 #pragma mark - Data Request Methods
 - (void)keHuListRequest:(NSString *)page numberEachPage:(NSString *)eachPage handsomeChooseCategory:(NSString *)chooseCategory handsomeChooseConditions:(NSString *)chooseConditions
 {
@@ -107,7 +80,12 @@
     [param setObject:chooseCategory forKey:@"zt"];
     [param setObject:chooseConditions forKey:@"key"];
     
-    [[AFHTTPSessionManager manager] POST:urlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:urlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
@@ -236,26 +214,37 @@
     return 20 + 20 + 12 + yixiang; // 返回行高
 }
 
+#pragma mark - UISearchBarDelegate
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    NSLog(@"%@",searchBar.text);
+}
+
 // 添加新客户事件
 - (void)addNewKeHuAction:(id)sender
 {
     NSLog(@"添加新客户!");
     // 添加新客户页
     WXZAddCustomerVC *addCustomerVC = [[WXZAddCustomerVC alloc] init];
+    addCustomerVC.titleStr = @"添加客户";
     [self.navigationController pushViewController:addCustomerVC animated:YES];
 }
 
 #pragma mark - Navigation BarButtonItem Click Event
-- (void)screeningAction:(id)sender
+// 右上方按钮监听点击
+- (void)queDing_click
 {
-    // 筛选
-    NSLog(@"筛选");
+    WXZLogFunc;
+    NSLog(@"%@",_searchBar.text);
+    // 显示菊花
+    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+    // 请求列表
+    [self keHuListRequest:@"1" numberEachPage:@"" handsomeChooseCategory:@"" handsomeChooseConditions:_searchBar.text];
 }
-
-- (void)determineAction:(id)sender
+// 左上方按钮监听点击
+- (void)quDu_click
 {
-    // 确定
-    NSLog(@"确定");
+    WXZLogFunc;
 }
 
 - (void)didReceiveMemoryWarning {

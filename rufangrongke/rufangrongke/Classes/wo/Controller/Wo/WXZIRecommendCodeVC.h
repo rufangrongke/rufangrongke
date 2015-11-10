@@ -12,5 +12,6 @@
 
 @property (nonatomic,strong) NSString *headUrl;
 @property (nonatomic,strong) NSString *userName;
+@property (nonatomic,strong) NSString *recommendedCodeStr; // 推荐码
 
 @end

@@ -56,8 +56,9 @@
 {
     [super viewWillAppear:animated];
     // 导航栏右侧按钮
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"wo_complete" highImage:@"" target:self action:@selector(completeAction:)];
-    // 已认证则不显示按钮，所有东西不可修改
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"wo_complete" highImage:@"" title:@"" target:self action:@selector(completeAction:) isEnable:YES];
+    
+    // 已认证则不显示按钮，所有东西不可修改；有身份证号但是为False，则为审核中
     if ([self.isCertification isEqualToString:@"True"])
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"" highImage:@"" target:self action:@selector(completeAction:)];
@@ -65,6 +66,10 @@
         self.nameTextField.enabled = NO;
         self.idCardTextField.enabled = NO;
         self.selectImgTap.enabled = NO;
+    }
+    else if ([self.isCertification isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:self.idCardId])
+    {
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"" highImage:@"" title:@"审核中" target:self action:@selector(completeAction:) isEnable:NO];
     }
 }
 
@@ -98,7 +103,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = YES; // 设置可以编辑
+                imagePicker.allowsEditing = NO; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera; // 设置源
                 imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto; // 设定图片选取器的摄像头捕获模式
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
@@ -116,7 +121,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = YES; // 设置可以编辑
+                imagePicker.allowsEditing = NO; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; // 设置源
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
             }
@@ -144,8 +149,12 @@
             //将图片存入系统相册
             UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
         }
-        NSData *imgData = UIImagePNGRepresentation(img);
+        NSData *imgData = UIImageJPEGRepresentation(img, 0.4f);
         // 缓存
+        NSString *pathStr = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        pathStr = [pathStr stringByAppendingString:@"sfzImg.png"];
+        [imgData writeToFile:pathStr atomically:YES];
+        
         [[NSUserDefaults standardUserDefaults] setObject:imgData forKey:@"sfzimg"];
         
         // 设置图片圆角
@@ -197,36 +206,51 @@
     [param setObject:sfzid forKey:@"sfzid"]; // 身份证号码
     [param setObject:sfzPic forKey:@"sfzPic"]; // 身份证图片
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     
-    [manager POST:requestUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager POST:requestUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    {
         
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyyMMddHHmmss";
-        NSString *str = [formatter stringFromDate:[NSDate date]];
-        NSString *fileName = [NSString stringWithFormat:@"%@.png", str];
+        NSString *fileName = [NSString stringWithFormat:@"%@.png", @"certification"];
         
         [formData appendPartWithFileData:sfzPic name:@"headFile" fileName:fileName mimeType:@"image/png"];
         
     } success:^(NSURLSessionDataTask *task, id responseObject)
     {
-        WXZLog(@"%@",responseObject);
+//        NSString *mm=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        WXZLog(@"%@",responseObject);
+//        NSLog(@"%@",mm);
+        
+        if ([responseObject[@"ok"] integerValue] == 1)
+        {
+            // 发送通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+            [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
+        }
+        
+        [SVProgressHUD dismiss];
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
         
     }];
     
     // 上传
-    [manager setTaskDidSendBodyDataBlock:^(NSURLSession *session, NSURLSessionTask *task, int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend)
-    {
-        // bytesSent本次上传了多少字节,totalBytesSent累计上传了多少字节,totalBytesExpectedToSend文件有多大,应该上传多少
-//        NSLog(@"task %@ progress is %f ", task, totalBytesSent*1.0/totalBytesExpectedToSend);
-        
-        // 设置当前进度值
-        CGFloat uploadProportion = totalBytesSent*1.0 / totalBytesExpectedToSend;
-        self.uploadProgress.progress = uploadProportion;
-    }];
+//    [manager setTaskDidSendBodyDataBlock:^(NSURLSession *session, NSURLSessionTask *task, int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend)
+//    {
+//        // bytesSent本次上传了多少字节,totalBytesSent累计上传了多少字节,totalBytesExpectedToSend文件有多大,应该上传多少
+////        NSLog(@"task %@ progress is %f ", task, totalBytesSent*1.0/totalBytesExpectedToSend);
+//        
+//        // 设置当前进度值
+//        CGFloat uploadProportion = totalBytesSent*1.0 / totalBytesExpectedToSend;
+//        self.uploadProgress.progress = uploadProportion;
+//    }];
 }
 
 - (void)completeAction:(id)sender
@@ -235,8 +259,11 @@
     NSData *imgData = [[NSUserDefaults standardUserDefaults] objectForKey:@"sfzimg"];
     if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text] && ![WXZChectObject checkWhetherStringIsEmpty:self.idCardTextField.text] && imgData != nil)
     {
+        NSString *pathStr = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        pathStr = [pathStr stringByAppendingString:@"sfzImg.png"];
+        
         // 显示菊花
-//        [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
         [self modifyRequestWithParameter1:self.nameTextField.text parameter2:self.idCardTextField.text parameter3:imgData]; // 请求
     }
     else

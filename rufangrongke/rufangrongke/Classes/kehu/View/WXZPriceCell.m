@@ -7,6 +7,7 @@
 //
 
 #import "WXZPriceCell.h"
+#import "WXZChectObject.h"
 
 @interface WXZPriceCell () <UITextFieldDelegate>
 
@@ -25,9 +26,22 @@
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
-- (void)updateInfo
+- (void)updateInfo:(NSDictionary *)dic isModify:(BOOL)ismodify
 {
     self.noLimitBtn.backgroundColor = [UIColor lightGrayColor];
+    if (ismodify)
+    {
+        NSString *sStr = [NSString stringWithFormat:@"%@",dic[@"JiaGeS"]];
+        NSString *eStr = [NSString stringWithFormat:@"%@",dic[@"JiaGeE"]];
+        if (![WXZChectObject checkWhetherStringIsEmpty:sStr])
+        {
+            self.pricefTextField.text = sStr;
+        }
+        if (![WXZChectObject checkWhetherStringIsEmpty:eStr])
+        {
+            self.priceeTextField.text = eStr;
+        }
+    }
 }
 
 #pragma mark - UITextFieldDelegate
