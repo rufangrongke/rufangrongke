@@ -32,29 +32,8 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     // 去除分割线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置导航栏左边按钮
-    {
-//    // 右边
-//    UIButton *button_right = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [button_right setBackgroundImage:[UIImage imageNamed:@"lp_qd"] forState:UIControlStateNormal];
-//    [button_right setBackgroundImage:[UIImage imageNamed:@"lp_qd"] forState:UIControlStateHighlighted];
-//    button_right.size = button_right.currentBackgroundImage.size;
-//    [button_right addTarget:self action:@selector(queDing_click) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:button_right];
-//    self.navigationItem.rightBarButtonItem = rightItem;
-//    
-//    // 左边
-//    UIButton *button_left = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [button_left setBackgroundImage:[UIImage imageNamed:@"lp_quyutu"] forState:UIControlStateNormal];
-//    [button_left setBackgroundImage:[UIImage imageNamed:@"lp_quyutu"] forState:UIControlStateHighlighted];
-//    button_left.size = button_left.currentBackgroundImage.size;
-//    [button_left addTarget:self action:@selector(quDu_click) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:button_left];
-//    self.navigationItem.leftBarButtonItem = leftItem;
-    }
-    // 左边按钮
-//    [UIBarButtonItem];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_quyutu" highImage:@"lp_quyutu" target:self action:@selector(quYu_click)];
-    // 右边按钮
+    // 设置导航栏右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
     // 添加一个系统的搜索框
     UISearchBar *search = [[UISearchBar alloc]init];
@@ -62,8 +41,16 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     self.navigationItem.titleView = search;
     self.search = search;
 
+    // cell高度
+    self.tableView.rowHeight = 100;
+    // 给tableview添加点击 为了取消键盘
+//    [self.tableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTableView:)]];
 }
-
+- (void)clickTableView:(UITapGestureRecognizer *)tap{
+    WXZLogFunc;
+    // 取消键盘
+    [self.search resignFirstResponder];
+}
 /**
  *  右上方按钮监听点击
  */
@@ -84,14 +71,63 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     [self.search resignFirstResponder];
 }
 
+/**
+ * 添加刷新控件
+ */
+- (void)setupRefresh
+{
+//    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewUsers)];
+    
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
+    self.tableView.footer.hidden = YES;
+}
+- (void)loadMoreUsers
+{
+//    XMGRecommendCategory *category = XMGSelectedCategory;
+//    
+//    // 发送请求给服务器, 加载右侧的数据
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    params[@"a"] = @"list";
+//    params[@"c"] = @"subscribe";
+//    params[@"category_id"] = @(category.id);
+//    params[@"page"] = @(++category.currentPage);
+//    self.params = params;
+//    // 发送请求
+//    NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    params[@"inp"] = @1;
+//    [self.manager GET:@"http://api.budejie.com/api/api_open.php" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+//        // 字典数组 -> 模型数组
+//        NSArray *users = [XMGRecommendUser objectArrayWithKeyValuesArray:responseObject[@"list"]];
+//        
+//        // 添加到当前类别对应的用户数组中
+//        [category.users addObjectsFromArray:users];
+//        
+//        // 不是最后一次请求
+//        if (self.params != params) return;
+//        
+//        // 刷新右边的表格
+//        [self.userTableView reloadData];
+//        
+//        // 让底部控件结束刷新
+//        [self checkFooterState];
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        if (self.params != params) return;
+//        
+//        // 提醒
+//        [SVProgressHUD showErrorWithStatus:@"加载用户数据失败"];
+//        
+//        // 让底部控件结束刷新
+//        [self.userTableView.footer endRefreshing];
+//    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 初始化信息
     [self setUp];
-    
-    self.tableView.rowHeight = 100;
-    
+    // 添加刷新控件
+    [self setupRefresh];
     // 注册
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZTableViewCell class]) bundle:nil] forCellReuseIdentifier:WXZLoupanCellID];
     
@@ -100,7 +136,6 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     
     // 发送请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
-//    WXZLog(@"%@", url); // 测试
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"inp"] = @1;
     [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -167,4 +202,6 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
     // 取消键盘
     [self.search resignFirstResponder];
 }
+
+//- sc
 @end

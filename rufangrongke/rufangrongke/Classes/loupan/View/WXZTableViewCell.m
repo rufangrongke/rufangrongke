@@ -43,10 +43,12 @@
     NSString *picUrlString = [picBaseULR stringByAppendingString:loupan.PicUrl];
     [self.loupantupian sd_setImageWithURL:[NSURL URLWithString:picUrlString] placeholderImage:[UIImage imageNamed:@"lp_fyt4"]];
     self.loupanmingcheng.text = loupan.xiaoqu;
-    self.loufangtaoshu.text = loupan.YongJin;
-    self.pingmijiage.text = loupan.JunJia;
+    self.loufangtaoshu.text = [NSString stringWithFormat:@"%@元/套",loupan.YongJin];
+    self.pingmijiage.text = [NSString stringWithFormat:@"%@元/平米",loupan.JunJia];
     self.jingjirenshu.text = loupan.HeZuoJJrNum;
     self.yixiangkehushu.text = loupan.YiXiangKeHuNum;
+    self.dituchibiao.hidden = YES;
+    self.xiangjujuli.hidden = YES;
     
 }
 

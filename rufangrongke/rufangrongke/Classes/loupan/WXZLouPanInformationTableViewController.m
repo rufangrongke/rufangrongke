@@ -251,6 +251,71 @@ static int colorNum = 235;
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section{
     view.tintColor = [UIColor colorWithRed:colorNum/255.0 green:colorNum/255.0 blue:colorNum/255.0 alpha:1.0];
 }
+
+/**
+ *  点击cell
+ */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 3) {
+        WXZLouPanInformationTableViewController *infoVc = [[WXZLouPanInformationTableViewController alloc] init];
+        // 标题
+        infoVc.title = @"户型详情";
+        infoVc.huXingBianHao = [self.louPanInformationControllerModel.others[indexPath.row] ID];
+        [infoVc openNewLouPanInfoVC:infoVc.huXingBianHao];
+        [self.navigationController pushViewController:infoVc animated:YES];
+    }
+    
+    
+}
+
+- (void)openNewLouPanInfoVC:(NSString *)fyhao
+{
+    // 楼盘详情初始化
+    [self setUp];
+    
+    // 1.创建请求对象
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:huxingxiangqing];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"hxid"] = fyhao;
+    // afn
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *dic = (NSDictionary *)responseObject;
+        NSDictionary *hxview = dic[@"hxview"];
+        //        WXZLog(@"%@", hxview);
+        [WXZLouPanInformationControllerModel setupObjectClassInArray:^NSDictionary *{
+            return @{
+                     @"others" : @"OthersModel",
+                     // @"others" : [OthersModel class],
+                     };
+        }];
+        
+        self.louPanInformationControllerModel = [WXZLouPanInformationControllerModel objectWithKeyValues:hxview];
+        
+        // 刷新表格
+        [self.tableView reloadData];
+        //        WXZLog(@"%@", self.louPanInformationControllerModel.others);
+        // 4.回到主线程
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            // 加载headView
+            [self setUpHeadImageView:self.louPanInformationControllerModel.pic];
+            //            if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
+            //                // 隐藏HUD
+            //                [SVProgressHUD dismiss];
+            //
+            //            }else{ //登陆失败
+            //                [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];
+            //            }
+            
+        }];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            //            [SVProgressHUD showErrorWithStatus:@"登陆超时,请重新登陆." maskType:SVProgressHUDMaskTypeBlack];
+        }];
+    }];
+
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

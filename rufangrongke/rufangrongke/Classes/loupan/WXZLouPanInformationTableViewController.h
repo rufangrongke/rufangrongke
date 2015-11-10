@@ -11,4 +11,6 @@
 @interface WXZLouPanInformationTableViewController : UITableViewController
 /* 户型编号 */
 @property (nonatomic , strong) NSString *huXingBianHao;
+
+- (void)openNewLouPanInfoVC:(NSString *)fyhao;
 @end
