@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZKeHuDetailModel.h"
 
 @interface WXZPriceCell : UITableViewCell
 
@@ -17,6 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *priceeTextField;
 
 + (instancetype)initPriceCell;
-- (void)updateInfo:(NSDictionary *)dic isModify:(BOOL)ismodify;
+- (void)updateInfo:(WXZKeHuDetailModel *)model isModify:(BOOL)ismodify;
 
 @end

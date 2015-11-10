@@ -13,6 +13,6 @@
 @property (nonatomic,strong) NSString *whichController; // 那个控制器
 @property (nonatomic,strong) NSString *titleStr; // 标题
 
-@property (nonatomic,strong) NSString *nameOrSex;
+@property (nonatomic,strong) NSString *nameOrSex; // 姓名或性别
 
 @end

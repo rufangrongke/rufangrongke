@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZWoInfoModel.h"
 
 @interface WXZPersonalController : UIViewController
+
+@property (nonatomic,strong) WXZWoInfoModel *woInfoModel;
 
 @end

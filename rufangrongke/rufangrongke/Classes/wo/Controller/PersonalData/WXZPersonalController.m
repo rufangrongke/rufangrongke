@@ -7,11 +7,12 @@
 //
 
 #import "WXZPersonalController.h"
-#import "WXZPersonalDataCell.h"
-#import "WXZPersonalData2Cell.h"
 #import <UIImageView+WebCache.h>
 #import "AFNetworking.h"
 #import <SVProgressHUD.h>
+#import "SRMonthPicker.h"
+#import "WXZPersonalDataCell.h"
+#import "WXZPersonalData2Cell.h"
 #import "WXZPersonalDeclarationVC.h"
 #import "WXZPersonalCertificationVC.h"
 #import "WXZPersonalCityVC.h"
@@ -19,7 +20,6 @@
 #import "WXZModifyPhoneVC.h"
 #import "WXZPersonalInfoVC.h"
 #import "WXZWorkingTimeView.h"
-#import "SRMonthPicker.h"
 #import "WXZLoginController.h"
 
 @interface WXZPersonalController () <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SRMonthPickerDelegate>
@@ -42,9 +42,6 @@
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"个人资料";
     
-    // 获取缓存数据
-    self.personalInfoDic = [self localUserInfo];
-    
     // 设置tableview 的数据源和代理
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
@@ -58,20 +55,37 @@
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = NO;
     
-    [self.myTableView reloadData]; // 刷新列表
+//    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateNormal];
+//    [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateHighlighted];
+//    leftButton.size = CGSizeMake(70, 30);
+//    // 让按钮内部的所有内容左对齐
+//    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    // 让按钮的内容往左边偏移10
+//    leftButton.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+//    [leftButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+//    // 修改导航栏左边的item
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    
+//    [self.myTableView reloadData]; // 刷新列表
 }
 
-// 通知事件（刷新数据）
-- (void)updatePersonalData:(NSNotification *)noti
+#pragma mark - 个人资料数据请求
+- (void)personalDataRequest:(BOOL)isNotification
 {
-    // 显示菊花
-    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+    if (isNotification)
+    {
+        // 显示菊花
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    }
     
     [self loginRequest:^(id result) {
         if (![result isEqual:@"请求失败"])
         {
-            self.personalInfoDic = [self localUserInfo]; // 获取最新数据
-            [self.myTableView reloadData]; // 刷新列表
+            NSDictionary *dic = (NSDictionary *)result;
+            // 刷新模型
+            self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:dic];
+            [self.myTableView reloadData]; // 刷新
         }
         else
         {
@@ -79,6 +93,12 @@
         }
         [SVProgressHUD dismiss]; // 结束菊花
     }];
+}
+
+// 通知事件（刷新数据）
+- (void)updatePersonalData:(NSNotification *)noti
+{
+    [self personalDataRequest:YES]; // 个人资料数据请求
 }
 
 #pragma mark - UITableViewDataSource/Delegate Methods
@@ -98,8 +118,7 @@
             personalDataCell = [WXZPersonalDataCell initPersonalDataCell];
         }
         
-        [personalDataCell headBorder]; // 分割线
-        [personalDataCell updateHead:self.personalInfoDic[@"TouXiang"]]; // 刷新头像
+        personalDataCell.woInfoModel = self.woInfoModel;
         
         return personalDataCell;
     }
@@ -116,7 +135,7 @@
         {
             // 初始化信息
             [personalData2Cell personalDataInfo:indexPath.row];
-            [personalData2Cell updatePersonalDataInfo:indexPath.row data:self.personalInfoDic];
+            [personalData2Cell updatePersonalDataInfo:indexPath.row data:self.woInfoModel];
         }
         else
         {
@@ -145,14 +164,14 @@
             // 修改姓名
             personalInfo.whichController = @"ModifyPersonalName";
             personalInfo.titleStr = @"修改姓名";
-            personalInfo.nameOrSex = self.personalInfoDic[@"TrueName"];
+            personalInfo.nameOrSex = self.woInfoModel.TrueName;
         }
         else if (indexPath.row == 2)
         {
             // 修改性别
             personalInfo.whichController = @"ModifyPersonalSex";
             personalInfo.titleStr = @"修改性别";
-            personalInfo.nameOrSex = self.personalInfoDic[@"Sex"];
+            personalInfo.nameOrSex = self.woInfoModel.Sex;
         }
         else
         {
@@ -175,39 +194,35 @@
     {
         // 服务宣言
         WXZPersonalDeclarationVC *declarationVC = [[WXZPersonalDeclarationVC alloc] init];
-        declarationVC.declarationContent = self.personalInfoDic[@"XuanYan"];
+        declarationVC.declarationContent = self.woInfoModel.XuanYan;
         [self.navigationController pushViewController:declarationVC animated:YES];
     }
     else if (indexPath.row == 5)
     {
         // 实名认证
         WXZPersonalCertificationVC *certificationVC = [[WXZPersonalCertificationVC alloc] init];
-        certificationVC.idCardName = self.personalInfoDic[@"TrueName"];
-        certificationVC.idCardId = self.personalInfoDic[@"sfzid"];
-        certificationVC.idCardImg = self.personalInfoDic[@"sfzPic"];
-        certificationVC.isCertification = self.personalInfoDic[@"IsShiMing"];
+        certificationVC.woInfoModel = self.woInfoModel;
         [self.navigationController pushViewController:certificationVC animated:YES];
     }
     else if (indexPath.row == 6)
     {
         // 设置城市
         WXZPersonalCityVC *cityVC = [[WXZPersonalCityVC alloc] init];
-        cityVC.currentCity = self.personalInfoDic[@"cityName"];
+        cityVC.currentCity = self.woInfoModel.cityName;
         [self.navigationController pushViewController:cityVC animated:YES];
     }
     else if (indexPath.row == 7)
     {
         // 绑定门店
         WXZPersonalStoreVC *storeVC = [[WXZPersonalStoreVC alloc] init];
-        storeVC.storeId = self.personalInfoDic[@"LtCid"];
-        storeVC.storeName = self.personalInfoDic[@"LtName"];
+        storeVC.storeId = [NSString stringWithFormat:@"%@",self.woInfoModel.LtCid];
         [self.navigationController pushViewController:storeVC animated:YES];
     }
     else if (indexPath.row == 8)
     {
         // 修改手机号
         WXZModifyPhoneVC *phoneVC = [[WXZModifyPhoneVC alloc] init];
-        phoneVC.phone = self.personalInfoDic[@"Mobile"];
+        phoneVC.phone = self.woInfoModel.Mobile;
         [self.navigationController pushViewController:phoneVC animated:YES];
     }
 }
@@ -313,10 +328,6 @@
     [params setObject:head forKey:@"File"];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
-//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
@@ -330,18 +341,7 @@
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             // 刷新界面
-            [self loginRequest:^(id result) {
-                if (![result isEqual:@"请求失败"])
-                {
-                    // 重新获取缓存数据
-                    self.personalInfoDic = [self localUserInfo];
-                    [self.myTableView reloadData];
-                }
-                else
-                    [SVProgressHUD showErrorWithStatus:result];
-                
-                [SVProgressHUD dismiss]; // 结束菊花
-            }];
+            [self personalDataRequest:NO]; // 个人资料数据请求
         }
         else
         {
@@ -372,12 +372,20 @@
     _workingTimeView.timePickerView.yearFirst = YES; // 今年是否显示在前面
     
     // 设置显示年月的text的宽度
-    _workingTimeView.timePickerView.monthWidth = 126.f;
-    _workingTimeView.timePickerView.yearWidth = 81.f;
     if ([UIScreen mainScreen].bounds.size.width == 320)
     {
         _workingTimeView.timePickerView.monthWidth = 120.f;
         _workingTimeView.timePickerView.yearWidth = 70.f;
+    }
+    else if (WXZ_ScreenWidth == 414)
+    {
+        _workingTimeView.timePickerView.monthWidth = 120.f;
+        _workingTimeView.timePickerView.yearWidth = 70.f;
+    }
+    else
+    {
+        _workingTimeView.timePickerView.monthWidth = 126.f;
+        _workingTimeView.timePickerView.yearWidth = 81.f;
     }
     
     // 添加事件
@@ -444,19 +452,7 @@
             [self removeWorkingTimeView]; // 把view从父view上移除
             
             // 刷新界面
-            [self loginRequest:^(id result) {
-                if (![result isEqual:@"请求失败"])
-                {
-                    // 重新获取缓存数据
-                    self.personalInfoDic = [self localUserInfo];
-                    [self.myTableView reloadData];
-                    [SVProgressHUD dismiss];
-                    return;
-                }
-                [SVProgressHUD showErrorWithStatus:result];
-                
-                [SVProgressHUD dismiss]; // 结束菊花
-            }];
+            [self personalDataRequest:NO]; // 个人资料数据请求
         }
         else
         {
@@ -480,6 +476,11 @@
 }
 
 // 返回button 事件
+//- (void)backAction:(id)sender
+//{
+//    
+//}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

@@ -25,13 +25,13 @@
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
-- (void)modifyInfo:(NSDictionary *)dic isModify:(BOOL)ismodify
+- (void)modifyInfo:(WXZKeHuDetailModel *)model isModify:(BOOL)ismodify
 {
     if (ismodify)
     {
-        self.nameTextField.text = dic[@"XingMing"];
-        self.phoneNumTextField.text = dic[@"Mobile"];
-        if ([dic[@"Sex"] isEqualToString:@"先生"])
+        self.nameTextField.text = model.XingMing;
+        self.phoneNumTextField.text = model.Mobile;
+        if ([model.Sex isEqualToString:@"先生"])
         {
             [self.menBtn setImage:[UIImage imageNamed:@"kh_nvbzhu"] forState:UIControlStateNormal];
         }

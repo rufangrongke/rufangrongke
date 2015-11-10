@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZKeHuInfoModel.h"
 
 @interface WXZKHListFooterView : UIView
+
+@property (nonatomic,strong) WXZKeHuInfoModel *keHuInfoModel;
 
 // 加载nib文件
 + (instancetype)initListFooterView;
 
 // footer信息
-- (void)footerInfoLabel:(NSDictionary *)info;
+//- (void)footerInfoLabel:(NSDictionary *)info;
 
 @end

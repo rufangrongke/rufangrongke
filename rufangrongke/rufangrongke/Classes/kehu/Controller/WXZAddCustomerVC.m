@@ -100,11 +100,13 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         }
         else
         {
-            WXZLog(@"%@",responseObject);
+//            WXZLog(@"%@",responseObject);
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
         [SVProgressHUD dismiss];
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"请求失败"];
         [SVProgressHUD dismiss];
     }];
 }
@@ -116,6 +118,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     if (isModify)
     {
+        url = [OutNetBaseURL stringByAppendingString:kehuxiugai];
         [param setObject:kehuId forKey:@"id"];
     }
     [param setObject:name forKey:@"XingMing"];
@@ -129,17 +132,19 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     
     [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
-        WXZLog(@"%@",responseObject);
+//        WXZLog(@"%@",responseObject);
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            
+            [self.navigationController popViewControllerAnimated:YES];
         }
         else
         {
-            
+//            NSLog(@"%@",responseObject[@"msg"]);
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
         [SVProgressHUD dismiss];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"请求失败"];
         [SVProgressHUD dismiss];
     }];
 }
@@ -177,7 +182,8 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         self.womenBtn = bCell.womenBtn;
         self.nameTextField = bCell.nameTextField;
         self.phoneNumTextField = bCell.phoneNumTextField;
-        [bCell modifyInfo:self.detailDic isModify:self.isModifyCustomerInfo]; // 修改传过来的信息，展示
+        // 修改传过来的信息，展示
+        [bCell modifyInfo:self.detailModel isModify:self.isModifyCustomerInfo];
         
         return bCell;
     }
@@ -195,7 +201,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
             [priceCell.determineBtn addTarget:self action:@selector(determineAction:) forControlEvents:UIControlEventTouchUpInside];
             self.pricefTextField = priceCell.pricefTextField;
             self.priceeTextField = priceCell.priceeTextField;
-            [priceCell updateInfo:self.detailDic isModify:self.isModifyCustomerInfo]; //
+            [priceCell updateInfo:self.detailModel isModify:self.isModifyCustomerInfo]; //
             
             return priceCell;
         }
@@ -210,15 +216,15 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
             [pCell showTypeName:indexPath.row];
             if (indexPath.row == 0)
             {
-                [pCell showTypeData:self.quyuListArr Target:self action:@selector(typeSelectAction:) row:indexPath.row isModify:self.isModifyCustomerInfo yuanData:self.detailDic]; // 添加button
+                [pCell showTypeData:self.quyuListArr Target:self action:@selector(typeSelectAction:) row:indexPath.row isModify:self.isModifyCustomerInfo yuanData:self.detailModel]; // 添加button
             }
             else if (indexPath.row == 1)
             {
-                [pCell showTypeData:self.huxingListArr Target:self action:@selector(typeSelectAction:) row:indexPath.row isModify:self.isModifyCustomerInfo yuanData:self.detailDic]; // 添加button
+                [pCell showTypeData:self.huxingListArr Target:self action:@selector(typeSelectAction:) row:indexPath.row isModify:self.isModifyCustomerInfo yuanData:self.detailModel]; // 添加button
             }
             else
             {
-                [pCell showTypeData:self.fangwuListArr Target:self action:@selector(typeSelectAction:) row:indexPath.row isModify:self.isModifyCustomerInfo yuanData:self.detailDic]; // 添加button
+                [pCell showTypeData:self.fangwuListArr Target:self action:@selector(typeSelectAction:) row:indexPath.row isModify:self.isModifyCustomerInfo yuanData:self.detailModel]; // 添加button
             }
             
             return pCell;
@@ -238,8 +244,8 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         self.yixiangLabel.textColor = WXZRGBColor(140, 139, 139);
         [headerView addSubview:self.yixiangLabel];
         
-        if (self.isModifyCustomerInfo && ![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailDic[@"YiXiang"]]])
-            self.yixiangLabel.text = [NSString stringWithFormat:@"%@",self.detailDic[@"YiXiang"]];
+        if (self.isModifyCustomerInfo && ![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailModel.YiXiang]])
+            self.yixiangLabel.text = [NSString stringWithFormat:@"%@",self.detailModel.YiXiang];
         else
             self.yixiangLabel.text = @"购买意向";
             
@@ -338,7 +344,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         [self.menBtn setImage:[UIImage imageNamed:@"kh_nanzhu"] forState:UIControlStateNormal];
         sex = @"女士";
     }
-    NSLog(@"%@",sex);
+//    NSLog(@"%@",sex);
 }
 
 - (void)typeSelectAction:(UIButton *)sender
@@ -347,7 +353,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     str = [str substringWithRange:NSMakeRange(0, str.length-1)];
     if ([str isEqualToString:@"100003"])
     {
-        NSLog(@"%ld",(long)sender.tag);
+//        NSLog(@"%ld",(long)sender.tag);
         if ([sender.backgroundColor isEqual:[UIColor lightGrayColor]])
         {
             sender.backgroundColor = WXZRGBColor(2, 135, 227);
@@ -363,7 +369,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     }
     else if ([str isEqualToString:@"100004"])
     {
-        NSLog(@"%ld",(long)sender.tag);
+//        NSLog(@"%ld",(long)sender.tag);
         if (sender.tag == 1000040)
         {
             if ([sender.backgroundColor isEqual:[UIColor lightGrayColor]])
@@ -409,7 +415,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     }
     else
     {
-        NSLog(@"%ld",(long)sender.tag);
+//        NSLog(@"%ld",(long)sender.tag);
         if ([sender.backgroundColor isEqual:[UIColor lightGrayColor]])
         {
             sender.backgroundColor = WXZRGBColor(2, 135, 227);
@@ -429,7 +435,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
 
 - (void)selectPriceAction:(UIButton *)sender
 {
-    NSLog(@"不限");
+//    NSLog(@"不限");
     if ([sender.backgroundColor isEqual:[UIColor lightGrayColor]])
     {
         sender.backgroundColor = WXZRGBColor(2, 135, 227);
@@ -455,7 +461,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     else
     {
         // 修改客户信息
-        [self addCustomerRequest:self.detailDic[@"id"] name:self.nameTextField.text sex:sex mobile:self.phoneNumTextField.text jiaGeS:self.pricefTextField.text jiaGeE:self.priceeTextField.text quYu:[WXZStringObject whetherStringContainsCharacter2:[self quyuMethod] character:@","] hx:[WXZStringObject whetherStringContainsCharacter2:[self huxingMethod] character:@","] yiXiang:self.yixiangLabel.text isModify:YES];
+        [self addCustomerRequest:self.detailModel.ID name:self.nameTextField.text sex:sex mobile:self.phoneNumTextField.text jiaGeS:self.pricefTextField.text jiaGeE:self.priceeTextField.text quYu:[WXZStringObject whetherStringContainsCharacter2:[self quyuMethod] character:@","] hx:[WXZStringObject whetherStringContainsCharacter2:[self huxingMethod] character:@","] yiXiang:self.yixiangLabel.text isModify:YES];
     }
 }
 

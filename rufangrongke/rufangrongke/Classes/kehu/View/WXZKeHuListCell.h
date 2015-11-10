@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZKeHuInfoModel.h"
 
 @interface WXZKeHuListCell : UITableViewCell
 
@@ -33,6 +34,8 @@
 // 传controller
 @property (nonatomic,strong) UIViewController *controller;
 
+@property (nonatomic,strong) WXZKeHuInfoModel *keHuInfoModel;
+
 // 加载nib文件
 + (instancetype)initListCell;
 
@@ -40,6 +43,6 @@
 - (void)buttonWithTarget:(id)target action:(SEL)action;
 
 // 更新数据
-- (void)showKeHuListInfo:(NSDictionary *)dic;
+//- (void)showKeHuListInfo:(NSDictionary *)dic;
 
 @end

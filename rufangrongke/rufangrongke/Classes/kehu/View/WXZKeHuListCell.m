@@ -32,20 +32,34 @@
     [self.callBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 }
 
-// 更新数据
-- (void)showKeHuListInfo:(NSDictionary *)dic
+- (void)setKeHuInfoModel:(WXZKeHuInfoModel *)keHuInfoModel
 {
-    self.customerNameLabel.text = dic[@"XingMing"]; // 姓名
-    self.customerPhoneLabel.text = dic[@"Mobile"]; // 电话
+    self.customerNameLabel.text = keHuInfoModel.XingMing; // 姓名
+    self.customerPhoneLabel.text = keHuInfoModel.Mobile; // 电话
     
     /**
      *  房源信息：
      */
-    self.houseInfoLabel.text = dic[@"YiXiang"];
+    self.houseInfoLabel.text = keHuInfoModel.YiXiang;
     
     self.reportedBtn.hidden = YES;
     self.callBtn.hidden = NO;
 }
+
+// 更新数据
+//- (void)showKeHuListInfo:(NSDictionary *)dic
+//{
+//    self.customerNameLabel.text = dic[@"XingMing"]; // 姓名
+//    self.customerPhoneLabel.text = dic[@"Mobile"]; // 电话
+//    
+//    /**
+//     *  房源信息：
+//     */
+//    self.houseInfoLabel.text = dic[@"YiXiang"];
+//    
+//    self.reportedBtn.hidden = YES;
+//    self.callBtn.hidden = NO;
+//}
 
 // 报备/打电话事件
 - (IBAction)reportedOrCallAction:(UIButton *)sender

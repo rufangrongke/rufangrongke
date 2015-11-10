@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZWoInfoModel.h"
 
 @interface WXZWoHeadCell : UITableViewCell
 
@@ -41,13 +42,15 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton *bindingBtn;
 
+@property (nonatomic,strong) WXZWoInfoModel *woInfoModel; // 数据 
+
 // 加载nib文件
 + (instancetype)initHeadCell;
 
 // 设置头像边框
 - (void)headBorder;
 // 更新头像
-- (void)updateWoInfo:(NSDictionary *)headInfoDic;
+//- (void)updateWoInfo:(NSDictionary *)headInfoDic;
 
 // 设置button单击事件
 - (void)buttonWithTarget:(id)target withAction:(SEL)action;

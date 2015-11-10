@@ -7,6 +7,7 @@
 //
 
 #import "WXZPurchaseIntentionCell.h"
+#import "WXZStringObject.h"
 
 @interface WXZPurchaseIntentionCell ()
 
@@ -39,7 +40,7 @@
     }
 }
 
-- (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row isModify:(BOOL)ismodify yuanData:(NSDictionary *)dic
+- (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row  isModify:(BOOL)ismodify yuanData:(WXZKeHuDetailModel *)model
 {
     NSMutableArray *houseArr = [NSMutableArray array];
     NSInteger btnTag = 0;
@@ -124,8 +125,43 @@
             self.typeBtn.backgroundColor = [UIColor lightGrayColor];
             [self.typeBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:self.typeBtn];
+            // 是否是修改页
+            if (ismodify)
+            {
+                // 判断名称是否相等
+                if ([self areEqual:houseArr[i*limit+j][@"q"] localData:model row:row])
+                {
+                    self.typeBtn.backgroundColor = WXZRGBColor(2, 135, 227);
+                    [self.typeBtn setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
+                }
+            }
         }
     }
+}
+
+// 判断两个字符串是否相等
+- (BOOL)areEqual:(NSString *)nowTitle localData:(WXZKeHuDetailModel *)model row:(NSInteger)row
+{
+//    WXZLog(@"%@",model);
+    NSString *huoquStr = @"";
+    if (row == 0)
+    {
+        huoquStr = model.QuYu;
+    }
+    else if (row == 1 || row == 2)
+    {
+        huoquStr = model.Hx;
+    }
+    NSArray *relationArr = [WXZStringObject interceptionOfString:huoquStr interceptType:@"/"];
+    
+    for (NSString *subStr in relationArr)
+    {
+        if ([subStr isEqualToString:nowTitle])
+        {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

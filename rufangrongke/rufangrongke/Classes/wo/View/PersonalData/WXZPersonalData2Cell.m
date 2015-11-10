@@ -9,6 +9,7 @@
 #import "WXZPersonalData2Cell.h"
 #import "WXZDateObject.h"
 #import "WXZStringObject.h"
+#import "WXZChectObject.h"
 
 @implementation WXZPersonalData2Cell
 
@@ -38,7 +39,7 @@
     }
 }
 
-- (void)updatePersonalDataInfo:(NSInteger)row data:(NSDictionary *)personalInfodic
+- (void)updatePersonalDataInfo:(NSInteger)row data:(WXZWoInfoModel *)personalInfoModel
 {
     NSArray *tipArr = @[@"录入真实姓名",@"选择性别",@"添加年限",@"编辑服务宣言",@"未认证",@"设置城市",@"绑定门店",@"绑定手机",@""];
     
@@ -46,34 +47,34 @@
     switch (row)
     {
         case 1:
-            tipStr = personalInfodic[@"TrueName"];
+            tipStr = personalInfoModel.TrueName;
             break;
         case 2:
-            tipStr = personalInfodic[@"Sex"];
+            tipStr = personalInfoModel.Sex;
             break;
         case 3:
         {
             // 时间的转换
-            NSString *time = personalInfodic[@"CongYeTime"];
+            NSString *time = personalInfoModel.CongYeTime;
             time = [WXZStringObject replacementString:time replace:@"/" replaced:@"-"];
             NSDate *date = [WXZDateObject formatDate1:time dateFormat:@"yyyy-MM-dd HH:mm:ss"];
             tipStr = [WXZDateObject formatDate2:date dateFormat:@"yyyy-MM"];
         }
             break;
         case 4:
-            tipStr = personalInfodic[@"XuanYan"];
+            tipStr = personalInfoModel.XuanYan;
             break;
         case 5:
-            tipStr = personalInfodic[@"IsShiMing"];
+            tipStr = personalInfoModel.IsShiMing;
             break;
         case 6:
-            tipStr = personalInfodic[@"cityName"];
+            tipStr = personalInfoModel.cityName;
             break;
         case 7:
-            tipStr = personalInfodic[@"LtName"];
+            tipStr = personalInfoModel.LtName;
             break;
         case 8:
-            tipStr = personalInfodic[@"Mobile"];
+            tipStr = personalInfoModel.Mobile;
             break;
             
         default:
@@ -103,10 +104,16 @@
         self.tipLabel.hidden = YES;
         self.certificationImgView.hidden = NO;
         self.certificationLabel.hidden = NO;
+        // 判断是否已认证；若没有认证并有身份证号，则显示审核中；否则未认证
         if ([tipStr isEqualToString:@"True"])
         {
             self.certificationImgView.image = [UIImage imageNamed:@"wo_personaldata_certified"];
             self.certificationLabel.text = @"已认证";
+        }
+        else if ([tipStr isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:personalInfoModel.sfzid])
+        {
+            self.certificationImgView.image = [UIImage imageNamed:@"wo_personaldata_certification"];
+            self.certificationLabel.text = @"审核中";
         }
         else
         {

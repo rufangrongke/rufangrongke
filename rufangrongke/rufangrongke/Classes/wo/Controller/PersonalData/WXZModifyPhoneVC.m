@@ -64,7 +64,7 @@
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             NSLog(@"%@",responseObject[@"msg"]);
+             WXZLog(@"%@",responseObject[@"msg"]);
              // 跳转到登录页面（修改密码）
              WXZLoginController *loginController = [[WXZLoginController alloc]init];
              [[[[UIApplication sharedApplication] delegate] window] setRootViewController:loginController];
@@ -93,7 +93,7 @@
         NSString *url = [OutNetBaseURL stringByAppendingString:yanzhengma];
         
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
-        [param setObject:@"ChangMobile" forKey:@"Act"]; // 验证码类型
+        [param setObject:@"ChangeMobile" forKey:@"Act"]; // 验证码类型
         [param setObject:self.currentPhoneNumLabel.text forKey:@"Mobile"]; // 当前手机号
         
         [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)

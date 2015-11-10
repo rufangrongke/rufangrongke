@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZKeHuDetailModel.h"
 
 @interface WXZPurchaseIntentionCell : UITableViewCell
 
 + (instancetype)initPurchaseIntentionCell;
 
 - (void)showTypeName:(NSInteger)row;
-- (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row  isModify:(BOOL)ismodify yuanData:(NSDictionary *)dic;
+- (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row  isModify:(BOOL)ismodify yuanData:(WXZKeHuDetailModel *)model;
 
 @end
