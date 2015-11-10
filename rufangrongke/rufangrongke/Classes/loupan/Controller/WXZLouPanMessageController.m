@@ -19,6 +19,7 @@
 #import "WXZLouPanBottomBar.h"
 #import "WXZLouPanHuXingController.h"
 #import "WXZLouPanYongJinController.h"
+#import "WXZLouPanMessageModel.h"
 
 
 @interface WXZLouPanMessageController ()<UITableViewDataSource, UITableViewDelegate, LouPanHuXingControllerDelegate>
@@ -26,6 +27,16 @@
 @property(nonatomic, strong) NSArray *PicUrls;
 /* 楼盘详情 */
 @property (nonatomic , copy) NSDictionary *loupanxiangqingDIC;
+/* LouPanMessageModel */
+@property (nonatomic , strong) WXZLouPanMessageModel *louPanMessageModel;
+/* pageView */
+@property (nonatomic , strong) XMGPageView *pageView;
+/* WXZXiangQingController */
+@property (nonatomic , strong) WXZXiangQingController *xiangQingController;
+/* WXZMaiDianController */
+@property (nonatomic , strong) WXZMaiDianController *maiDianController;
+/* WXZLouPanHuXingController */
+@property (nonatomic , strong) WXZLouPanHuXingController *louPanHuXingController;
 @end
 
 @implementation WXZLouPanMessageController
@@ -69,13 +80,9 @@ static CGFloat carouselPic_height = 226;
  */
 - (void)phone_click
 {
-    WXZLogFunc;
+//    WXZLogFunc;
 }
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // 楼盘详情初始化
-    [self setUp];
+- (void)footViewLunBo{
     // 尺寸
     // 主屏幕尺寸mainScreen_height;mainScreen_width;
     CGFloat mainScreenHeight = mainScreen_height;
@@ -94,62 +101,80 @@ static CGFloat carouselPic_height = 226;
     pageView.imageNames = @[@"loupan-banner", @"loupan-banner", @"loupan-banner"];
     pageView.otherColor = [UIColor grayColor];
     pageView.currentColor = [UIColor orangeColor];
-    self.tableView.tableHeaderView = pageView;
+    self.pageView = pageView;
+    self.tableView.tableHeaderView = self.pageView;
+}
+/**
+ * footView
+ */
+- (void)setUpFootView{
+    // 添加footView
+    WXZLouPanHuXingController *vc01 = [[WXZLouPanHuXingController alloc] init];
+    vc01.title = @"户型";
+    vc01.fyhao = self.fyhao;
+    // 设置户型代理
+    vc01.delegate = self;
+    self.louPanHuXingController = vc01;
+    
+    WXZMaiDianController *vc02 = [[WXZMaiDianController alloc] init];
+    vc02.title = @"卖点";
+    vc02.fyhao = self.fyhao;
+    self.maiDianController = vc02;
+    
+    WXZXiangQingController *vc03 = [[WXZXiangQingController alloc] init];
+    vc03.title = @"详情";
+    vc03.fyhao = self.fyhao;
+    self.xiangQingController = vc03;
+    
+    WXZLiandong *liandong = [WXZLiandong makeLiandongView:[NSMutableArray arrayWithObjects:vc01, vc02, vc03, nil]];
+    liandong.backgroundColor = [UIColor clearColor];
+    liandong.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 360);
+    self.tableView.tableFooterView = liandong;
 
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // 楼盘详情初始化
+    [self setUp];
+    // footView--轮播
+    [self footViewLunBo];
+    
+    // 添加footView
+    [self setUpFootView];
     // 网络请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanxiangqing];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"fy"] = self.fyhao;
     [[AFHTTPSessionManager manager] POST:url parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dic = (NSDictionary *)responseObject;
+        WXZLog(@"%@", responseObject);
+        // 字典转模型
+        self.louPanMessageModel = [WXZLouPanMessageModel objectWithKeyValues:responseObject];
         
-        // 刷新数据源
-        [self.tableView reloadData];
-//        WXZLog(@"%@", dic);
-        // 将服务器返回数据存储
-        self.loupanxiangqingDIC = dic;
-        NSDictionary *view = dic[@"view"];
-        NSArray *pics = view[@"pics"];
-//        WXZLog(@"%@",pics);
+        // 详情/卖点/户型
+        self.xiangQingController.model = self.louPanMessageModel.view;
+        self.maiDianController.model = self.louPanMessageModel.view;
+        self.louPanHuXingController.hxs = self.louPanMessageModel.view.hxs;
+        
+        // 获取轮播图片地址
         NSMutableArray *PicUrls = [NSMutableArray array];
-        for (NSDictionary *dic in pics) {
-            NSString *PicUrl = [picBaseULR stringByAppendingString:dic[@"PicUrl"]];
+        for (Pics *pic in self.louPanMessageModel.view.pics) {
+            NSString *picString = [NSString stringWithFormat:@"%@", pic.PicUrl];
+            NSString *PicUrl = [picBaseULR stringByAppendingString:picString];
             [PicUrls addObject:PicUrl];
         }
-//        WXZLog(@"%@", PicUrls);
-        self.PicUrls = PicUrls;
         // 非轮播图片
-        pageView.imageNames = self.PicUrls;
+        if (PicUrls.count != 0) {
+            self.pageView.imageNames = PicUrls;
+        }
+        [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
     }];
     
-    // 添加footView
-    WXZLouPanHuXingController *vc01 = [[WXZLouPanHuXingController alloc] init];
-//    vc01.view.backgroundColor = [UIColor greenColor];
-    vc01.title = @"户型";
-    vc01.fyhao = self.fyhao;
-    // 设置户型代理
-    vc01.delegate = self;
-    
-    WXZMaiDianController *vc02 = [[WXZMaiDianController alloc] init];
-//    vc02.view.backgroundColor = [UIColor yellowColor];
-    vc02.title = @"卖点";
-    vc01.fyhao = self.fyhao;
-    
-    WXZXiangQingController *vc03 = [[WXZXiangQingController alloc] init];
-//    vc03.view.backgroundColor = [UIColor purpleColor];
-    vc03.title = @"详情";
-    vc01.fyhao = self.fyhao;
-    
-    WXZLiandong *liandong = [WXZLiandong makeLiandongView:[NSMutableArray arrayWithObjects:vc01, vc02, vc03, nil]];
-    liandong.backgroundColor = [UIColor clearColor];
-    liandong.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 350);
-    self.tableView.tableFooterView = liandong;
     
     // 添加底部栏
 //    [self setUpBottomBar];
-    self.navigationController.hidesBottomBarWhenPushed = NO;
+//    self.navigationController.hidesBottomBarWhenPushed = NO;
     
 }
 
@@ -184,31 +209,17 @@ static CGFloat carouselPic_height = 226;
         if (indexPath.row == 0)
         {
             WXZLouPanMessageCell_0_0 *Cell_0_0 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMessageCell_0_0 class]) owner:nil options:nil] lastObject];
-            // 楼盘均价
-            Cell_0_0.loupanJunJia.text = [NSString stringWithFormat:@"%@元/平", dic[@"JunJia"]];;
-            [Cell_0_0.loupanJunJia setTextColor:[UIColor redColor]];
-            // 楼盘位置
-            Cell_0_0.loupanWeiZhi.text = dic[@"WeiZhi"];
-            [Cell_0_0.loupanWeiZhi setTextColor:[UIColor darkGrayColor]];
-            // 楼盘收藏人数
-            Cell_0_0.shouCangNum.text = [NSString stringWithFormat:@"%@", dic[@"ShouCangNum"]];
-        
+            Cell_0_0.model = self.louPanMessageModel.view;
             return Cell_0_0;
         }else{
             WXZLouPanMessageCell_0_1 *Cell_0_1 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMessageCell_0_1 class]) owner:nil options:nil] lastObject];
-            // YiXiangKeHuNum HeZuoJJrNum ChengJiaoNum
-            Cell_0_1.yixiangkehuNum.text = [NSString stringWithFormat:@"%@", dic[@"YiXiangKeHuNum"]];
-            Cell_0_1.hezuojingjirenNum.text = [NSString stringWithFormat:@"%@", dic[@"HeZuoJJrNum"]];
-            Cell_0_1.zuijinchengjiaoNum.text = [NSString stringWithFormat:@"%@", dic[@"ChengJiaoNum"]];
-            
+            Cell_0_1.model = self.louPanMessageModel.view;
             return Cell_0_1;
         }
     }
     else{
         WXZLouPanMessageCell_1_0 *Cell_1_0 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMessageCell_1_0 class]) owner:nil options:nil] lastObject];
-        // YongJin 21 137 226
-        Cell_1_0.yongJin.text = [NSString stringWithFormat:@"%@元/套", dic[@"YongJin"]];
-        [Cell_1_0.yongJin setTextColor:[UIColor colorWithRed:21/255.0 green:137/255.0 blue:226/255.0 alpha:1.0]];
+        Cell_1_0.model = self.louPanMessageModel.view;
         return Cell_1_0;
     }
 }
@@ -288,11 +299,11 @@ static int colorNum = 235;
 #pragma UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WXZLog(@"%zd--%zd", indexPath.section, indexPath.row);
+//    WXZLog(@"%zd--%zd", indexPath.section, indexPath.row);
     if (indexPath.section == 1) {
         WXZLouPanYongJinController *yongJinVc = [[WXZLouPanYongJinController alloc] init];
         yongJinVc.fyhao = self.fyhao;
-        WXZLog(@"%@", yongJinVc.fyhao);
+//        WXZLog(@"%@", yongJinVc.fyhao);
         [self.navigationController pushViewController:yongJinVc animated:YES];
     }
 }

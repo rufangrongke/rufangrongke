@@ -150,6 +150,7 @@
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="gA5-LO-dIs"/>
                         <exclude reference="Ask-Pa-fzh"/>
                     </mask>
                 </variation>

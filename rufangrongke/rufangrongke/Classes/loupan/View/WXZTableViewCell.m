@@ -36,17 +36,17 @@
 }
 
 // 模型-->cell
-- (void)setLoupan:(WXZLouPan *)loupan
+- (void)setFys:(Fys *)fys
 {
-    _loupan = loupan;
+    _fys = fys;
     
-    NSString *picUrlString = [picBaseULR stringByAppendingString:loupan.PicUrl];
+    NSString *picUrlString = [picBaseULR stringByAppendingFormat:@"%@", fys.PicUrl];
     [self.loupantupian sd_setImageWithURL:[NSURL URLWithString:picUrlString] placeholderImage:[UIImage imageNamed:@"lp_fyt4"]];
-    self.loupanmingcheng.text = loupan.xiaoqu;
-    self.loufangtaoshu.text = [NSString stringWithFormat:@"%@元/套",loupan.YongJin];
-    self.pingmijiage.text = [NSString stringWithFormat:@"%@元/平米",loupan.JunJia];
-    self.jingjirenshu.text = loupan.HeZuoJJrNum;
-    self.yixiangkehushu.text = loupan.YiXiangKeHuNum;
+    self.loupanmingcheng.text = fys.xiaoqu;
+    self.loufangtaoshu.text = [NSString stringWithFormat:@"%@元/套",fys.YongJin];
+    self.pingmijiage.text = [NSString stringWithFormat:@"%@元/平米",fys.JunJia];
+    self.jingjirenshu.text = fys.HeZuoJJrNum;
+    self.yixiangkehushu.text = fys.YiXiangKeHuNum;
     self.dituchibiao.hidden = YES;
     self.xiangjujuli.hidden = YES;
     

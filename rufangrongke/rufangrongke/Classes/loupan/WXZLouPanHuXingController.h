@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZLouPanMessageModel.h"
 
 @protocol  LouPanHuXingControllerDelegate <NSObject>
 
@@ -19,4 +20,8 @@
 
 /* 楼盘参数 */
 @property(nonatomic,copy) NSString *fyhao;
+
+/* model */
+@property (nonatomic , strong) NSArray *hxs;
+
 @end

@@ -24,7 +24,9 @@
 - (void)setLouPanHuXingModel:(WXZLouPanHuXingModel *)louPanHuXingModel
 {
     _louPanHuXingModel = louPanHuXingModel;
-    NSString *picUrlString = [picBaseULR stringByAppendingString:louPanHuXingModel.pic];
+//    NSString *picUrlString = [picBaseULR stringByAppendingString:louPanHuXingModel.pic];
+    NSString *picUrlString = [picBaseULR stringByAppendingFormat:@"%@", louPanHuXingModel.pic];
+
 //    WXZLog(@"%@", picUrlString);
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:picUrlString] placeholderImage:[UIImage imageNamed:@"lp_fyt4"]];
     self.huXingLabel.text = louPanHuXingModel.hx;

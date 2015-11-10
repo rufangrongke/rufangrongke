@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "WXZLouPanMessageModel.h"
 @interface WXZMaiDianController : UITableViewController
 
 /* 楼盘参数 */
 @property(nonatomic,copy) NSString *fyhao;
+
+/* model */
+@property (nonatomic , strong) View *model;
 @end

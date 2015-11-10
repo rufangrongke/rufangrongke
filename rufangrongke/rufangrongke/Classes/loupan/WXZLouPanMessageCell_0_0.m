@@ -47,6 +47,18 @@ static int index_1 = 0;
     
 }
 
+- (void)setModel:(View *)model
+{
+    _model = model;
+    // 楼盘均价
+    self.loupanJunJia.text = [NSString stringWithFormat:@"%@元/平", model.JunJia];;
+    [self.loupanJunJia setTextColor:[UIColor redColor]];
+    // 楼盘位置
+    self.loupanWeiZhi.text = model.WeiZhi;
+    [self.loupanWeiZhi setTextColor:[UIColor darkGrayColor]];
+    // 楼盘收藏人数
+    self.shouCangNum.text = [NSString stringWithFormat:@"%zd", model.ShouCangNum];
+}
 // cell数据源
 //- (void)setWXZLouPanMessageCell_0_0_Dic:(NSMutableDictionary *)WXZLouPanMessageCell_0_0_Dic
 //{

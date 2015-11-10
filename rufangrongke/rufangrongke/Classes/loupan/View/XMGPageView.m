@@ -106,7 +106,8 @@
     for (int i = 0; i<imageNames.count; i++) {
         UIImageView *imageView = [[UIImageView alloc] init];
 //        imageView.image = [UIImage imageNamed:imageNames[i]];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:imageNames[i]] placeholderImage:[UIImage imageNamed:@"loupan-banner"]];
+        NSString *picUrlString = [NSString stringWithFormat:@"%@", imageNames[i]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:picUrlString] placeholderImage:[UIImage imageNamed:@"loupan-banner"]];
         [self.scrollView addSubview:imageView];
     }
     

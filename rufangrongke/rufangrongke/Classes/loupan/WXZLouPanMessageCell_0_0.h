@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZLouPanMessageModel.h"
 
 @interface WXZLouPanMessageCell_0_0 : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *loupanJunJia;
@@ -16,4 +17,6 @@
 /* WXZLouPanMessageCell_0_0_Dic */
 //@property (nonatomic , strong) NSNumber *shouCan;
 
+/* model */
+@property (nonatomic , strong) View *model;
 @end
