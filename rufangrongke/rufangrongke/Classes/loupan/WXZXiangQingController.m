@@ -8,8 +8,6 @@
 
 #import "WXZXiangQingController.h"
 
-#import "WXZLouPanXiangQingModel.h"
-
 @interface WXZXiangQingController ()
 @property (weak, nonatomic) IBOutlet UILabel *kaipanshijian;
 @property (weak, nonatomic) IBOutlet UILabel *jiaofangshijian;
@@ -27,8 +25,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *zhuangxiuleixing;
 @property (weak, nonatomic) IBOutlet UILabel *chanquannianxian;
 
-/* WXZLouPanXiangQingModel */
-@property (nonatomic , strong) WXZLouPanXiangQingModel *louPanXiangQingModel;
 @end
 
 @implementation WXZXiangQingController

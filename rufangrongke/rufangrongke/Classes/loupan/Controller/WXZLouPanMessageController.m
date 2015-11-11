@@ -200,9 +200,6 @@ static CGFloat carouselPic_height = 226;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 数据
-    NSDictionary *dic = self.loupanxiangqingDIC[@"view"];
-    
     // 设置每组的行高
     if (indexPath.section == 0)
     {

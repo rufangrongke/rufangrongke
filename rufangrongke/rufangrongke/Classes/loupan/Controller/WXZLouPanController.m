@@ -14,6 +14,7 @@
 #import "WXZTableViewCell.h"
 #import <MJExtension.h>
 #import "WXZLouPanMessageController.h"
+#import "WXZquYuListViewController.h"
 
 @interface WXZLouPanController ()<UITableViewDataSource, UITableViewDelegate>
 /** 楼盘模型字典 */
@@ -24,6 +25,8 @@
 /* 缓存list数据 */
 /* fys */
 @property (nonatomic , strong) NSMutableArray *fysList;
+/* WXZquYuListViewController */
+@property (nonatomic , strong) WXZquYuListViewController *quYuListViewVC;
 @end
 
 @implementation WXZLouPanController
@@ -81,15 +84,13 @@ static NSInteger listCount = 1;
         params[@"xiaoqu"] = self.search.text;
         [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
             // 转模型,存储模型
+            WXZLog(@"%@", responseObject);
             self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
             self.fysList = [NSMutableArray arrayWithArray:self.loupanModel.fys];
             // 刷新表格
             [self.tableView reloadData];
-            // 结束刷新
-            [self.tableView.header endRefreshing];
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            // 结束刷新
-            [self.tableView.header endRefreshing];
+            WXZLog(@"%@", error);
             // 显示失败信息
             [SVProgressHUD showErrorWithStatus:@"加载信息失败!"];
         }];
@@ -103,7 +104,25 @@ static NSInteger listCount = 1;
 - (void)quYu_click{
     // 取消键盘
     [self.search resignFirstResponder];
-    
+    if (self.quYuListViewVC == nil) {
+        // 楼盘区域列表
+        WXZquYuListViewController *quYuListViewVC = [[WXZquYuListViewController alloc] init];
+        self.quYuListViewVC = quYuListViewVC;
+        self.quYuListViewVC.tableView.frame = self.tableView.bounds;
+//        self.quYuListViewVC.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width - 64);
+        [self.tableView addSubview:self.quYuListViewVC.tableView];
+//        self.tableView.hidden = YES;
+    }else{
+        self.quYuListViewVC.tableView.hidden = !self.quYuListViewVC.tableView.hidden;
+//        self.tableView.hidden = !self.tableView.hidden;
+//        // quYuListViewVC.tableView 显示和隐藏
+//        if ([self.quYuListViewVC isViewLoaded]) {
+//            [self.quYuListViewVC.tableView];
+//        }else{
+//            self.quYuListViewVC.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width - 64);
+//            [self.tableView addSubview:self.quYuListViewVC.tableView];
+//        }
+    }
 }
 
 #pragma 刷新控件

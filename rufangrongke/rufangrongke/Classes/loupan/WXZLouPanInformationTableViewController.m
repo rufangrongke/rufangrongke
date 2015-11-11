@@ -258,12 +258,12 @@ static int colorNum = 235;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 3) {
-        WXZLouPanInformationTableViewController *infoVc = [[WXZLouPanInformationTableViewController alloc] init];
-        // 标题
-        infoVc.title = @"户型详情";
-        infoVc.huXingBianHao = [self.louPanInformationControllerModel.others[indexPath.row] ID];
-        [infoVc openNewLouPanInfoVC:infoVc.huXingBianHao];
-        [self.navigationController pushViewController:infoVc animated:YES];
+//        WXZLouPanInformationTableViewController *infoVc = [[WXZLouPanInformationTableViewController alloc] init];
+//        // 标题
+//        infoVc.title = @"户型详情";
+//        infoVc.huXingBianHao = [self.louPanInformationControllerModel.others[indexPath.row] ID];
+        [self openNewLouPanInfoVC:[self.louPanInformationControllerModel.others[indexPath.row] ID]];
+//        [self.navigationController pushViewController:infoVc animated:YES];
     }
     
     
@@ -279,6 +279,7 @@ static int colorNum = 235;
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"hxid"] = fyhao;
+    [SVProgressHUD show];
     // afn
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dic = (NSDictionary *)responseObject;
@@ -302,7 +303,7 @@ static int colorNum = 235;
             [self setUpHeadImageView:self.louPanInformationControllerModel.pic];
             //            if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
             //                // 隐藏HUD
-            //                [SVProgressHUD dismiss];
+                            [SVProgressHUD dismiss];
             //
             //            }else{ //登陆失败
             //                [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];

@@ -56,8 +56,8 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deM-VU-0gI">
-                        <rect key="frame" x="132" y="38.5" width="35.5" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deM-VU-0gI">
+                        <rect key="frame" x="132" y="38.5" width="14" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="75" id="CNP-zD-xHU"/>
                             <constraint firstAttribute="height" constant="20" id="DfS-lt-0Fg"/>
@@ -71,8 +71,8 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dge-6v-7wX">
-                        <rect key="frame" x="132" y="80.5" width="35.5" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dge-6v-7wX">
+                        <rect key="frame" x="132" y="80.5" width="14" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="75" id="Sgf-Fv-7VZ"/>
                             <constraint firstAttribute="height" constant="20" id="yiR-64-fcg"/>
@@ -85,8 +85,8 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0c-JZ-oAs">
-                        <rect key="frame" x="132" y="101.5" width="35.5" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0c-JZ-oAs">
+                        <rect key="frame" x="132" y="101.5" width="14" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="HRw-nt-iu1"/>
                             <constraint firstAttribute="width" constant="75" id="bJj-69-206"/>
@@ -99,8 +99,8 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BcQ-YI-gLu">
-                        <rect key="frame" x="132" y="59.5" width="35.5" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BcQ-YI-gLu">
+                        <rect key="frame" x="132" y="59.5" width="14" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="g7w-vt-kZJ"/>
                             <constraint firstAttribute="width" constant="75" id="o08-SP-GOG"/>

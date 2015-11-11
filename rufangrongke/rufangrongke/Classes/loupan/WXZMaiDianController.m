@@ -16,11 +16,8 @@
 #import "WXZLouPanMaiDianCell.h"
 #import "WXZLouPanMaiDianCell_1.h"
 #import "WXZLouPanMaiDianCell_2.h"
-#import "WXZLouPanMaiDianModel.h"
 
 @interface WXZMaiDianController ()<UITableViewDataSource, UITableViewDelegate>
-/* WXZLouPanMaiDianModel */
-@property (nonatomic , strong) WXZLouPanMaiDianModel *louPanMaiDianModel;
 
 @end
 
@@ -30,35 +27,7 @@ static NSString *maindianCellID = @"maindianCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView reloadData];
-//    [self setModel:_model];
-//    // 1.创建请求对象
-//    NSString *urlString = [OutNetBaseURL stringByAppendingString:loupanxiangqing];
-//    
-//    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-//    parameters[@"fy"] = self.fyhao;
-//    // afn
-//    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-//        NSDictionary *dic = (NSDictionary *)responseObject;
-////        NSLog(@"%@----", dic);
-//        self.louPanMaiDianModel = [WXZLouPanMaiDianModel objectWithKeyValues:dic[@"view"]];
-//        
-//        [self.tableView reloadData];
-//        // 4.回到主线程
-//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-////            if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
-////                // 隐藏HUD
-////                [SVProgressHUD dismiss];
-////                
-////            }else{ //登陆失败
-////                [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];
-////            }
-//            
-//        }];
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-////            [SVProgressHUD showErrorWithStatus:@"登陆超时,请重新登陆." maskType:SVProgressHUDMaskTypeBlack];
-//        }];
-//    }];
+
 }
 
 - (void)didReceiveMemoryWarning {
