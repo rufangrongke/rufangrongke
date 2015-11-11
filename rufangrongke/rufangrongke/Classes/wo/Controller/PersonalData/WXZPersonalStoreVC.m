@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *cardImgView; // 名片imgView
-@property (weak, nonatomic) IBOutlet UIProgressView *uploadProgress; // 上传进度条
+
 @property (weak, nonatomic) IBOutlet UITextField *storeNameTextField; // 新门店输入框
 
 @end
@@ -33,12 +33,11 @@
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"修改绑定门店";
     
-    self.storeNameTextField.text = self.storeName; // 赋值
     self.storeNameTextField.delegate = self; // 遵循协议
     
     self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 350); // 设置scrollView的contentSize
     
-    [self initControl]; // 初始化progress
+    [self initControl]; // 初始化
     
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -49,9 +48,8 @@
 // 初始化控件
 - (void)initControl
 {
-    self.uploadProgress.progress = 0;
-    self.uploadProgress.progressTintColor = [UIColor blueColor];
-    self.uploadProgress.trackTintColor = [UIColor grayColor];
+    self.cardImgView.layer.cornerRadius = 6;
+    self.cardImgView.layer.masksToBounds = YES;
 }
 
 // 选择名片单击事件
@@ -92,7 +90,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = NO; // 设置可以编辑
+                imagePicker.allowsEditing = YES; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera; // 设置源
                 imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto; // 设定图片选取器的摄像头捕获模式
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
@@ -110,7 +108,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = NO; // 设置可以编辑
+                imagePicker.allowsEditing = YES; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; // 设置源
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
             }
@@ -143,8 +141,6 @@
         [[NSUserDefaults standardUserDefaults] setObject:imgData forKey:@"companyImg"];
         
         self.cardImgView.image = [UIImage imageWithData:imgData];
-        self.cardImgView.layer.cornerRadius = 6;
-        self.cardImgView.layer.masksToBounds = YES;
     }
     else
     {
@@ -169,10 +165,6 @@
     [param setObject:picfile forKey:@"picfile"]; // 公司图片
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     [manager POST:nameUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
@@ -182,15 +174,15 @@
         
     } success:^(NSURLSessionDataTask *task, id responseObject)
      {
-//         NSString *mm=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//         WXZLog(@"%@",responseObject);
-//         NSLog(@"%@",mm);
-         
          if ([responseObject[@"ok"] integerValue] == 1)
          {
              // 发送通知
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
              [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
+         }
+         else
+         {
+             WXZLog(@"%@",responseObject);
          }
          
          [SVProgressHUD dismiss];

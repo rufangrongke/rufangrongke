@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField; // 姓名
 @property (weak, nonatomic) IBOutlet UITextField *idCardTextField; // 身份证号
 @property (weak, nonatomic) IBOutlet UIImageView *idCardImgView; // 身份证正面图片
-@property (weak, nonatomic) IBOutlet UIProgressView *uploadProgress; // 上传进度
 
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *selectImgTap; // 手势
 
@@ -40,16 +39,16 @@
     self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 300);
     
     // 赋值
-    self.nameTextField.text = self.idCardName;
-    self.idCardTextField.text = self.idCardId;
-    NSString *imgUrlStr = [OutNetBaseURL stringByAppendingString:self.idCardImg];
+    self.nameTextField.text = self.woInfoModel.TrueName;
+    self.idCardTextField.text = self.woInfoModel.sfzid;
+    NSString *imgUrlStr = [picBaseULR stringByAppendingFormat:@"%@",self.woInfoModel.sfzPic];
     [self.idCardImgView sd_setImageWithURL:[NSURL URLWithString:imgUrlStr] placeholderImage:[UIImage imageNamed:@"wo_personal_idcard"]];
     
     // 设置代理
     self.nameTextField.delegate = self;
     self.idCardTextField.delegate = self;
     
-    [self initControl]; // 初始化progress
+    [self initControl]; // 初始化
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -59,27 +58,30 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"wo_complete" highImage:@"" title:@"" target:self action:@selector(completeAction:) isEnable:YES];
     
     // 已认证则不显示按钮，所有东西不可修改；有身份证号但是为False，则为审核中
-    if ([self.isCertification isEqualToString:@"True"])
+    if ([self.woInfoModel.IsShiMing isEqualToString:@"True"])
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"" highImage:@"" target:self action:@selector(completeAction:)];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"" highImage:@"" title:@"" target:self action:@selector(completeAction:) isEnable:NO];
         
         self.nameTextField.enabled = NO;
         self.idCardTextField.enabled = NO;
         self.selectImgTap.enabled = NO;
     }
-    else if ([self.isCertification isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:self.idCardId])
+    else if ([self.woInfoModel.IsShiMing isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:self.woInfoModel.sfzid])
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"" highImage:@"" title:@"审核中" target:self action:@selector(completeAction:) isEnable:NO];
+        
+        self.nameTextField.enabled = NO;
+        self.idCardTextField.enabled = NO;
+        self.selectImgTap.enabled = NO;
     }
 }
 
 // 初始化控件
 - (void)initControl
 {
-    // UIProgress 的相关设置
-    self.uploadProgress.progress = 0;
-    self.uploadProgress.progressTintColor = [UIColor blueColor];
-    self.uploadProgress.trackTintColor = [UIColor grayColor];
+    // 设置图片圆角
+    self.idCardImgView.layer.cornerRadius = 6;
+    self.idCardImgView.layer.masksToBounds = YES;
 }
 
 // 添加身份证正面照的按钮事件
@@ -103,7 +105,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = NO; // 设置可以编辑
+                imagePicker.allowsEditing = YES; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera; // 设置源
                 imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto; // 设定图片选取器的摄像头捕获模式
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
@@ -121,7 +123,7 @@
             {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = self; // 设置代理
-                imagePicker.allowsEditing = NO; // 设置可以编辑
+                imagePicker.allowsEditing = YES; // 设置可以编辑
                 imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; // 设置源
                 [self presentViewController:imagePicker animated:YES completion:nil]; // 开启拾取器界面
             }
@@ -157,10 +159,8 @@
         
         [[NSUserDefaults standardUserDefaults] setObject:imgData forKey:@"sfzimg"];
         
-        // 设置图片圆角
+        // 设置图片
         self.idCardImgView.image = [UIImage imageWithData:imgData];
-        self.idCardImgView.layer.cornerRadius = 6;
-        self.idCardImgView.layer.masksToBounds = YES;
     }
     else
     {
@@ -209,10 +209,6 @@
     
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css", @"text/plain", nil];
-//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     [manager POST:requestUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
@@ -222,11 +218,7 @@
         [formData appendPartWithFileData:sfzPic name:@"headFile" fileName:fileName mimeType:@"image/png"];
         
     } success:^(NSURLSessionDataTask *task, id responseObject)
-    {
-//        NSString *mm=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//        WXZLog(@"%@",responseObject);
-//        NSLog(@"%@",mm);
-        
+    {        
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             // 发送通知
@@ -238,7 +230,7 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
-        
+        [SVProgressHUD dismiss];
     }];
     
     // 上传

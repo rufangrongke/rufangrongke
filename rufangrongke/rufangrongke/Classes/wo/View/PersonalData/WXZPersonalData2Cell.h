@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZWoInfoModel.h"
 
 @interface WXZPersonalData2Cell : UITableViewCell
 
@@ -21,7 +22,7 @@
 // 初始化信息
 - (void)personalDataInfo:(NSInteger)row;
 // 刷新数据
-- (void)updatePersonalDataInfo:(NSInteger)row data:(NSDictionary *)personalInfodic;
+- (void)updatePersonalDataInfo:(NSInteger)row data:(WXZWoInfoModel *)personalInfoModel;
 //
 - (void)buttonWithTarget:(id)target action:(SEL)action;
 

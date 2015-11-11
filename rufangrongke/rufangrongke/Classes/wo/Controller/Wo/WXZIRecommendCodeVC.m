@@ -40,7 +40,7 @@
 - (void)initControl
 {
     // 设置图片
-    NSString *imgUrl = [picBaseULR stringByAppendingString:self.headUrl];
+    NSString *imgUrl = [picBaseULR stringByAppendingFormat:@"%@",self.headUrl];
     self.headImgView.layer.cornerRadius = 50;
     self.headImgView.layer.masksToBounds = YES;
     self.headImgView.layer.borderColor = WXZRGBColor(229, 229, 229).CGColor;

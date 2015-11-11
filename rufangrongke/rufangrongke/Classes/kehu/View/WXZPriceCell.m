@@ -26,13 +26,13 @@
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
-- (void)updateInfo:(NSDictionary *)dic isModify:(BOOL)ismodify
+- (void)updateInfo:(WXZKeHuDetailModel *)model isModify:(BOOL)ismodify
 {
     self.noLimitBtn.backgroundColor = [UIColor lightGrayColor];
     if (ismodify)
     {
-        NSString *sStr = [NSString stringWithFormat:@"%@",dic[@"JiaGeS"]];
-        NSString *eStr = [NSString stringWithFormat:@"%@",dic[@"JiaGeE"]];
+        NSString *sStr = [NSString stringWithFormat:@"%@",model.JiaGeS];
+        NSString *eStr = [NSString stringWithFormat:@"%@",model.JiaGeE];
         if (![WXZChectObject checkWhetherStringIsEmpty:sStr])
         {
             self.pricefTextField.text = sStr;

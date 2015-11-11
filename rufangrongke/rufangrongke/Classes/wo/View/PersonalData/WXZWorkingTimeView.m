@@ -12,11 +12,10 @@
 
 - (void)awakeFromNib
 {
-    if ([UIScreen mainScreen].bounds.size.width == 320)
+    if (WXZ_ScreenWidth == 320 || WXZ_ScreenWidth == 414)
     {
-        self.bgView.frame = CGRectMake(12, 40, 320-24, 320-24+1);
+        self.bgView.frame = CGRectMake(12, 40, WXZ_ScreenWidth-24, WXZ_ScreenWidth-23-64);
     }
-
 }
 
 

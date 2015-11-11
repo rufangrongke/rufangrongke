@@ -10,4 +10,6 @@
 
 @interface WXZNavController : UINavigationController
 
+- (void)back;
+
 @end

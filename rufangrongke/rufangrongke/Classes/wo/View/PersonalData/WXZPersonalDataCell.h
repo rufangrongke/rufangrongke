@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZWoInfoModel.h"
 
 @interface WXZPersonalDataCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *headImgView;
 
+@property (nonatomic,strong) WXZWoInfoModel *woInfoModel;
+
 // 加载nib文件
 + (instancetype)initPersonalDataCell;
 
 // 头像边框
-- (void)headBorder;
+//- (void)headBorder;
 // 刷新头像
-- (void)updateHead:(NSString *)headUrl;
+//- (void)updateHead:(NSString *)headUrl;
 
 @end

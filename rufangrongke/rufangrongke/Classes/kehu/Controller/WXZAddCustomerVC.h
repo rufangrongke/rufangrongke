@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZKeHuDetailModel.h"
 
 @interface WXZAddCustomerVC : UIViewController
 
 @property (nonatomic,strong) NSString *titleStr;
 
-@property (nonatomic,strong) NSDictionary *detailDic;
+@property (nonatomic,strong) WXZKeHuDetailModel *detailModel;
 
 @property (nonatomic,assign) BOOL isModifyCustomerInfo;
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZKeHuDetailModel.h"
 
 @interface WXZBasicInfoCell : UITableViewCell
 
@@ -16,8 +17,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *menBtn;
 @property (weak, nonatomic) IBOutlet UIButton *womenBtn;
 
+@property (nonatomic,strong) WXZKeHuDetailModel *detailModel;
+
 + (instancetype)initBasicInfoCell;
 
-- (void)modifyInfo:(NSDictionary *)dic isModify:(BOOL)ismodify;
+- (void)modifyInfo:(WXZKeHuDetailModel *)model isModify:(BOOL)ismodify;
 
 @end

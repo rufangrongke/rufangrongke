@@ -10,7 +10,6 @@
 
 @interface WXZPersonalStoreVC : UIViewController
 
-@property (nonatomic,strong) NSString *storeId;
-@property (nonatomic,strong) NSString *storeName;
+@property (nonatomic,strong) NSString *storeId; // 门店id
 
 @end

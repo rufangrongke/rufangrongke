@@ -13,7 +13,7 @@
 // 按“/”等截取字符串
 + (NSArray *)interceptionOfString:(NSString *)str  interceptType:(NSString *)type
 {
-    return [str componentsSeparatedByString:@"-"];
+    return [str componentsSeparatedByString:type];
 }
 
 // 截取一定范围的字符串

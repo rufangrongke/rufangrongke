@@ -7,6 +7,7 @@
 //
 
 #import "WXZWoController.h"
+#import "WXZWoInfoModel.h"
 #import "WXZWoHeadCell.h"
 #import "WXZWoTypeCell.h"
 #import "WXZWoListCell.h"
@@ -18,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *myTableView; // 底层TableView
 
 @property (nonatomic,strong) NSDictionary *woHeadInfoDic; // 关于头像，姓名等的信息字典
+
+@property (nonatomic,strong) WXZWoInfoModel *woInfoModel; //
 
 @end
 
@@ -36,13 +39,12 @@
     [self.view addSubview:statusView];
     
     // 获取缓存数据
-    self.woHeadInfoDic = [self localUserInfo];
+//    self.woHeadInfoDic = [self localUserInfo];
+    [self woInfoRequest]; // “我”信息数据请求
     
     // 设置数据源，遵循协议
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
-//    self.automaticallyAdjustsScrollViewInsets = NO;
-//    self.myTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWoData:) name:@"UpdateWoPage" object:nil];
@@ -56,11 +58,30 @@
     [self.myTableView reloadData];
 }
 
+#pragma mark - Wo Info Request
+- (void)woInfoRequest
+{
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [self loginRequest:^(id result) {
+        if (![result isEqual:@"请求失败"])
+        {
+            NSDictionary *dic = (NSDictionary *)result;
+            // 转模型
+            self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:dic];
+            [self.myTableView reloadData]; // 刷新
+        }
+        else
+            [SVProgressHUD showErrorWithStatus:result];
+//            NSLog(@"%@",result);
+        
+        [SVProgressHUD dismiss];
+    }];
+}
+
 // 刷新“我”界面数据（通知方法）
 - (void)updateWoData:(NSNotification *)noti
 {
-    // 获取缓存数据
-    self.woHeadInfoDic = [self localUserInfo];
+    [self woInfoRequest]; // 请求
     [self.myTableView reloadData];
 }
 
@@ -110,7 +131,7 @@
             }
             
             [headCell headBorder]; // 设置头像边框
-            [headCell updateWoInfo:self.woHeadInfoDic]; // 更新信息
+            headCell.woInfoModel = self.woInfoModel;
             
             // 添加立即绑定button 响应事件
             [headCell buttonWithTarget:self withAction:@selector(immediatelyBindingAction:)];
@@ -200,7 +221,9 @@
             {
                 // 推出个人资料页面
                 NSLog(@"个人资料");
-                [self.navigationController pushViewController:[[WXZPersonalController alloc] init] animated:YES];
+                WXZPersonalController *personalVC = [[WXZPersonalController alloc] init];
+                personalVC.woInfoModel = self.woInfoModel;
+                [self.navigationController pushViewController:personalVC animated:YES];
             }
         }
             break;
@@ -211,9 +234,9 @@
                 // 推出我的推荐码页面
                 NSLog(@"我的推荐码");
                 WXZIRecommendCodeVC *recommendCodeVC = [[WXZIRecommendCodeVC alloc] init];
-                recommendCodeVC.headUrl = self.woHeadInfoDic[@"TouXiang"];
-                recommendCodeVC.userName = self.woHeadInfoDic[@"TrueName"];
-                recommendCodeVC.recommendedCodeStr = self.woHeadInfoDic[@"tjm"];
+                recommendCodeVC.headUrl = self.woInfoModel.TouXiang;
+                recommendCodeVC.userName = self.woInfoModel.TrueName;
+                recommendCodeVC.recommendedCodeStr = self.woInfoModel.tjm;
                 [self.navigationController pushViewController:recommendCodeVC animated:YES];
             }
             else if (indexPath.row == 1)

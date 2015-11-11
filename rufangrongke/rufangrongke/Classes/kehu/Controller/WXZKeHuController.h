@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BackFilterTypeDelegate <NSObject>
+
+- (void)backScreeningType:(NSString *)type;
+
+@end
+
 @interface WXZKeHuController : UITableViewController
 
 @end

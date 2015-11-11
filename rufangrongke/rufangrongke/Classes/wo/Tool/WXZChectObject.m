@@ -119,7 +119,7 @@
 // --邮编
 +(BOOL)checkEmailCode:(NSString *)emaliCode{
     const char *cvalue = [emaliCode UTF8String];
-    int len = strlen(cvalue);
+    int len = (int)strlen(cvalue);
     if (len != 6) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邮政编码格式不正确" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
@@ -172,7 +172,7 @@
 +(BOOL)checkSpace:(NSString *)text
 {
     NSRange range=[text rangeOfString:@" "];
-    int length=range.length;
+    int length = (int)range.length;
     if (length>0)
     {
         return NO;

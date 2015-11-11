@@ -22,8 +22,22 @@
 }
 
 // 设置头像边框
-- (void)headBorder
+//- (void)headBorder
+//{
+//    self.headImgView.layer.cornerRadius = 30;
+//    self.headImgView.layer.masksToBounds = YES;
+//    self.headImgView.layer.borderWidth = 2;
+//    self.headImgView.layer.borderColor = WXZRGBColor(184, 184, 184).CGColor;
+//    
+//    // 添加分割线
+//    UIImageView *lineImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 74, WXZ_ScreenWidth-20, 1)];
+//    lineImgView.image = [UIImage imageNamed:@"wo_personaldata_divider"];
+//    [self.contentView addSubview:lineImgView];
+//}
+
+- (void)setWoInfoModel:(WXZWoInfoModel *)woInfoModel
 {
+    // 设置头像边框
     self.headImgView.layer.cornerRadius = 30;
     self.headImgView.layer.masksToBounds = YES;
     self.headImgView.layer.borderWidth = 2;
@@ -33,22 +47,25 @@
     UIImageView *lineImgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 74, WXZ_ScreenWidth-20, 1)];
     lineImgView.image = [UIImage imageNamed:@"wo_personaldata_divider"];
     [self.contentView addSubview:lineImgView];
+    
+    NSURL *personalHeadUrl = [NSURL URLWithString:[picBaseULR stringByAppendingFormat:@"%@",woInfoModel.TouXiang]];
+    [self.headImgView sd_setImageWithURL:personalHeadUrl placeholderImage:[UIImage imageNamed:@"wo_personaldata_head"]];
 }
 
-- (void)updateHead:(NSString *)headUrl
-{
-    // 拼接头像url
-    if (headUrl != nil)
-    {
-        NSURL *personalHeadUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:headUrl]];
-        [self.headImgView sd_setImageWithURL:personalHeadUrl placeholderImage:[UIImage imageNamed:@"wo_personaldata_head"]];
-    }
-    else
-    {
-        NSURL *personalHeadUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:@""]];
-        [self.headImgView sd_setImageWithURL:personalHeadUrl placeholderImage:[UIImage imageNamed:@"wo_personaldata_head"]];
-    }
-}
+//- (void)updateHead:(NSString *)headUrl
+//{
+//    // 拼接头像url
+//    if (headUrl != nil)
+//    {
+//        NSURL *personalHeadUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:headUrl]];
+//        [self.headImgView sd_setImageWithURL:personalHeadUrl placeholderImage:[UIImage imageNamed:@"wo_personaldata_head"]];
+//    }
+//    else
+//    {
+//        NSURL *personalHeadUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:@""]];
+//        [self.headImgView sd_setImageWithURL:personalHeadUrl placeholderImage:[UIImage imageNamed:@"wo_personaldata_head"]];
+//    }
+//}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

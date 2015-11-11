@@ -50,19 +50,19 @@
     }
 }
 
-- (IBAction)goufangyixiangAction:(id)sender
-{
-    NSLog(@"购房意向");
-    WXZAddCustomerVC *addVC = [[WXZAddCustomerVC alloc] init];
-    addVC.isModifyCustomerInfo = YES;
-    addVC.titleStr = @"修改客户信息";
-    addVC.detailDic = self.dDic;
-    [self.controller.navigationController pushViewController:addVC animated:YES];
-}
+//- (IBAction)goufangyixiangAction:(id)sender
+//{
+//    NSLog(@"购房意向");
+//    WXZAddCustomerVC *addVC = [[WXZAddCustomerVC alloc] init];
+//    addVC.isModifyCustomerInfo = YES;
+//    addVC.titleStr = @"修改客户信息";
+//    addVC.detailDic = self.dDic;
+//    [self.controller.navigationController pushViewController:addVC animated:YES];
+//}
 
 - (IBAction)baobeiloupanAction:(id)sender
 {
-    NSLog(@"报备楼盘");
+//    NSLog(@"报备楼盘");
     NSLog(@"敬请期待！");
 //    WXZReportPreparationVC *rpVC = [[WXZReportPreparationVC alloc] init];
 //    [_controller.navigationController pushViewController:rpVC animated:YES];

@@ -14,6 +14,7 @@
 #import "WXZGouFangYiXiangCell.h"
 #import "WXZHousingDetailsCell.h"
 #import "WXZAddCustomerVC.h"
+#import "WXZKeHuDetailModel.h"
 
 
 @interface WXZCustomerDetailsVC () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MFMessageComposeViewControllerDelegate>
@@ -26,6 +27,8 @@
 @property (nonatomic,strong) UITextField *phoneNumTextField;
 
 @property (nonatomic,strong) NSDictionary *cdDic; // 客户详情信息
+
+@property (nonatomic,strong) WXZKeHuDetailModel *keHuDetailModel;
 
 @end
 
@@ -41,14 +44,16 @@
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    [self customerDetailRequest:self.customerId];
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+//    [self customerDetailRequest:self.customerId];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_detailedit" highImage:@"" target:self action:@selector(editAction:)];
     
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [self customerDetailRequest:self.customerId];
 }
 
 #pragma mark - Request
@@ -64,35 +69,19 @@
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             self.cdDic = responseObject[@"kehu"];
+            self.keHuDetailModel = [WXZKeHuDetailModel objectWithKeyValues:self.cdDic];
             [self.myTableView reloadData];
-            WXZLog(@"%@",self.cdDic);
-            /*
-            id : 6,
-            Mobile : 16891958995,
-            bbTime : 10/15/2015 20:09:51,
-            uid : 2,
-            JiaGeS : <null>,
-            LastLookTime : <null>,
-            typeBig : 添加,
-            XingMing : ,
-            QuYu : ,
-            fyhao : <null>,
-            YiXiang : <null>,
-            JiaGeE : <null>,
-            cityid : 3,
-            Hx : ,
-            xiaoqu : 石府小区,
-            AddTime : 10/15/2015 19:31:16,
-            Sex : 女士,
-            typeSmall : */
+//            WXZLog(@"detail = %@",self.keHuDetailModel);
         }
         else
         {
-            
+//            WXZLog(@"%@",responseObject);
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
         [SVProgressHUD dismiss];
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"请求失败"];
         [SVProgressHUD dismiss];
     }];
 }
@@ -122,7 +111,7 @@
     WXZAddCustomerVC *addVC = [[WXZAddCustomerVC alloc] init];
     addVC.isModifyCustomerInfo = YES;
     addVC.titleStr = @"修改客户信息";
-    addVC.detailDic = self.cdDic;
+    addVC.detailModel = self.keHuDetailModel;
     [self.navigationController pushViewController:addVC animated:YES];
     // 判断按钮当前图片
 //    if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_detailedit"]])
