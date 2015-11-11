@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol  WXZquYuListViewControllerDelegate <NSObject>
 
-@interface WXZquYuListViewController : UITableViewController
+- (void)quYuListViewControllerDelegate:(NSString *)parameter;
+
+@end
+@interface WXZquYuListViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+/* 代理 */
+@property (nonatomic , weak) id<WXZquYuListViewControllerDelegate> delegate;
 
 @end

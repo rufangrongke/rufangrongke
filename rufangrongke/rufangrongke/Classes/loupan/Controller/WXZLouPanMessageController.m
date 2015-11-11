@@ -132,6 +132,13 @@ static CGFloat carouselPic_height = 226;
     self.tableView.tableFooterView = liandong;
 
 }
+
+#pragma view显示
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    self.hidesBottomBarWhenPushed = NO;
+////    self.tabBarController.tabBar.hidden = NO;
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 楼盘详情初始化

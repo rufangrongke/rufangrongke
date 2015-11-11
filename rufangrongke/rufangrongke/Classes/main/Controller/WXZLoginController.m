@@ -45,18 +45,18 @@
     NSString *username = self.usernameField.text;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:username forKey:@"phoneNumber"];
-    if (username.length == 0) {
-        [SVProgressHUD showErrorWithStatus:self.usernameField.placeholder];
-        return;
-    }
+//    if (username.length == 0) {
+//        [SVProgressHUD showErrorWithStatus:self.usernameField.placeholder];
+//        return;
+//    }
     
     // 检测密码
     NSString *pwd = self.pwdField.text;
     [defaults setObject:pwd forKey:@"password"];
-    if (pwd.length == 0) {
-        [SVProgressHUD showErrorWithStatus:self.pwdField.placeholder];
-        return;
-    }
+//    if (pwd.length == 0) {
+//        [SVProgressHUD showErrorWithStatus:self.pwdField.placeholder];
+//        return;
+//    }
     
     // 显示HUD
     [SVProgressHUD showWithStatus:@"登录中..." maskType:SVProgressHUDMaskTypeBlack];
@@ -106,12 +106,14 @@
     }];
 
 }
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
     // 隐藏导航栏
     [self.navigationController setNavigationBarHidden:YES];
-    
+
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,11 +122,13 @@
 }
 
 - (IBAction)findPassWord:(id)sender {
+    WXZLogFunc;
     // 添加找回密码控制器
     [self.navigationController pushViewController:[[WXZFindPasswordController alloc] init] animated:YES];
 }
 
 - (IBAction)registerAccount:(id)sender {
+    WXZLogFunc;
     // 添加注册控制器
     [self.navigationController pushViewController:[[WXZRegisterController alloc] init] animated:YES];
 }
