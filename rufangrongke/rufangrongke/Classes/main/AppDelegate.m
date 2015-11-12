@@ -27,6 +27,7 @@
     self.window = [[UIWindow alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.frame = [UIScreen mainScreen].bounds;
+    
     // 启动页只在第一页显示
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
     {
@@ -37,11 +38,18 @@
     }
     else
     {
-        // 创建Nav控制器
-        WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZLoginController alloc] init]];
-        // 设置窗口的根控制器
-        self.window.rootViewController = nav;
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"evenLaunch"])
+        {
+//          设置窗口的根控制器
+            self.window.rootViewController = [[WXZYingDaoPageViewController alloc] init];
+
+        }else{
+            // 创建Nav控制器
+            WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZLoginController alloc] init]];
+            // 设置窗口的根控制器
+            self.window.rootViewController = nav;
+        }
+        
     }
     
     // 显示窗口

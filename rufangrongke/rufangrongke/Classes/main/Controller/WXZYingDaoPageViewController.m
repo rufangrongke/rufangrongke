@@ -78,6 +78,7 @@
 
 // 按钮点击
 - (void)liKeJinRu{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"evenLaunch"];
     // 创建Nav控制器
     WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZLoginController alloc] init]];
     
