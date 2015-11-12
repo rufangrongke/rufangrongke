@@ -86,7 +86,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return self.louPanYongJinModel.list.count;
+        if (self.louPanYongJinModel.list.count == 0) {
+            return 1;
+        }else{
+            return self.louPanYongJinModel.list.count;
+        }
     }else{
         return 1;
     }
@@ -96,8 +100,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         WXZLouPanYongJinCell_0 *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanYongJinCell_0 class]) owner:nil options:nil].lastObject;
-        
-        cell.listYongJin = self.louPanYongJinModel.list[indexPath.row];
+        if (self.louPanYongJinModel.list.count != 0) {
+            cell.listYongJin = self.louPanYongJinModel.list[indexPath.row];
+        }
         
         return cell;
     }else{

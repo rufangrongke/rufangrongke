@@ -7,7 +7,6 @@
 //
 
 #import "WXZLouPanHuXingCollectionCell.h"
-#import "WXZLouPanHuXingModel.h"
 #import <UIImageView+WebCache.h>
 
 @interface WXZLouPanHuXingCollectionCell()
@@ -21,14 +20,13 @@
     // Initialization code
 }
 
-- (void)setLouPanHuXingModel:(WXZLouPanHuXingModel *)louPanHuXingModel
+- (void)setHxs:(Hxs *)hxs
 {
-    _louPanHuXingModel = louPanHuXingModel;
-//    NSString *picUrlString = [picBaseULR stringByAppendingString:louPanHuXingModel.pic];
-    NSString *picUrlString = [picBaseULR stringByAppendingFormat:@"%@", louPanHuXingModel.pic];
-
-//    WXZLog(@"%@", picUrlString);
+    _hxs = hxs;
+    NSString *picUrlString = [picBaseULR stringByAppendingFormat:@"%@", hxs.pic];
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:picUrlString] placeholderImage:[UIImage imageNamed:@"lp_fyt4"]];
-    self.huXingLabel.text = louPanHuXingModel.hx;
+    self.huXingLabel.text = [NSString stringWithFormat:@"%@平米 %@",hxs.Area, hxs.hx];
+
 }
+
 @end

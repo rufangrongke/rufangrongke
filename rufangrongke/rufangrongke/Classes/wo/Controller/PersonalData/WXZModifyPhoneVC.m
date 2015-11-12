@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *erPhoneTextField; // 再次输入手机号
 
 @property (weak, nonatomic) IBOutlet UILabel *currentPhoneNumLabel; // 当前手机号
-@property (weak, nonatomic) IBOutlet JxbScaleButton *codeBtn; // 发送验证码按钮
+@property (weak, nonatomic) IBOutlet UIButton *codeBtn; // 发送验证码按钮
 @end
 
 @implementation WXZModifyPhoneVC

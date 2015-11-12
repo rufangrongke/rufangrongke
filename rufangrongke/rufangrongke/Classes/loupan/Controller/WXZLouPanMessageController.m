@@ -132,6 +132,13 @@ static CGFloat carouselPic_height = 226;
     self.tableView.tableFooterView = liandong;
 
 }
+
+#pragma view显示
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    self.hidesBottomBarWhenPushed = NO;
+////    self.tabBarController.tabBar.hidden = NO;
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 楼盘详情初始化
@@ -200,9 +207,6 @@ static CGFloat carouselPic_height = 226;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 数据
-    NSDictionary *dic = self.loupanxiangqingDIC[@"view"];
-    
     // 设置每组的行高
     if (indexPath.section == 0)
     {

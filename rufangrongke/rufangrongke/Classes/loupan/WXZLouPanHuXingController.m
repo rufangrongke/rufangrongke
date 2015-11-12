@@ -7,7 +7,6 @@
 //
 
 #import "WXZLouPanHuXingController.h"
-#import "WXZLouPanHuXingModel.h"
 #import "WXZLouPanHuXingCollectionCell.h"
 #import <SVProgressHUD.h>
 #import <MJRefresh.h>
@@ -48,7 +47,7 @@ static NSString *louPanHuXingCollectionCellID = @"WXZLouPanHuXingCollectionCell"
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WXZLouPanHuXingCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:louPanHuXingCollectionCellID forIndexPath:indexPath];
-    cell.louPanHuXingModel = self.hxs[indexPath.row];
+    cell.hxs = self.hxs[indexPath.row];
 //    cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100)/100.0 green:arc4random_uniform(100)/100.0  blue:arc4random_uniform(100)/100.0  alpha:1.0];
     return cell;
 }

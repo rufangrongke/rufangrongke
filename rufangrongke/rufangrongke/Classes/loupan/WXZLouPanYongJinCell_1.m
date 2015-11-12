@@ -29,7 +29,19 @@
 - (void)setKfsgzYongjin:(KfsgzYongjin *)kfsgzYongjin
 {
     _kfsgzYongjin = kfsgzYongjin;
-    self.heZuoShiJianLabel.text = [NSString stringWithFormat:@"%@ 至 %@", kfsgzYongjin.HeZuoTimeS, kfsgzYongjin.HeZuoTimeE];
+    /* 2015/10/1 0:00:00 */
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+    NSDate *date =[dateFormat dateFromString:kfsgzYongjin.HeZuoTimeS];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+    // 合作开始时间
+    NSString *heZuoTimeS = [dateFormatter stringFromDate:date];
+    // 合作结束时间
+    date =[dateFormat dateFromString:kfsgzYongjin.HeZuoTimeE];
+    NSString *heZuoTimeE = [dateFormatter stringFromDate:date];
+
+    self.heZuoShiJianLabel.text = [NSString stringWithFormat:@"%@ 至 %@", heZuoTimeS, heZuoTimeE];
     self.heZuoFangYuanLabel.text = [NSString stringWithFormat:@"%@元/套", kfsgzYongjin.HeZuoFy];
     self.baoHuQiLabel.text = [NSString stringWithFormat:@"%@", kfsgzYongjin.BaoHuQi];
     self.jiangLiLabel.text = [NSString stringWithFormat:@"%@", kfsgzYongjin.JiangLi];

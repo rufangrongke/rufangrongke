@@ -11,6 +11,7 @@
 #import "WXZLoginController.h"
 #import "WXZNavController.h"
 #import "WXZWoController.h"
+#import "WXZYingDaoPageViewController.h"
 
 @interface AppDelegate ()
 
@@ -24,20 +25,24 @@
     
     // 创建窗口
     self.window = [[UIWindow alloc] init];
+    self.window.backgroundColor = [UIColor whiteColor];
     self.window.frame = [UIScreen mainScreen].bounds;
-    
-    // 创建Nav控制器
-//    WXZLoginController *loginVC = [[WXZLoginController alloc]init];
-//    loginVC.
-    WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZLoginController alloc] init]];
-    
-//    // 我界面
-//    [[[UIViewController alloc] init] loginRequest:^(id result) {
-//        
-//    }];
-//    WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZWoController alloc] init]];
-    // 设置窗口的根控制器
-    self.window.rootViewController = nav;
+    // 启动页只在第一页显示
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"])
+    {
+        // 设置窗口的根控制器
+        self.window.rootViewController = [[WXZYingDaoPageViewController alloc] init];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+        
+    }
+    else
+    {
+        // 创建Nav控制器
+        WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:[[WXZLoginController alloc] init]];
+        // 设置窗口的根控制器
+        self.window.rootViewController = nav;
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+    }
     
     // 显示窗口
     [self.window makeKeyAndVisible];

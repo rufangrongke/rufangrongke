@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class WXZLouPanHuXingModel;
+#import "WXZLouPanMessageModel.h"
 @interface WXZLouPanHuXingCollectionCell : UICollectionViewCell
 /* 户型模型 */
-@property (nonatomic , strong) WXZLouPanHuXingModel *louPanHuXingModel;
+@property (nonatomic , strong) Hxs *hxs;
 @end

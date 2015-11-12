@@ -108,12 +108,14 @@
     }];
 
 }
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
     // 隐藏导航栏
     [self.navigationController setNavigationBarHidden:YES];
-    
+
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -122,11 +124,13 @@
 }
 
 - (IBAction)findPassWord:(id)sender {
+    WXZLogFunc;
     // 添加找回密码控制器
     [self.navigationController pushViewController:[[WXZFindPasswordController alloc] init] animated:YES];
 }
 
 - (IBAction)registerAccount:(id)sender {
+    WXZLogFunc;
     // 添加注册控制器
     [self.navigationController pushViewController:[[WXZRegisterController alloc] init] animated:YES];
 }
