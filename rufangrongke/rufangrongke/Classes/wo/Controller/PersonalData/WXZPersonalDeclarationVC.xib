@@ -57,6 +57,7 @@
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstItem="dnp-UQ-q2o" firstAttribute="top" secondItem="OjS-jt-xPa" secondAttribute="top" id="2Ii-es-sjH"/>
                                 <constraint firstItem="QDr-Iv-RWJ" firstAttribute="top" secondItem="dnp-UQ-q2o" secondAttribute="bottom" constant="8" symbolic="YES" id="2sT-Hv-GJG"/>
@@ -71,8 +72,12 @@
                                 <constraint firstAttribute="trailing" secondItem="dnp-UQ-q2o" secondAttribute="trailing" constant="12" id="duy-I0-p1q"/>
                                 <constraint firstItem="vRN-Sh-2TX" firstAttribute="top" secondItem="OjS-jt-xPa" secondAttribute="top" id="rqj-xU-At2"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="Jfp-vv-oZZ" appends="YES" id="WsP-lh-DaE"/>
+                            </connections>
                         </view>
                     </subviews>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstItem="OjS-jt-xPa" firstAttribute="leading" secondItem="RgU-M4-mmb" secondAttribute="leading" id="5vZ-nA-15H"/>
                         <constraint firstAttribute="width" secondItem="OjS-jt-xPa" secondAttribute="width" id="Ae1-Pd-W73"/>
@@ -86,6 +91,9 @@
                             <exclude reference="Dia-Nw-VTN"/>
                         </mask>
                     </variation>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="Omc-dh-dpK" appends="YES" id="eDh-q1-mMo"/>
+                    </connections>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -96,6 +104,16 @@
                 <constraint firstAttribute="bottom" secondItem="RgU-M4-mmb" secondAttribute="bottom" id="nFT-nI-7ex"/>
             </constraints>
         </view>
+        <tapGestureRecognizer id="Jfp-vv-oZZ" userLabel="Tap Gesture Recognizer v">
+            <connections>
+                <action selector="declarationTapAction:" destination="-1" id="vhk-Qi-OQH"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="Omc-dh-dpK" userLabel="Tap Gesture Recognizer s">
+            <connections>
+                <action selector="declarationTapAction:" destination="-1" id="bRQ-C1-ecB"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="wo_determine" width="340" height="44"/>

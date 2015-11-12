@@ -26,7 +26,7 @@
 {
     if ([str isEqualToString:@""] || str == nil || [str isEqual:[NSNull null]] || [str isEqualToString:@"<null>"] || [str isEqualToString:@"(null)"])
     {
-        [SVProgressHUD showErrorWithStatus:tip];
+        [SVProgressHUD showErrorWithStatus:tip maskType:SVProgressHUDMaskTypeBlack];
         return YES;
     }
     return NO;
@@ -47,7 +47,7 @@
 {
     if (str.length > length)
     {
-        [SVProgressHUD showErrorWithStatus:tip];
+        [SVProgressHUD showErrorWithStatus:tip maskType:SVProgressHUDMaskTypeBlack];
         return YES;
     }
     return NO;
@@ -126,18 +126,21 @@
 // 电话－方法二 判断手机号
 + (BOOL)checkPhone2:(NSString *)mobileNum withTipInfo:(NSString *)tip
 {
-    NSString *regex = @"[1][3578]\\d{9}";
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    BOOL isMatch = [pred evaluateWithObject:mobileNum];
-    if (!isMatch)
+    if (mobileNum.length == 11)
     {
-        [SVProgressHUD showErrorWithStatus:tip];
-        return NO;
+        if ([WXZChectObject checkIsAllNumber:mobileNum])
+        {
+            NSString *regex = @"[1][34578]\\d{9}";
+            NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+            BOOL isMatch = [pred evaluateWithObject:mobileNum];
+            if (isMatch)
+            {
+                return YES;
+            }
+        }
     }
-    else
-    {
-        return YES;
-    }
+    [SVProgressHUD showErrorWithStatus:tip maskType:SVProgressHUDMaskTypeBlack];
+    return NO;
 }
 
 // --邮编
@@ -210,6 +213,42 @@
     NSScanner* scan = [NSScanner scannerWithString:numberString];
     int val;
     return [scan scanInt:&val] && [scan isAtEnd];
+}
+
+// 判断是否为纯数字
++(BOOL)checkIsAllNumber:(NSString*)numberString withTipInfo:(NSString *)tip
+{
+    NSScanner* scan = [NSScanner scannerWithString:numberString];
+    int val;
+    
+    if ([scan scanInt:&val] && [scan isAtEnd])
+    {
+        return YES;
+    }
+    [SVProgressHUD showErrorWithStatus:tip maskType:SVProgressHUDMaskTypeBlack];
+    return NO;
+}
+
+// 检查身份证号
++ (BOOL)checkIdCard:(NSString *)idCard
+{
+    if (![WXZChectObject checkWhetherStringIsEmpty:idCard])
+    {
+        if (idCard.length == 18)
+        {
+            if ([WXZChectObject checkIsAllNumber:[idCard substringWithRange:NSMakeRange(0, 17)]])
+            {
+                return YES;
+            }
+        }
+        [SVProgressHUD showErrorWithStatus:@"身份证号有误，请检查" maskType:SVProgressHUDMaskTypeBlack];
+        return NO;
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"身份证号不能为空" maskType:SVProgressHUDMaskTypeBlack];
+        return NO;
+    }
 }
 
 @end

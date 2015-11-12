@@ -45,11 +45,6 @@
     // 赋值
     self.currentPhoneNumLabel.text = self.phone;
     
-    //增加监听，当键盘出现或改变时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    
     //增加监听，当键退出时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
@@ -187,6 +182,26 @@
 }
 
 #pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        if (textField.tag == 100013)
+        {
+            self.view.frame = CGRectMake(0, -60, WXZ_ScreenWidth, WXZ_ScreenHeight);
+        }
+        else if (textField.tag == 100012)
+        {
+            self.view.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight);
+        }
+        else
+        {
+            self.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
+        }
+    }];
+    
+    return YES;
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     // 不同输入框限定输入的字数
@@ -216,29 +231,10 @@
 }
 
 #pragma mark 键盘监听方法设置
-//当键盘出现时调用
--(void)keyboardWillShow:(NSNotification *)aNotification
-{
-//    NSDictionary* info = [aNotification userInfo];
-//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    if (self.erPhoneTextField)
-    {
-        self.view.frame = CGRectMake(0, 30, WXZ_ScreenWidth, WXZ_ScreenHeight);
-    }
-    else
-    {
-        self.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight);
-    }
-}
-
 //当键退出时调用
 -(void)keyboardWillHide:(NSNotification *)aNotification
 {
-    if (self.erPhoneTextField)
-    {
-        self.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight);
-    }
+    self.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
 }
 
 // 取消第一响应

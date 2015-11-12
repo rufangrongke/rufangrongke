@@ -13,7 +13,7 @@
 
 @property (nonatomic, copy) NSString *msg;
 
-@property (nonatomic, strong) NSArray<Qus *> *qus;
+@property (nonatomic, strong) NSArray/*<Qus *>*/ *qus;
 
 @property (nonatomic, assign) BOOL ok;
 

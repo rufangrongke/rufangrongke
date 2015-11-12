@@ -95,6 +95,11 @@
     }
 }
 
+- (IBAction)declarationTapAction:(id)sender
+{
+    [self.declarationTextView resignFirstResponder];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
