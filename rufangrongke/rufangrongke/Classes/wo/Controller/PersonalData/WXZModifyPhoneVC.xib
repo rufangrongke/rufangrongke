@@ -298,7 +298,7 @@
         </view>
     </objects>
     <resources>
-        <image name="wo_codebg" width="75" height="25"/>
+        <image name="wo_codebg" width="11" height="25"/>
         <image name="wo_determine" width="340" height="44"/>
         <image name="wo_dottedline" width="355" height="1"/>
         <image name="wo_personal_divider" width="375" height="1"/>

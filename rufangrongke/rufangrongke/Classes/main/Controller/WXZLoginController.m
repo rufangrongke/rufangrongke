@@ -12,44 +12,66 @@
 #import "WXZRegisterController.h"
 #import "WXZFindPasswordController.h"
 #import "AFNetworking.h"
+#import "WXZChectObject.h"
 
-@interface WXZLoginController ()
+@interface WXZLoginController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 
 @property (weak, nonatomic) IBOutlet UITextField *pwdField;
 @property (weak, nonatomic) IBOutlet UIButton *showHideCode_Button;
+@property (weak, nonatomic) IBOutlet UIButton *remenberPasswordBtn;
+@property (weak, nonatomic) IBOutlet UIButton *autoLoginBtn;
 
 @end
 
 @implementation WXZLoginController
 
 // 隐藏或者显示密码
-- (IBAction)showHideCode:(id)sender {
+- (IBAction)showHideCode:(UIButton *)sender {
     // 隐藏或者显示密码
     // 默认是隐藏
-    UIButton *btn = (UIButton *)sender;
+//    UIButton *btn = (UIButton *)sender;
     if (self.pwdField.secureTextEntry) {
         self.pwdField.secureTextEntry = NO;
-        btn.selected = YES;
+        sender.selected = YES;
     }else{
         self.pwdField.secureTextEntry = YES;
-        btn.selected = NO;
+        sender.selected = NO;
+    }
+}
+#pragma 记住密码
+- (IBAction)remenberPassword:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (self.remenberPasswordBtn.selected == NO) { // 取消记住密码
+        // 取消自动登录
+        [self.autoLoginBtn setSelected:NO];
+    }
+}
+#pragma 自动登录
+- (IBAction)autoLogin:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (self.autoLoginBtn.selected == YES) { // 取消记住密码
+        // 取消自动登录
+        [self.remenberPasswordBtn setSelected:YES];
     }
 }
 
-
 - (IBAction)login:(id)sender {
     
-    // 检测用户名
-//    NSString *username = self.usernameField.text;
+    // 检测用户号码
     NSString *username = @"18311281581";
+//    NSString *username = self.usernameField.text;
+    //    if (username.length == 0) {
+    //        [SVProgressHUD showErrorWithStatus:self.usernameField.placeholder];
+    //        return;
+    //    }
+
+//    if (![WXZChectObject checkPhone2:self.usernameField.text withTipInfo:@"手机号格式不正确"])
+//        return;
+    // 号码符合规范
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:username forKey:@"phoneNumber"];
-//    if (username.length == 0) {
-//        [SVProgressHUD showErrorWithStatus:self.usernameField.placeholder];
-//        return;
-//    }
     
     // 检测密码
 //    NSString *pwd = self.pwdField.text;
@@ -108,27 +130,44 @@
     }];
 
 }
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (self.usernameField)
+    {
+        if (range.location > 11)
+        {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+// 隐藏导航栏
 - (void)viewWillAppear:(BOOL)animated{
 //    [super viewWillAppear:animated];
-    // 隐藏导航栏
     [self.navigationController setNavigationBarHidden:YES];
 
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    self.usernameField.delegate = self;
+//    WXZLog(@"self.view.height-%f, textField.y-%f, textField.height-%f", self.view.frame.size.height, self.usernameField.frame.origin.y, self.usernameField.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma 找回密码
 - (IBAction)findPassWord:(id)sender {
     WXZLogFunc;
     // 添加找回密码控制器
     [self.navigationController pushViewController:[[WXZFindPasswordController alloc] init] animated:YES];
 }
-
+#pragma 注册
 - (IBAction)registerAccount:(id)sender {
     WXZLogFunc;
     // 添加注册控制器
@@ -141,4 +180,24 @@
     [self.pwdField resignFirstResponder];
 }
 
+#pragma 键盘处理 不遮盖textfield
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    WXZLogFunc;
+    CGFloat offset = self.view.height - (260 + textField.height + 216 +50);
+    WXZLog(@"self.view.height-%f, textField.y-%f, textField.height-%f", self.view.height, textField.y, textField.height);
+    WXZLog(@"%f", offset);
+    if (offset <= 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.y = offset;
+        }];
+    }
+    return YES;
+}
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    WXZLogFunc;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.y = 0;
+    }];
+    return YES;
+}
 @end

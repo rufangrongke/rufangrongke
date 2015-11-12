@@ -77,6 +77,8 @@ static NSInteger listCount = 1;
  */
 - (void)queDing_click:(NSString *)parameter
 {
+    // 隐藏蒙版
+//    [];
     // 隐藏WXZquYuListViewController.view
     self.quYuListViewVC.view.hidden = YES;
     // 取消键盘
@@ -88,6 +90,7 @@ static NSInteger listCount = 1;
     }
     [SVProgressHUD show];
     // 发送请求
+//    [[AFHTTPSessionManager manager] ]
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"xiaoqu"] = parameter ? parameter : self.search.text;

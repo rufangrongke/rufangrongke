@@ -149,9 +149,6 @@
 		88AE89381BE07EA800407ECF /* WXZLouPanMessageCell_0_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AE89361BE07EA800407ECF /* WXZLouPanMessageCell_0_1.xib */; };
 		88AE893C1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AE893A1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m */; };
 		88AE893D1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AE893B1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.xib */; };
-		88B523FA1BF36D0000983996 /* WXZAddCustomerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886023501BEC4FA300C0D75E /* WXZAddCustomerVC.xib */; };
-		88B523FB1BF36D0D00983996 /* WXZReportPreparationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886023461BEC4F7C00C0D75E /* WXZReportPreparationVC.xib */; };
-		88B523FC1BF36D1D00983996 /* WXZBasicInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886023691BEC500A00C0D75E /* WXZBasicInfoCell.xib */; };
 		88C108931BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C108911BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.m */; };
 		88C108941BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C108921BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.xib */; };
 		88C1089C1BF0A85800337E09 /* WXZLouPanYongJinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C1089A1BF0A85800337E09 /* WXZLouPanYongJinController.m */; };
@@ -183,6 +180,8 @@
 		88EF69571BF4219F00B4E169 /* WXZAddCustomerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886023501BEC4FA300C0D75E /* WXZAddCustomerVC.xib */; };
 		88EF69581BF421B300B4E169 /* WXZReportPreparationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886023461BEC4F7C00C0D75E /* WXZReportPreparationVC.xib */; };
 		88EF69591BF421C400B4E169 /* WXZBasicInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886023691BEC500A00C0D75E /* WXZBasicInfoCell.xib */; };
+		88F31BD91BF4889F007FEA53 /* WXZquYuListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F31BD71BF4889F007FEA53 /* WXZquYuListViewCell.m */; };
+		88F31BDA1BF4889F007FEA53 /* WXZquYuListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F31BD81BF4889F007FEA53 /* WXZquYuListViewCell.xib */; };
 		88F4F6201BF2F65B007FBCB7 /* WXZquYuListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4F61E1BF2F65B007FBCB7 /* WXZquYuListViewController.m */; };
 		88F4F6211BF2F65B007FBCB7 /* WXZquYuListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F4F61F1BF2F65B007FBCB7 /* WXZquYuListViewController.xib */; };
 		88F4F6241BF3100B007FBCB7 /* WXZquYuListViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4F6231BF3100B007FBCB7 /* WXZquYuListViewCellModel.m */; };
@@ -484,9 +483,12 @@
 		88EAA71F1BD88DA40072CD40 /* WXZLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLoginController.h; sourceTree = "<group>"; };
 		88EAA7201BD88DA40072CD40 /* WXZLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLoginController.m; sourceTree = "<group>"; };
 		88EAA7211BD88DA40072CD40 /* WXZLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLoginController.xib; sourceTree = "<group>"; };
-		88F4F61D1BF2F65B007FBCB7 /* WXZquYuListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZquYuListViewController.h; sourceTree = "<group>"; };
-		88F4F61E1BF2F65B007FBCB7 /* WXZquYuListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZquYuListViewController.m; sourceTree = "<group>"; };
-		88F4F61F1BF2F65B007FBCB7 /* WXZquYuListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZquYuListViewController.xib; sourceTree = "<group>"; };
+		88F31BD61BF4889F007FEA53 /* WXZquYuListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZquYuListViewCell.h; sourceTree = "<group>"; };
+		88F31BD71BF4889F007FEA53 /* WXZquYuListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZquYuListViewCell.m; sourceTree = "<group>"; };
+		88F31BD81BF4889F007FEA53 /* WXZquYuListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZquYuListViewCell.xib; sourceTree = "<group>"; };
+		88F4F61D1BF2F65B007FBCB7 /* WXZquYuListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZquYuListViewController.h; path = ../View/WXZquYuListViewController.h; sourceTree = "<group>"; };
+		88F4F61E1BF2F65B007FBCB7 /* WXZquYuListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZquYuListViewController.m; path = ../View/WXZquYuListViewController.m; sourceTree = "<group>"; };
+		88F4F61F1BF2F65B007FBCB7 /* WXZquYuListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WXZquYuListViewController.xib; path = ../View/WXZquYuListViewController.xib; sourceTree = "<group>"; };
 		88F4F6221BF3100B007FBCB7 /* WXZquYuListViewCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZquYuListViewCellModel.h; sourceTree = "<group>"; };
 		88F4F6231BF3100B007FBCB7 /* WXZquYuListViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZquYuListViewCellModel.m; sourceTree = "<group>"; };
 		88F4F66E1BF3416F007FBCB7 /* WXZYingDaoPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZYingDaoPageViewController.h; sourceTree = "<group>"; };
@@ -601,9 +603,9 @@
 				885387FD1BDD1DC0005DCF38 /* WXZTableViewCell.h */,
 				885387FE1BDD1DC0005DCF38 /* WXZTableViewCell.m */,
 				885387FF1BDD1DC0005DCF38 /* WXZTableViewCell.xib */,
-				88F4F61D1BF2F65B007FBCB7 /* WXZquYuListViewController.h */,
-				88F4F61E1BF2F65B007FBCB7 /* WXZquYuListViewController.m */,
-				88F4F61F1BF2F65B007FBCB7 /* WXZquYuListViewController.xib */,
+				88F31BD61BF4889F007FEA53 /* WXZquYuListViewCell.h */,
+				88F31BD71BF4889F007FEA53 /* WXZquYuListViewCell.m */,
+				88F31BD81BF4889F007FEA53 /* WXZquYuListViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -715,6 +717,9 @@
 			children = (
 				305784511BD3D52C00169C44 /* WXZLouPanController.h */,
 				305784521BD3D52C00169C44 /* WXZLouPanController.m */,
+				88F4F61D1BF2F65B007FBCB7 /* WXZquYuListViewController.h */,
+				88F4F61E1BF2F65B007FBCB7 /* WXZquYuListViewController.m */,
+				88F4F61F1BF2F65B007FBCB7 /* WXZquYuListViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1395,6 +1400,7 @@
 				882902B31BE73CFE00BA7D24 /* WXZPersonalCityCell.xib in Resources */,
 				8829028D1BE73C6400BA7D24 /* WXZPersonalInfoVC.xib in Resources */,
 				882902851BE73C6400BA7D24 /* WXZPersonalCertificationVC.xib in Resources */,
+				88F31BDA1BF4889F007FEA53 /* WXZquYuListViewCell.xib in Resources */,
 				8860234D1BEC4F9300C0D75E /* WXZCustomerDetailsVC.xib in Resources */,
 				8860238C1BEC510400C0D75E /* WXZKeHuListCell.xib in Resources */,
 				880869091BF0C54D00128610 /* WXZLouPanYongJinSectionHeadView_1.xib in Resources */,
@@ -1574,6 +1580,7 @@
 				30B2DBA01BD6515400F00DF0 /* WXZLouPan.m in Sources */,
 				882793721BEC803700218F13 /* WXZLouPanBottomBar.m in Sources */,
 				88C108A01BF0BDF300337E09 /* WXZLouPanYongJinModel.m in Sources */,
+				88F31BD91BF4889F007FEA53 /* WXZquYuListViewCell.m in Sources */,
 				882793611BEC540900218F13 /* WXZLouPanMaiDianCell.m in Sources */,
 				882E47051BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.m in Sources */,
 				88041AB11BF20A3D00FDABFC /* WXZKeHuDetailModel.m in Sources */,

@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *verificationCode;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UITextField *yaoqingren;
-@property (weak, nonatomic) IBOutlet JxbScaleButton *getVerificationCode_Button;
+@property (weak, nonatomic) IBOutlet UIButton *getVerificationCode_Button;
 
 @end
 
@@ -47,19 +47,8 @@
         WXZLog(@"%@", responseObject);
         if ([dic[@"msg"] isEqualToString:@"发送成功"]) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                JxbScaleButton* btn = (JxbScaleButton*)sender;
-                JxbScaleSetting* setting = [[JxbScaleSetting alloc] init];
-                setting.strPrefix = @"";
-                setting.strSuffix = @"秒";
-                setting.strCommon = @"重新发送";
-                
-                setting.indexStart = [dic[@"timeout"] integerValue];
-                
-                [btn startWithSetting:setting];
-                [self.view setNeedsDisplay];
-//                WXZLog(@"%@", dic);
+                [self countdownWithTimeOut:dic[@"timeout"]];
             }];
-//                NSLog(@"hhhhhhhhhh");
             
         }else{
             [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
@@ -125,40 +114,52 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)showHidenPwd:(UIButton *)sender {
+    // 隐藏或者显示密码
+    // 默认是隐藏
+    //    UIButton *btn = (UIButton *)sender;
+    if (self.password.secureTextEntry) {
+        self.password.secureTextEntry = NO;
+        sender.selected = YES;
+    }else{
+        self.password.secureTextEntry = YES;
+        sender.selected = NO;
+    }
+}
 
-//// 倒计时
-//- (void)countdownWithTimeOut:(NSString *)timeOutStr
-//{
-//    int timeOut2 = timeOutStr.intValue;
-//    __block int timeout = timeOut2; //倒计时时间
-//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-//    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
-//    dispatch_source_set_event_handler(_timer, ^{
-//        
-//        if(timeout <= 0)
-//        {
-//            //倒计时结束，关闭
-//            dispatch_source_cancel(_timer);
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [_codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-//                _codeBtn.userInteractionEnabled = YES;
-//            });
-//        }
-//        else
-//        {
-//            int seconds = timeout; // 或 timeout % 300 或 timeout（计算分几次，每次60秒）
-//            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                //设置界面的按钮显示 根据自己需求设置
-//                [_codeBtn setTitle:[NSString stringWithFormat:@"%@秒",strTime] forState:UIControlStateNormal];
-//                _codeBtn.userInteractionEnabled = NO;
-//            });
-//            timeout--;
-//        }
-//    });
-//    dispatch_resume(_timer);
-//}
+// 倒计时
+- (void)countdownWithTimeOut:(NSString *)timeOutStr
+{
+    int timeOut2 = timeOutStr.intValue;
+    __block int timeout = timeOut2; //倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        
+        if(timeout <= 0)
+        {
+            //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.getVerificationCode_Button setTitle:@"获取验证码" forState:UIControlStateNormal];
+                self.getVerificationCode_Button.userInteractionEnabled = YES;
+            });
+        }
+        else
+        {
+            int seconds = timeout; // 或 timeout % 300 或 timeout（计算分几次，每次60秒）
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                [self.getVerificationCode_Button setTitle:[NSString stringWithFormat:@"%@秒",strTime] forState:UIControlStateNormal];
+                self.getVerificationCode_Button.userInteractionEnabled = NO;
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
+}
 
 
 @end
