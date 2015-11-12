@@ -21,7 +21,7 @@
     self.priceeTextField.delegate = self;
     
     // 注册键盘通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
@@ -49,6 +49,18 @@
 }
 
 #pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        if (textField.tag == 100025 || textField.tag == 100026)
+        {
+            self.controller.view.frame = CGRectMake(0, -110, WXZ_ScreenWidth, WXZ_ScreenHeight);
+        }
+    }];
+    
+    return YES;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     // 发送通知更新意向价格
@@ -64,17 +76,9 @@
 }
 
 #pragma mark - 键盘显示和隐藏事件
-- (void)keyBoardWillShow:(NSNotification *)notification
-{
-    if (self.pricefTextField.tag != 100021 || self.priceeTextField.tag != 100022)
-    {
-        self.controller.view.frame = CGRectMake(0, -40, WXZ_ScreenWidth, WXZ_ScreenHeight);
-    }
-}
-
 - (void)keyBoardWillHide:(NSNotification *)notification
 {
-    self.controller.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight);
+    self.controller.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

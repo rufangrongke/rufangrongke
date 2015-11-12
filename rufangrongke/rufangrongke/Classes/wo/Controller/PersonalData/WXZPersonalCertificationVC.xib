@@ -142,6 +142,7 @@
                         </label>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="5aY-KX-EhL" secondAttribute="bottom" constant="60" id="5Al-vO-QGf"/>
                         <constraint firstAttribute="width" secondItem="Rff-YV-3Lb" secondAttribute="width" id="5Eo-cw-Qev"/>
                         <constraint firstItem="Rff-YV-3Lb" firstAttribute="top" secondItem="EGp-6d-eg4" secondAttribute="top" constant="10" id="LP7-N5-OuL"/>
                         <constraint firstAttribute="trailing" secondItem="Rff-YV-3Lb" secondAttribute="trailing" id="SKv-7n-v6O"/>
@@ -150,6 +151,11 @@
                         <constraint firstItem="Rff-YV-3Lb" firstAttribute="leading" secondItem="EGp-6d-eg4" secondAttribute="leading" id="kPM-JV-I80"/>
                         <constraint firstItem="5aY-KX-EhL" firstAttribute="top" secondItem="Rff-YV-3Lb" secondAttribute="bottom" constant="10" id="oec-Nb-ju1"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Ugd-SK-2i1"/>
+                        </mask>
+                    </variation>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

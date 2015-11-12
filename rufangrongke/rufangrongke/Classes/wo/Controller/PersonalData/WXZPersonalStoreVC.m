@@ -60,6 +60,7 @@
 // 选择名片单击事件
 - (IBAction)uploadCard:(id)sender
 {
+    [self.storeNameTextField resignFirstResponder];
     // 添加UIActionSheet
     UIActionSheet *photosSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
     [photosSheet showInView:self.view];
@@ -206,7 +207,7 @@
 //当键盘出现时调用
 -(void)keyboardWillShow:(NSNotification *)aNotification
 {
-    self.view.frame = CGRectMake(0, 40, WXZ_ScreenWidth, WXZ_ScreenHeight);
+    self.view.frame = CGRectMake(0, -40, WXZ_ScreenWidth, WXZ_ScreenHeight);
 }
 
 //当键退出时调用

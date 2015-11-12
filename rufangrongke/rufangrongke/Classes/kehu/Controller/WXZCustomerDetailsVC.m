@@ -17,7 +17,7 @@
 #import "WXZKeHuDetailModel.h"
 
 
-@interface WXZCustomerDetailsVC () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MFMessageComposeViewControllerDelegate>
+@interface WXZCustomerDetailsVC () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,MFMessageComposeViewControllerDelegate,UpdateKeHuDetailInfoDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -32,6 +32,8 @@
 
 @end
 
+static BOOL isRefreshDetail;
+
 @implementation WXZCustomerDetailsVC
 
 - (void)viewDidLoad {
@@ -44,16 +46,27 @@
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
     
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-//    [self customerDetailRequest:self.customerId];
+    isRefreshDetail = NO;
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [self customerDetailRequest:self.customerId];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_detailedit" highImage:@"" target:self action:@selector(editAction:)];
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateNormal];
+    [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateHighlighted];
+    leftButton.size = CGSizeMake(70, 30);
+    // 让按钮内部的所有内容左对齐
+    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    // 让按钮的内容往左边偏移10
+    leftButton.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    [leftButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    // 修改导航栏左边的item
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    [self customerDetailRequest:self.customerId];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_detailedit" highImage:@"" target:self action:@selector(editAction:)];
 }
 
 #pragma mark - Request
@@ -68,40 +81,28 @@
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
+            WXZLog(@"%@",responseObject);
             self.cdDic = responseObject[@"kehu"];
             self.keHuDetailModel = [WXZKeHuDetailModel objectWithKeyValues:self.cdDic];
             [self.myTableView reloadData];
-//            WXZLog(@"detail = %@",self.keHuDetailModel);
+            [SVProgressHUD dismiss];
         }
         else
         {
-//            WXZLog(@"%@",responseObject);
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
-        [SVProgressHUD dismiss];
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-        [SVProgressHUD dismiss];
     }];
 }
 
-- (void)modifyDetailRequest:(NSString *)cid
+// 代理方法
+- (void)updateKeHuDetailInfo:(NSString *)customerId
 {
-    // 修改客户详情请求
-    NSString *url = [OutNetBaseURL stringByAppendingString:kehuxiugai];
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [param setObject:cid forKey:@"id"];
-    
-    [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
-     {
-         if ([responseObject[@"ok"] integerValue] == 1)
-         {
-             
-         }
-     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-         
-     }];
+    isRefreshDetail = YES;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [self customerDetailRequest:customerId];
 }
 
 // 编辑事件
@@ -112,38 +113,18 @@
     addVC.isModifyCustomerInfo = YES;
     addVC.titleStr = @"修改客户信息";
     addVC.detailModel = self.keHuDetailModel;
+    addVC.isKeHuDetail = YES;
+    addVC.updateDelegate = self; // 遵循协议
     [self.navigationController pushViewController:addVC animated:YES];
-    // 判断按钮当前图片
-//    if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_detailedit"]])
-//    {
-//        [sender setBackgroundImage:[UIImage imageNamed:@"wo_complete"] forState:UIControlStateNormal]; // 完成
-//        
-//        self.nameTextField.enabled = YES; // 可用
-//        self.phoneNumTextField.enabled = YES; // 可用
-//        if ([self.cdDic[@"XingMing"] isEqualToString:@""])
-//        {
-//            self.nameTextField.placeholder = @"请输入姓名";
-//        }
-//        if ([self.cdDic[@"Mobile"] isEqualToString:@""])
-//        {
-//            self.phoneNumTextField.placeholder = @"请输入11位手机号";
-//        }
-//    }
-//    else
-//    {
-//        [sender setBackgroundImage:[UIImage imageNamed:@"kh_detailedit"] forState:UIControlStateNormal]; // 编辑
-//        
-//        self.nameTextField.enabled = NO; // 不可用
-//        self.phoneNumTextField.enabled = NO; // 不可用
-//        if ([self.nameTextField.text isEqualToString:@""])
-//        {
-//            self.nameTextField.placeholder = @"";
-//        }
-//        if ([self.phoneNumTextField.text isEqualToString:@""])
-//        {
-//            self.phoneNumTextField.placeholder = @"";
-//        }
-//    }
+}
+
+- (void)backAction:(id)sender
+{
+    if (isRefreshDetail)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateKeHuInfoNotification" object:nil]; // 发送通知刷新客户首页方法
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -270,7 +251,7 @@
     //方法一
     //    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"sms://13888888888"]];
     
-    [self showMessageView:[NSArray arrayWithObjects:self.phoneNumTextField.text, nil] title:@"test" body:@"哈哈，么么哒！"];
+    [self showMessageView:[NSArray arrayWithObjects:self.phoneNumTextField.text, nil] title:@"新信息" body:@""];
 }
 
 // 展示消息的view

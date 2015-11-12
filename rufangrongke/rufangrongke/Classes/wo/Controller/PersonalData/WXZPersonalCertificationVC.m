@@ -58,7 +58,7 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"wo_complete" highImage:@"hehe.png" title:@"" target:self action:@selector(completeAction:) isEnable:YES];
     
     // 已认证则不显示按钮，所有东西不可修改；有身份证号但是为False，则为审核中
-    if ([self.woInfoModel.IsShiMing isEqualToString:@"True"])
+    if (![self.woInfoModel.IsShiMing isEqualToString:@"True"])
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"hehe.png" highImage:@"hehe.png" title:@"" target:self action:@selector(completeAction:) isEnable:NO];
         
@@ -87,7 +87,8 @@
 // 添加身份证正面照的按钮事件
 - (IBAction)idCardAction:(id)sender
 {
-    NSLog(@"身份证照");
+    [self.nameTextField resignFirstResponder];
+    [self.idCardTextField resignFirstResponder];
     // 添加UIActionSheet
     UIActionSheet *photosSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
     [photosSheet showInView:self.view];
@@ -251,8 +252,11 @@
 
 - (void)completeAction:(id)sender
 {
+    [self.nameTextField resignFirstResponder];
+    [self.idCardTextField resignFirstResponder];
+    
     NSData *imgData = [[NSUserDefaults standardUserDefaults] objectForKey:@"sfzimg"];
-    if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text withTipInfo:@"姓名不能为空"] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text withTipInfo:@"请输入4个字内的姓名"] && ![WXZChectObject checkWhetherStringIsEmpty:self.idCardTextField.text withTipInfo:@"身份证号不能为空"] && imgData != nil)
+    if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text withTipInfo:@"姓名不能为空"] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text withTipInfo:@"请输入4个字内的姓名"] && [WXZChectObject checkIdCard:self.idCardTextField.text] && imgData != nil)
     {
         NSString *pathStr = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         pathStr = [pathStr stringByAppendingString:@"sfzImg.png"];

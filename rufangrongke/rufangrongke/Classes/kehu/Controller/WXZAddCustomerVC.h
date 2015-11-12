@@ -9,12 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "WXZKeHuDetailModel.h"
 
-@interface WXZAddCustomerVC : UIViewController
+@protocol UpdateKeHuDetailInfoDelegate <NSObject>
+
+- (void)updateKeHuDetailInfo:(NSString *)customerId;
+
+@end
+
+@interface WXZAddCustomerVC : UIViewController 
 
 @property (nonatomic,strong) NSString *titleStr;
 
 @property (nonatomic,strong) WXZKeHuDetailModel *detailModel;
 
 @property (nonatomic,assign) BOOL isModifyCustomerInfo;
+
+@property (nonatomic,assign) BOOL isKeHuDetail;
+
+@property (nonatomic,assign) id<UpdateKeHuDetailInfoDelegate> updateDelegate;
 
 @end

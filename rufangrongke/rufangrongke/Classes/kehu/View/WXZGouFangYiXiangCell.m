@@ -10,6 +10,7 @@
 #import "WXZChectObject.h"
 #import "WXZAddCustomerVC.h"
 #import "WXZReportPreparationVC.h"
+#import <SVProgressHUD.h>
 
 @interface WXZGouFangYiXiangCell ()
 
@@ -63,7 +64,7 @@
 - (IBAction)baobeiloupanAction:(id)sender
 {
 //    NSLog(@"报备楼盘");
-    NSLog(@"敬请期待！");
+    [SVProgressHUD showErrorWithStatus:@"流程：选择楼盘->报备客户"];
 //    WXZReportPreparationVC *rpVC = [[WXZReportPreparationVC alloc] init];
 //    [_controller.navigationController pushViewController:rpVC animated:YES];
 }

@@ -33,6 +33,8 @@
 
 @property (nonatomic,strong) WXZScreeningView *screeningView;
 
+@property (nonatomic,strong) UIView *mengCengView;
+
 @property (nonatomic,strong) NSMutableArray *dataArr;
 
 @property (nonatomic,strong) NSArray *shaixuanArr;
@@ -77,6 +79,9 @@ static NSString *searchStr; // 记录搜索条件
     // 初始化信息
     [self setUp];
     isHiden = NO;
+    
+    // 注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKeHuInfo:) name:@"UpdateKeHuInfoNotification" object:nil];
 }
 
 #pragma 初始化项目
@@ -185,8 +190,18 @@ static NSString *searchStr; // 记录搜索条件
     [self keHuListRequest:currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
 }
 
-#pragma mark - Table view data source
+// 通知事件
+- (void)updateKeHuInfo:(id)sender
+{
+    currentPage = 1;
+    isRefresh = YES;
+    shaixuanStr = @"";
+    searchStr = @"";
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
+    [self keHuListRequest:currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr]; // 请求列表
+}
 
+#pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.dataArr.count+1;
@@ -360,7 +375,7 @@ static NSString *searchStr; // 记录搜索条件
     return YES;
 }
 
-#pragma 刷新控件
+#pragma - mark 刷新、加载
 /**
  * 添加刷新控件
  */
@@ -390,12 +405,13 @@ static NSString *searchStr; // 记录搜索条件
 // 添加新客户事件
 - (void)addNewKeHuAction:(id)sender
 {
-//    NSLog(@"添加新客户!");
     [self hideScreeningView];
     [_searchBar resignFirstResponder];
     // 添加新客户页
     WXZAddCustomerVC *addCustomerVC = [[WXZAddCustomerVC alloc] init];
+    addCustomerVC.isModifyCustomerInfo = NO;
     addCustomerVC.titleStr = @"添加客户";
+    addCustomerVC.isKeHuDetail = NO;
     [self.navigationController pushViewController:addCustomerVC animated:YES];
 }
 
@@ -404,7 +420,6 @@ static NSString *searchStr; // 记录搜索条件
 - (void)queDing_click
 {
     WXZLogFunc;
-//    NSLog(@"%@",_searchBar.text);
     [self hideScreeningView];
     currentPage = 1;
     isRefresh = YES;
@@ -426,6 +441,10 @@ static NSString *searchStr; // 记录搜索条件
     }
     else
     {
+        self.mengCengView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight-64)];
+        self.mengCengView.backgroundColor = [UIColor lightTextColor];
+        [self.view addSubview:self.mengCengView];
+        
         // 动画
         CGContextRef context = UIGraphicsGetCurrentContext();
         [UIView beginAnimations:@"donghua" context:context];
@@ -437,7 +456,8 @@ static NSString *searchStr; // 记录搜索条件
         _screeningView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"kh_screening"]];
         _screeningView.dataArr = self.shaixuanArr;
         _screeningView.backScreeningTypeDelegate = self;
-        [self.view addSubview:_screeningView];
+        [self.mengCengView addSubview:_screeningView];
+        self.tableView.scrollEnabled = NO;
         isHiden = YES;
         // 提交动画
         [UIView commitAnimations];
@@ -446,7 +466,8 @@ static NSString *searchStr; // 记录搜索条件
 // 隐藏筛选视图
 - (void)hideScreeningView
 {
-    [self.screeningView removeFromSuperview];
+    [self.mengCengView removeFromSuperview];
+    self.tableView.scrollEnabled = YES;
     isHiden = NO;
 }
 
