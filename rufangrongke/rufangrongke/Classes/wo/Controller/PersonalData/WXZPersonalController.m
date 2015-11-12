@@ -21,6 +21,7 @@
 #import "WXZPersonalInfoVC.h"
 #import "WXZWorkingTimeView.h"
 #import "WXZLoginController.h"
+#import "WXZNavController.h"
 
 @interface WXZPersonalController () <UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,SRMonthPickerDelegate>
 
@@ -31,6 +32,8 @@
 @property (nonatomic,strong) NSDictionary *personalInfoDic; // 获取登录的缓存数据（即个人资料信息）
 
 @end
+
+static BOOL isRefreshWo;
 
 @implementation WXZPersonalController
 
@@ -46,6 +49,8 @@
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
     
+    isRefreshWo = NO;
+    
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePersonalData:) name:@"UpdatePersonalDataPage" object:nil];
 }
@@ -55,17 +60,17 @@
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = NO;
     
-//    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateNormal];
-//    [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateHighlighted];
-//    leftButton.size = CGSizeMake(70, 30);
-//    // 让按钮内部的所有内容左对齐
-//    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    // 让按钮的内容往左边偏移10
-//    leftButton.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
-//    [leftButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-//    // 修改导航栏左边的item
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateNormal];
+    [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateHighlighted];
+    leftButton.size = CGSizeMake(70, 30);
+    // 让按钮内部的所有内容左对齐
+    leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    // 让按钮的内容往左边偏移10
+    leftButton.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    [leftButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    // 修改导航栏左边的item
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     
 //    [self.myTableView reloadData]; // 刷新列表
 }
@@ -86,12 +91,13 @@
             // 刷新模型
             self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:dic];
             [self.myTableView reloadData]; // 刷新
+            [SVProgressHUD dismiss]; // 结束菊花
         }
         else
         {
             [SVProgressHUD showErrorWithStatus:result];
         }
-        [SVProgressHUD dismiss]; // 结束菊花
+        isRefreshWo = YES;
     }];
 }
 
@@ -302,7 +308,7 @@
         NSData *imgData = UIImageJPEGRepresentation(img, 0.4f);
         
         // 添加转圈
-        [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         [self upLoadHead:imgData]; // 请求
     }
     else
@@ -337,7 +343,6 @@
         
     } success:^(NSURLSessionDataTask *task, id responseObject)
     {
-        WXZLog(@"%@",responseObject);
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             // 刷新界面
@@ -345,12 +350,12 @@
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:responseObject];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-        [SVProgressHUD dismiss]; // 取消菊花
+//        [SVProgressHUD dismiss]; // 取消菊花
     }];
 }
 
@@ -379,12 +384,12 @@
     }
     else if (WXZ_ScreenWidth == 414)
     {
-        _workingTimeView.timePickerView.monthWidth = 120.f;
-        _workingTimeView.timePickerView.yearWidth = 70.f;
+        _workingTimeView.timePickerView.monthWidth = 130.f;
+        _workingTimeView.timePickerView.yearWidth = 109.f;
     }
     else
     {
-        _workingTimeView.timePickerView.monthWidth = 126.f;
+        _workingTimeView.timePickerView.monthWidth = 138.f;
         _workingTimeView.timePickerView.yearWidth = 81.f;
     }
     
@@ -417,7 +422,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 // 显示菊花
-                [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
                 [self workingTimeRequest:[self formatDate:_workingTimeView.timePickerView.date dateFormat:@"yyyy-MM-dd"]]; // 修改从业时间请求
             });
         });
@@ -461,7 +466,7 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-        [SVProgressHUD dismiss]; // 取消菊花
+//        [SVProgressHUD dismiss]; // 
     }];
 }
 #pragma mark - WorkingTime End
@@ -472,22 +477,22 @@
     NSLog(@"退出登录");
     // 跳到登录页面
     WXZLoginController *loginController = [[WXZLoginController alloc]init];
-    [[[[UIApplication sharedApplication] delegate] window] setRootViewController:loginController];
+    WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
+    [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
 }
 
 // 返回button 事件
-//- (void)backAction:(id)sender
-//{
-//    
-//}
-
-- (void)viewWillDisappear:(BOOL)animated
+- (void)backAction:(id)sender
 {
-    [super viewWillDisappear:animated];
-    // 发送通知，更新“我”界面信息
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateWoPage" object:nil];
+    if (isRefreshWo)
+    {
+        // 发送通知，更新“我”界面信息
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateWoPage" object:nil];
+        
+        [self removeWorkingTimeView]; // 从父view移除该view
+    }
     
-    [self removeWorkingTimeView]; // 从父view移除该view
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

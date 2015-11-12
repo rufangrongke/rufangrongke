@@ -40,13 +40,13 @@
 
 @property (nonatomic, copy) NSString *JiaoFangTime;
 
-@property (nonatomic, strong) NSArray<Pics *> *pics;
+@property (nonatomic, strong) NSArray/*<Pics *>*/ *pics;
 
 @property (nonatomic, copy) NSString *KaiFaShang;
 
 @property (nonatomic, assign) NSInteger ChengJiaoNum;
 
-@property (nonatomic, strong) NSArray<Hxs *> *hxs;
+@property (nonatomic, strong) NSArray/*<Hxs *>*/ *hxs;
 
 @property (nonatomic, copy) NSString *xiaoqu;
 

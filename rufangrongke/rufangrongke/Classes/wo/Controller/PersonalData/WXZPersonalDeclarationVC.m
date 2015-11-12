@@ -39,11 +39,11 @@
 // 提交服务宣言
 - (IBAction)declarationCommitAction:(id)sender
 {
-    NSLog(@"提交");
-    if (![WXZChectObject checkWhetherStringIsEmpty:self.declarationTextView.text] && ![WXZChectObject isBeyondTheScopeOf:30 string:self.declarationTextView.text])
+    [self.declarationTextView resignFirstResponder];
+    if (![WXZChectObject checkWhetherStringIsEmpty:self.declarationTextView.text withTipInfo:@"请输入服务宣言"] && ![WXZChectObject isBeyondTheScopeOf:30 string:self.declarationTextView.text withTipInfo:@"请输入30个字符内的服务宣言"])
     {
         // 显示菊花
-        [SVProgressHUD showWithStatus:@"正在提交..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         [self modifyRequestWithParameter:self.declarationTextView.text]; // 提交请求
     }
 }
@@ -60,21 +60,19 @@
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             NSLog(@"%@",responseObject[@"msg"]);
+             [SVProgressHUD dismiss]; // 取消菊花
              // 发送通知
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
              [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
          }
          else
          {
-             NSLog(@"%@",responseObject[@"msg"]);
              [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
          }
-         [SVProgressHUD dismiss]; // 取消菊花
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
          [SVProgressHUD showErrorWithStatus:@"请求失败"];
-         [SVProgressHUD dismiss]; // 取消菊花
+//         [SVProgressHUD dismiss]; // 取消菊花
      }];
 }
 

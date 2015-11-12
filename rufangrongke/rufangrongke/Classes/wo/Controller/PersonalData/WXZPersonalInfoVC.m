@@ -11,6 +11,7 @@
 #import "WXZChectObject.h"
 #import <SVProgressHUD.h>
 #import "WXZLoginController.h"
+#import "WXZNavController.h"
 
 @interface WXZPersonalInfoVC () <UITextFieldDelegate>
 
@@ -159,31 +160,34 @@ static NSString *sex = @"先生"; // 记录性别
 // 确定按钮事件
 - (IBAction)determineAction:(id)sender
 {
+    [self.nameTextField resignFirstResponder];
+    [self.currentPwdTextField resignFirstResponder];
+    [self.modifyPwdTextField resignFirstResponder];
     // 判断是哪个controller，并进行相应请求
     if ([self.whichController isEqualToString:@"ModifyPersonalName"])
     {
-        if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text])
+        if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text withTipInfo:@"请输入姓名"] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text withTipInfo:@"请输入4个字符内的名字"] )
         {
             // 显示菊花
-            [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             [self modifyRequestWithParameter1:self.nameTextField.text parameter:@""];
         }
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
     {
-        if (![WXZChectObject checkWhetherStringIsEmpty:sex])
+        if (![WXZChectObject checkWhetherStringIsEmpty:sex withTipInfo:@"请选择性别"])
         {
             // 显示菊花
-            [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             [self modifyRequestWithParameter1:sex parameter:@""];
         }
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
     {
-        if (![WXZChectObject checkWhetherStringIsEmpty:self.currentPwdTextField.text] && ![WXZChectObject checkWhetherStringIsEmpty:self.modifyPwdTextField.text])
+        if (![WXZChectObject checkWhetherStringIsEmpty:self.currentPwdTextField.text withTipInfo:@"请输入当前密码"] && ![WXZChectObject checkWhetherStringIsEmpty:self.modifyPwdTextField.text withTipInfo:@"请输入新密码"])
         {
             // 显示菊花
-            [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             [self modifyRequestWithParameter1:self.currentPwdTextField.text parameter:self.modifyPwdTextField.text];
         }
     }
@@ -224,26 +228,25 @@ static NSString *sex = @"先生"; // 记录性别
             {
                 // 跳转到登录页面（修改密码）
                 WXZLoginController *loginController = [[WXZLoginController alloc]init];
-                [[[[UIApplication sharedApplication] delegate] window] setRootViewController:loginController];
+                WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
+                [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
             }
             else
             {
-                NSLog(@"%@",responseObject[@"msg"]);
                 // 发送通知
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
                 [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
             }
+            [SVProgressHUD dismiss]; // 取消菊花
         }
         else
         {
-            NSLog(@"%@",responseObject[@"msg"]);
-            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD showErrorWithStatus:@"修改失败"];
         }
-        [SVProgressHUD dismiss]; // 取消菊花
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-        [SVProgressHUD dismiss]; // 取消菊花
+//        [SVProgressHUD dismiss]; // 取消菊花
     }];
 }
 

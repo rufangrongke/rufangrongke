@@ -35,14 +35,19 @@
     
     self.storeNameTextField.delegate = self; // 遵循协议
     
-    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 350); // 设置scrollView的contentSize
+//    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 350); // 设置scrollView的contentSize
     
     [self initControl]; // 初始化
     
     //增加监听，当键盘出现或改变时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    
     //增加监听，当键退出时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 // 初始化控件
@@ -55,7 +60,6 @@
 // 选择名片单击事件
 - (IBAction)uploadCard:(id)sender
 {
-    NSLog(@"上传名片");
     // 添加UIActionSheet
     UIActionSheet *photosSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
     [photosSheet showInView:self.view];
@@ -64,17 +68,16 @@
 // 提交审核按钮事件
 - (IBAction)submitAuditAction:(id)sender
 {
-    NSLog(@"提交审核");
     NSData *imgData = [[NSUserDefaults standardUserDefaults] objectForKey:@"companyImg"]; // 获取缓存图片
-    if (![WXZChectObject checkWhetherStringIsEmpty:self.storeNameTextField.text] && imgData != nil)
+    if (imgData == nil)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请选择门店图片"];
+    }
+    else if (![WXZChectObject checkWhetherStringIsEmpty:self.storeNameTextField.text withTipInfo:@"请输入门店名"] && imgData != nil)
     {
         // 显示菊花
-        [SVProgressHUD showWithStatus:@"正在提交..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         [self modifyRequestWithParameter1:self.storeId parameter2:self.storeNameTextField.text parameter3:imgData]; // 绑定门店请求
-    }
-    else
-    {
-        NSLog(@"您还未选择图片");
     }
 }
 
@@ -176,19 +179,19 @@
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
+             [SVProgressHUD dismiss];
              // 发送通知
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
              [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
          }
          else
          {
-             WXZLog(@"%@",responseObject);
+             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
          }
          
-         [SVProgressHUD dismiss];
      } failure:^(NSURLSessionDataTask *task, NSError *error)
      {
-         
+         [SVProgressHUD showErrorWithStatus:@"请求失败"];
      }];
 }
 
@@ -203,14 +206,13 @@
 //当键盘出现时调用
 -(void)keyboardWillShow:(NSNotification *)aNotification
 {
-    //如果想不通输入view获得不同高度，可自己在此方法里分别判断区别
-    [[CDPMonitorKeyboard defaultMonitorKeyboard] keyboardWillShowWithSuperView:self.view andNotification:aNotification higherThanKeyboard:10];
+    self.view.frame = CGRectMake(0, 40, WXZ_ScreenWidth, WXZ_ScreenHeight);
 }
 
 //当键退出时调用
 -(void)keyboardWillHide:(NSNotification *)aNotification
 {
-    [[CDPMonitorKeyboard defaultMonitorKeyboard] keyboardWillHide];
+    self.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight);
 }
 
 // 取消第一响应
@@ -226,6 +228,8 @@
     
     //移除监听，当键退出时收出消息
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"companyImg"]; // 清除缓存
 }
 
 - (void)didReceiveMemoryWarning {

@@ -75,9 +75,12 @@
 + (NSString *)pinJieString1:(NSMutableArray *)arr
 {
     // 排序
-    [arr sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return obj1 > obj2;
-    }];
+    if (arr.count > 1)
+    {
+        [arr sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return obj1 > obj2;
+        }];
+    }
     
     NSString *str = @"";
     if (arr.count > 1)
@@ -119,6 +122,22 @@
         return str;
     }
     return str = [str stringByAppendingFormat:@"%@,",arr1[0]];
+}
+
++ (NSArray *)traversalReturnsString:(NSArray *)arr1 allArr:(NSArray *)arr2
+{
+    NSMutableArray *newArr = [NSMutableArray array];
+    for (NSString *subString in arr2)
+    {
+        for (NSString *newString in arr1)
+        {
+            if ([newString isEqualToString:subString])
+            {
+                [newArr addObject:newString];
+            }
+        }
+    }
+    return newArr;
 }
 
 @end

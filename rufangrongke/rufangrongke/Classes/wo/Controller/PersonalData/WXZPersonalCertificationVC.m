@@ -36,7 +36,7 @@
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"实名认证";
     
-    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 300);
+//    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 300);
     
     // 赋值
     self.nameTextField.text = self.woInfoModel.TrueName;
@@ -55,12 +55,12 @@
 {
     [super viewWillAppear:animated];
     // 导航栏右侧按钮
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"wo_complete" highImage:@"" title:@"" target:self action:@selector(completeAction:) isEnable:YES];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"wo_complete" highImage:@"hehe.png" title:@"" target:self action:@selector(completeAction:) isEnable:YES];
     
     // 已认证则不显示按钮，所有东西不可修改；有身份证号但是为False，则为审核中
     if ([self.woInfoModel.IsShiMing isEqualToString:@"True"])
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"" highImage:@"" title:@"" target:self action:@selector(completeAction:) isEnable:NO];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"hehe.png" highImage:@"hehe.png" title:@"" target:self action:@selector(completeAction:) isEnable:NO];
         
         self.nameTextField.enabled = NO;
         self.idCardTextField.enabled = NO;
@@ -68,7 +68,7 @@
     }
     else if ([self.woInfoModel.IsShiMing isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:self.woInfoModel.sfzid])
     {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"" highImage:@"" title:@"审核中" target:self action:@selector(completeAction:) isEnable:NO];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"hehe.png" highImage:@"hehe.png" title:@"审核中" target:self action:@selector(completeAction:) isEnable:NO];
         
         self.nameTextField.enabled = NO;
         self.idCardTextField.enabled = NO;
@@ -221,16 +221,20 @@
     {        
         if ([responseObject[@"ok"] integerValue] == 1)
         {
+            [SVProgressHUD dismiss];
             // 发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
             [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
         }
-        
-        [SVProgressHUD dismiss];
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+        }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
-        [SVProgressHUD dismiss];
+        [SVProgressHUD showErrorWithStatus:@"请求失败"];
+//        [SVProgressHUD dismiss];
     }];
     
     // 上传
@@ -247,20 +251,19 @@
 
 - (void)completeAction:(id)sender
 {
-    NSLog(@"完成");
     NSData *imgData = [[NSUserDefaults standardUserDefaults] objectForKey:@"sfzimg"];
-    if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text] && ![WXZChectObject checkWhetherStringIsEmpty:self.idCardTextField.text] && imgData != nil)
+    if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text withTipInfo:@"姓名不能为空"] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text withTipInfo:@"请输入4个字内的姓名"] && ![WXZChectObject checkWhetherStringIsEmpty:self.idCardTextField.text withTipInfo:@"身份证号不能为空"] && imgData != nil)
     {
         NSString *pathStr = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         pathStr = [pathStr stringByAppendingString:@"sfzImg.png"];
         
         // 显示菊花
-        [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         [self modifyRequestWithParameter1:self.nameTextField.text parameter2:self.idCardTextField.text parameter3:imgData]; // 请求
     }
-    else
+    else if (imgData == nil)
     {
-        
+        [SVProgressHUD showErrorWithStatus:@"请选择身份证正面照"];
     }
 }
 

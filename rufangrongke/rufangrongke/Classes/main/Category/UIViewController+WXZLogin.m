@@ -53,12 +53,11 @@
 
 - (void)loginRequest:(loginMessage)message
 {
-    NSDictionary *loginInfoDic = [self localUserInfo];
     // 1.创建请求对象
     NSString *urlString = [OutNetBaseURL stringByAppendingString:denglu];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"mob"] = loginInfoDic[@"Mobile"];
+    parameters[@"mob"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"phoneNumber"];
     parameters[@"pas"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject)
@@ -72,7 +71,7 @@
             NSDictionary *userinfo = loginContentDic[@"u"];
             // 将用户信息写入字典
             [userinfo writeToFile:userinfoPath atomically:YES];
-            WXZLog(@"%@",userinfo);
+//            WXZLog(@"%@",userinfo);
             
             message(userinfo);
         }

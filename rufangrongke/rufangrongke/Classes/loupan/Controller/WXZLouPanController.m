@@ -115,7 +115,7 @@ static NSInteger listCount = 1;
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewUsers)];
     
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
-    self.tableView.footer.hidden = YES;
+//    self.tableView.footer.hidden = YES;
 }
 - (void)loadNewUsers
 {
