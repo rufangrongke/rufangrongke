@@ -7,15 +7,26 @@
 //
 
 #import "WXZChectObject.h"
+#import <SVProgressHUD.h>
 
 @implementation WXZChectObject
 
 // 判断字符串是否为空
 + (BOOL)checkWhetherStringIsEmpty:(NSString *)str
 {
-    if ([str isEqualToString:@""] || str == nil || [str isEqual:[NSNull null]] || [str isEqualToString:@"<null>"])
+    if ([str isEqualToString:@""] || str == nil || [str isEqual:[NSNull null]] || [str isEqualToString:@"<null>"] || [str isEqualToString:@"(null)"])
     {
-        NSLog(@"字符串不能为空");
+        return YES;
+    }
+    return NO;
+}
+
+// 判断字符串是否为空
++ (BOOL)checkWhetherStringIsEmpty:(NSString *)str withTipInfo:(NSString *)tip
+{
+    if ([str isEqualToString:@""] || str == nil || [str isEqual:[NSNull null]] || [str isEqualToString:@"<null>"] || [str isEqualToString:@"(null)"])
+    {
+        [SVProgressHUD showErrorWithStatus:tip];
         return YES;
     }
     return NO;
@@ -26,7 +37,17 @@
 {
     if (str.length > length)
     {
-        NSLog(@"字符串超出规定范围");
+        return YES;
+    }
+    return NO;
+}
+
+// 是否超出规定范围
++ (BOOL)isBeyondTheScopeOf:(NSInteger)length string:(NSString *)str withTipInfo:(NSString *)tip
+{
+    if (str.length > length)
+    {
+        [SVProgressHUD showErrorWithStatus:tip];
         return YES;
     }
     return NO;
@@ -102,18 +123,21 @@
     //    @"[1][3578]\\d{9}"判断手机号的正则表达式
 }
 
-// 电话－方法二
-+ (BOOL)checkPhone2:(NSString *)mobileNum
+// 电话－方法二 判断手机号
++ (BOOL)checkPhone2:(NSString *)mobileNum withTipInfo:(NSString *)tip
 {
     NSString *regex = @"[1][3578]\\d{9}";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     BOOL isMatch = [pred evaluateWithObject:mobileNum];
     if (!isMatch)
     {
-        NSLog(@"手机号格式不正确");
+        [SVProgressHUD showErrorWithStatus:tip];
         return NO;
     }
-    return YES;
+    else
+    {
+        return YES;
+    }
 }
 
 // --邮编

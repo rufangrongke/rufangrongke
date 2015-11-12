@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *pricefTextField;
 @property (weak, nonatomic) IBOutlet UITextField *priceeTextField;
 
+@property (nonatomic,strong) UIViewController *controller;
+
 + (instancetype)initPriceCell;
 - (void)updateInfo:(WXZKeHuDetailModel *)model isModify:(BOOL)ismodify;
 

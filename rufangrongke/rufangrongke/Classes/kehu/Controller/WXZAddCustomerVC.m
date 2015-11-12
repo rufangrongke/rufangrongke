@@ -15,7 +15,7 @@
 #import "WXZPurchaseIntentionCell.h"
 #import "WXZPriceCell.h"
 
-@interface WXZAddCustomerVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface WXZAddCustomerVC () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     NSString *quyuSS;
     NSString *huxingSS;
@@ -59,7 +59,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
     
-    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self quyuListRequest]; // 区域列表请求
     
     // 初始化
@@ -76,6 +76,8 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backPriceInfo:) name:@"BackPriceInfoAndUpdate" object:nil];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -83,6 +85,21 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     [self.qiWangQuYuArr removeAllObjects];
     [self.qiWangHuXingArr removeAllObjects];
     [self.fangWuTypeArr removeAllObjects];
+    
+    if (self.isModifyCustomerInfo)
+    {
+        NSString *quyuStr = [WXZStringObject whetherStringContainsCharacter2:self.detailModel.QuYu character:@","];
+        self.qiWangQuYuArr = (NSMutableArray *)[WXZStringObject interceptionOfString:quyuStr interceptType:@"/"];
+        NSString *hxStr = [WXZStringObject whetherStringContainsCharacter2:self.detailModel.QuYu character:@","];
+        NSArray *hxArr = [WXZStringObject interceptionOfString:hxStr interceptType:@"/"];
+        [self.qiWangHuXingArr addObjectsFromArray:[WXZStringObject traversalReturnsString:hxArr allArr:self.huxingListArr]];
+        [self.fangWuTypeArr addObjectsFromArray:[WXZStringObject traversalReturnsString:hxArr allArr:self.fangWuTypeArr]];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self showHeaderInfo]; // 
 }
 
 #pragma mark - Request
@@ -94,13 +111,13 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
+            WXZLog(@"%@",responseObject);
             // 赋值
             self.quyuListArr = responseObject[@"qus"];
             [self.myTableView reloadData];
         }
         else
         {
-//            WXZLog(@"%@",responseObject);
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
         [SVProgressHUD dismiss];
@@ -132,14 +149,12 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     
     [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
-//        WXZLog(@"%@",responseObject);
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             [self.navigationController popViewControllerAnimated:YES];
         }
         else
         {
-//            NSLog(@"%@",responseObject[@"msg"]);
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
         [SVProgressHUD dismiss];
@@ -201,6 +216,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
             [priceCell.determineBtn addTarget:self action:@selector(determineAction:) forControlEvents:UIControlEventTouchUpInside];
             self.pricefTextField = priceCell.pricefTextField;
             self.priceeTextField = priceCell.priceeTextField;
+            priceCell.controller = self;
             [priceCell updateInfo:self.detailModel isModify:self.isModifyCustomerInfo]; //
             
             return priceCell;
@@ -283,7 +299,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         }
         else
         {
-            return 257;
+            return 300;
         }
     }
 }
@@ -295,6 +311,14 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         return 33;
     }
     return 0.1;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.nameTextField resignFirstResponder];
+    [self.phoneNumTextField resignFirstResponder];
+    [self.pricefTextField resignFirstResponder];
+    [self.priceeTextField resignFirstResponder];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -344,7 +368,6 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         [self.menBtn setImage:[UIImage imageNamed:@"kh_nanzhu"] forState:UIControlStateNormal];
         sex = @"女士";
     }
-//    NSLog(@"%@",sex);
 }
 
 - (void)typeSelectAction:(UIButton *)sender
@@ -453,7 +476,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
 - (void)determineAction:(id)sender
 {
     // 添加客户请求
-    [SVProgressHUD showWithStatus:@"正在提交..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     if ([self.navigationItem.title isEqualToString:@"添加客户"])
     {
         [self addCustomerRequest:@"" name:self.nameTextField.text sex:sex mobile:self.phoneNumTextField.text jiaGeS:self.pricefTextField.text jiaGeE:self.priceeTextField.text quYu:[WXZStringObject whetherStringContainsCharacter2:[self quyuMethod] character:@","] hx:[WXZStringObject whetherStringContainsCharacter2:[self huxingMethod] character:@","] yiXiang:self.yixiangLabel.text isModify:NO];

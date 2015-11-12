@@ -109,7 +109,7 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     _currentCityLabel.text = self.currentCity; // 赋值
     
     // 显示菊花
-    [SVProgressHUD showWithStatus:@"正在加载..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 加载城市列表
     [self cityListRequest];
     
@@ -149,16 +149,16 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
              {
                  self.myTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
              }
+             [SVProgressHUD dismiss]; // 取消菊花
          }
          else
          {
              [SVProgressHUD showErrorWithStatus:@"暂无数据"];
          }
-         [SVProgressHUD dismiss]; // 取消菊花
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
          [SVProgressHUD showErrorWithStatus:@"请求失败"];
-         [SVProgressHUD dismiss]; // 取消菊花
+//         [SVProgressHUD dismiss]; // 取消菊花
      }];
 }
 
@@ -224,7 +224,7 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     [self.cityDelegate backCityName:selectedCurrentCityName]; // 代理方法
     
     // 显示菊花
-    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self modifyRequestWithParameter:selectedCurrentCityName]; // 修改城市数据请求
 }
 
@@ -311,7 +311,7 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     selectedCurrentCityName = self.currentCityLabel.text; // 赋值
     
     // 显示菊花
-    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self modifyRequestWithParameter:selectedCurrentCityName]; // 修改城市数据请求
 }
 

@@ -13,6 +13,7 @@
 #import <SVProgressHUD.h>
 #import "CDPMonitorKeyboard.h"
 #import "WXZLoginController.h"
+#import "WXZNavController.h"
 
 @interface WXZModifyPhoneVC () <UITextFieldDelegate>
 
@@ -37,7 +38,6 @@
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"修改绑定手机";
     
-    
     self.codeTextField.delegate = self;
     self.xinPhoneTextField.delegate = self;
     self.erPhoneTextField.delegate = self;
@@ -46,9 +46,19 @@
     self.currentPhoneNumLabel.text = self.phone;
     
     //增加监听，当键盘出现或改变时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    
     //增加监听，当键退出时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 400);
 }
 
 // 修改手机号请求
@@ -64,20 +74,21 @@
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             WXZLog(@"%@",responseObject[@"msg"]);
-             // 跳转到登录页面（修改密码）
+             [SVProgressHUD dismiss]; // 取消菊花
+             [SVProgressHUD showSuccessWithStatus:@""];
+             // 跳转到登录页面（修改手机号）
              WXZLoginController *loginController = [[WXZLoginController alloc]init];
-             [[[[UIApplication sharedApplication] delegate] window] setRootViewController:loginController];
+             WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
+             [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
          }
          else
          {
              [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
          }
-         [SVProgressHUD dismiss]; // 取消菊花
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
          [SVProgressHUD showErrorWithStatus:@"请求失败"];
-         [SVProgressHUD dismiss]; // 取消菊花
+//         [SVProgressHUD dismiss]; // 取消菊花
      }];
 }
 
@@ -86,10 +97,10 @@
 {
     NSLog(@"验证码");
     // 判断有没有手机号
-    if (![WXZChectObject checkWhetherStringIsEmpty:self.currentPhoneNumLabel.text])
+    if (![WXZChectObject checkWhetherStringIsEmpty:self.currentPhoneNumLabel.text withTipInfo:@"未发现当前手机号"])
     {
         // 显示菊花
-        [SVProgressHUD showWithStatus:@"发送中..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         NSString *url = [OutNetBaseURL stringByAppendingString:yanzhengma];
         
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -99,10 +110,10 @@
         [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
          {
              NSDictionary *dic = (NSDictionary *)responseObject;
-             WXZLog(@"%@",dic);
+             
              if ([dic[@"status"] integerValue] == 1)
              {
-                 NSLog(@"%@",responseObject[@"msg"]);
+                 [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
                  // 倒计时
                  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                      [self countdownWithTimeOut:dic[@"timeout"]]; // 倒计时
@@ -113,11 +124,9 @@
              {
                  [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
              }
-             [SVProgressHUD dismiss]; // 取消菊花
              
          } failure:^(NSURLSessionDataTask *task, NSError *error) {
              [SVProgressHUD showErrorWithStatus:@"请求失败"];
-             [SVProgressHUD dismiss]; // 取消菊花
          }];
     }
 }
@@ -159,26 +168,21 @@
 // 确定按钮单击事件
 - (IBAction)determineBtn:(id)sender
 {
-    NSLog(@"确定");
-    if (![WXZChectObject checkWhetherStringIsEmpty:self.xinPhoneTextField.text] && ![WXZChectObject checkWhetherStringIsEmpty:self.erPhoneTextField.text])
+    [self.codeTextField resignFirstResponder];
+    [self.xinPhoneTextField resignFirstResponder];
+    [self.erPhoneTextField resignFirstResponder];
+    if (![WXZChectObject checkWhetherStringIsEmpty:self.codeTextField.text withTipInfo:@"验证码不能为空"] && ![WXZChectObject checkWhetherStringIsEmpty:self.xinPhoneTextField.text withTipInfo:@"请输入手机号"] && ![WXZChectObject checkWhetherStringIsEmpty:self.erPhoneTextField.text withTipInfo:@"请再次输入手机号"] && [WXZChectObject checkPhone2:self.xinPhoneTextField.text withTipInfo:@"手机号格式不正确"])
     {
-        if ([WXZChectObject checkPhone2:self.xinPhoneTextField.text])
+        if ([self.xinPhoneTextField.text isEqualToString:self.erPhoneTextField.text])
         {
-            if ([self.xinPhoneTextField.text isEqualToString:self.erPhoneTextField.text])
-            {
-                // 显示菊花
-                [SVProgressHUD showWithStatus:@"发送中..." maskType:SVProgressHUDMaskTypeBlack];
-                [self modifyRequestWithParameter1:self.codeTextField.text parameter:self.xinPhoneTextField.text];
-            }
-            else
-            {
-                NSLog(@"两次手机号不一致，请重新输入");
-            }
+            // 显示菊花
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+            [self modifyRequestWithParameter1:self.codeTextField.text parameter:self.xinPhoneTextField.text];
         }
-    }
-    else
-    {
-        NSLog(@"手机号不能为空！");
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"两次输入的手机号不一致，请重新输入"];
+        }
     }
 }
 
@@ -215,14 +219,26 @@
 //当键盘出现时调用
 -(void)keyboardWillShow:(NSNotification *)aNotification
 {
-    //如果想不通输入view获得不同高度，可自己在此方法里分别判断区别
-    [[CDPMonitorKeyboard defaultMonitorKeyboard] keyboardWillShowWithSuperView:self.view andNotification:aNotification higherThanKeyboard:0];
+//    NSDictionary* info = [aNotification userInfo];
+//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    if (self.erPhoneTextField)
+    {
+        self.view.frame = CGRectMake(0, 30, WXZ_ScreenWidth, WXZ_ScreenHeight);
+    }
+    else
+    {
+        self.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight);
+    }
 }
 
 //当键退出时调用
 -(void)keyboardWillHide:(NSNotification *)aNotification
 {
-    [[CDPMonitorKeyboard defaultMonitorKeyboard] keyboardWillHide];
+    if (self.erPhoneTextField)
+    {
+        self.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight);
+    }
 }
 
 // 取消第一响应

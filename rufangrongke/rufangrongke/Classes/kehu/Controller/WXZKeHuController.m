@@ -20,10 +20,16 @@
 #import "WXZReportPreparationVC.h"
 #import "WXZScreeningView.h"
 #import "WXZKeHuInfoModel.h"
+#import <MJExtension.h>
 
-@interface WXZKeHuController () <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,BackFilterTypeDelegate>
+@interface WXZKeHuController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UISearchBarDelegate,BackFilterTypeDelegate>
+{
+    NSString *eachPage; // 每页显示条数
+    BOOL isRefresh; // 是否刷新
+}
 
 @property (nonatomic,strong) UISearchBar *searchBar;
+@property (nonatomic,strong) UITextField *searchTextField;
 
 @property (nonatomic,strong) WXZScreeningView *screeningView;
 
@@ -36,6 +42,10 @@
 @end
 
 static NSInteger isHiden; // 弹框是否隐藏
+static NSInteger currentPage; // 当前页数
+static BOOL isMore; // 是否有更多数据
+static NSString *shaixuanStr; // 记录筛选类型
+static NSString *searchStr; // 记录搜索条件
 
 @implementation WXZKeHuController
 
@@ -52,10 +62,17 @@ static NSInteger isHiden; // 弹框是否隐藏
     self.dataArr = [NSMutableArray array];
     self.shaixuanArr = @[@"所有",@"已报备",@"已带看",@"已预约",@"以认购",@"已结佣",@"未报备",@"无效客户"];
     
+    isRefresh = YES;
+    isMore = YES;
+    currentPage = 1;
+    eachPage = @"8";
+    shaixuanStr = @"";
+    searchStr = @"";
     // 显示菊花
-    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 请求列表
-    [self keHuListRequest:@"1" numberEachPage:@"8" handsomeChooseCategory:@"" handsomeChooseConditions:@""];
+    [self keHuListRequest:currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
+    [self setupRefresh];
     
     // 初始化信息
     [self setUp];
@@ -70,19 +87,30 @@ static NSInteger isHiden; // 弹框是否隐藏
     // 右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
     // 添加一个系统的搜索框
+//    _searchTextField = [[UITextField alloc] init];
+//    _searchTextField.frame = CGRectMake(80, 0, WXZ_ScreenWidth-80-60, 25);
+//    _searchTextField.borderStyle = UITextBorderStyleRoundedRect;
+//    _searchTextField.placeholder = @"请输入客户姓名";
+//    _searchT extField.font = WXZ_SystemFont(14);
+//    _searchTextField.delegate = self;
+//    self.navigationItem.titleView = _searchTextField;
+    
+    
     _searchBar = [[UISearchBar alloc] init];
+    _searchBar.backgroundColor = [UIColor clearColor];
+    _searchBar.backgroundImage = [UIImage imageNamed:@""];
+    _searchBar.placeholder = @"请输入客户姓名";
     _searchBar.delegate = self;
     self.navigationItem.titleView = _searchBar;
-    
 }
 
 #pragma mark - Data Request Methods
-- (void)keHuListRequest:(NSString *)page numberEachPage:(NSString *)eachPage handsomeChooseCategory:(NSString *)chooseCategory handsomeChooseConditions:(NSString *)chooseConditions
+- (void)keHuListRequest:(NSInteger)page numberEachPage:(NSString *)eachPage1 handsomeChooseCategory:(NSString *)chooseCategory handsomeChooseConditions:(NSString *)chooseConditions
 {
     NSString *urlStr = [OutNetBaseURL stringByAppendingString:kehuliebiao];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [param setObject:page forKey:@"inp"];
-    [param setObject:eachPage forKey:@"ps"];
+    [param setObject:[NSString stringWithFormat:@"%ld",(long)page] forKey:@"inp"];
+    [param setObject:eachPage1 forKey:@"ps"];
     [param setObject:chooseCategory forKey:@"zt"];
     [param setObject:chooseConditions forKey:@"key"];
     
@@ -92,34 +120,69 @@ static NSInteger isHiden; // 弹框是否隐藏
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-//            WXZLog(@"%@",responseObject);
-            
             NSArray *arr = responseObject[@"list"];
-            // 直接把数组里边的字典的值转换为模型
-            self.dataArr = [WXZKeHuInfoModel objectArrayWithKeyValuesArray:arr];
-            [self.tableView reloadData];
+            if (isRefresh)
+            {
+                if (arr.count > 0)
+                {
+                    // 直接把数组里边的字典的值转换为模型
+                    self.dataArr = [NSMutableArray arrayWithArray:[WXZKeHuInfoModel objectArrayWithKeyValuesArray:arr]];
+                }
+                else
+                {
+                    [self.dataArr removeAllObjects];
+                    [self.tableView.footer endRefreshingWithNoMoreData];
+                    isMore = NO;
+                }
+            }
+            else
+            {
+                if (arr.count > 0)
+                {
+                    [self.dataArr addObjectsFromArray:[WXZKeHuInfoModel objectArrayWithKeyValuesArray:arr]];
+                }
+                else
+                {
+                    [self.tableView.footer endRefreshingWithNoMoreData];
+                    isMore = NO;
+                }
+            }
+            [SVProgressHUD dismiss]; // 取消菊花
         }
         else
         {
-//            WXZLog(@"%@",responseObject);
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
-        [SVProgressHUD dismiss];
+        [self.tableView reloadData];
+        // 结束刷新
+        [self.tableView.header endRefreshing];
+        if (isMore)
+        {
+            // 结束刷新
+            [self.tableView.footer endRefreshing];
+        }
+        searchStr = @"";
+        _searchBar.text = @"";
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-        [SVProgressHUD dismiss];
+        searchStr = @"";
+        _searchBar.text = @"";
     }];
 }
 
 - (void)backScreeningType:(NSString *)type
 {
     [self hideScreeningView];
+    currentPage = 1;
+    isRefresh = YES;
+    shaixuanStr = type;
+    searchStr = @"";
     // 显示菊花
-    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 请求列表
-    [self keHuListRequest:@"1" numberEachPage:@"8" handsomeChooseCategory:type handsomeChooseConditions:@""];
+    [self keHuListRequest:currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
 }
 
 #pragma mark - Table view data source
@@ -162,7 +225,6 @@ static NSInteger isHiden; // 弹框是否隐藏
         keHuInfoCell.controller = self; // 权限
         
         // 赋值
-//        [keHuInfoCell showKeHuListInfo:self.dataArr[indexPath.section]];
         keHuInfoCell.keHuInfoModel = self.dataArr[indexPath.section-1];
         
         return keHuInfoCell;
@@ -264,6 +326,7 @@ static NSInteger isHiden; // 弹框是否隐藏
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self hideScreeningView];
+    [_searchBar resignFirstResponder];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -275,8 +338,53 @@ static NSInteger isHiden; // 弹框是否隐藏
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-//    NSLog(@"%@",searchBar.text);
     [self hideScreeningView];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    searchStr = searchBar.text;
+    [self queDing_click]; //
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+#pragma 刷新控件
+/**
+ * 添加刷新控件
+ */
+- (void)setupRefresh
+{
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshKeHuInfo)];
+    
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreKeHuInfo)];
+    //    self.tableView.footer.hidden = YES;
+}
+- (void)refreshKeHuInfo
+{
+    // 刷新
+    currentPage = 1;
+    isRefresh = YES;
+    isMore = YES;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [self keHuListRequest:currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
+}
+- (void)loadMoreKeHuInfo
+{
+    isRefresh = NO;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [self keHuListRequest:currentPage++ numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
 }
 
 // 添加新客户事件
@@ -284,6 +392,7 @@ static NSInteger isHiden; // 弹框是否隐藏
 {
 //    NSLog(@"添加新客户!");
     [self hideScreeningView];
+    [_searchBar resignFirstResponder];
     // 添加新客户页
     WXZAddCustomerVC *addCustomerVC = [[WXZAddCustomerVC alloc] init];
     addCustomerVC.titleStr = @"添加客户";
@@ -297,10 +406,14 @@ static NSInteger isHiden; // 弹框是否隐藏
     WXZLogFunc;
 //    NSLog(@"%@",_searchBar.text);
     [self hideScreeningView];
+    currentPage = 1;
+    isRefresh = YES;
+    shaixuanStr = @"";
+    searchStr = self.searchBar.text;
     // 显示菊花
-    [SVProgressHUD showWithStatus:@"请稍后..." maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 请求列表
-    [self keHuListRequest:@"1" numberEachPage:@"8" handsomeChooseCategory:@"" handsomeChooseConditions:_searchBar.text];
+    [self keHuListRequest:currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
 }
 // 左上方按钮监听点击
 - (void)quDu_click
@@ -320,12 +433,11 @@ static NSInteger isHiden; // 弹框是否隐藏
         [UIView setAnimationDelay:0.1];
         // 显示视图
         _screeningView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZScreeningView class]) owner:self options:nil] lastObject];
-        _screeningView.frame = CGRectMake(10, 0, 84, 111);
+        _screeningView.frame = CGRectMake(10, self.tableView.contentOffset.y, 140, 185);
         _screeningView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"kh_screening"]];
         _screeningView.dataArr = self.shaixuanArr;
         _screeningView.backScreeningTypeDelegate = self;
         [self.view addSubview:_screeningView];
-        self.tableView.scrollEnabled = YES;
         isHiden = YES;
         // 提交动画
         [UIView commitAnimations];
@@ -335,7 +447,6 @@ static NSInteger isHiden; // 弹框是否隐藏
 - (void)hideScreeningView
 {
     [self.screeningView removeFromSuperview];
-    self.tableView.scrollEnabled = YES;
     isHiden = NO;
 }
 

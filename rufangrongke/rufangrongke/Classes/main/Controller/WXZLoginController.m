@@ -42,7 +42,8 @@
 - (IBAction)login:(id)sender {
     
     // 检测用户名
-    NSString *username = self.usernameField.text;
+//    NSString *username = self.usernameField.text;
+    NSString *username = @"18311281581";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:username forKey:@"phoneNumber"];
 //    if (username.length == 0) {
@@ -51,7 +52,8 @@
 //    }
     
     // 检测密码
-    NSString *pwd = self.pwdField.text;
+//    NSString *pwd = self.pwdField.text;
+    NSString *pwd = @"123456";
     [defaults setObject:pwd forKey:@"password"];
 //    if (pwd.length == 0) {
 //        [SVProgressHUD showErrorWithStatus:self.pwdField.placeholder];
@@ -71,8 +73,8 @@
     parameters[@"mob"] = @"18311281581";
     parameters[@"pas"] = @"123456";
     // 17701261104
-//    parameters[@"mob"] = @"18833198078"; // 18833198078
-//    parameters[@"pas"] = @"1234567";
+//    parameters[@"mob"] = @"17701261104"; // 18833198078
+//    parameters[@"pas"] = @"123456";
     // afn
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;
@@ -80,7 +82,7 @@
         NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
         // 获取用户信息
         NSDictionary *userinfo = loginContentDic[@"u"];
-        WXZLog(@"%@",loginContentDic[@"u"]);
+//        WXZLog(@"%@",loginContentDic[@"u"]);
         // 讲用户信息写入字典
         [userinfo writeToFile:userinfoPath atomically:YES];
         

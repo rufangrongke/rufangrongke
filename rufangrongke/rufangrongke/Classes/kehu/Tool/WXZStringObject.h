@@ -27,4 +27,6 @@
 
 + (NSString *)pinJieString2:(NSMutableArray *)arr array2:(NSMutableArray *)arr; // 遍历并拼接字符串
 
++ (NSArray *)traversalReturnsString:(NSArray *)arr1 allArr:(NSArray *)arr2; // 遍历并返回数组
+
 @end

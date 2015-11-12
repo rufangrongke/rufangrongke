@@ -17,7 +17,7 @@
 
 @property (nonatomic, assign) BOOL ok;
 
-@property (nonatomic, strong) NSArray<Fys *> *fys;
+@property (nonatomic, strong) NSArray/*<Fys *>*/ *fys;
 
 @end
 @interface Fys : NSObject

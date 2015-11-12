@@ -68,7 +68,7 @@
                                                 <constraint firstAttribute="height" constant="30" id="IkN-Cp-fzD"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         </textField>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_personal_divider" translatesAutoresizingMaskIntoConstraints="NO" id="Ffc-5U-dxV">
                                             <rect key="frame" x="0.0" y="178" width="600" height="1"/>
