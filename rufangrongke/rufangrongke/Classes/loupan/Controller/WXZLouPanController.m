@@ -90,7 +90,6 @@ static NSInteger listCount = 1;
     }
     [SVProgressHUD show];
     // 发送请求
-//    [[AFHTTPSessionManager manager] ]
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"xiaoqu"] = parameter ? parameter : self.search.text;
