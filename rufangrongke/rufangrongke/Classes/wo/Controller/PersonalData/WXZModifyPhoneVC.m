@@ -19,12 +19,16 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 
+@property (weak, nonatomic) IBOutlet UIView *xinPCodeView; // 新手机号验证码view
+
 @property (weak, nonatomic) IBOutlet UITextField *codeTextField; // 验证码输入框
 @property (weak, nonatomic) IBOutlet UITextField *xinPhoneTextField; // 新手机号输入框
 @property (weak, nonatomic) IBOutlet UITextField *erPhoneTextField; // 再次输入手机号
+@property (weak, nonatomic) IBOutlet UITextField *xinPCodeTextField; // 新手机号验证码输入框
 
 @property (weak, nonatomic) IBOutlet UILabel *currentPhoneNumLabel; // 当前手机号
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn; // 发送验证码按钮
+@property (weak, nonatomic) IBOutlet UIButton *determineBtn; // 确定按钮
 @end
 
 @implementation WXZModifyPhoneVC
@@ -41,6 +45,7 @@
     self.codeTextField.delegate = self;
     self.xinPhoneTextField.delegate = self;
     self.erPhoneTextField.delegate = self;
+    self.xinPCodeTextField.delegate = self;
     
     // 赋值
     self.currentPhoneNumLabel.text = self.phone;
@@ -53,7 +58,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 400);
+    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 405);
+    
+    self.xinPCodeView.hidden = YES; // 不显示输入新手机号输入框
+    self.determineBtn.frame = CGRectMake(17, 288, WXZ_ScreenWidth-17*2, 44);
 }
 
 // 修改手机号请求
@@ -70,11 +78,13 @@
          if ([responseObject[@"ok"] integerValue] == 1)
          {
              [SVProgressHUD dismiss]; // 取消菊花
-             [SVProgressHUD showSuccessWithStatus:@""];
-             // 跳转到登录页面（修改手机号）
-             WXZLoginController *loginController = [[WXZLoginController alloc]init];
-             WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
-             [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
+//             [SVProgressHUD showSuccessWithStatus:@""];
+//             // 跳转到登录页面（修改手机号）
+//             WXZLoginController *loginController = [[WXZLoginController alloc]init];
+//             WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
+//             [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
+             
+             self.xinPCodeView.hidden = NO; // 请求成功，显示输入新手机号输入框
          }
          else
          {
@@ -166,6 +176,7 @@
     [self.codeTextField resignFirstResponder];
     [self.xinPhoneTextField resignFirstResponder];
     [self.erPhoneTextField resignFirstResponder];
+    [self.xinPCodeTextField resignFirstResponder];
     if (![WXZChectObject checkWhetherStringIsEmpty:self.codeTextField.text withTipInfo:@"验证码不能为空"] && ![WXZChectObject checkWhetherStringIsEmpty:self.xinPhoneTextField.text withTipInfo:@"请输入手机号"] && ![WXZChectObject checkWhetherStringIsEmpty:self.erPhoneTextField.text withTipInfo:@"请再次输入手机号"] && [WXZChectObject checkPhone2:self.xinPhoneTextField.text withTipInfo:@"手机号格式不正确"])
     {
         if ([self.xinPhoneTextField.text isEqualToString:self.erPhoneTextField.text])
@@ -184,6 +195,7 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    // 键盘出来时，改变父view的坐标，使输入框露出来
     [UIView animateWithDuration:0.25 animations:^{
         if (textField.tag == 100013)
         {
@@ -192,6 +204,10 @@
         else if (textField.tag == 100012)
         {
             self.view.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight);
+        }
+        else if (textField.tag == 100027)
+        {
+            self.view.frame = CGRectMake(0, -110, WXZ_ScreenWidth, WXZ_ScreenHeight);
         }
         else
         {
@@ -243,6 +259,7 @@
     [self.codeTextField resignFirstResponder];
     [self.xinPhoneTextField resignFirstResponder];
     [self.erPhoneTextField resignFirstResponder];
+    [self.xinPCodeTextField resignFirstResponder];
 }
 
 // dealloc中需要移除监听

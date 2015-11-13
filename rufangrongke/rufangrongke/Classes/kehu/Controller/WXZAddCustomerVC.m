@@ -103,7 +103,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            WXZLog(@"%@",responseObject);
+//            WXZLog(@"%@",responseObject);
             // 赋值
             self.quyuListArr = responseObject[@"qus"];
             [self showTheOriginalInfo]; // 重新构造购房意向信息
@@ -375,19 +375,19 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
 
 - (void)typeSelectAction:(UIButton *)sender
 {
-    NSString *str = [NSString stringWithFormat:@"%ld",(long)sender.tag];
+    NSString *str = [NSString stringWithFormat:@"%d",(NSInteger)sender.tag];
     str = [str substringWithRange:NSMakeRange(0, str.length-1)];
     if ([str isEqualToString:@"100003"])
     {
-        if ([sender.backgroundColor isEqual:[UIColor lightGrayColor]])
+        if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_quyuunselect"]])
         {
-            sender.backgroundColor = WXZRGBColor(2, 135, 227);
+            [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
             [sender setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
             [self.qiWangQuYuArr addObject:sender.titleLabel.text];
         }
         else
         {
-            sender.backgroundColor = [UIColor lightGrayColor];
+            [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
             [sender setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
             [self.qiWangQuYuArr removeObject:sender.titleLabel.text];
         }
@@ -396,42 +396,42 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     {
         if (sender.tag == 1000040)
         {
-            if ([sender.backgroundColor isEqual:[UIColor lightGrayColor]])
+            if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_quyuunselect"]])
             {
-                sender.backgroundColor = WXZRGBColor(2, 135, 227);
+                [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
                 [sender setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
                 [self.qiWangHuXingArr removeAllObjects];
                 [self.qiWangHuXingArr addObject:sender.titleLabel.text];
             }
             else
             {
-                sender.backgroundColor = [UIColor lightGrayColor];
+                [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
                 [sender setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
             }
             
             for (int i = 1; i < 6; i++)
             {
                 UIButton *btn = (UIButton *)[self.view viewWithTag:1000040+i];
-                btn.backgroundColor = [UIColor lightGrayColor];
+                [btn setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
                 [btn setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
             }
         }
         else
         {
             UIButton *btn = (UIButton *)[self.view viewWithTag:1000040];
-            btn.backgroundColor = [UIColor lightGrayColor];
+            [btn setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
             [btn setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
             [self.qiWangHuXingArr removeObject:btn.titleLabel.text]; // 移除不限户型
             
-            if ([sender.backgroundColor isEqual:[UIColor lightGrayColor]])
+            if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_quyuunselect"]])
             {
-                sender.backgroundColor = WXZRGBColor(2, 135, 227);
+                [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
                 [sender setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
                 [self.qiWangHuXingArr addObject:sender.titleLabel.text];
             }
             else
             {
-                sender.backgroundColor = [UIColor lightGrayColor];
+                [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
                 [sender setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
                 [self.qiWangHuXingArr removeObject:sender.titleLabel.text];
             }
@@ -439,15 +439,15 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     }
     else
     {
-        if ([sender.backgroundColor isEqual:[UIColor lightGrayColor]])
+        if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_quyuunselect"]])
         {
-            sender.backgroundColor = WXZRGBColor(2, 135, 227);
+            [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
             [sender setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
             [self.fangWuTypeArr addObject:sender.titleLabel.text];
         }
         else
         {
-            sender.backgroundColor = [UIColor lightGrayColor];
+            [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
             [sender setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
             [self.fangWuTypeArr removeObject:sender.titleLabel.text];
         }
@@ -458,15 +458,15 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
 
 - (void)selectPriceAction:(UIButton *)sender
 {
-    if ([sender.backgroundColor isEqual:[UIColor lightGrayColor]])
+    if ([sender.currentBackgroundImage isEqual:[UIImage imageNamed:@"kh_quyuunselect"]])
     {
-        sender.backgroundColor = WXZRGBColor(2, 135, 227);
+        [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
         [sender setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
         _priceStr = @"";
     }
     else
     {
-        sender.backgroundColor = [UIColor lightGrayColor];
+        [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
         [sender setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
     }
     [self showHeaderInfo]; // 展示header信息

@@ -22,13 +22,12 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsF-2v-EsA">
                         <rect key="frame" x="11" y="44" width="65" height="22"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65" id="Fng-lL-Z1M"/>
                             <constraint firstAttribute="height" constant="22" id="GpA-tu-ebq"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="不限">
+                        <state key="normal" title="不限" backgroundImage="kh_quyuunselect">
                             <color key="titleColor" red="0.10588235294117647" green="0.10980392156862745" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -98,6 +97,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="kh_quyuunselect" width="50" height="19"/>
         <image name="wo_determine" width="340" height="44"/>
     </resources>
 </document>

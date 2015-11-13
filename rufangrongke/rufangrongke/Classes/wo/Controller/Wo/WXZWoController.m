@@ -32,11 +32,12 @@
     
     // 视图整体背景色
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
     // 状态栏
-    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
-    statusView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wo_status_bar"]];
-    [self.view addSubview:statusView];
+//    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
+//    statusView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wo_status_bar"]];
+//    [self.view addSubview:statusView];
     
     // 获取缓存数据
 //    self.woHeadInfoDic = [self localUserInfo];
@@ -49,6 +50,12 @@
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWoData:) name:@"UpdateWoPage" object:nil];
 }
+
+// 隐藏状态栏
+//- (BOOL)prefersStatusBarHidden
+//{
+//    return YES;
+//}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -176,7 +183,7 @@
     {
         if (indexPath.row == 0)
         {
-            return 249;
+            return 269;
         }
         else
         {
