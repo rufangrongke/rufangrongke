@@ -11,6 +11,7 @@
 #import "WXZChectObject.h"
 #import "WXZiMuTableObject.h"
 #import <SVProgressHUD.h>
+#import <MJExtension.h>
 #import "WXZPersonalCityCell.h"
 #import "WXZCitySectionHeader.h"
 
@@ -112,6 +113,7 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 加载城市列表
     [self cityListRequest];
+    [self setupRefresh];
     
     // 设置字幕的圆角
     self.largeIndexZimu.layer.cornerRadius = 6;
@@ -155,6 +157,8 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
          {
              [SVProgressHUD showErrorWithStatus:@"暂无数据"];
          }
+         // 结束刷新
+         [self.myTableView.header endRefreshing];
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
          [SVProgressHUD showErrorWithStatus:@"请求失败"];
@@ -177,18 +181,41 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
          if ([responseObject[@"ok"] integerValue] == 1)
          {
              NSLog(@"%@",responseObject[@"msg"]);
-             // 发送通知
+             // 发送通知更新个人资料
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+             [self reloadCityRegionList]; // 更新区域方法
              [self.navigationController popViewControllerAnimated:YES];
+             [SVProgressHUD dismiss];
          }
          else
          {
-             NSLog(@"%@",responseObject[@"msg"]);
+             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
          }
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
-         
+         [SVProgressHUD showErrorWithStatus:@"请求失败"];
      }];
+}
+
+#pragma - mark 刷新、加载
+/**
+ * 添加刷新控件
+ */
+- (void)setupRefresh
+{
+    self.myTableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshKeHuInfo)];
+}
+- (void)refreshKeHuInfo
+{
+    [self.citysArr removeAllObjects]; // 总体数据
+    self.ziMuAllKeys = @[]; // tableview上显示的索引
+    self.indexZimuAllKeys = @[]; // 索引条显示的索引
+    
+    [self.sourceDic removeAllObjects]; // 存储城市和城市对应id
+    [self.allCitysDic removeAllObjects];
+    // 刷新
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
+    [self cityListRequest]; // 加载城市列表
 }
 
 #pragma mark - UITableViewDataSource/UITableViewDelegate

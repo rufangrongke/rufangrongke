@@ -9,6 +9,7 @@
 #import "WXZPersonalInfoVC.h"
 #import "AFNetworking.h"
 #import "WXZChectObject.h"
+#import "WXZStringObject.h"
 #import <SVProgressHUD.h>
 #import "WXZLoginController.h"
 #import "WXZNavController.h"
@@ -166,7 +167,7 @@ static NSString *sex = @"先生"; // 记录性别
     // 判断是哪个controller，并进行相应请求
     if ([self.whichController isEqualToString:@"ModifyPersonalName"])
     {
-        if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text withTipInfo:@"请输入姓名"] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text withTipInfo:@"请输入4个字符内的名字"] )
+        if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text withTipInfo:@"请输入姓名"] && [WXZStringObject judgmentIsCharacters:self.nameTextField.text withTipInfo:@"请输入4个字符内的汉字"] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text withTipInfo:@"请输入4个字符内的汉字"] )
         {
             // 显示菊花
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];

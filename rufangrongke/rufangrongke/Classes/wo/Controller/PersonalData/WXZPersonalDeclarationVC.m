@@ -32,8 +32,9 @@
     
     self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 300); // 设置scrollView的contentSize
     // 赋值，遵循协议
-    self.declarationTextView.text = self.declarationContent;
+    self.declarationTextView.text = self.declarationContent; // 显示原有内容
     self.declarationTextView.delegate = self;
+    self.declarationWordPromptLabel.text = [NSString stringWithFormat:@"%lu/30",(unsigned long)self.declarationContent.length]; // 显示原有字数
 }
 
 // 提交服务宣言
