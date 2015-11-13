@@ -70,9 +70,15 @@ static NSString *quYuListViewCellID = @"quyuCell";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WXZquYuListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"quyuCell"];
-    cell.qus = self.quYuListViewCellModel.qus[indexPath.row];
-    return cell;
+    if (indexPath.row == 0) {
+        WXZquYuListViewCell *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZquYuListViewCell class]) owner:nil options:nil].lastObject;
+        cell.cityLabel.text = @"全部区域";
+        return cell;
+    }else{
+        WXZquYuListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"quyuCell"];
+        cell.qus = self.quYuListViewCellModel.qus[indexPath.row - 1];
+        return cell;
+    }
 }
 #pragma UITableViewDelegate
 
@@ -81,7 +87,12 @@ static NSString *quYuListViewCellID = @"quyuCell";
 //    inp = 1;
     WXZquYuListViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.chooseImage.hidden = NO;
-    [self.delegate quYuListViewControllerDelegate:[self.quYuListViewCellModel.qus[indexPath.row] q]];
+    if (indexPath.row == 0) {
+        [self.delegate quYuListViewControllerDelegate:@""];
+    }else{
+        [self.delegate quYuListViewControllerDelegate:[self.quYuListViewCellModel.qus[indexPath.row - 1] q]];
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath

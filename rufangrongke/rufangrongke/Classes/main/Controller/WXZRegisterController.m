@@ -10,6 +10,7 @@
 #import "JxbScaleButton.h"
 #import "AFNetworking.h"
 #import <SVProgressHUD.h>
+#import "WXZChectObject.h"
 
 @interface WXZRegisterController ()
 @property (weak, nonatomic) IBOutlet UITextField *name;
@@ -24,30 +25,24 @@
 @implementation WXZRegisterController
 
 - (IBAction)huoquyanzhengma:(id)sender {
-    // 0.请求路径
-    // 基本URL
-    NSString *baseURL = OutNetBaseURL;
-    NSString *urlString = [baseURL stringByAppendingString:yanzhengma];
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    // URL
-    NSURL *url = [NSURL URLWithString:urlString];
+    if (![WXZChectObject checkPhone2:self.phoneNumber.text withTipInfo:@"请输入正确手机号"])
+    {return;}
     
-    // 1.创建请求对象
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    NSString *parameter = [NSString stringWithFormat:@"Act=Reg&Mobile=%@",self.phoneNumber.text];
-    request.HTTPBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
-    
+    // 蒙版
+    [SVProgressHUD show];
+    // 请求路径
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:yanzhengma];
     // AFNetworking
     NSMutableDictionary *parameterS = [NSMutableDictionary dictionary];
     parameterS[@"Act"] = @"Reg";
     parameterS[@"Mobile"] = self.phoneNumber.text;
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameterS success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dic = (NSDictionary *)responseObject;
-        WXZLog(@"%@", responseObject);
+        //        WXZLog(@"%@",responseObject);
         if ([dic[@"msg"] isEqualToString:@"发送成功"]) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 [self countdownWithTimeOut:dic[@"timeout"]];
+                [SVProgressHUD showSuccessWithStatus:@"验证码已发送,请稍等..."];
             }];
             
         }else{
@@ -57,8 +52,6 @@
         //        WXZLog(@"%@", error);
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
     }];
-    
-
     
 }
 // 取消键盘
@@ -76,35 +69,43 @@
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.title = @"注册";
     
-    // 隐藏导航栏
-    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (IBAction)register:(id)sender {
-    // 0.请求路径
-    // 基本URL
-    NSString *baseURL = OutNetBaseURL;
-    NSString *urlString = [baseURL stringByAppendingString:zhuce];
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    // URL
-    NSURL *url = [NSURL URLWithString:urlString];
-    
+    if (self.verificationCode.text.length != 6) {
+        [SVProgressHUD showErrorWithStatus:@"请输入6位验证码"];
+        return;
+    }
+    // 蒙版
+    [SVProgressHUD show];
     // 1.创建请求对象
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    NSString *parameter = [NSString stringWithFormat:@"xm=%@&mob=%@&yzm=%@&pas=%@&mobtj=%@",self.name.text, self.phoneNumber.text, self.verificationCode.text, self.password.text, self.yaoqingren.text];
-    request.HTTPBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:zhaohuimima];
     
-    
-    // 2.发送请求
-    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        // 3.解析服务器返回的数据（解析成字符串）
-        //            WXZLog(@"%@", data);
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        // 获取用户信息
-        //            WXZLog(@"Act=GetPass");
-        WXZLog(@"%@", dic);
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"xm"] = self.name.text;
+    parameters[@"mob"] = self.phoneNumber.text;
+    parameters[@"pas"] = self.password.text;
+    parameters[@"yzm"] = self.verificationCode.text;
+    parameters[@"mobtj"] = self.yaoqingren.text;
+    // afnetworking
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *loginContentDic = (NSDictionary *)responseObject;
+        WXZLog(@"%@", responseObject);
+        if ([loginContentDic[@"ok"] isEqualToNumber:@(0)]) {
+            [SVProgressHUD showErrorWithStatus:@"注册失败" maskType:SVProgressHUDMaskTypeBlack];
+        }else{
+            [SVProgressHUD showSuccessWithStatus:@"注册成功" maskType:SVProgressHUDMaskTypeBlack];
+            [self.yaoqingren resignFirstResponder];
+            [self.phoneNumber resignFirstResponder];
+            [self.verificationCode resignFirstResponder];
+            [self.name resignFirstResponder];
+            [self.password resignFirstResponder];
+        }
         
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [SVProgressHUD showErrorWithStatus:@"登陆超时,请重新登陆." maskType:SVProgressHUDMaskTypeBlack];
+        }];
     }];
 
 }
