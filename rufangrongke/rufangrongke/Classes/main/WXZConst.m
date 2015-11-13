@@ -2,12 +2,12 @@
 #import <Foundation/Foundation.h>
 
 // picBaseULR
-//NSString * const picBaseULR = @"http://xfapp.ru9911.com";
-NSString * const picBaseULR = @"http://192.168.1.21";
+NSString * const picBaseULR = @"http://xfapp.ru9911.com";
+//NSString * const picBaseULR = @"http://192.168.1.21";
 
 // 0.基础URL
-//NSString * const OutNetBaseURL = @"http://xfapp.ru9911.com/Svs/";
-NSString * const OutNetBaseURL = @"http://192.168.1.21/Svs/";
+NSString * const OutNetBaseURL = @"http://xfapp.ru9911.com/Svs/";
+//NSString * const OutNetBaseURL = @"http://192.168.1.21/Svs/";
 
 // 1.城市列表
 NSString * const chengshileibiao = @"allcity.ashx";
@@ -104,3 +104,4 @@ NSString * const password = @"password";
 
 // 用户信息沙河存储路径userinfo.plist
 NSString * const userinfoFile = @"userinfo.plist";
+NSString * const cityListInfoFile = @"userinfo.plist";

@@ -22,11 +22,17 @@
 @property (weak, nonatomic) IBOutlet UIButton *showHideCode_Button;
 @property (weak, nonatomic) IBOutlet UIButton *remenberPasswordBtn;
 @property (weak, nonatomic) IBOutlet UIButton *autoLoginBtn;
-
+/* default */
+@property (nonatomic , strong) NSUserDefaults *defaults;
 @end
 
 @implementation WXZLoginController
-
+- (NSUserDefaults *)defaults{
+    if (_defaults == nil) {
+        _defaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _defaults;
+}
 // 隐藏或者显示密码
 - (IBAction)showHideCode:(UIButton *)sender {
     // 隐藏或者显示密码
@@ -42,7 +48,23 @@
 }
 #pragma 记住密码
 - (IBAction)remenberPassword:(UIButton *)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    // 写入上次的状态
+    WXZLog(@"%zd", [defaults boolForKey:@"remenberPasswordBtnStatus"]);
+    WXZLog(@"phoneNumber:%@, password%@", [defaults stringForKey:@"phoneNumber"], [defaults stringForKey:@"password"]);
+    sender.selected = [defaults boolForKey:@"remenberPasswordBtnStatus"];
+    if (!sender.selected) {
+        self.usernameField.text = [defaults stringForKey:@"phoneNumber"] ? [defaults stringForKey:@"phoneNumber"] : self.usernameField.text;
+        self.pwdField.text = [defaults stringForKey:@"password"] ? [defaults stringForKey:@"phoneNumber"] : self.pwdField.text;
+    }else{
+//        self.usernameField.text = @"";
+//        self.pwdField.text = @"";
+    }
     sender.selected = !sender.selected;
+    
+    // 记住选中状态
+    [defaults setBool:sender.selected forKey:@"remenberPasswordBtnStatus"];
+    WXZLog(@"%zd", [defaults boolForKey:@"remenberPasswordBtnStatus"]);
     if (self.remenberPasswordBtn.selected == NO) { // 取消记住密码
         // 取消自动登录
         [self.autoLoginBtn setSelected:NO];
@@ -50,6 +72,13 @@
 }
 #pragma 自动登录
 - (IBAction)autoLogin:(UIButton *)sender {
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    
+//    if (sender.selected) {
+//        self.pwdField.text = @"";
+//    }else{
+//        self.pwdField.text = [defaults stringForKey:@"password"];
+//    }
     sender.selected = !sender.selected;
     if (self.autoLoginBtn.selected == YES) { // 取消记住密码
         // 取消自动登录
@@ -58,29 +87,25 @@
 }
 
 - (IBAction)login:(id)sender {
-    
-    // 检测用户号码
-    NSString *username = @"18311281581";
-//    NSString *username = self.usernameField.text;
-    //    if (username.length == 0) {
-    //        [SVProgressHUD showErrorWithStatus:self.usernameField.placeholder];
-    //        return;
-    //    }
-
-//    if (![WXZChectObject checkPhone2:self.usernameField.text withTipInfo:@"手机号格式不正确"])
-//        return;
-    // 号码符合规范
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:username forKey:@"phoneNumber"];
+    // [defaults stringForKey:@"phoneNumber"] ? [defaults stringForKey:@"phoneNumber"] :
+    // 用户名手机号
+    NSString *usePhone = self.usernameField.text;
+    // 检测用户号码
+        if (usePhone.length == 0) {
+            [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
+            return;
+        }
+    if (![WXZChectObject checkPhone2:usePhone withTipInfo:@"手机号格式不正确"]){
+        return;
+    }
     
     // 检测密码
-//    NSString *pwd = self.pwdField.text;
-    NSString *pwd = @"123456";
-    [defaults setObject:pwd forKey:@"password"];
-//    if (pwd.length == 0) {
-//        [SVProgressHUD showErrorWithStatus:self.pwdField.placeholder];
-//        return;
-//    }
+    NSString *pwd = self.pwdField.text;
+    if (pwd.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+        return;
+    }
     
     // 显示HUD
     [SVProgressHUD showWithStatus:@"登录中..." maskType:SVProgressHUDMaskTypeBlack];
@@ -88,15 +113,9 @@
     
     // 1.创建请求对象
     NSString *urlString = [OutNetBaseURL stringByAppendingString:denglu];
-    
-    
-    // 18833198077   18311281581   17701261104 18310532603
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"mob"] = @"18311281581";
-    parameters[@"pas"] = @"123456";
-    // 17701261104
-//    parameters[@"mob"] = @"17701261104"; // 18833198078
-//    parameters[@"pas"] = @"123456";
+    parameters[@"mob"] = usePhone;
+    parameters[@"pas"] = pwd;
     // afn
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;
@@ -105,9 +124,15 @@
         // 获取用户信息
         NSDictionary *userinfo = loginContentDic[@"u"];
 //        WXZLog(@"%@",loginContentDic[@"u"]);
-        // 讲用户信息写入字典
-        [userinfo writeToFile:userinfoPath atomically:YES];
-        
+        if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
+            // 将用户信息写入字典
+            [userinfo writeToFile:userinfoPath atomically:YES];
+            // 存储用户名,存储密码
+            if ([defaults boolForKey:@"remenberPasswordBtnStatus"]) {
+                [defaults setObject:usePhone forKey:@"phoneNumber"];
+                [defaults setObject:pwd forKey:@"password"];
+            }
+        }
         // 4.回到主线程
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
@@ -152,14 +177,18 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.remenberPasswordBtn.selected = [self.defaults boolForKey:@"remenberPasswordBtnStatus"];
+    if (self.remenberPasswordBtn.selected) {
+        self.usernameField.text = [self.defaults stringForKey:@"phoneNumber"];
+        self.pwdField.text = [self.defaults stringForKey:@"password"];
+    }    
 //    self.usernameField.delegate = self;
 //    WXZLog(@"self.view.height-%f, textField.y-%f, textField.height-%f", self.view.frame.size.height, self.usernameField.frame.origin.y, self.usernameField.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 #pragma 找回密码
 - (IBAction)findPassWord:(id)sender {

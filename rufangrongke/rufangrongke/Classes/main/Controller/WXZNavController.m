@@ -51,7 +51,7 @@
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         //        [button sizeToFit];
         // 让按钮的内容往左边偏移10
-        button.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+        button.contentEdgeInsets = UIEdgeInsetsMake(0, -3, 0, 0);
 //        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];

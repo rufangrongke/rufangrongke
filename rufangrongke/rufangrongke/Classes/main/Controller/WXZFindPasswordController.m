@@ -10,6 +10,7 @@
 #import "JxbScaleButton.h"
 #import <SVProgressHUD.h>
 #import "AFNetworking.h"
+#import "WXZChectObject.h"
 
 @interface WXZFindPasswordController ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumber;
@@ -22,7 +23,11 @@
 @implementation WXZFindPasswordController
 // 获取验证码
 - (IBAction)getVerificationCode:(id)sender {
+    if (![WXZChectObject checkPhone2:self.phoneNumber.text withTipInfo:@"请输入正确手机号"])
+    {return;}
     
+    // 蒙版
+    [SVProgressHUD show];
     // 请求路径
     NSString *urlString = [OutNetBaseURL stringByAppendingString:yanzhengma];
     // AFNetworking
@@ -31,10 +36,11 @@
     parameterS[@"Mobile"] = self.phoneNumber.text;
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameterS success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dic = (NSDictionary *)responseObject;
-        WXZLog(@"%@",responseObject);
+//        WXZLog(@"%@",responseObject);
         if ([dic[@"msg"] isEqualToString:@"发送成功"]) {
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                 [self countdownWithTimeOut:dic[@"timeout"]];
+                [SVProgressHUD showSuccessWithStatus:@"验证码已发送,请稍等..."];
             }];
             
         }else{
@@ -48,30 +54,51 @@
 }
 // 点击确定,找回密码
 - (IBAction)findPassword:(id)sender {
-    // 0.请求路径
-    // 基本URL
-    NSString *baseURL = OutNetBaseURL;
-    NSString *urlString = [baseURL stringByAppendingString:zhaohuimima];
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    // URL
-    NSURL *url = [NSURL URLWithString:urlString];
-    
+    if (self.verificationCode.text.length != 6) {
+        [SVProgressHUD showErrorWithStatus:@"请输入6位验证码"];
+        return;
+    }
+    // 蒙版
+    [SVProgressHUD show];
     // 1.创建请求对象
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    NSString *parameter = [NSString stringWithFormat:@"mob=%@&pas=%@&yzm=%@",self.phoneNumber.text, self.resetPassword.text, self.verificationCode.text];
-    request.HTTPBody = [parameter dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:zhaohuimima];
     
-    
-    // 2.发送请求
-    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            // 3.解析服务器返回的数据（解析成字符串）
-//            WXZLog(@"%@", data);
-            NSDictionary *loginContentDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-            // 获取用户信息
-//            WXZLog(@"Act=GetPass");
-            WXZLog(@"%@", loginContentDic);
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"mob"] = self.phoneNumber.text;
+    parameters[@"pas"] = self.resetPassword.text;
+    parameters[@"yzm"] = self.verificationCode.text;
+    // afnetworking
+    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *loginContentDic = (NSDictionary *)responseObject;
+        WXZLog(@"%@", responseObject);
+        if ([loginContentDic[@"ok"] isEqualToNumber:@(0)]) {
+            [SVProgressHUD showErrorWithStatus:@"修改失败" maskType:SVProgressHUDMaskTypeBlack];
+        }else{
+            [SVProgressHUD showSuccessWithStatus:@"修改成功" maskType:SVProgressHUDMaskTypeBlack];
+            [self.resetPassword resignFirstResponder];
+            [self.phoneNumber resignFirstResponder];
+            [self.verificationCode resignFirstResponder];
+        }
         
+//        // 4.回到主线程
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
+//                // 隐藏HUD
+//                [SVProgressHUD dismiss];
+//                
+//                // 添加tabBarcontroller
+//                WXZTabBarController *tabBarController = [[WXZTabBarController alloc]init];
+//                [[[[UIApplication sharedApplication] delegate] window] setRootViewController:tabBarController];
+//                
+//            }else{ //登陆失败
+//                [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];
+//            }
+//            
+//        }];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [SVProgressHUD showErrorWithStatus:@"登陆超时,请重新登陆." maskType:SVProgressHUDMaskTypeBlack];
+        }];
     }];
 
 }
