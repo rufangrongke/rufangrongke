@@ -260,7 +260,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         if (self.isModifyCustomerInfo && (![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailModel.QuYu]] || ![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailModel.Hx]] || ![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailModel.JiaGeS]] || ![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailModel.JiaGeE]]))
             [self showTheOriginalInfo]; //
         else
-            self.yixiangLabel.text = @"购买意向";
+            self.yixiangLabel.text = @"购房意向";
             
         return headerView;
     }
@@ -296,7 +296,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         }
         else
         {
-            return 257;
+            return 259;
         }
     }
 }
@@ -348,11 +348,17 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     {
         row = count / limit + 1; // 行数
     }
-    return row * 19 + (row - 1) * 10 + 18 + 16; // 返回行高
+    NSInteger sumHeight = row * 22 + (row - 1) * 15 + 18 + 18 + 10; // (控件高度＋控件之间的间距＋标题的高＋标题距上边的高)
+    
+    return sumHeight; // 返回行高
 }
 
 - (void)sexSelectAction:(UIButton *)sender
 {
+    [self.nameTextField resignFirstResponder];
+    [self.phoneNumTextField resignFirstResponder];
+    [self.pricefTextField resignFirstResponder];
+    [self.priceeTextField resignFirstResponder];
     if (sender.tag == 100018)
     {
         [self.menBtn setImage:[UIImage imageNamed:@"kh_nvbzhu"] forState:UIControlStateNormal];
@@ -471,16 +477,22 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     // 添加客户请求
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
-    if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text withTipInfo:@"请输入姓名"] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text withTipInfo:@"请输入4个字符内的姓名"] && ![WXZChectObject checkWhetherStringIsEmpty:sex withTipInfo:@"请选择性别"] && ![WXZChectObject checkWhetherStringIsEmpty:self.phoneNumTextField.text withTipInfo:@"请输入手机号"] && [WXZChectObject checkPhone2:self.phoneNumTextField.text withTipInfo:@"手机号格式不正确"])
+    if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text withTipInfo:@"请输入姓名"] && [WXZStringObject judgmentIsCharacterOrCharacters:self.nameTextField.text withTipInfo:@"姓名中不能包含特殊字符"] && ![WXZChectObject checkWhetherStringIsEmpty:sex withTipInfo:@"请选择性别"] && ![WXZChectObject checkWhetherStringIsEmpty:self.phoneNumTextField.text withTipInfo:@"请输入手机号"] && [WXZChectObject checkPhone2:self.phoneNumTextField.text withTipInfo:@"手机号格式不正确"])
     {
+        NSString *gfyxStr = self.yixiangLabel.text;
+        if ([gfyxStr isEqualToString:@"购房意向"])
+        {
+            gfyxStr = @"";
+        }
+        
         if ([self.navigationItem.title isEqualToString:@"添加客户"])
         {
-            [self addCustomerRequest:@"" name:self.nameTextField.text sex:sex mobile:self.phoneNumTextField.text jiaGeS:self.pricefTextField.text jiaGeE:self.priceeTextField.text quYu:[WXZStringObject whetherStringContainsCharacter2:[self quyuMethod] character:@","] hx:[WXZStringObject whetherStringContainsCharacter2:[self huxingMethod] character:@","] yiXiang:self.yixiangLabel.text isModify:NO];
+            [self addCustomerRequest:@"" name:self.nameTextField.text sex:sex mobile:self.phoneNumTextField.text jiaGeS:self.pricefTextField.text jiaGeE:self.priceeTextField.text quYu:[WXZStringObject whetherStringContainsCharacter2:[self quyuMethod] character:@","] hx:[WXZStringObject whetherStringContainsCharacter2:[self huxingMethod] character:@","] yiXiang:gfyxStr isModify:NO];
         }
         else
         {
             // 修改客户信息
-            [self addCustomerRequest:self.detailModel.ID name:self.nameTextField.text sex:sex mobile:self.phoneNumTextField.text jiaGeS:self.pricefTextField.text jiaGeE:self.priceeTextField.text quYu:[WXZStringObject whetherStringContainsCharacter2:[self quyuMethod] character:@","] hx:[WXZStringObject whetherStringContainsCharacter2:[self huxingMethod] character:@","] yiXiang:self.yixiangLabel.text isModify:YES];
+            [self addCustomerRequest:self.detailModel.ID name:self.nameTextField.text sex:sex mobile:self.phoneNumTextField.text jiaGeS:self.pricefTextField.text jiaGeE:self.priceeTextField.text quYu:[WXZStringObject whetherStringContainsCharacter2:[self quyuMethod] character:@","] hx:[WXZStringObject whetherStringContainsCharacter2:[self huxingMethod] character:@","] yiXiang:gfyxStr isModify:YES];
         }
     }
 }
@@ -490,7 +502,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
 {
     if ([WXZChectObject checkWhetherStringIsEmpty:[self quyuMethod]] && [WXZChectObject checkWhetherStringIsEmpty:[self huxingMethod]] && [WXZChectObject checkWhetherStringIsEmpty:[self yixiangMethod]])
     {
-        self.yixiangLabel.text = @"购买意向";
+        self.yixiangLabel.text = @"购房意向";
     }
     else
     {

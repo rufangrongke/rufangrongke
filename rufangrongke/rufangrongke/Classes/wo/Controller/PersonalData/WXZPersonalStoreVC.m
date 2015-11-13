@@ -69,6 +69,7 @@
 // 提交审核按钮事件
 - (IBAction)submitAuditAction:(id)sender
 {
+    [self.storeNameTextField resignFirstResponder];
     NSData *imgData = [[NSUserDefaults standardUserDefaults] objectForKey:@"companyImg"]; // 获取缓存图片
     if (imgData == nil)
     {

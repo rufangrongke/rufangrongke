@@ -71,7 +71,6 @@
             NSDictionary *userinfo = loginContentDic[@"u"];
             // 将用户信息写入字典
             [userinfo writeToFile:userinfoPath atomically:YES];
-//            WXZLog(@"%@",userinfo);
             
             message(userinfo);
         }

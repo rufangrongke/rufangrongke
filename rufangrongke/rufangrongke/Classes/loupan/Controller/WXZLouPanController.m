@@ -64,6 +64,7 @@ static NSInteger inp = 1;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZTableViewCell class]) bundle:nil] forCellReuseIdentifier:WXZLoupanCellID];
     // cell高度
     self.tableView.rowHeight = 100;
+    
     // 给tableview添加点击 为了取消键盘
 //    [self.tableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTableView:)]];
 }

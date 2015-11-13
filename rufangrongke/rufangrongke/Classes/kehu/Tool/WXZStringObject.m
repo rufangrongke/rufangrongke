@@ -140,4 +140,32 @@
     return newArr;
 }
 
+// 判断输入的是否为汉字或英文字母
++ (BOOL)judgmentIsCharacterOrCharacters:(NSString *)str withTipInfo:(NSString *)tip
+{
+    NSString *regex = @"^[\u4e00-\u9fa5a-zA-Z]+$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL isMatch = [pred evaluateWithObject:str];
+    if (isMatch)
+    {
+        return YES;
+    }
+    [SVProgressHUD showErrorWithStatus:tip maskType:SVProgressHUDMaskTypeBlack];
+    return NO;
+}
+
+// 判断输入的是否为汉字
++ (BOOL)judgmentIsCharacters:(NSString *)str withTipInfo:(NSString *)tip
+{
+    NSString *regex = @"^[\u4e00-\u9fa5]+$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL isMatch = [pred evaluateWithObject:str];
+    if (isMatch)
+    {
+        return YES;
+    }
+    [SVProgressHUD showErrorWithStatus:tip maskType:SVProgressHUDMaskTypeBlack];
+    return NO;
+}
+
 @end

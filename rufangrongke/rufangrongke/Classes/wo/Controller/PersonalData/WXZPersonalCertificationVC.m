@@ -58,7 +58,7 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"wo_complete" highImage:@"hehe.png" title:@"" target:self action:@selector(completeAction:) isEnable:YES];
     
     // 已认证则不显示按钮，所有东西不可修改；有身份证号但是为False，则为审核中
-    if (![self.woInfoModel.IsShiMing isEqualToString:@"True"])
+    if ([self.woInfoModel.IsShiMing isEqualToString:@"True"])
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"hehe.png" highImage:@"hehe.png" title:@"" target:self action:@selector(completeAction:) isEnable:NO];
         

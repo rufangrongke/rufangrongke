@@ -29,4 +29,8 @@
 
 + (NSArray *)traversalReturnsString:(NSArray *)arr1 allArr:(NSArray *)arr2; // 遍历并返回数组
 
++ (BOOL)judgmentIsCharacterOrCharacters:(NSString *)str withTipInfo:(NSString *)tip; // 判断输入的是否为汉字或英文字母
+
++ (BOOL)judgmentIsCharacters:(NSString *)str withTipInfo:(NSString *)tip; // 判断输入的是否为汉字
+
 @end

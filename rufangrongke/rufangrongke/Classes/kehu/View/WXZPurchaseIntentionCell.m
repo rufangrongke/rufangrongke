@@ -76,12 +76,17 @@
     if ([UIScreen mainScreen].bounds.size.width == 320)
     {
         limit = 4; // 每行显示的个数
-        spacing = 33; // 间距
+        spacing = 23; // 间距
+    }
+    else if (WXZ_ScreenWidth == 414)
+    {
+        limit = 5; // 每行显示的个数
+        spacing = 26.5; // 间距
     }
     else
     {
         limit = 5; // 每行显示的个数
-        spacing = 25; // 间距
+        spacing = 17; // 间距
     }
     NSInteger count = houseArr.count % limit; // 取余数
     NSInteger hang = 1; // 行数
@@ -117,11 +122,11 @@
         for (int j =0 ; j < lie; j++)
         {
             self.typeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.typeBtn.frame = CGRectMake(11+spacing*j+50*j, self.typeLabel.x+self.typeLabel.height+10+10*i+19*i, 50, 19);
+            self.typeBtn.frame = CGRectMake(11+spacing*j+55*j, self.typeLabel.x+self.typeLabel.height+15+10*i+19*i, 65, 22);
             self.typeBtn.tag = btnTag + (i*limit+j); // 设置tag值
             [self.typeBtn setTitle:houseArr[i*limit+j][@"q"] forState:UIControlStateNormal];
             [self.typeBtn setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
-            self.typeBtn.titleLabel.font = WXZ_SystemFont(10);
+            self.typeBtn.titleLabel.font = WXZ_SystemFont(12);
             self.typeBtn.backgroundColor = [UIColor lightGrayColor];
             [self.typeBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:self.typeBtn];

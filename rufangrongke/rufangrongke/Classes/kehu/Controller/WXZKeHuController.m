@@ -91,16 +91,8 @@ static NSString *searchStr; // 记录搜索条件
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_shaixuan" highImage:@"kh_shaixuan" target:self action:@selector(quDu_click)];
     // 右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
+    
     // 添加一个系统的搜索框
-//    _searchTextField = [[UITextField alloc] init];
-//    _searchTextField.frame = CGRectMake(80, 0, WXZ_ScreenWidth-80-60, 25);
-//    _searchTextField.borderStyle = UITextBorderStyleRoundedRect;
-//    _searchTextField.placeholder = @"请输入客户姓名";
-//    _searchT extField.font = WXZ_SystemFont(14);
-//    _searchTextField.delegate = self;
-//    self.navigationItem.titleView = _searchTextField;
-    
-    
     _searchBar = [[UISearchBar alloc] init];
     _searchBar.backgroundColor = [UIColor clearColor];
     _searchBar.backgroundImage = [UIImage imageNamed:@""];
@@ -363,18 +355,6 @@ static NSString *searchStr; // 记录搜索条件
     [self queDing_click]; //
 }
 
-#pragma mark - UITextFieldDelegate
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
 #pragma - mark 刷新、加载
 /**
  * 添加刷新控件
@@ -441,8 +421,8 @@ static NSString *searchStr; // 记录搜索条件
     }
     else
     {
-        self.mengCengView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight-64)];
-        self.mengCengView.backgroundColor = [UIColor lightTextColor];
+        self.mengCengView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.contentOffset.y, WXZ_ScreenWidth, WXZ_ScreenHeight-64)];
+        self.mengCengView.backgroundColor = [UIColor colorWithRed:15/255 green:15/255 blue:15/255 alpha:0.5];
         [self.view addSubview:self.mengCengView];
         
         // 动画
@@ -452,7 +432,7 @@ static NSString *searchStr; // 记录搜索条件
         [UIView setAnimationDelay:0.1];
         // 显示视图
         _screeningView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZScreeningView class]) owner:self options:nil] lastObject];
-        _screeningView.frame = CGRectMake(10, self.tableView.contentOffset.y, 140, 185);
+        _screeningView.frame = CGRectMake(10, 0, 140, 185);
         _screeningView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"kh_screening"]];
         _screeningView.dataArr = self.shaixuanArr;
         _screeningView.backScreeningTypeDelegate = self;
