@@ -107,3 +107,4 @@ UIKIT_EXTERN NSString * const password;
 
 // 用户信息沙河存储路径userinfo.plist
 UIKIT_EXTERN NSString * const userinfoFile;
+UIKIT_EXTERN NSString * const cityListInfoFile;

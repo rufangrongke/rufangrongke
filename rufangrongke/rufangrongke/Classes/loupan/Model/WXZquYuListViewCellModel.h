@@ -17,6 +17,8 @@
 
 @property (nonatomic, assign) BOOL ok;
 
+@property (nonatomic, assign) NSInteger all;
+
 @end
 @interface Qus : NSObject
 

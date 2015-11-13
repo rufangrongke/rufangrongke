@@ -18,4 +18,5 @@ typedef void(^loginMessage)(id result);
 
 - (NSDictionary *)localUserInfo;
 
+- (void)reloadCityRegionList;
 @end

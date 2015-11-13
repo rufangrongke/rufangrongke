@@ -104,3 +104,4 @@ NSString * const password = @"password";
 
 // 用户信息沙河存储路径userinfo.plist
 NSString * const userinfoFile = @"userinfo.plist";
+NSString * const cityListInfoFile = @"userinfo.plist";

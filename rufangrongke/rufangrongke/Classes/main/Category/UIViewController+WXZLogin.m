@@ -92,4 +92,20 @@
     return [NSDictionary dictionaryWithContentsOfFile:userinfoPath];
 }
 
+- (void)reloadCityRegionList{
+    NSString *url = [OutNetBaseURL stringByAppendingString:quyuliebiao];
+    [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        WXZLog(@"%@", responseObject);
+        NSDictionary *cityListDic = (NSDictionary *)responseObject;
+        // 获取沙河路径
+        NSString *cityListInfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:cityListInfoFile];
+        // 将用户信息写入字典
+        [cityListDic writeToFile:cityListInfoPath atomically:YES];
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        WXZLog(@"%@", error);
+        // 显示失败信息
+//        [SVProgressHUD showErrorWithStatus:@"加载信息失败!"];
+    }];
+}
 @end

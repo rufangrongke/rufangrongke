@@ -32,7 +32,10 @@
 @implementation WXZLouPanController
 
 static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
-static NSInteger listCount = 1;
+//static NSInteger listCount = 1;
+NSString *xiaoqu = @"";
+NSString *quyu = @"";
+NSInteger inp = 1;
 /* fysList懒加载 */
 - (NSMutableArray *)fysList
 {
@@ -44,6 +47,7 @@ static NSInteger listCount = 1;
 #pragma WXZquYuListViewControllerDelegate
 - (void)quYuListViewControllerDelegate:(NSString *)parameter
 {
+    inp = 1;
     [self queDing_click:parameter];
 }
 #pragma 初始化项目
@@ -64,6 +68,7 @@ static NSInteger listCount = 1;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZTableViewCell class]) bundle:nil] forCellReuseIdentifier:WXZLoupanCellID];
     // cell高度
     self.tableView.rowHeight = 100;
+    
     // 给tableview添加点击 为了取消键盘
 //    [self.tableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTableView:)]];
 }
@@ -78,7 +83,6 @@ static NSInteger listCount = 1;
 - (void)queDing_click:(NSString *)parameter
 {
     // 隐藏蒙版
-//    [];
     // 隐藏WXZquYuListViewController.view
     self.quYuListViewVC.view.hidden = YES;
     // 取消键盘
@@ -89,10 +93,19 @@ static NSInteger listCount = 1;
         return;
     }
     [SVProgressHUD show];
+    inp = 1;
+    if ([parameter  isEqual: @"全部区域"]) {
+        quyu = @"";
+    }else{
+        quyu = parameter;
+    }
+    xiaoqu = self.search.text;
     // 发送请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"xiaoqu"] = parameter ? parameter : self.search.text;
+    params[@"xiaoqu"] = xiaoqu;
+    params[@"qu"] = quyu;
+    params[@"inp"] = @(inp);
     [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         // 转模型,存储模型
         WXZLog(@"%@", responseObject);
@@ -154,12 +167,14 @@ static NSInteger listCount = 1;
 }
 - (void)loadNewUsers
 {
-    // 清空搜索栏
-    self.search.text = @"";
+    inp = 1;
+    
     // 发送请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"inp"] = @(1);
+    params[@"inp"] = @(inp);
+    params[@"qu"] = quyu;
+    params[@"xiaoqu"] = xiaoqu;
     [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         // 转模型,存储模型
         self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
@@ -179,10 +194,13 @@ static NSInteger listCount = 1;
 - (void)loadMoreUsers
 {
     if (self.fysList.count < self.loupanModel.rowcount) {
+        inp++;
         // 发送请求
         NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        params[@"inp"] = @(++listCount);
+        params[@"inp"] = @(inp);
+        params[@"qu"] = quyu;
+        params[@"xiaoqu"] = xiaoqu;
         [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
             // 转模型,存储模型
             WXZLouPan *loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
@@ -217,8 +235,12 @@ static NSInteger listCount = 1;
     // 发送请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"inp"] = @(listCount);
+    params[@"inp"] = @(inp);
+    params[@"xiaoqu"] = xiaoqu;
+    params[@"qu"] = quyu;
+    WXZLog(@"%zd, %@, %@", inp, xiaoqu,quyu);
     [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        WXZLog(@"%@", responseObject);
         // 隐藏指示器
         [SVProgressHUD dismiss];
         // 转模型,存储模型

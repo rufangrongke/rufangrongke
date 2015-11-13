@@ -105,7 +105,7 @@
         // 获取用户信息
         NSDictionary *userinfo = loginContentDic[@"u"];
 //        WXZLog(@"%@",loginContentDic[@"u"]);
-        // 讲用户信息写入字典
+        // 将用户信息写入字典
         [userinfo writeToFile:userinfoPath atomically:YES];
         
         // 4.回到主线程
