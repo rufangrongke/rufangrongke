@@ -181,7 +181,7 @@
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             [SVProgressHUD dismiss];
+             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
              // 发送通知
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
              [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面

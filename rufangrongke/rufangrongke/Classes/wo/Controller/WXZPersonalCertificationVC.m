@@ -207,8 +207,6 @@
     [param setObject:sfzid forKey:@"sfzid"]; // 身份证号码
     [param setObject:sfzPic forKey:@"sfzPic"]; // 身份证图片
     
-    
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     [manager POST:requestUrlStr parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
@@ -222,7 +220,7 @@
     {        
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            [SVProgressHUD dismiss];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
             // 发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
             [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
@@ -235,7 +233,6 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-//        [SVProgressHUD dismiss];
     }];
     
     // 上传
@@ -276,6 +273,11 @@
 {
     [self.nameTextField resignFirstResponder];
     [self.idCardTextField resignFirstResponder];
+}
+
+- (void)dealloc
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sfzimg"]; // 清除缓存
 }
 
 - (void)didReceiveMemoryWarning {

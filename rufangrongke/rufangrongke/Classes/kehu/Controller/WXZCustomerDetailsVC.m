@@ -81,7 +81,7 @@ static BOOL isRefreshDetail;
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            WXZLog(@"%@",responseObject);
+//            WXZLog(@"%@",responseObject);
             self.cdDic = responseObject[@"kehu"];
             self.keHuDetailModel = [WXZKeHuDetailModel objectWithKeyValues:self.cdDic];
             [self.myTableView reloadData];
@@ -249,7 +249,7 @@ static BOOL isRefreshDetail;
 - (void)sendSmsAction:(id)sender
 {
     //方法一
-    //    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"sms://13888888888"]];
+//        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"sms://13888888888"]];
     
     [self showMessageView:[NSArray arrayWithObjects:self.phoneNumTextField.text, nil] title:@"新信息" body:@""];
 }
@@ -270,7 +270,8 @@ static BOOL isRefreshDetail;
     }
     else
     {
-        NSLog(@"设备不支持");
+//        NSLog(@"设备不支持");
+        [SVProgressHUD showErrorWithStatus:@"此设备不支持发送短信"];
     }
 }
 
@@ -283,16 +284,19 @@ static BOOL isRefreshDetail;
         case MessageComposeResultSent:
         {
             NSLog(@"//信息传送成功");
+//            [SVProgressHUD showErrorWithStatus:@"发送成功"];
         }
             break;
         case MessageComposeResultFailed:
         {
             NSLog(@"//信息传送失败");
+            [SVProgressHUD showErrorWithStatus:@"信息传送失败"];
         }
             break;
         case MessageComposeResultCancelled:
         {
             NSLog(@"//信息被用户取消传送");
+            [SVProgressHUD showErrorWithStatus:@"取消发送"];
         }
             break;
             

@@ -203,11 +203,16 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     {
         if (indexPath.row == 3)
         {
-            WXZPriceCell *priceCell = [tableView dequeueReusableCellWithIdentifier:@"PriceCell"];
-            if (!priceCell)
+            WXZPriceCell *priceCell;
+            for (UIView *subView in priceCell.subviews)
             {
-                priceCell = [WXZPriceCell initPriceCell];
+                [subView removeFromSuperview];
             }
+//            WXZPriceCell *priceCell = [tableView dequeueReusableCellWithIdentifier:@"PriceCell"];
+//            if (!priceCell)
+//            {
+                priceCell = [WXZPriceCell initPriceCell];
+//            }
             
             [priceCell.noLimitBtn addTarget:self action:@selector(selectPriceAction:) forControlEvents:UIControlEventTouchUpInside];
             [priceCell.determineBtn addTarget:self action:@selector(determineAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -220,11 +225,17 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         }
         else
         {
-            WXZPurchaseIntentionCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"PurchaseIntentionCell"];
-            if (!pCell)
+            WXZPurchaseIntentionCell *pCell;
+            for (UIView *subView in pCell.subviews)
             {
-                pCell = [WXZPurchaseIntentionCell initPurchaseIntentionCell];
+                [subView removeFromSuperview];
             }
+            
+//            WXZPurchaseIntentionCell *pCell = [tableView dequeueReusableCellWithIdentifier:@"PurchaseIntentionCell"];
+//            if (!pCell)
+//            {
+                pCell = [WXZPurchaseIntentionCell initPurchaseIntentionCell];
+//            }
             
             [pCell showTypeName:indexPath.row];
             if (indexPath.row == 0)
@@ -375,7 +386,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
 
 - (void)typeSelectAction:(UIButton *)sender
 {
-    NSString *str = [NSString stringWithFormat:@"%d",(NSInteger)sender.tag];
+    NSString *str = [NSString stringWithFormat:@"%ld",(long)sender.tag];
     str = [str substringWithRange:NSMakeRange(0, str.length-1)];
     if ([str isEqualToString:@"100003"])
     {

@@ -31,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *determineBtn; // 确定按钮
 @end
 
+static BOOL isModifyCount; // 第几次请求
+
 @implementation WXZModifyPhoneVC
 
 - (void)viewDidLoad {
@@ -46,6 +48,7 @@
     self.xinPhoneTextField.delegate = self;
     self.erPhoneTextField.delegate = self;
     self.xinPCodeTextField.delegate = self;
+    isModifyCount = 1;
     
     // 赋值
     self.currentPhoneNumLabel.text = self.phone;
@@ -64,7 +67,7 @@
     self.determineBtn.frame = CGRectMake(17, 288, WXZ_ScreenWidth-17*2, 44);
 }
 
-// 修改手机号请求
+// 修改手机号请求1
 - (void)modifyRequestWithParameter1:(NSString *)parm1 parameter:(NSString *)parm2
 {
     NSString *url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao];
@@ -77,14 +80,10 @@
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             [SVProgressHUD dismiss]; // 取消菊花
-//             [SVProgressHUD showSuccessWithStatus:@""];
-//             // 跳转到登录页面（修改手机号）
-//             WXZLoginController *loginController = [[WXZLoginController alloc]init];
-//             WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
-//             [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
+             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]]; // 取消菊花
              
              self.xinPCodeView.hidden = NO; // 请求成功，显示输入新手机号输入框
+             isModifyCount = 2;
          }
          else
          {
@@ -93,7 +92,35 @@
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
          [SVProgressHUD showErrorWithStatus:@"请求失败"];
-//         [SVProgressHUD dismiss]; // 取消菊花
+     }];
+}
+
+// 修改手机号请求2
+- (void)modifyRequestWithParameter2:(NSString *)parm1 parameter:(NSString *)parm2
+{
+    NSString *url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao2];
+    
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param setObject:parm2 forKey:@"yzm"]; // 新手机号发送的验证码
+    [param setObject:parm1 forKey:@"mob"]; // 新手机号
+    
+    [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+     {
+         if ([responseObject[@"ok"] integerValue] == 1)
+         {
+             [SVProgressHUD showSuccessWithStatus:@"手机号修改成功"]; // 取消菊花
+              // 跳转到登录页面（修改手机号）
+              WXZLoginController *loginController = [[WXZLoginController alloc]init];
+              WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
+              [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
+         }
+         else
+         {
+             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+         }
+         
+     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+         [SVProgressHUD showErrorWithStatus:@"请求失败"];
      }];
 }
 
@@ -177,19 +204,30 @@
     [self.xinPhoneTextField resignFirstResponder];
     [self.erPhoneTextField resignFirstResponder];
     [self.xinPCodeTextField resignFirstResponder];
-    if (![WXZChectObject checkWhetherStringIsEmpty:self.codeTextField.text withTipInfo:@"验证码不能为空"] && ![WXZChectObject checkWhetherStringIsEmpty:self.xinPhoneTextField.text withTipInfo:@"请输入手机号"] && ![WXZChectObject checkWhetherStringIsEmpty:self.erPhoneTextField.text withTipInfo:@"请再次输入手机号"] && [WXZChectObject checkPhone2:self.xinPhoneTextField.text withTipInfo:@"手机号格式不正确"])
+    
+    if (isModifyCount == 1)
     {
-        if ([self.xinPhoneTextField.text isEqualToString:self.erPhoneTextField.text])
+        if (![WXZChectObject checkWhetherStringIsEmpty:self.codeTextField.text withTipInfo:@"验证码不能为空"] && ![WXZChectObject checkWhetherStringIsEmpty:self.xinPhoneTextField.text withTipInfo:@"请输入手机号"] && ![WXZChectObject checkWhetherStringIsEmpty:self.erPhoneTextField.text withTipInfo:@"请再次输入手机号"] && [WXZChectObject checkPhone2:self.xinPhoneTextField.text withTipInfo:@"手机号格式不正确"])
         {
-            // 显示菊花
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-            [self modifyRequestWithParameter1:self.codeTextField.text parameter:self.xinPhoneTextField.text];
-        }
-        else
-        {
-            [SVProgressHUD showErrorWithStatus:@"两次输入的手机号不一致，请重新输入"];
+            if ([self.xinPhoneTextField.text isEqualToString:self.erPhoneTextField.text])
+            {
+                // 显示菊花
+                [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+                [self modifyRequestWithParameter1:self.codeTextField.text parameter:self.xinPhoneTextField.text];
+            }
+            else
+            {
+                [SVProgressHUD showErrorWithStatus:@"两次输入的手机号不一致，请重新输入"];
+            }
         }
     }
+    else if (isModifyCount == 2)
+    {
+        // 显示菊花
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+        [self modifyRequestWithParameter2:self.xinPhoneTextField.text parameter:self.xinPCodeTextField.text];
+    }
+    
 }
 
 #pragma mark - UITextFieldDelegate

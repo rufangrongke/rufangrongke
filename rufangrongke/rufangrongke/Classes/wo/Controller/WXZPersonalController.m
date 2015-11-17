@@ -345,8 +345,9 @@ static BOOL isRefreshWo;
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
             // 刷新界面
-            [self personalDataRequest:NO]; // 个人资料数据请求
+            [self personalDataRequest:YES]; // 个人资料数据请求
         }
         else
         {
@@ -385,12 +386,12 @@ static BOOL isRefreshWo;
     else if (WXZ_ScreenWidth == 414)
     {
         _workingTimeView.timePickerView.monthWidth = 130.f;
-        _workingTimeView.timePickerView.yearWidth = 109.f;
+        _workingTimeView.timePickerView.yearWidth = 81.f;
     }
     else
     {
         _workingTimeView.timePickerView.monthWidth = 138.f;
-        _workingTimeView.timePickerView.yearWidth = 81.f;
+        _workingTimeView.timePickerView.yearWidth = 71.f;
     }
     
     // 添加事件
@@ -455,9 +456,9 @@ static BOOL isRefreshWo;
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             [self removeWorkingTimeView]; // 把view从父view上移除
-            
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
             // 刷新界面
-            [self personalDataRequest:NO]; // 个人资料数据请求
+            [self personalDataRequest:YES]; // 个人资料数据请求
         }
         else
         {
@@ -474,7 +475,7 @@ static BOOL isRefreshWo;
 // 退出登录
 - (void)logOutAction:(id)sender
 {
-    NSLog(@"退出登录");
+//    NSLog(@"退出登录");
     // 跳到登录页面
     WXZLoginController *loginController = [[WXZLoginController alloc]init];
     WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
@@ -493,6 +494,11 @@ static BOOL isRefreshWo;
     }
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)dealloc
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self]; // 取消所有网络请求
 }
 
 - (void)didReceiveMemoryWarning {
