@@ -79,7 +79,7 @@
     // 蒙版
     [SVProgressHUD show];
     // 1.创建请求对象
-    NSString *urlString = [OutNetBaseURL stringByAppendingString:zhaohuimima];
+    NSString *urlString = [OutNetBaseURL stringByAppendingString:zhuce];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"xm"] = self.name.text;

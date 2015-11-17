@@ -149,6 +149,7 @@
             
         }];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        WXZLog(@"%@", error);
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [SVProgressHUD showErrorWithStatus:@"登陆超时,请重新登陆." maskType:SVProgressHUDMaskTypeBlack];
         }];

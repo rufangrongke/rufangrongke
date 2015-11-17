@@ -15,7 +15,7 @@
 
 @property (nonatomic, assign) BOOL ok;
 
-@property (nonatomic, strong) NSArray/*<ListYongJin *>*/ *list;
+@property (nonatomic, strong) NSArray<ListYongJin *> *list;
 
 @property (nonatomic, strong) KfsgzYongjin *KFSgz;
 

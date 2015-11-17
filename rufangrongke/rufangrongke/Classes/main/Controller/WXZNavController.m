@@ -7,6 +7,9 @@
 //
 
 #import "WXZNavController.h"
+#import "WXZLouPanMessageController.h"
+#import "WXZTabBar.h"
+#import "WXZLouPanController.h"
 
 @interface WXZNavController ()
 
@@ -41,6 +44,10 @@
  */
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    // 隐藏tabBar.louPanBottomBar
+//    WXZTabBar *tabBar = viewController.tabBarController.tabBar;
+//    tabBar.louPanBottomBar.hidden = YES;
+    
     if (self.childViewControllers.count > 0) { // 如果push进来的不是第一个控制器
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 //        [button setTitle:@"返回" forState:UIControlStateNormal];
@@ -51,16 +58,23 @@
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         //        [button sizeToFit];
         // 让按钮的内容往左边偏移10
-        button.contentEdgeInsets = UIEdgeInsetsMake(0, -3, 0, 0);
+        button.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
 //        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         
         // 修改导航栏左边的item
         viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        
-        // 隐藏tabbar
-        viewController.hidesBottomBarWhenPushed = YES;
+        if ([viewController isKindOfClass:[WXZLouPanMessageController class]]) {
+            // 隐藏tabbar
+            viewController.hidesBottomBarWhenPushed = NO;
+//            WXZTabBar *tabBar = viewController.tabBarController.tabBar;
+//            tabBar.louPanBottomBar.hidden = NO;
+        }else{// 隐藏tabbar
+            viewController.hidesBottomBarWhenPushed = YES;
+//            WXZTabBar *tabBar = viewController.tabBarController.tabBar;
+//            tabBar.louPanBottomBar.hidden = YES;
+        }
     }
     
     // 这句super的push要放在后面, 让viewController可以覆盖上面设置的leftBarButtonItem
@@ -70,9 +84,21 @@
 
 - (void)back
 {
+    WXZLog(@"%@", self.viewControllers);
+    if (self.viewControllers.count == 2) {
+        for (UIViewController *vc in self.viewControllers) {
+            if ([vc isKindOfClass:[WXZLouPanController class]]) {
+                //            WXZLouPanController *loupanVc = vc;
+                WXZTabBar *tabBar = vc.tabBarController.tabBar;
+                tabBar.louPanBottomBar.hidden = YES;
+            }
+            
+        }
+    }
+    
     [self popViewControllerAnimated:YES];
 }
-
+//- (void)
 //// 重写hidden方法
 //- (void)setNavigationBarHidden:(BOOL)navigationBarHidden
 //{

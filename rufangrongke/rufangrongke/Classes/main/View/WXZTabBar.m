@@ -23,14 +23,26 @@
 //        publishButton.size = publishButton.currentBackgroundImage.size;
 //        [self addSubview:publishButton];
 //        self.publishButton = publishButton;
+//        WXZLog(@"self.subviews.count%zd", self.subviews.count);
+//        WXZLouPanBottomBar *bar = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanBottomBar class]) owner:nil options:nil].lastObject;
+//        self.louPanBottomBar = bar;
+////        bar.hidden = YES;
+//        [self addSubview:bar];
     }
     return self;
 }
-
+static NSInteger ind = 0;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+    if (ind == 0) {
+        WXZLouPanBottomBar *bar = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanBottomBar class]) owner:nil options:nil].lastObject;
+        self.louPanBottomBar = bar;
+        bar.hidden = YES;
+        [self addSubview:bar];
+        self.louPanBottomBar.frame = self.bounds;
+    }
+//    self.louPanBottomBar.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44);
 //    CGFloat width = self.width;
 //    CGFloat height = self.height;
 //    

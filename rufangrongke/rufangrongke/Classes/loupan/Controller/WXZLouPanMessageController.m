@@ -20,9 +20,13 @@
 #import "WXZLouPanHuXingController.h"
 #import "WXZLouPanYongJinController.h"
 #import "WXZLouPanMessageModel.h"
+#import "WXZTabBar.h"
+#import "WXZLouPanBottomBar.h"
+#import "WXZLouPanYiBaoBeiKeHuController.h"
+#import "WXZLouPanBaoBeiKeHuController.h"
 
 
-@interface WXZLouPanMessageController ()<UITableViewDataSource, UITableViewDelegate, LouPanHuXingControllerDelegate>
+@interface WXZLouPanMessageController ()<UITableViewDataSource, UITableViewDelegate, LouPanHuXingControllerDelegate, WXZLouPanBottomBarProtocol>
 /*轮播图片URL*/
 @property(nonatomic, strong) NSArray *PicUrls;
 /* 楼盘详情 */
@@ -62,7 +66,8 @@
     WXZLouPanBottomBar *bottomBar = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanBottomBar class]) owner:nil options:nil].firstObject;
     bottomBar.frame = CGRectMake(bottomBarX, bottomBarY, bottomBarW, bottomBarH);
 //    bottomBar.backgroundColor = [UIColor redColor];
-    [self.tableView addSubview:bottomBar];
+//    [self.tableView addSubview:bottomBar];
+//    [self.tabBarItem.t addSubview:bottomBar];
 }
 // 轮播图片 宽 / 高
 static CGFloat carouselPic_width = 375;
@@ -153,7 +158,7 @@ static CGFloat carouselPic_height = 226;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"fy"] = self.fyhao;
     [[AFHTTPSessionManager manager] POST:url parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        WXZLog(@"%@", responseObject);
+//        WXZLog(@"%@", responseObject);
         // 字典转模型
         self.louPanMessageModel = [WXZLouPanMessageModel objectWithKeyValues:responseObject];
         
@@ -183,6 +188,9 @@ static CGFloat carouselPic_height = 226;
 //    [self setUpBottomBar];
 //    self.navigationController.hidesBottomBarWhenPushed = NO;
     
+    WXZTabBar *tabBar = self.tabBarController.tabBar;
+    tabBar.louPanBottomBar.delegate = self;
+    tabBar.louPanBottomBar.hidden = NO;
 }
 
 #pragma mark - Table view data source
@@ -317,6 +325,18 @@ static int colorNum = 235;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
-
+#pragma WXZLouPanBottomBarProtocol
+- (void)louPanBottomBar_click_wodekehu{
+    WXZLouPanYiBaoBeiKeHuController *yiBaoBeiKeHuVC = [[WXZLouPanYiBaoBeiKeHuController alloc] init];
+    yiBaoBeiKeHuVC.navigationItem.title = @"已报备客户";
+    yiBaoBeiKeHuVC.fyhao = self.fyhao;
+    [self.navigationController pushViewController:yiBaoBeiKeHuVC animated:YES];
+}
+- (void)louPanBottomBar_click_baobeikehu
+{
+    WXZLouPanBaoBeiKeHuController *baoBeiKeHuVC = [[WXZLouPanBaoBeiKeHuController alloc] init];
+    baoBeiKeHuVC.navigationItem.title = @"报备客户";
+    baoBeiKeHuVC.fyhao = self.fyhao;
+    [self.navigationController pushViewController:baoBeiKeHuVC animated:YES];
+}
 @end

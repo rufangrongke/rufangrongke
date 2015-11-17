@@ -154,6 +154,16 @@
 		88C1089C1BF0A85800337E09 /* WXZLouPanYongJinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C1089A1BF0A85800337E09 /* WXZLouPanYongJinController.m */; };
 		88C1089D1BF0A85800337E09 /* WXZLouPanYongJinController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C1089B1BF0A85800337E09 /* WXZLouPanYongJinController.xib */; };
 		88C108A01BF0BDF300337E09 /* WXZLouPanYongJinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C1089F1BF0BDF300337E09 /* WXZLouPanYongJinModel.m */; };
+		88D857791BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D857771BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.m */; };
+		88D8577A1BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D857781BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.xib */; };
+		88D8577E1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D8577C1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.m */; };
+		88D8577F1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D8577D1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.xib */; };
+		88D857821BF98BF20069EE4E /* WXZLouPanYiBaoBeiKeHuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D857811BF98BF20069EE4E /* WXZLouPanYiBaoBeiKeHuModel.m */; };
+		88D857861BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D857841BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.m */; };
+		88D857871BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D857851BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.xib */; };
+		88D8578A1BF9BBEA0069EE4E /* WXZLouPanBaoBeiKeHuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D857891BF9BBEA0069EE4E /* WXZLouPanBaoBeiKeHuModel.m */; };
+		88D8578E1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D8578C1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m */; };
+		88D8578F1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D8578D1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib */; };
 		88DB2EC11BE8846500003A77 /* CDPMonitorKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */; };
 		88DBC1031BF0436C00425B81 /* WXZMessagePrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1021BF0436C00425B81 /* WXZMessagePrompt.m */; };
 		88DBC1081BF0442900425B81 /* WXZDateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1051BF0442900425B81 /* WXZDateObject.m */; };
@@ -441,6 +451,22 @@
 		88C1089B1BF0A85800337E09 /* WXZLouPanYongJinController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanYongJinController.xib; sourceTree = "<group>"; };
 		88C1089E1BF0BDF300337E09 /* WXZLouPanYongJinModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanYongJinModel.h; sourceTree = "<group>"; };
 		88C1089F1BF0BDF300337E09 /* WXZLouPanYongJinModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanYongJinModel.m; sourceTree = "<group>"; };
+		88D857761BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanYiBaoBeiKeHuController.h; sourceTree = "<group>"; };
+		88D857771BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanYiBaoBeiKeHuController.m; sourceTree = "<group>"; };
+		88D857781BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanYiBaoBeiKeHuController.xib; sourceTree = "<group>"; };
+		88D8577B1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanYiBaoBeiKeHuCell.h; sourceTree = "<group>"; };
+		88D8577C1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanYiBaoBeiKeHuCell.m; sourceTree = "<group>"; };
+		88D8577D1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanYiBaoBeiKeHuCell.xib; sourceTree = "<group>"; };
+		88D857801BF98BF20069EE4E /* WXZLouPanYiBaoBeiKeHuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanYiBaoBeiKeHuModel.h; sourceTree = "<group>"; };
+		88D857811BF98BF20069EE4E /* WXZLouPanYiBaoBeiKeHuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanYiBaoBeiKeHuModel.m; sourceTree = "<group>"; };
+		88D857831BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanBaoBeiKeHuController.h; sourceTree = "<group>"; };
+		88D857841BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanBaoBeiKeHuController.m; sourceTree = "<group>"; };
+		88D857851BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanBaoBeiKeHuController.xib; sourceTree = "<group>"; };
+		88D857881BF9BBEA0069EE4E /* WXZLouPanBaoBeiKeHuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanBaoBeiKeHuModel.h; sourceTree = "<group>"; };
+		88D857891BF9BBEA0069EE4E /* WXZLouPanBaoBeiKeHuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanBaoBeiKeHuModel.m; sourceTree = "<group>"; };
+		88D8578B1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanBaoBeiKeHuCell.h; sourceTree = "<group>"; };
+		88D8578C1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanBaoBeiKeHuCell.m; sourceTree = "<group>"; };
+		88D8578D1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanBaoBeiKeHuCell.xib; sourceTree = "<group>"; };
 		88DB2EBF1BE8846500003A77 /* CDPMonitorKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDPMonitorKeyboard.h; path = Tool/NotificationKeyboard/CDPMonitorKeyboard.h; sourceTree = "<group>"; };
 		88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDPMonitorKeyboard.m; path = Tool/NotificationKeyboard/CDPMonitorKeyboard.m; sourceTree = "<group>"; };
 		88DBC1011BF0436C00425B81 /* WXZMessagePrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZMessagePrompt.h; path = Tool/WXZMessagePrompt.h; sourceTree = "<group>"; };
@@ -794,6 +820,10 @@
 			children = (
 				880869141BF1DCCB00128610 /* WXZLouPanMessageModel.h */,
 				880869151BF1DCCB00128610 /* WXZLouPanMessageModel.m */,
+				88D857801BF98BF20069EE4E /* WXZLouPanYiBaoBeiKeHuModel.h */,
+				88D857811BF98BF20069EE4E /* WXZLouPanYiBaoBeiKeHuModel.m */,
+				88D857881BF9BBEA0069EE4E /* WXZLouPanBaoBeiKeHuModel.h */,
+				88D857891BF9BBEA0069EE4E /* WXZLouPanBaoBeiKeHuModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1181,6 +1211,12 @@
 				882793BE1BEC998E00218F13 /* WXZLouPanHuXingCollectionCell.h */,
 				882793BF1BEC998E00218F13 /* WXZLouPanHuXingCollectionCell.m */,
 				882793C01BEC998E00218F13 /* WXZLouPanHuXingCollectionCell.xib */,
+				88D8577B1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.h */,
+				88D8577C1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.m */,
+				88D8577D1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.xib */,
+				88D8578B1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.h */,
+				88D8578C1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m */,
+				88D8578D1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -1200,6 +1236,12 @@
 				882793B91BEC98A800218F13 /* WXZLouPanHuXingController.h */,
 				882793BA1BEC98A800218F13 /* WXZLouPanHuXingController.m */,
 				882793BB1BEC98A800218F13 /* WXZLouPanHuXingController.xib */,
+				88D857761BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.h */,
+				88D857771BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.m */,
+				88D857781BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.xib */,
+				88D857831BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.h */,
+				88D857841BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.m */,
+				88D857851BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.xib */,
 			);
 			name = louPanMessageVC;
 			sourceTree = "<group>";
@@ -1366,6 +1408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88EF69591BF421C400B4E169 /* WXZBasicInfoCell.xib in Resources */,
+				88D8577A1BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.xib in Resources */,
 				88EF69581BF421B300B4E169 /* WXZReportPreparationVC.xib in Resources */,
 				88EF69571BF4219F00B4E169 /* WXZAddCustomerVC.xib in Resources */,
 				8808690E1BF0C58300128610 /* WXZLouPanYongJinCell_0.xib in Resources */,
@@ -1397,6 +1440,7 @@
 				8829028F1BE73C6400BA7D24 /* WXZPersonalStoreVC.xib in Resources */,
 				886332341BDF4EE000218E4B /* WXZLouPanMessageController.xib in Resources */,
 				88916B461BF043F700981258 /* WXZLouPanInformationTableViewController.xib in Resources */,
+				88D8577F1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.xib in Resources */,
 				882902B31BE73CFE00BA7D24 /* WXZPersonalCityCell.xib in Resources */,
 				8829028D1BE73C6400BA7D24 /* WXZPersonalInfoVC.xib in Resources */,
 				882902851BE73C6400BA7D24 /* WXZPersonalCertificationVC.xib in Resources */,
@@ -1404,6 +1448,7 @@
 				8860234D1BEC4F9300C0D75E /* WXZCustomerDetailsVC.xib in Resources */,
 				8860238C1BEC510400C0D75E /* WXZKeHuListCell.xib in Resources */,
 				880869091BF0C54D00128610 /* WXZLouPanYongJinSectionHeadView_1.xib in Resources */,
+				88D8578F1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib in Resources */,
 				882902B51BE73CFE00BA7D24 /* WXZPersonalData2Cell.xib in Resources */,
 				8827936C1BEC55E900218F13 /* WXZLouPanMaiDianCell_2.xib in Resources */,
 				882E47011BF07CD60022378F /* WXZLouPanInfoVC_footTableView_footView.xib in Resources */,
@@ -1422,6 +1467,7 @@
 				88700EED1BF1C14A003F2224 /* WXZScreeningView.xib in Resources */,
 				882793BD1BEC98A800218F13 /* WXZLouPanHuXingController.xib in Resources */,
 				882793C21BEC998E00218F13 /* WXZLouPanHuXingCollectionCell.xib in Resources */,
+				88D857871BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.xib in Resources */,
 				882618821BF050CF00FAD6E9 /* WXZLouPanInformationControllerCell_1_0.xib in Resources */,
 				882902891BE73C6400BA7D24 /* WXZPersonalController.xib in Resources */,
 				88EAA7231BD88DA40072CD40 /* WXZLoginController.xib in Resources */,
@@ -1501,8 +1547,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D8578E1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m in Sources */,
 				88465A9D1BF0D6BA006B75F9 /* WXZLouPanInformationControllerCell_0_1.m in Sources */,
 				88DBC10B1BF04E4100425B81 /* WXZLouPanInformationTableViewController.m in Sources */,
+				88D8577E1BF989320069EE4E /* WXZLouPanYiBaoBeiKeHuCell.m in Sources */,
 				8826186E1BF049EA00FAD6E9 /* WXZGouFangYiXiangCell.m in Sources */,
 				8826186D1BF049BD00FAD6E9 /* WXZKeHuListCell.m in Sources */,
 				8826186C1BF049A800FAD6E9 /* WXZCustomerDetailsVC.m in Sources */,
@@ -1534,6 +1582,7 @@
 				8829028C1BE73C6400BA7D24 /* WXZPersonalInfoVC.m in Sources */,
 				88DBC1091BF0442900425B81 /* WXZStringObject.m in Sources */,
 				88EAA7191BD87C180072CD40 /* AFNetworkReachabilityManager.m in Sources */,
+				88D857861BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.m in Sources */,
 				88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */,
 				88EAA71C1BD87C180072CD40 /* AFURLRequestSerialization.m in Sources */,
 				882902881BE73C6400BA7D24 /* WXZPersonalController.m in Sources */,
@@ -1556,6 +1605,7 @@
 				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
 				882902B81BE73CFE00BA7D24 /* WXZWorkingTimeView.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
+				88D857791BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.m in Sources */,
 				88DB2EC11BE8846500003A77 /* CDPMonitorKeyboard.m in Sources */,
 				882793661BEC55DC00218F13 /* WXZLouPanMaiDianCell_1.m in Sources */,
 				88AE89321BE07E9A00407ECF /* WXZLouPanMessageCell_0_0.m in Sources */,
@@ -1596,6 +1646,7 @@
 				88EAA7171BD87C180072CD40 /* AFHTTPRequestOperationManager.m in Sources */,
 				88EAA7221BD88DA40072CD40 /* WXZLoginController.m in Sources */,
 				88C1089C1BF0A85800337E09 /* WXZLouPanYongJinController.m in Sources */,
+				88D857821BF98BF20069EE4E /* WXZLouPanYiBaoBeiKeHuModel.m in Sources */,
 				88AE893C1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m in Sources */,
 				885388001BDD1DC0005DCF38 /* WXZTableViewCell.m in Sources */,
 				88F4F6201BF2F65B007FBCB7 /* WXZquYuListViewController.m in Sources */,
@@ -1606,6 +1657,7 @@
 				886023801BEC50E800C0D75E /* WXZKeHuController.m in Sources */,
 				882E46FF1BF07CB60022378F /* WXZLouPanInfoVC_footTableView_footView.m in Sources */,
 				88EAA71D1BD87C180072CD40 /* AFURLResponseSerialization.m in Sources */,
+				88D8578A1BF9BBEA0069EE4E /* WXZLouPanBaoBeiKeHuModel.m in Sources */,
 				8829029A1BE73CDD00BA7D24 /* WXZWoHeadCell.m in Sources */,
 				88DBC1081BF0442900425B81 /* WXZDateObject.m in Sources */,
 			);

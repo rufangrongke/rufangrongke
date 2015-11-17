@@ -36,6 +36,29 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 static NSString *xiaoqu = @"";
 static NSString *quyu = @"";
 static NSInteger inp = 1;
+/**
+ * 抽取的网络请求方法
+ */
+- (void)networkRequestsWithInp:(NSInteger)inp xiaoqu:(NSString *)xiaoqu quyu:(NSString *)quyu{
+    // 发送请求
+    NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"inp"] = @(inp);
+    params[@"xiaoqu"] = xiaoqu;
+    params[@"qu"] = quyu;
+    [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        // 隐藏指示器
+        [SVProgressHUD dismiss];
+        // 转模型,存储模型
+        self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
+        self.fysList = [NSMutableArray arrayWithArray:self.loupanModel.fys];
+        // 刷新表格
+        [self.tableView reloadData];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        // 显示失败信息
+        [SVProgressHUD showErrorWithStatus:@"加载推荐信息失败!"];
+    }];
+}
 /* fysList懒加载 */
 - (NSMutableArray *)fysList
 {
@@ -53,7 +76,7 @@ static NSInteger inp = 1;
     // 设置导航栏左边按钮
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_quyutu" highImage:@"lp_quyutu" target:self action:@selector(quYu_click)];
     // 设置导航栏右边按钮
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click: quYu:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
     // 添加一个系统的搜索框
     UISearchBar *search = [[UISearchBar alloc]init];
     search.placeholder = @"楼盘搜索";
@@ -64,14 +87,6 @@ static NSInteger inp = 1;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZTableViewCell class]) bundle:nil] forCellReuseIdentifier:WXZLoupanCellID];
     // cell高度
     self.tableView.rowHeight = 100;
-    
-    // 给tableview添加点击 为了取消键盘
-//    [self.tableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTableView:)]];
-}
-- (void)clickTableView:(UITapGestureRecognizer *)tap{
-    WXZLogFunc;
-    // 取消键盘
-    [self.search resignFirstResponder];
 }
 
 - (void)viewDidLoad {
@@ -84,89 +99,80 @@ static NSInteger inp = 1;
     // 显示指示器
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
-    // 发送请求
-    NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"inp"] = @(inp);
-    params[@"xiaoqu"] = xiaoqu;
-    params[@"qu"] = quyu;
-    WXZLog(@"%zd, %@, %@", inp, xiaoqu,quyu);
-    [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-//        WXZLog(@"%@", responseObject);
-        // 隐藏指示器
-        [SVProgressHUD dismiss];
-        // 转模型,存储模型
-        self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
-        self.fysList = [NSMutableArray arrayWithArray:self.loupanModel.fys];
-        // 刷新表格
-        [self.tableView reloadData];
-        
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        // 显示失败信息
-        [SVProgressHUD showErrorWithStatus:@"加载推荐信息失败!"];
-    }];
+    // 网络请求
+    [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
+//    // 发送请求
+//    NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    params[@"inp"] = @(inp);
+//    params[@"xiaoqu"] = xiaoqu;
+//    params[@"qu"] = quyu;
+//    WXZLog(@"%zd, %@, %@", inp, xiaoqu,quyu);
+//    [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+////        WXZLog(@"%@", responseObject);
+//        // 隐藏指示器
+//        [SVProgressHUD dismiss];
+//        // 转模型,存储模型
+//        self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
+//        self.fysList = [NSMutableArray arrayWithArray:self.loupanModel.fys];
+//        // 刷新表格
+//        [self.tableView reloadData];
+//        
+//        
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        // 显示失败信息
+//        [SVProgressHUD showErrorWithStatus:@"加载推荐信息失败!"];
+//    }];
 }
 
 /**
  *  右上方按钮监听点击
  */
-- (void)queDing_click:(NSString *)parameter quYu:(BOOL)quYuBool
+- (void)queDing_click
 {
-    WXZLog(@"%d", quYuBool);
-    // 隐藏蒙版
     // 隐藏WXZquYuListViewController.view
     self.quYuListViewVC.view.hidden = YES;
     // 取消键盘
     [self.search resignFirstResponder];
-//    // 根据搜索栏发送请求
-//    if (self.search.text.length == 0 && parameter.length == 0){
-//        [SVProgressHUD showErrorWithStatus:@"请填写小区名" maskType:SVProgressHUDMaskTypeBlack];
-//        return;
-//    }
-    [SVProgressHUD show];
-    if (quYuBool == YES) {
-        self.search.text = @"";
-        inp = 1;
-        quyu = parameter;
-        xiaoqu = self.search.text;
-    }else{
-        inp = 1;
-        quyu = @"";
-        xiaoqu = self.search.text;
+    // 根据搜索栏发送请求
+    if (self.search.text.length == 0){
+        [SVProgressHUD showErrorWithStatus:@"请填写小区名" maskType:SVProgressHUDMaskTypeBlack];
+        return;
     }
-    // 发送请求
-    NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"xiaoqu"] = xiaoqu;
-    params[@"qu"] = quyu;
-    params[@"inp"] = @(inp);
-    WXZLog(@"inp%zd, xiaoqu%@, quyu%@", inp, xiaoqu,quyu);
-    [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        // 转模型,存储模型
-//        WXZLog(@"%@", responseObject);
-        self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
-        self.fysList = nil;
-        self.fysList = [NSMutableArray arrayWithArray:self.loupanModel.fys];
-        // 刷新表格
-        [self.tableView reloadData];
- //     4.回到主线程
-
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//            if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
-//                // 隐藏HUD
-                [SVProgressHUD dismiss];
-//            }else{ //登陆失败
-//                [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];
-//            }
-        }];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        WXZLog(@"%@", error);
-        // 显示失败信息
-        [SVProgressHUD showErrorWithStatus:@"加载信息失败!"];
-    }];
-        
-
+    [SVProgressHUD show];
+    inp = 1;
+    xiaoqu = self.search.text;
+    [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
+//    // 发送请求
+//    NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    params[@"xiaoqu"] = xiaoqu;
+//    params[@"qu"] = quyu;
+//    params[@"inp"] = @(inp);
+//    WXZLog(@"inp%zd, xiaoqu%@, quyu%@", inp, xiaoqu,quyu);
+//    [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+//        // 转模型,存储模型
+////        WXZLog(@"%@", responseObject);
+//        self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
+//        self.fysList = nil;
+//        self.fysList = [NSMutableArray arrayWithArray:self.loupanModel.fys];
+//        // 刷新表格
+//        [self.tableView reloadData];
+// //     4.回到主线程
+//
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+////            if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
+////                // 隐藏HUD
+//                [SVProgressHUD dismiss];
+////            }else{ //登陆失败
+////                [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];
+////            }
+//        }];
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        WXZLog(@"%@", error);
+//        // 显示失败信息
+//        [SVProgressHUD showErrorWithStatus:@"加载信息失败!"];
+//    }];
 }
 
 /**
@@ -194,9 +200,13 @@ static NSInteger inp = 1;
 #pragma WXZquYuListViewControllerDelegate
 - (void)quYuListViewControllerDelegate:(NSString *)parameter
 {
-    inp = 1;
+    self.quYuListViewVC.view.hidden = YES;
     self.tableView.scrollEnabled = YES;
-    [self queDing_click:parameter quYu:YES];
+    inp = 1;
+    quyu = parameter;
+    self.search.text = @"";
+    xiaoqu = self.search.text;
+    [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
 }
 #pragma 刷新控件
 /**
@@ -212,8 +222,6 @@ static NSInteger inp = 1;
 - (void)loadNewUsers
 {
     inp = 1;
-    
-    // 发送请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"inp"] = @(inp);
@@ -266,6 +274,7 @@ static NSInteger inp = 1;
     
 }
 
+
 #pragma mark - <UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -311,5 +320,4 @@ static NSInteger inp = 1;
     [self.search resignFirstResponder];
 }
 
-//- sc
 @end

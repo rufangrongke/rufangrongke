@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZLouPanBottomBar.h"
 
 @interface WXZTabBar : UITabBar
-
+/* WXZLouPanBottomBar.h */
+@property (nonatomic , weak) WXZLouPanBottomBar *louPanBottomBar;
 @end
