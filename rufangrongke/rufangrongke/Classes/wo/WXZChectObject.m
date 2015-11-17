@@ -130,7 +130,7 @@
     {
         if ([WXZChectObject checkIsAllNumber:mobileNum])
         {
-            NSString *regex = @"[1][34578]\\d{9}";
+            NSString *regex = @"[1][34578]\\d{9}"; // 判断手机号的正则表达式
             NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
             BOOL isMatch = [pred evaluateWithObject:mobileNum];
             if (isMatch)
@@ -236,12 +236,15 @@
     {
         if (idCard.length == 18)
         {
-            if ([WXZChectObject checkIsAllNumber:[idCard substringWithRange:NSMakeRange(0, 17)]])
+            NSString *regex = @"^[0-9]{17}[0-9|xX]{1}$"; // 判断身份证号的正则表达式
+            NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+            BOOL isMatch = [pred evaluateWithObject:idCard];
+            if (isMatch)
             {
                 return YES;
             }
         }
-        [SVProgressHUD showErrorWithStatus:@"身份证号有误，请检查" maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showErrorWithStatus:@"身份证号不足18位或有误，请检查" maskType:SVProgressHUDMaskTypeBlack];
         return NO;
     }
     else
