@@ -22,7 +22,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" tag="100018" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bab-GN-Ocl">
-                        <rect key="frame" x="232" y="10" width="58" height="30"/>
+                        <rect key="frame" x="242" y="10" width="58" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="93g-0t-W1d"/>
                             <constraint firstAttribute="width" constant="58" id="UpT-hG-nna"/>
@@ -93,7 +93,7 @@
                     <constraint firstAttribute="trailing" secondItem="MaZ-dV-Vd9" secondAttribute="trailing" id="SSU-bm-C6l"/>
                     <constraint firstItem="Bab-GN-Ocl" firstAttribute="centerY" secondItem="MKT-rP-K2Z" secondAttribute="centerY" id="UJX-IS-gZW"/>
                     <constraint firstItem="Bab-GN-Ocl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MKT-rP-K2Z" secondAttribute="trailing" constant="5" id="UMm-B2-aFP"/>
-                    <constraint firstItem="eR0-1E-X1p" firstAttribute="leading" secondItem="Bab-GN-Ocl" secondAttribute="trailing" constant="15" id="Uu4-7F-sNB"/>
+                    <constraint firstItem="eR0-1E-X1p" firstAttribute="leading" secondItem="Bab-GN-Ocl" secondAttribute="trailing" constant="5" id="Uu4-7F-sNB"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iwh-JD-ncf" secondAttribute="trailing" constant="11" id="Wcp-kI-q4y"/>
                     <constraint firstItem="iwh-JD-ncf" firstAttribute="leading" secondItem="7fr-dA-f8x" secondAttribute="trailing" constant="5" id="YHA-g6-LWo"/>
                     <constraint firstItem="eR0-1E-X1p" firstAttribute="centerY" secondItem="Bab-GN-Ocl" secondAttribute="centerY" id="aKt-R4-D4w"/>

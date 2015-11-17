@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="sgO-d7-KMf">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="-20" width="600" height="620"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -25,7 +25,7 @@
             <constraints>
                 <constraint firstItem="sgO-d7-KMf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3LC-CZ-07N"/>
                 <constraint firstAttribute="trailing" secondItem="sgO-d7-KMf" secondAttribute="trailing" id="ENs-zl-Cid"/>
-                <constraint firstItem="sgO-d7-KMf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="R1n-pr-PrS"/>
+                <constraint firstItem="sgO-d7-KMf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-20" id="R1n-pr-PrS"/>
                 <constraint firstAttribute="bottom" secondItem="sgO-d7-KMf" secondAttribute="bottom" id="ZKu-ob-HMN"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

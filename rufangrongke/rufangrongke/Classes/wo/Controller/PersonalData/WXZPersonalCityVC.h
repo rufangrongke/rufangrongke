@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZLouPanController.h"
 
 #pragma mark - 返货城市名称的代理方法
 @protocol BackCityNameDelegate <NSObject>

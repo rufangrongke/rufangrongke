@@ -127,7 +127,7 @@
             [self.typeBtn setTitle:houseArr[i*limit+j][@"q"] forState:UIControlStateNormal];
             [self.typeBtn setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
             self.typeBtn.titleLabel.font = WXZ_SystemFont(12);
-            self.typeBtn.backgroundColor = [UIColor lightGrayColor];
+            [self.typeBtn setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
             [self.typeBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
             [self.contentView addSubview:self.typeBtn];
             // 是否是修改页
@@ -136,7 +136,7 @@
                 // 判断名称是否相等
                 if ([self areEqual:houseArr[i*limit+j][@"q"] localData:model row:row])
                 {
-                    self.typeBtn.backgroundColor = WXZRGBColor(2, 135, 227);
+                    [self.typeBtn setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
                     [self.typeBtn setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
                 }
             }
