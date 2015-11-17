@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScreeningCell" id="KGk-i7-Jjw" customClass="WXZScreeningCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eku-Xd-6Is">
+                        <rect key="frame" x="20" y="13" width="38" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.10588235294117647" green="0.10980392156862745" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loupan-qy-complete" translatesAutoresizingMaskIntoConstraints="NO" id="fGT-QM-lxO">
+                        <rect key="frame" x="278" y="11" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="2D5-Mj-DKm"/>
+                            <constraint firstAttribute="width" constant="22" id="bZh-BS-Xzc"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_personal_divider" translatesAutoresizingMaskIntoConstraints="NO" id="a9M-7f-jTR">
+                        <rect key="frame" x="0.0" y="42" width="320" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="qwL-WH-olM"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="a9M-7f-jTR" secondAttribute="trailing" id="3kI-m3-IoR"/>
+                    <constraint firstItem="Eku-Xd-6Is" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="DCz-5h-cN7"/>
+                    <constraint firstItem="fGT-QM-lxO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Eku-Xd-6Is" secondAttribute="trailing" constant="20" id="IPU-eD-yRg"/>
+                    <constraint firstAttribute="bottom" secondItem="a9M-7f-jTR" secondAttribute="bottom" id="JVm-h9-Z32"/>
+                    <constraint firstAttribute="trailing" secondItem="fGT-QM-lxO" secondAttribute="trailing" constant="20" id="JaM-0E-Vbv"/>
+                    <constraint firstItem="fGT-QM-lxO" firstAttribute="centerY" secondItem="Eku-Xd-6Is" secondAttribute="centerY" id="QEv-15-V4G"/>
+                    <constraint firstItem="a9M-7f-jTR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="wZU-FF-qwh"/>
+                    <constraint firstItem="Eku-Xd-6Is" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="x8x-gG-oum"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="selectImgView" destination="fGT-QM-lxO" id="xlp-xn-95C"/>
+                <outlet property="titleLabel" destination="Eku-Xd-6Is" id="kM0-kT-wrW"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="loupan-qy-complete" width="22" height="22"/>
+        <image name="wo_personal_divider" width="375" height="1"/>
+    </resources>
+</document>
