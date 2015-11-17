@@ -102,7 +102,7 @@
             }
             else
             {
-                NSLog(@"相机不可用!");
+                [SVProgressHUD showErrorWithStatus:@"摄像头不可用"];
             }
         }
             break;
@@ -119,7 +119,7 @@
             }
             else
             {
-                NSLog(@"相簿不可用！");
+                [SVProgressHUD showErrorWithStatus:@"相簿不可用"];
             }
         }
             break;

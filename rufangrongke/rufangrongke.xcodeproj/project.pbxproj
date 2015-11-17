@@ -147,6 +147,8 @@
 		888115EA1BDE068C003A0356 /* UIViewController+WXZLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115E91BDE068C003A0356 /* UIViewController+WXZLogin.m */; };
 		888115ED1BDE4230003A0356 /* JxbScaleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 888115EC1BDE4230003A0356 /* JxbScaleButton.m */; };
 		88916B461BF043F700981258 /* WXZLouPanInformationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88916B441BF043F700981258 /* WXZLouPanInformationTableViewController.xib */; };
+		88AC3BC41BFB22C00005E877 /* WXZScreeningCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AC3BC21BFB22C00005E877 /* WXZScreeningCell.m */; };
+		88AC3BC51BFB22C00005E877 /* WXZScreeningCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AC3BC31BFB22C00005E877 /* WXZScreeningCell.xib */; };
 		88AE892D1BE0733F00407ECF /* XMGPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AE892B1BE0733F00407ECF /* XMGPageView.m */; };
 		88AE892E1BE0733F00407ECF /* XMGPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88AE892C1BE0733F00407ECF /* XMGPageView.xib */; };
 		88AE89321BE07E9A00407ECF /* WXZLouPanMessageCell_0_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 88AE89301BE07E9A00407ECF /* WXZLouPanMessageCell_0_0.m */; };
@@ -441,6 +443,9 @@
 		88916B421BF043F700981258 /* WXZLouPanInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanInformationTableViewController.h; sourceTree = "<group>"; };
 		88916B431BF043F700981258 /* WXZLouPanInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanInformationTableViewController.m; sourceTree = "<group>"; };
 		88916B441BF043F700981258 /* WXZLouPanInformationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanInformationTableViewController.xib; sourceTree = "<group>"; };
+		88AC3BC11BFB22C00005E877 /* WXZScreeningCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZScreeningCell.h; sourceTree = "<group>"; };
+		88AC3BC21BFB22C00005E877 /* WXZScreeningCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZScreeningCell.m; sourceTree = "<group>"; };
+		88AC3BC31BFB22C00005E877 /* WXZScreeningCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZScreeningCell.xib; sourceTree = "<group>"; };
 		88AE892A1BE0733F00407ECF /* XMGPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMGPageView.h; path = View/XMGPageView.h; sourceTree = "<group>"; };
 		88AE892B1BE0733F00407ECF /* XMGPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMGPageView.m; path = View/XMGPageView.m; sourceTree = "<group>"; };
 		88AE892C1BE0733F00407ECF /* XMGPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XMGPageView.xib; path = View/XMGPageView.xib; sourceTree = "<group>"; };
@@ -1083,6 +1088,9 @@
 				8869E17F1BFAC09A00D409FC /* WXZScreeningView.h */,
 				8869E1801BFAC09A00D409FC /* WXZScreeningView.m */,
 				8869E1811BFAC09A00D409FC /* WXZScreeningView.xib */,
+				88AC3BC11BFB22C00005E877 /* WXZScreeningCell.h */,
+				88AC3BC21BFB22C00005E877 /* WXZScreeningCell.m */,
+				88AC3BC31BFB22C00005E877 /* WXZScreeningCell.xib */,
 			);
 			name = KeHuView;
 			sourceTree = "<group>";
@@ -1473,6 +1481,7 @@
 				88E30FB51BEA340F002F5FF1 /* WXZMaiDianController.xib in Resources */,
 				8802E69C1BFAC1AA00866F52 /* WXZLouPanHomeHeadView.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
+				88AC3BC51BFB22C00005E877 /* WXZScreeningCell.xib in Resources */,
 				885388011BDD1DC0005DCF38 /* WXZTableViewCell.xib in Resources */,
 				882793671BEC55DC00218F13 /* WXZLouPanMaiDianCell_1.xib in Resources */,
 				8869E1EE1BFAC29A00D409FC /* WXZWorkingTimeView.xib in Resources */,
@@ -1605,6 +1614,7 @@
 				880869071BF0C53500128610 /* WXZLouPanYongJinSectionHeadView_1.m in Sources */,
 				88DBC1091BF0442900425B81 /* WXZStringObject.m in Sources */,
 				88EAA7191BD87C180072CD40 /* AFNetworkReachabilityManager.m in Sources */,
+				88AC3BC41BFB22C00005E877 /* WXZScreeningCell.m in Sources */,
 				88D857861BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.m in Sources */,
 				88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */,
 				8869E1841BFAC09A00D409FC /* WXZKHListFooterView.m in Sources */,

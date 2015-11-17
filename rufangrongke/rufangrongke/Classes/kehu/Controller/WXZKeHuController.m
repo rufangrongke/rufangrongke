@@ -21,6 +21,7 @@
 #import "WXZScreeningView.h"
 #import "WXZKeHuInfoModel.h"
 #import <MJExtension.h>
+#import "WXZLeftBtnView.h"
 
 @interface WXZKeHuController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UISearchBarDelegate,BackFilterTypeDelegate>
 {
@@ -45,6 +46,8 @@
 @property (nonatomic,strong) UIView *leftView;
 @property (nonatomic,strong) UILabel *leftTitleLabel;
 @property (nonatomic,strong) UIImageView *leftImgView;
+/* leftBtn */
+@property (nonatomic , weak) WXZLeftBtnView *leftBtn;
 @end
 
 static NSInteger isHiden; // 弹框是否隐藏
@@ -71,7 +74,7 @@ static NSString *searchStr; // 记录搜索条件
     isRefresh = YES;
     isMore = YES;
     currentPage = 1;
-    eachPage = @"8";
+    eachPage = @"10";
     shaixuanStr = @"";
     searchStr = @"";
     // 显示菊花
@@ -144,6 +147,11 @@ static NSString *searchStr; // 记录搜索条件
                 {
                     // 直接把数组里边的字典的值转换为模型
                     self.dataArr = [NSMutableArray arrayWithArray:[WXZKeHuInfoModel objectArrayWithKeyValuesArray:arr]];
+                    if (arr.count < eachPage.integerValue)
+                    {
+                        [self.tableView.footer endRefreshingWithNoMoreData];
+                        isMore = NO;
+                    }
                 }
                 else
                 {
@@ -178,14 +186,10 @@ static NSString *searchStr; // 记录搜索条件
             // 结束刷新
             [self.tableView.footer endRefreshing];
         }
-//        searchStr = @"";
-//        _searchBar.text = @"";
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-//        searchStr = @"";
-//        _searchBar.text = @"";
     }];
 }
 
@@ -195,7 +199,6 @@ static NSString *searchStr; // 记录搜索条件
     currentPage = 1;
     isRefresh = YES;
     shaixuanStr = type;
-//    searchStr = @"";
     // 计算宽度
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,WXZ_SystemFont(16),NSFontAttributeName, nil];
     CGRect rect = [type boundingRectWithSize:CGSizeMake(80, 44) options:NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dic context:nil];
@@ -233,8 +236,6 @@ static NSString *searchStr; // 记录搜索条件
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
-    // Return the number of rows in the section.
     return 1;
 }
 
@@ -437,7 +438,6 @@ static NSString *searchStr; // 记录搜索条件
     [self hideScreeningView];
     currentPage = 1;
     isRefresh = YES;
-//    shaixuanStr = @"";
     searchStr = self.searchBar.text;
     // 显示菊花
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
@@ -447,7 +447,6 @@ static NSString *searchStr; // 记录搜索条件
 // 左上方按钮监听点击
 - (void)quDu_click
 {
-    WXZLogFunc;
     [self.searchBar resignFirstResponder];
     if (isHiden)
     {
@@ -456,29 +455,25 @@ static NSString *searchStr; // 记录搜索条件
     else
     {
         // 显示视图
-        _screeningView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZScreeningView class]) owner:self options:nil] lastObject];
-        _screeningView.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
-        _screeningView.backgroundColor = [UIColor whiteColor];
+        if (_screeningView == nil)
+        {
+            _screeningView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZScreeningView class]) owner:self options:nil] lastObject];
+            _screeningView.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
+            _screeningView.backgroundColor = [UIColor whiteColor];
+            [self.view addSubview:_screeningView];
+        }
+        
         _screeningView.dataArr = self.shaixuanArr;
         _screeningView.backScreeningTypeDelegate = self;
-        [self.view addSubview:_screeningView];
+        _screeningView.hidden = NO;
         self.tableView.scrollEnabled = NO;
         isHiden = YES;
-        
-//        // 动画
-//        CGContextRef context = UIGraphicsGetCurrentContext();
-//        [UIView beginAnimations:@"donghua" context:context];
-//        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-//        [UIView setAnimationDelay:0.1];
-//        
-//        // 提交动画
-//        [UIView commitAnimations];
     }
 }
 // 隐藏筛选视图
 - (void)hideScreeningView
 {
-    [self.screeningView removeFromSuperview];
+    [self.screeningView setHidden:YES];
     self.tableView.scrollEnabled = YES;
     isHiden = NO;
 }

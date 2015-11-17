@@ -138,7 +138,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     [param setObject:quyu forKey:@"QuYu"];
     [param setObject:hx forKey:@"Hx"];
     [param setObject:yixinag forKey:@"YiXiang"];
-    WXZLog(@"add param = %@",param);
+//    WXZLog(@"add param = %@",param);
     [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
         if ([responseObject[@"ok"] integerValue] == 1)
