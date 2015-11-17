@@ -34,16 +34,55 @@ static NSInteger ind = 1;
 - (void)setUp{
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZLouPanBaoBeiKeHuCell class]) bundle:nil] forCellReuseIdentifier:WXZLouPanBaoBeiKeHuCellID];
     self.tableView.rowHeight = 50;
+    // 设置导航栏右边按钮
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTintColor:[UIColor whiteColor]];
+    [button setTitle:@"报备" forState:UIControlStateNormal];
+    button.size = CGSizeMake(50, 30);
+    [button addTarget:self action:@selector(baobei_click) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+- (void)baobei_click{
+    WXZLogFunc;
+    // 网络请求
+    [SVProgressHUD show];
+    NSString *url = [OutNetBaseURL stringByAppendingString:kehubaobei];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"fyhao"] = self.fyhao;
+    parameters[@"kid"] = @(self.list.id);
+    parameters[@"loupan"] = self.list.loupan;
+    [[AFHTTPSessionManager manager] POST:url parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        WXZLog(@"%@", responseObject);
+        
+        [SVProgressHUD showSuccessWithStatus:@"报备成功" maskType:SVProgressHUDMaskTypeBlack];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        WXZLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:@"报备失败" maskType:SVProgressHUDMaskTypeBlack];
+    }];
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUp];
+    [SVProgressHUD show];
     // 网络请求
     NSString *url = [OutNetBaseURL stringByAppendingString:kehuliebiao];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"inp"] = @(ind);
     [[AFHTTPSessionManager manager] POST:url parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        WXZLog(@"%@", responseObject);
+        NSDictionary *dic = responseObject;
+        if ([dic[@"ok"] isEqualToNumber:@(1)]) {
+            // 字典转模型
+            self.louPanBaoBeiKeHuModel = [WXZLouPanBaoBeiKeHuModel objectWithKeyValues:responseObject];
+            //        WXZLog(@"%@", self.louPanBaoBeiKeHuModel.list);
+            self.listArray = [NSMutableArray arrayWithArray:self.louPanBaoBeiKeHuModel.list];
+            // 刷新表格
+            [self.tableView reloadData];
+            [SVProgressHUD dismiss];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"失败" maskType:SVProgressHUDMaskTypeBlack];
+        }
         // 字典转模型
         self.louPanBaoBeiKeHuModel = [WXZLouPanBaoBeiKeHuModel objectWithKeyValues:responseObject];
 //        WXZLog(@"%@", self.louPanBaoBeiKeHuModel.list);
@@ -52,6 +91,7 @@ static NSInteger ind = 1;
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         WXZLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:@"失败" maskType:SVProgressHUDMaskTypeBlack];
     }];
     // 刷新
     [self refresh];
@@ -71,7 +111,7 @@ static NSInteger ind = 1;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"inp"] = @(ind);
     [[AFHTTPSessionManager manager] POST:url parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        WXZLog(@"%@", responseObject);
+//        WXZLog(@"%@", responseObject);
         // 字典转模型
         self.louPanBaoBeiKeHuModel = [WXZLouPanBaoBeiKeHuModel objectWithKeyValues:responseObject];
         self.listArray = nil;

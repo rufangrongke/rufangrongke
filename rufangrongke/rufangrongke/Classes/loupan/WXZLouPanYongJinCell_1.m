@@ -40,12 +40,21 @@
     // 合作结束时间
     date =[dateFormat dateFromString:kfsgzYongjin.HeZuoTimeE];
     NSString *heZuoTimeE = [dateFormatter stringFromDate:date];
-
-    self.heZuoShiJianLabel.text = [NSString stringWithFormat:@"%@ 至 %@", heZuoTimeS, heZuoTimeE];
-    self.heZuoFangYuanLabel.text = [NSString stringWithFormat:@"%@元/套", kfsgzYongjin.HeZuoFy];
-    self.baoHuQiLabel.text = [NSString stringWithFormat:@"%@", kfsgzYongjin.BaoHuQi];
-    self.jiangLiLabel.text = [NSString stringWithFormat:@"%@", kfsgzYongjin.JiangLi];
-    self.kaiFaShangJiangLiLabel.text = [NSString stringWithFormat:@"%@", kfsgzYongjin.KFSJiangLi];
+    if (kfsgzYongjin.HeZuoTimeS && kfsgzYongjin.HeZuoTimeE) {
+        self.heZuoShiJianLabel.text = [NSString stringWithFormat:@"%@ 至 %@", heZuoTimeS, heZuoTimeE];
+    }
+    if (kfsgzYongjin.HeZuoFy) {
+        self.heZuoFangYuanLabel.text = [NSString stringWithFormat:@"%@元/套", kfsgzYongjin.HeZuoFy];
+    }
+    if (kfsgzYongjin.BaoHuQi) {
+        self.baoHuQiLabel.text = [NSString stringWithFormat:@"%@", kfsgzYongjin.BaoHuQi];
+    }
+    if (kfsgzYongjin.JiangLi) {
+        self.jiangLiLabel.text = [NSString stringWithFormat:@"%@", kfsgzYongjin.JiangLi];
+    }
+    if (kfsgzYongjin.KFSJiangLi) {
+        self.kaiFaShangJiangLiLabel.text = [NSString stringWithFormat:@"%@", kfsgzYongjin.KFSJiangLi];
+    }
 }
 
 @end

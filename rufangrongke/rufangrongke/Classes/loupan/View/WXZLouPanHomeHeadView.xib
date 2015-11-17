@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,6 +17,11 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="130" id="2z8-J0-6NC"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="2z8-J0-6NC"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <outlet property="delegate" destination="-1" id="QeK-88-7sX"/>
                     </connections>
@@ -30,6 +36,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="7kg-4z-bFM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5Sj-aZ-EYp"/>
+                <constraint firstItem="pxk-4b-GGz" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.59633" id="7Re-39-cEQ"/>
                 <constraint firstItem="7kg-4z-bFM" firstAttribute="bottom" secondItem="pxk-4b-GGz" secondAttribute="bottom" constant="8" id="8jT-09-QbS"/>
                 <constraint firstAttribute="bottom" secondItem="1Qe-MK-bbA" secondAttribute="bottom" id="G2K-B5-xHI"/>
                 <constraint firstAttribute="trailing" secondItem="pxk-4b-GGz" secondAttribute="trailing" id="KBa-rb-NRx"/>
@@ -42,8 +49,8 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="pageControl" destination="7kg-4z-bFM" id="pSv-SE-fxH"/>
-                <outlet property="scrollView" destination="pxk-4b-GGz" id="MLb-iH-aep"/>
+                <outlet property="pageControl" destination="7kg-4z-bFM" id="AtK-99-iLH"/>
+                <outlet property="scrollView" destination="pxk-4b-GGz" id="sns-Dr-Vhl"/>
             </connections>
             <point key="canvasLocation" x="153" y="335"/>
         </view>

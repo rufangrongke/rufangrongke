@@ -65,6 +65,9 @@
 		882E47011BF07CD60022378F /* WXZLouPanInfoVC_footTableView_footView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882E47001BF07CD60022378F /* WXZLouPanInfoVC_footTableView_footView.xib */; };
 		882E47051BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 882E47031BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.m */; };
 		882E47061BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882E47041BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.xib */; };
+		88366B121BFACAAA0046DE64 /* WXZAddCustomerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8869E16D1BFABFD300D409FC /* WXZAddCustomerVC.m */; };
+		88366B571BFB104D0046DE64 /* WXZLeftBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88366B561BFB104D0046DE64 /* WXZLeftBtnView.m */; };
+		88366B591BFB105A0046DE64 /* WXZLeftBtnView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88366B581BFB105A0046DE64 /* WXZLeftBtnView.xib */; };
 		88465A9D1BF0D6BA006B75F9 /* WXZLouPanInformationControllerCell_0_1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8826187A1BF050BF00FAD6E9 /* WXZLouPanInformationControllerCell_0_1.m */; };
 		8852738A1BF048D5008803EF /* WXZRealEstateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 886023541BEC4FE800C0D75E /* WXZRealEstateListCell.m */; };
 		885387F01BDCB958005DCF38 /* WXZConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 885387EF1BDCB958005DCF38 /* WXZConst.m */; };
@@ -87,7 +90,6 @@
 		886332341BDF4EE000218E4B /* WXZLouPanMessageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886332321BDF4EE000218E4B /* WXZLouPanMessageController.xib */; };
 		8869E16A1BFABF8E00D409FC /* WXZKeHuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8869E1681BFABF8E00D409FC /* WXZKeHuController.m */; };
 		8869E16B1BFABF8E00D409FC /* WXZKeHuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8869E1691BFABF8E00D409FC /* WXZKeHuController.xib */; };
-		8869E16F1BFABFD300D409FC /* WXZAddCustomerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8869E16D1BFABFD300D409FC /* WXZAddCustomerVC.m */; };
 		8869E1701BFABFD300D409FC /* WXZAddCustomerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8869E16E1BFABFD300D409FC /* WXZAddCustomerVC.xib */; };
 		8869E1741BFABFEB00D409FC /* WXZCustomerDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8869E1721BFABFEB00D409FC /* WXZCustomerDetailsVC.m */; };
 		8869E1751BFABFEB00D409FC /* WXZCustomerDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8869E1731BFABFEB00D409FC /* WXZCustomerDetailsVC.xib */; };
@@ -311,6 +313,9 @@
 		882E47021BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanInfoVC_footTableView_Cell.h; sourceTree = "<group>"; };
 		882E47031BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanInfoVC_footTableView_Cell.m; sourceTree = "<group>"; };
 		882E47041BF07E6C0022378F /* WXZLouPanInfoVC_footTableView_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanInfoVC_footTableView_Cell.xib; sourceTree = "<group>"; };
+		88366B551BFB104D0046DE64 /* WXZLeftBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLeftBtnView.h; sourceTree = "<group>"; };
+		88366B561BFB104D0046DE64 /* WXZLeftBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLeftBtnView.m; sourceTree = "<group>"; };
+		88366B581BFB105A0046DE64 /* WXZLeftBtnView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLeftBtnView.xib; sourceTree = "<group>"; };
 		885387EE1BDCB852005DCF38 /* WXZConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXZConst.h; sourceTree = "<group>"; };
 		885387EF1BDCB958005DCF38 /* WXZConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZConst.m; sourceTree = "<group>"; };
 		885387F11BDCE5D3005DCF38 /* WXZRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZRegisterController.h; sourceTree = "<group>"; };
@@ -640,6 +645,9 @@
 				8802E6981BFAC18900866F52 /* WXZLouPanHomeHeadView.h */,
 				8802E6991BFAC18900866F52 /* WXZLouPanHomeHeadView.m */,
 				8802E69B1BFAC1AA00866F52 /* WXZLouPanHomeHeadView.xib */,
+				88366B551BFB104D0046DE64 /* WXZLeftBtnView.h */,
+				88366B561BFB104D0046DE64 /* WXZLeftBtnView.m */,
+				88366B581BFB105A0046DE64 /* WXZLeftBtnView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1433,6 +1441,7 @@
 				8869E1851BFAC09A00D409FC /* WXZKHListFooterView.xib in Resources */,
 				882618911BF0510600FAD6E9 /* WXZLouPanInformationControllerCell_1_3.xib in Resources */,
 				8869E1D51BFAC27B00D409FC /* WXZWoTypeCell.xib in Resources */,
+				88366B591BFB105A0046DE64 /* WXZLeftBtnView.xib in Resources */,
 				882618871BF050E000FAD6E9 /* WXZLouPanInformationControllerCell_1_1.xib in Resources */,
 				8869E1D11BFAC27B00D409FC /* WXZWoHeadCell.xib in Resources */,
 				88E30FB01BEA3387002F5FF1 /* WXZXiangQingController.xib in Resources */,
@@ -1556,7 +1565,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88366B121BFACAAA0046DE64 /* WXZAddCustomerVC.m in Sources */,
 				8802E69A1BFAC18900866F52 /* WXZLouPanHomeHeadView.m in Sources */,
+				88366B571BFB104D0046DE64 /* WXZLeftBtnView.m in Sources */,
 				88D8578E1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m in Sources */,
 				88465A9D1BF0D6BA006B75F9 /* WXZLouPanInformationControllerCell_0_1.m in Sources */,
 				88DBC10B1BF04E4100425B81 /* WXZLouPanInformationTableViewController.m in Sources */,

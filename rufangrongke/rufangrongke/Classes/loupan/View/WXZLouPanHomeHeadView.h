@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WXZLouPanHomeHeadView : UIView
-
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
++ (instancetype)louPanHomeHeadView;
 @end

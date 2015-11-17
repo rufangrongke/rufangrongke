@@ -68,13 +68,12 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    // 获得scrollview的尺寸
+    CGFloat scrollW = [UIScreen mainScreen].bounds.size.width;
+    CGFloat scrollH = [UIScreen mainScreen].bounds.size.width * 226 / 375;
     
     // 设置scrollView的frame
-    self.scrollView.frame = self.bounds;
-    
-    // 获得scrollview的尺寸
-    CGFloat scrollW = self.scrollView.frame.size.width;
-    CGFloat scrollH = self.scrollView.frame.size.height;
+    self.scrollView.frame = CGRectMake(0, 0, scrollW, scrollH);
     
     // 设置pageControl
     CGFloat pageW = 100;
