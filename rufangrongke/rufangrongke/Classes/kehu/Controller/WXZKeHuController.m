@@ -40,6 +40,9 @@
 
 @property (nonatomic,strong) NSArray *shaixuanArr;
 
+@property (nonatomic,weak) WXZKHListHeaderView *headerView;
+@property (nonatomic,weak) WXZKHListFooterView *footerView;
+
 @property (nonatomic,strong) WXZKeHuInfoModel *kehuInfoModel;
 
 @property (nonatomic,strong) UIButton *leftButton; // 导航栏左侧按钮
@@ -66,6 +69,7 @@ static NSString *searchStr; // 记录搜索条件
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.userInteractionEnabled = YES;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // 初始化
     self.dataArr = [NSMutableArray array];
@@ -177,6 +181,10 @@ static NSString *searchStr; // 记录搜索条件
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            {
+                [self goBackLoginPage]; // 回到登录页面
+            }
         }
         [self.tableView reloadData];
         // 结束刷新
@@ -199,14 +207,24 @@ static NSString *searchStr; // 记录搜索条件
     currentPage = 1;
     isRefresh = YES;
     shaixuanStr = type;
+    if ([type isEqualToString:@"筛选"])
+    {
+        shaixuanStr = @"";
+    }
     // 计算宽度
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,WXZ_SystemFont(16),NSFontAttributeName, nil];
-    CGRect rect = [type boundingRectWithSize:CGSizeMake(80, 44) options:NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dic context:nil];
-    _leftView.frame = CGRectMake(10, 0, rect.size.width+14+10, 44);
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,WXZ_SystemFont(18),NSFontAttributeName, nil];
+    CGRect rect = [type boundingRectWithSize:CGSizeMake(120, 44) options:NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dic context:nil];
+    _leftView.frame = CGRectMake(0, 0, rect.size.width+14, 44);
     _leftTitleLabel.frame = CGRectMake(0, 0, _leftView.width-14, _leftView.height);
     _leftImgView.frame = CGRectMake(_leftView.width-14, (_leftView.height-8)/2, 14, 8);
     _leftTitleLabel.text = type;
-    [_leftView setNeedsLayout];
+    [_leftView setNeedsUpdateConstraints]; // 更新约束
+    
+    if ([type isEqualToString:@"筛选"])
+    {
+        shaixuanStr = @"";
+    }
+    
     // 显示菊花
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 请求列表
@@ -216,13 +234,14 @@ static NSString *searchStr; // 记录搜索条件
 // 通知事件，刷新客户列表（显示所有数据）
 - (void)updateKeHuInfo:(id)sender
 {
-    [_screeningView removeFromSuperview];
-    _screeningView = nil;
+    [_screeningView removeFromSuperview]; // 移除弹出框view
+    _screeningView = nil; // 置为空
     
     _leftView.size = CGSizeMake(52, 44);
     _leftTitleLabel.size = CGSizeMake(38, 44);
     _leftImgView.frame = CGRectMake(_leftView.width-14, (_leftView.height-8)/2, 14, 8);
     _leftTitleLabel.text = @"筛选";
+    [_leftView setNeedsUpdateConstraints]; // 更新约束
     
     currentPage = 1;
     isRefresh = YES;
@@ -289,12 +308,12 @@ static NSString *searchStr; // 记录搜索条件
 {
     if (section == 0)
     {
-        WXZKHListHeaderView *headerView = [WXZKHListHeaderView initListHeaderView]; // header背景 view
+        _headerView = [WXZKHListHeaderView initListHeaderView]; // header背景 view
         // 添加轻击手势
         UITapGestureRecognizer *headerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewKeHuAction:)];
-        [headerView addGestureRecognizer:headerTap];
+        [_headerView addGestureRecognizer:headerTap];
         
-        return headerView;
+        return _headerView;
     }
     else
     {
@@ -302,26 +321,26 @@ static NSString *searchStr; // 记录搜索条件
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    if (section != 0)
-    {
-        // 首先判断有没有值
-        self.kehuInfoModel = self.dataArr[section-1];
-        if (![WXZChectObject checkWhetherStringIsEmpty:self.kehuInfoModel.hdTime] || ![WXZChectObject checkWhetherStringIsEmpty:self.kehuInfoModel.typebig] || ![WXZChectObject checkWhetherStringIsEmpty:self.kehuInfoModel.loupan])
-        {
-            WXZKHListFooterView *footerView = [WXZKHListFooterView initListFooterView]; // footer背景 view
-            footerView.keHuInfoModel = self.dataArr[section-1]; // footer 信息
-            
-            return footerView;
-        }
-        else
-        {
-            return nil;
-        }
-    }
-    return nil;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+////    if (section != 0)
+////    {
+////        // 首先判断有没有值
+////        self.kehuInfoModel = self.dataArr[section-1];
+////        if (![WXZChectObject checkWhetherStringIsEmpty:self.kehuInfoModel.hdTime] || ![WXZChectObject checkWhetherStringIsEmpty:self.kehuInfoModel.typebig] || ![WXZChectObject checkWhetherStringIsEmpty:self.kehuInfoModel.loupan])
+////        {
+////            _footerView = [WXZKHListFooterView initListFooterView]; // footer背景 view
+////            _footerView.keHuInfoModel = self.dataArr[section-1]; // footer 信息
+////            
+////            return _footerView;
+////        }
+////        else
+////        {
+////            return nil;
+////        }
+////    }
+//    return nil;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -332,17 +351,18 @@ static NSString *searchStr; // 记录搜索条件
     }
     else
     {
-        return 0.1;
+        return 0.1f;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 0)
-    {
-        return 0.001;
-    }
-    return 31;
+//    if (section == 0)
+//    {
+//        return 0.001;
+//    }
+//    return 31;
+    return 0.01f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -364,13 +384,18 @@ static NSString *searchStr; // 记录搜索条件
         yixiang = 18;
     }
     
-    return 20 + 20 + 12 + yixiang; // 返回行高
+    return 20 + 20 + 12 + yixiang+31; // 返回行高
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self hideScreeningView];
     [_searchBar resignFirstResponder];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    self.screeningView.frame = CGRectMake(0, self.tableView.contentOffset.y, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
 }
 
 #pragma mark - UISearchBarDelegate
@@ -467,10 +492,13 @@ static NSString *searchStr; // 记录搜索条件
             [self.view addSubview:_screeningView];
         }
         
+        _screeningView.frame = CGRectMake(0, self.tableView.contentOffset.y, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
         _screeningView.dataArr = self.shaixuanArr;
         _screeningView.backScreeningTypeDelegate = self;
         _screeningView.hidden = NO;
         self.tableView.scrollEnabled = NO;
+        self.headerView.hidden = YES;
+        self.footerView.hidden = YES;
         isHiden = YES;
     }
 }
@@ -479,6 +507,8 @@ static NSString *searchStr; // 记录搜索条件
 {
     [self.screeningView setHidden:YES];
     self.tableView.scrollEnabled = YES;
+    self.headerView.hidden = NO;
+    self.footerView.hidden = NO;
     isHiden = NO;
 }
 

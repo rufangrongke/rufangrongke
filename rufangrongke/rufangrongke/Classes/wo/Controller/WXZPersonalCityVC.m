@@ -156,6 +156,10 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
          else
          {
              [SVProgressHUD showErrorWithStatus:@"暂无数据"];
+             if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+             {
+                 [self goBackLoginPage]; // 回到登录页面
+             }
          }
          // 结束刷新
          [self.myTableView.header endRefreshing];

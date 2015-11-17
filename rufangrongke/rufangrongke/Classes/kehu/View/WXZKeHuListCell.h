@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *customerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *customerPhoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *houseInfoLabel;
+@property (weak, nonatomic) IBOutlet UIView *footerViews;
+@property (weak, nonatomic) IBOutlet UILabel *yixiangLabel;
 
 /**
  *  UIButton: 按钮

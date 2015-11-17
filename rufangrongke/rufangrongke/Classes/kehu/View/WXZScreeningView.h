@@ -17,7 +17,4 @@
 
 @property (nonatomic,assign) id<BackFilterTypeDelegate> backScreeningTypeDelegate;
 
-@property (nonatomic,strong) UILabel *titleLabel;
-@property (nonatomic,strong) UIImageView *selectImgView;
-
 @end

@@ -189,6 +189,10 @@
          else
          {
              [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+             if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+             {
+                 [self goBackLoginPage]; // 回到登录页面
+             }
          }
          
      } failure:^(NSURLSessionDataTask *task, NSError *error)

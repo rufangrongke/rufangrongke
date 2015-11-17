@@ -13,8 +13,6 @@
 
 @end
 
-static NSInteger recordRow;
-
 @implementation WXZScreeningView
 
 - (void)awakeFromNib
@@ -23,10 +21,6 @@ static NSInteger recordRow;
     self.myTable.delegate = self;
     self.myTable.backgroundColor = [UIColor clearColor];
     self.myTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    recordRow = 0;
-    
-//    _selectImgView.hidden = YES;
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
