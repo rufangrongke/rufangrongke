@@ -48,6 +48,7 @@ static NSString *louPanHuXingCollectionCellID = @"WXZLouPanHuXingCollectionCell"
 {
     WXZLouPanHuXingCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:louPanHuXingCollectionCellID forIndexPath:indexPath];
     cell.hxs = self.hxs[indexPath.row];
+//    cell.bounds = CGRectMake(0, 0, 80, 100);
 //    cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(100)/100.0 green:arc4random_uniform(100)/100.0  blue:arc4random_uniform(100)/100.0  alpha:1.0];
     return cell;
 }

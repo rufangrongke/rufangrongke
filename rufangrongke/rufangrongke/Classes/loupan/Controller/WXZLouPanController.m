@@ -82,6 +82,7 @@ static NSInteger inp = 1;
     inp = 1;
     xiaoqu = @"";
     quyu = @"";
+    self.fysList = nil;
     [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
 }
 #pragma mark - <初始化项目>
