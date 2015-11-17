@@ -33,7 +33,7 @@
 
 @property (nonatomic,strong) WXZScreeningView *screeningView;
 
-@property (nonatomic,strong) UIView *mengCengView;
+//@property (nonatomic,strong) UIView *mengCengView;
 
 @property (nonatomic,strong) NSMutableArray *dataArr;
 
@@ -41,6 +41,10 @@
 
 @property (nonatomic,strong) WXZKeHuInfoModel *kehuInfoModel;
 
+@property (nonatomic,strong) UIButton *leftButton; // 导航栏左侧按钮
+@property (nonatomic,strong) UIView *leftView;
+@property (nonatomic,strong) UILabel *leftTitleLabel;
+@property (nonatomic,strong) UIImageView *leftImgView;
 @end
 
 static NSInteger isHiden; // 弹框是否隐藏
@@ -88,7 +92,23 @@ static NSString *searchStr; // 记录搜索条件
 - (void)setUp
 {
     // 左边按钮
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage2:@"kh_shaixuan" highImage:@"kh_shaixuan" title:@"" target:self action:@selector(quDu_click) isEnable:YES];
+    _leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 52, 44)];
+    _leftView.backgroundColor = [UIColor clearColor];
+    
+    _leftTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 38, _leftView.height)];
+    _leftTitleLabel.text = @"筛选";
+    _leftTitleLabel.font = WXZ_SystemFont(18);
+    _leftTitleLabel.textColor = [UIColor whiteColor];
+    [_leftView addSubview:_leftTitleLabel];
+    
+    _leftImgView = [[UIImageView alloc] initWithFrame:CGRectMake(_leftView.width-14, (_leftView.height-8)/2, 14, 8)];
+    _leftImgView.image = [UIImage imageNamed:@"kh_ip_jt"];
+    [_leftView addSubview:_leftImgView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(quDu_click)];
+    [_leftView addGestureRecognizer:tap];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_leftView];
     // 右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"lp_qd" highImage:@"lp_qd" title:@"" target:self action:@selector(queDing_click) isEnable:YES];
     
@@ -176,10 +196,13 @@ static NSString *searchStr; // 记录搜索条件
     isRefresh = YES;
     shaixuanStr = type;
 //    searchStr = @"";
-
-    self.navigationItem.leftBarButtonItem.title = type;
-    self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@""];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage2:@"" highImage:@"" title:type target:self action:@selector(quDu_click) isEnable:YES];
+    // 计算宽度
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,WXZ_SystemFont(16),NSFontAttributeName, nil];
+    CGRect rect = [type boundingRectWithSize:CGSizeMake(80, 44) options:NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dic context:nil];
+    _leftView.frame = CGRectMake(10, 0, rect.size.width+14+10, 44);
+    _leftTitleLabel.frame = CGRectMake(0, 0, _leftView.width-14, _leftView.height);
+    _leftImgView.frame = CGRectMake(_leftView.width-14, (_leftView.height-8)/2, 14, 8);
+    _leftTitleLabel.text = type;
     // 显示菊花
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 请求列表
@@ -189,6 +212,11 @@ static NSString *searchStr; // 记录搜索条件
 // 通知事件，刷新客户列表（显示所有数据）
 - (void)updateKeHuInfo:(id)sender
 {
+    _leftView.size = CGSizeMake(52, 44);
+    _leftTitleLabel.size = CGSizeMake(38, 44);
+    _leftImgView.frame = CGRectMake(_leftView.width-14, (_leftView.height-8)/2, 14, 8);
+    _leftTitleLabel.text = @"筛选";
+    
     currentPage = 1;
     isRefresh = YES;
     shaixuanStr = @"";
@@ -427,32 +455,30 @@ static NSString *searchStr; // 记录搜索条件
     }
     else
     {
-        self.mengCengView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.contentOffset.y, WXZ_ScreenWidth, WXZ_ScreenHeight-64)];
-        self.mengCengView.backgroundColor = [UIColor colorWithRed:15/255 green:15/255 blue:15/255 alpha:0.5];
-        [self.view addSubview:self.mengCengView];
-        
-        // 动画
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        [UIView beginAnimations:@"donghua" context:context];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [UIView setAnimationDelay:0.1];
         // 显示视图
         _screeningView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZScreeningView class]) owner:self options:nil] lastObject];
         _screeningView.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
         _screeningView.backgroundColor = [UIColor whiteColor];
         _screeningView.dataArr = self.shaixuanArr;
         _screeningView.backScreeningTypeDelegate = self;
-        [self.mengCengView addSubview:_screeningView];
+        [self.view addSubview:_screeningView];
         self.tableView.scrollEnabled = NO;
         isHiden = YES;
-        // 提交动画
-        [UIView commitAnimations];
+        
+//        // 动画
+//        CGContextRef context = UIGraphicsGetCurrentContext();
+//        [UIView beginAnimations:@"donghua" context:context];
+//        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+//        [UIView setAnimationDelay:0.1];
+//        
+//        // 提交动画
+//        [UIView commitAnimations];
     }
 }
 // 隐藏筛选视图
 - (void)hideScreeningView
 {
-    [self.mengCengView removeFromSuperview];
+    [self.screeningView removeFromSuperview];
     self.tableView.scrollEnabled = YES;
     isHiden = NO;
 }

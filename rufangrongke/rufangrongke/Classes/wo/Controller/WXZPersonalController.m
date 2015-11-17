@@ -50,6 +50,7 @@ static BOOL isRefreshWo;
     self.myTableView.delegate = self;
     
     isRefreshWo = NO;
+    [self personalDataRequest:YES]; // 个人资料数据请求
     
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePersonalData:) name:@"UpdatePersonalDataPage" object:nil];

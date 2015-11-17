@@ -19,6 +19,13 @@
     // Initialization code
     self.pricefTextField.delegate = self;
     self.priceeTextField.delegate = self;
+    // 替换原有光标，并向右侧移动一点
+    UIView *paddingfView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 3, 30)];
+    self.pricefTextField.leftView = paddingfView;
+    self.pricefTextField.leftViewMode = UITextFieldViewModeAlways;
+    UIView *paddingeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 3, 30)];
+    self.priceeTextField.leftView = paddingeView;
+    self.priceeTextField.leftViewMode = UITextFieldViewModeAlways;
     
     // 注册键盘通知
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -45,8 +52,14 @@
         }
         else
         {
-            self.pricefTextField.text = sStr;
-            self.priceeTextField.text = eStr;
+            if (![WXZChectObject checkWhetherStringIsEmpty:sStr])
+            {
+                self.pricefTextField.text = sStr;
+            }
+            if (![WXZChectObject checkWhetherStringIsEmpty:eStr])
+            {
+                self.priceeTextField.text = eStr;
+            }
         }
     }
 }

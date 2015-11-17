@@ -138,7 +138,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     [param setObject:quyu forKey:@"QuYu"];
     [param setObject:hx forKey:@"Hx"];
     [param setObject:yixinag forKey:@"YiXiang"];
-    
+    WXZLog(@"add param = %@",param);
     [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
         if ([responseObject[@"ok"] integerValue] == 1)
@@ -269,7 +269,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         [headerView addSubview:self.yixiangLabel];
         
         if (self.isModifyCustomerInfo && (![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailModel.QuYu]] || ![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailModel.Hx]] || ![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailModel.JiaGeS]] || ![WXZChectObject checkWhetherStringIsEmpty:[NSString stringWithFormat:@"%@",self.detailModel.JiaGeE]]))
-            [self showTheOriginalInfo]; //
+            [self showHeaderInfo]; // 展示已有购房意向
         else
             self.yixiangLabel.text = @"购房意向";
             
@@ -386,6 +386,10 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
 
 - (void)typeSelectAction:(UIButton *)sender
 {
+    [self.nameTextField resignFirstResponder];
+    [self.phoneNumTextField resignFirstResponder];
+    [self.pricefTextField resignFirstResponder];
+    [self.priceeTextField resignFirstResponder];
     NSString *str = [NSString stringWithFormat:@"%ld",(long)sender.tag];
     str = [str substringWithRange:NSMakeRange(0, str.length-1)];
     if ([str isEqualToString:@"100003"])
@@ -418,6 +422,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
             {
                 [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
                 [sender setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
+                [self.qiWangHuXingArr removeObject:sender.titleLabel.text];
             }
             
             for (int i = 1; i < 6; i++)
@@ -474,6 +479,10 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         [sender setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
         [sender setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
         _priceStr = @"";
+        [self.pricefTextField resignFirstResponder];
+        [self.priceeTextField resignFirstResponder];
+        self.pricefTextField.text = @"";
+        self.priceeTextField.text = @"";
     }
     else
     {

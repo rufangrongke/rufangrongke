@@ -31,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *determineBtn; // 确定按钮
 @end
 
-static BOOL isModifyCount; // 第几次请求
+static NSInteger isModifyCount; // 第几次请求
 
 @implementation WXZModifyPhoneVC
 
@@ -48,7 +48,7 @@ static BOOL isModifyCount; // 第几次请求
     self.xinPhoneTextField.delegate = self;
     self.erPhoneTextField.delegate = self;
     self.xinPCodeTextField.delegate = self;
-    isModifyCount = 1;
+    isModifyCount = 1; // 初始值
     
     // 赋值
     self.currentPhoneNumLabel.text = self.phone;
@@ -70,10 +70,18 @@ static BOOL isModifyCount; // 第几次请求
 // 修改手机号请求1
 - (void)modifyRequestWithParameter1:(NSString *)parm1 parameter:(NSString *)parm2
 {
-    NSString *url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao];
+    NSString *url = @"";
+    if (isModifyCount == 1)
+    {
+        url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao];
+    }
+    else if (isModifyCount == 2)
+    {
+        url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao2];
+    }
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [param setObject:parm1 forKey:@"yzm"]; // 旧手机号发送的验证码
+    [param setObject:parm1 forKey:@"yzm"]; // 旧/新手机号验证码
     [param setObject:parm2 forKey:@"mob"]; // 新手机号
     
     [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
@@ -82,37 +90,18 @@ static BOOL isModifyCount; // 第几次请求
          {
              [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]]; // 取消菊花
              
-             self.xinPCodeView.hidden = NO; // 请求成功，显示输入新手机号输入框
-             isModifyCount = 2;
-         }
-         else
-         {
-             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
-         }
-         
-     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-     }];
-}
-
-// 修改手机号请求2
-- (void)modifyRequestWithParameter2:(NSString *)parm1 parameter:(NSString *)parm2
-{
-    NSString *url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao2];
-    
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [param setObject:parm2 forKey:@"yzm"]; // 新手机号发送的验证码
-    [param setObject:parm1 forKey:@"mob"]; // 新手机号
-    
-    [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
-     {
-         if ([responseObject[@"ok"] integerValue] == 1)
-         {
-             [SVProgressHUD showSuccessWithStatus:@"手机号修改成功"]; // 取消菊花
-              // 跳转到登录页面（修改手机号）
-              WXZLoginController *loginController = [[WXZLoginController alloc]init];
-              WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
-              [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
+             if (isModifyCount == 1)
+             {
+                 self.xinPCodeView.hidden = NO; // 请求成功，显示输入新手机号输入框
+                 isModifyCount = 2;
+             }
+             else
+             {
+                 // 跳转到登录页面（修改手机号）
+                 WXZLoginController *loginController = [[WXZLoginController alloc]init];
+                 WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
+                 [[[[UIApplication sharedApplication] delegate] window] setRootViewController:nav];
+             }
          }
          else
          {
@@ -127,7 +116,6 @@ static BOOL isModifyCount; // 第几次请求
 // 获取验证码事件及请求
 - (IBAction)codeBtnAction:(JxbScaleButton *)sender
 {
-    NSLog(@"验证码");
     // 判断有没有手机号
     if (![WXZChectObject checkWhetherStringIsEmpty:self.currentPhoneNumLabel.text withTipInfo:@"未发现当前手机号"])
     {
@@ -180,6 +168,8 @@ static BOOL isModifyCount; // 第几次请求
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
                 _codeBtn.userInteractionEnabled = YES;
+                isModifyCount = 1; // 倒计时结束还没有修改成功，则需要重新请求
+                self.xinPCodeView.hidden = YES; // 隐藏新手机验证码view
             });
         }
         else
@@ -225,7 +215,7 @@ static BOOL isModifyCount; // 第几次请求
     {
         // 显示菊花
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-        [self modifyRequestWithParameter2:self.xinPhoneTextField.text parameter:self.xinPCodeTextField.text];
+        [self modifyRequestWithParameter1:self.xinPCodeTextField.text parameter:self.xinPhoneTextField.text];
     }
     
 }
@@ -260,7 +250,7 @@ static BOOL isModifyCount; // 第几次请求
 {
     // 不同输入框限定输入的字数
     NSInteger sum = 0;
-    if (textField.tag == 100011)
+    if (textField.tag == 100011 || textField.tag == 100027)
     {
         sum = 6; // 验证码位数
     }
