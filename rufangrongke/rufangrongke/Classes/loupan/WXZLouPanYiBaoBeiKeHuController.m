@@ -21,6 +21,7 @@ static NSString *WXZLouPanYiBaoBeiKeHuCellID = @"WXZLouPanYiBaoBeiKeHuCellID";
 - (void)setUp{
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZLouPanYiBaoBeiKeHuCell class]) bundle:nil] forCellReuseIdentifier:WXZLouPanYiBaoBeiKeHuCellID];
     self.tableView.rowHeight = 50;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

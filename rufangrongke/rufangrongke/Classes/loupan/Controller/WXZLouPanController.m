@@ -15,8 +15,10 @@
 #import <MJExtension.h>
 #import "WXZLouPanMessageController.h"
 #import "WXZquYuListViewController.h"
+#import "WXZLouPanHomeHeadView.h"
+#import "WXZLeftBtnView.h"
 
-@interface WXZLouPanController ()<UITableViewDataSource, UITableViewDelegate, WXZquYuListViewControllerDelegate>
+@interface WXZLouPanController ()<UITableViewDataSource, UITableViewDelegate, WXZquYuListViewControllerDelegate, UISearchBarDelegate>
 /** 楼盘模型字典 */
 @property (nonatomic, strong) WXZLouPan *loupanModel;
 
@@ -27,6 +29,8 @@
 @property (nonatomic , strong) NSMutableArray *fysList;
 /* WXZquYuListViewController */
 @property (nonatomic , strong) WXZquYuListViewController *quYuListViewVC;
+/* leftBtn */
+@property (nonatomic , weak) WXZLeftBtnView *leftBtn;
 @end
 
 @implementation WXZLouPanController
@@ -40,6 +44,7 @@ static NSInteger inp = 1;
  * 抽取的网络请求方法
  */
 - (void)networkRequestsWithInp:(NSInteger)inp xiaoqu:(NSString *)xiaoqu quyu:(NSString *)quyu{
+    [SVProgressHUD show];
     // 发送请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -69,18 +74,32 @@ static NSInteger inp = 1;
 }
 
 
-#pragma 初始化项目
+#pragma - <初始化项目>
 - (void)setUp{
+//    self.tableView.style = UITableViewStyleGrouped;
     // 去除分割线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置导航栏左边按钮
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_quyutu" highImage:@"lp_quyutu" target:self action:@selector(quYu_click)];
+//    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+////    leftBtn.frame = CGRectMake(0, 0, 60, 30);
+//    [leftBtn setTitle:@"区域" forState:UIControlStateNormal];
+//    leftBtn.titleLabel.font = [UIFont systemFontOfSize:19];
+//    [leftBtn setImage:[UIImage imageNamed:@"lp_jt"] forState:UIControlStateNormal];
+//    [leftBtn setTitleColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0] forState:UIControlStateNormal];
+//    [leftBtn addTarget:self action:@selector(quYu_click) forControlEvents:UIControlEventTouchUpInside];
+//    [leftBtn sizeToFit];
+//    self.leftBtn = leftBtn;
+    WXZLeftBtnView *leftBtn = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLeftBtnView class]) owner:nil options:nil].lastObject;
+    [leftBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(quYu_click)]];
+    self.leftBtn = leftBtn;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
     // 设置导航栏右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
     // 添加一个系统的搜索框
     UISearchBar *search = [[UISearchBar alloc]init];
     search.placeholder = @"楼盘搜索";
     self.navigationItem.titleView = search;
+    search.delegate = self;
     self.search = search;
 
     // 注册cell
@@ -101,28 +120,7 @@ static NSInteger inp = 1;
     
     // 网络请求
     [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
-//    // 发送请求
-//    NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    params[@"inp"] = @(inp);
-//    params[@"xiaoqu"] = xiaoqu;
-//    params[@"qu"] = quyu;
-//    WXZLog(@"%zd, %@, %@", inp, xiaoqu,quyu);
-//    [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-////        WXZLog(@"%@", responseObject);
-//        // 隐藏指示器
-//        [SVProgressHUD dismiss];
-//        // 转模型,存储模型
-//        self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
-//        self.fysList = [NSMutableArray arrayWithArray:self.loupanModel.fys];
-//        // 刷新表格
-//        [self.tableView reloadData];
-//        
-//        
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        // 显示失败信息
-//        [SVProgressHUD showErrorWithStatus:@"加载推荐信息失败!"];
-//    }];
+
 }
 
 /**
@@ -143,36 +141,7 @@ static NSInteger inp = 1;
     inp = 1;
     xiaoqu = self.search.text;
     [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
-//    // 发送请求
-//    NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    params[@"xiaoqu"] = xiaoqu;
-//    params[@"qu"] = quyu;
-//    params[@"inp"] = @(inp);
-//    WXZLog(@"inp%zd, xiaoqu%@, quyu%@", inp, xiaoqu,quyu);
-//    [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-//        // 转模型,存储模型
-////        WXZLog(@"%@", responseObject);
-//        self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
-//        self.fysList = nil;
-//        self.fysList = [NSMutableArray arrayWithArray:self.loupanModel.fys];
-//        // 刷新表格
-//        [self.tableView reloadData];
-// //     4.回到主线程
-//
-//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-////            if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
-////                // 隐藏HUD
-//                [SVProgressHUD dismiss];
-////            }else{ //登陆失败
-////                [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];
-////            }
-//        }];
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        WXZLog(@"%@", error);
-//        // 显示失败信息
-//        [SVProgressHUD showErrorWithStatus:@"加载信息失败!"];
-//    }];
+
 }
 
 /**
@@ -207,6 +176,15 @@ static NSInteger inp = 1;
     self.search.text = @"";
     xiaoqu = self.search.text;
     [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
+    
+    // 修改左上方按钮
+    if (![parameter  isEqual: @""]) {
+        NSString *name = [parameter substringToIndex:2];
+        WXZLog(@"%@", name);
+        self.leftBtn.leftBtnLabel.text = name;
+    }else{
+        self.leftBtn.leftBtnLabel.text = @"区域";
+    }
 }
 #pragma 刷新控件
 /**
@@ -276,6 +254,10 @@ static NSInteger inp = 1;
 
 
 #pragma mark - <UITableViewDataSource>
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.fysList.count;
@@ -290,8 +272,16 @@ static NSInteger inp = 1;
     
     return cell;
 }
-
-
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    WXZLouPanHomeHeadView *louPanHomeHeadView = [WXZLouPanHomeHeadView louPanHomeHeadView];
+    louPanHomeHeadView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 218 / 375);
+    return louPanHomeHeadView;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return [UIScreen mainScreen].bounds.size.width * 218 / 375;
+}
 /**
  *  点击cell
  */
@@ -319,5 +309,22 @@ static NSInteger inp = 1;
     // 取消键盘
     [self.search resignFirstResponder];
 }
-
+/**
+ *  搜索
+ */
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    // 隐藏WXZquYuListViewController.view
+    self.quYuListViewVC.view.hidden = YES;
+    // 取消键盘
+    [self.search resignFirstResponder];
+    // 根据搜索栏发送请求
+    if (self.search.text.length == 0){
+        [SVProgressHUD showErrorWithStatus:@"请填写小区名" maskType:SVProgressHUDMaskTypeBlack];
+        return;
+    }
+    [SVProgressHUD show];
+    inp = 1;
+    xiaoqu = self.search.text;
+    [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
+}
 @end

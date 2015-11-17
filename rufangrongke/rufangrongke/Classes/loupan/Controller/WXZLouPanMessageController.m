@@ -102,7 +102,8 @@ static CGFloat carouselPic_height = 226;
     
     // XMGPageView
     XMGPageView *pageView = [XMGPageView pageView];
-    pageView.frame = CGRectMake(carouselPic_x, carouselPic_y, carouselPic_width, carouselPic_height);
+    pageView.frame = CGRectMake(carouselPic_x, carouselPic_y, mainScreenWeight, carouselPic_height);
+    WXZLog(@"%f, %f, %f, %f",carouselPic_x, carouselPic_y, mainScreenWeight, carouselPic_height);
     pageView.imageNames = @[@"loupan-banner", @"loupan-banner", @"loupan-banner"];
     pageView.otherColor = [UIColor grayColor];
     pageView.currentColor = [UIColor orangeColor];

@@ -22,17 +22,17 @@ static NSString *quYuListViewCellID = @"quyuCell";
 //    self.tableView.backgroundColor = [UIColor clearColor];
 //    [self.tableView registerClass:[WXZquYuListViewCell class] forCellReuseIdentifier:quYuListViewCellID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZquYuListViewCell class]) bundle:nil] forCellReuseIdentifier:quYuListViewCellID];
-
-    // 获取沙河路径
-    NSString *cityListInfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:cityListInfoFile];
-    // 从沙河中获取城市列表
-    NSDictionary *sandBoxCityList = [NSDictionary dictionaryWithContentsOfFile:cityListInfoPath];
-    if (sandBoxCityList != nil) {
-        // 字典转模型
-        self.quYuListViewCellModel = [WXZquYuListViewCellModel objectWithKeyValues:[NSDictionary dictionaryWithContentsOfFile:cityListInfoPath]];
-        // 刷新表格
-        [self.tableView reloadData];
-    }else{// 发送请求
+//
+//    // 获取沙河路径
+//    NSString *cityListInfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:cityListInfoFile];
+//    // 从沙河中获取城市列表
+//    NSDictionary *sandBoxCityList = [NSDictionary dictionaryWithContentsOfFile:cityListInfoPath];
+//    if (sandBoxCityList != nil) {
+//        // 字典转模型
+//        self.quYuListViewCellModel = [WXZquYuListViewCellModel objectWithKeyValues:[NSDictionary dictionaryWithContentsOfFile:cityListInfoPath]];
+//        // 刷新表格
+//        [self.tableView reloadData];
+//    }else{// 发送请求
         NSString *url = [OutNetBaseURL stringByAppendingString:quyuliebiao];
         [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             WXZLog(@"%@", responseObject);
@@ -54,7 +54,7 @@ static NSString *quYuListViewCellID = @"quyuCell";
             [SVProgressHUD showErrorWithStatus:@"加载信息失败!"];
         }];
 
-    }
+//    }
 
 }
 

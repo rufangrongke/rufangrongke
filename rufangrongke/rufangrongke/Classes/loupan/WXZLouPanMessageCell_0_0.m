@@ -51,8 +51,9 @@ static int index_1 = 0;
 {
     _model = model;
     // 楼盘均价
-    self.loupanJunJia.text = [NSString stringWithFormat:@"%@元/平", model.JunJia];;
-    [self.loupanJunJia setTextColor:[UIColor redColor]];
+    if (model.JunJia) {
+        self.loupanJunJia.text = [NSString stringWithFormat:@"%@元/平", model.JunJia];
+    }
     // 楼盘位置
     self.loupanWeiZhi.text = model.WeiZhi;
     [self.loupanWeiZhi setTextColor:[UIColor darkGrayColor]];

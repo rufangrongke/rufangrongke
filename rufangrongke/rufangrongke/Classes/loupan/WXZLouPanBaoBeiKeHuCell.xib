@@ -21,7 +21,7 @@
                             <constraint firstAttribute="height" constant="18" id="pCU-sK-EBx"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEn-l2-ynA">
@@ -31,7 +31,7 @@
                             <constraint firstAttribute="height" constant="18" id="c89-0R-qoD"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m89-X5-bCI">
@@ -40,7 +40,7 @@
                             <constraint firstAttribute="height" constant="18" id="ral-o2-Otq"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系电话" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUY-g8-quQ">
@@ -49,16 +49,23 @@
                             <constraint firstAttribute="height" constant="18" id="Y5T-iq-DH9"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loupan-baobei-wdg" highlightedImage="loupan-baobei-dg" translatesAutoresizingMaskIntoConstraints="NO" id="yxa-FE-yys">
-                        <rect key="frame" x="279" y="12.5" width="26" height="26"/>
+                        <rect key="frame" x="279" y="12" width="26" height="26"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="26" id="YXD-Vp-rtt"/>
                             <constraint firstAttribute="height" constant="26" id="hRY-Es-Vg7"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5S-D4-TuS">
+                        <rect key="frame" x="0.0" y="49.5" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.11" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="HIf-dy-TYI"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="AUY-g8-quQ" firstAttribute="centerY" secondItem="Ajh-lE-l98" secondAttribute="centerY" id="2pY-yu-ffP"/>
@@ -66,10 +73,13 @@
                     <constraint firstItem="m89-X5-bCI" firstAttribute="leading" secondItem="qEn-l2-ynA" secondAttribute="trailing" constant="5" id="EIT-pO-xmM"/>
                     <constraint firstItem="yxa-FE-yys" firstAttribute="centerY" secondItem="Mp2-Hf-O6m" secondAttribute="centerY" id="IMk-u1-xbn"/>
                     <constraint firstItem="Ajh-lE-l98" firstAttribute="top" secondItem="qEn-l2-ynA" secondAttribute="bottom" constant="4" id="Ihw-SK-gI8"/>
+                    <constraint firstAttribute="trailing" secondItem="G5S-D4-TuS" secondAttribute="trailing" id="Vbv-RM-4YF"/>
                     <constraint firstItem="qEn-l2-ynA" firstAttribute="leading" secondItem="Mp2-Hf-O6m" secondAttribute="leading" constant="15" id="dje-YY-gQy"/>
                     <constraint firstItem="AUY-g8-quQ" firstAttribute="leading" secondItem="Ajh-lE-l98" secondAttribute="trailing" constant="5" id="hfT-bd-PvD"/>
+                    <constraint firstAttribute="bottom" secondItem="G5S-D4-TuS" secondAttribute="bottom" id="lfI-Hs-rGh"/>
                     <constraint firstItem="m89-X5-bCI" firstAttribute="centerY" secondItem="qEn-l2-ynA" secondAttribute="centerY" id="oD2-vB-GEw"/>
                     <constraint firstItem="Ajh-lE-l98" firstAttribute="leading" secondItem="Mp2-Hf-O6m" secondAttribute="leading" constant="15" id="qd1-XD-K4s"/>
+                    <constraint firstItem="G5S-D4-TuS" firstAttribute="leading" secondItem="Mp2-Hf-O6m" secondAttribute="leading" id="r2t-MQ-xFQ"/>
                     <constraint firstAttribute="trailing" secondItem="yxa-FE-yys" secondAttribute="trailing" constant="15" id="tpK-yD-3cf"/>
                 </constraints>
             </tableViewCellContentView>
