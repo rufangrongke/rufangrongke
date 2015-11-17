@@ -262,6 +262,7 @@ static int colorNum = 235;
 //        // 标题
 //        infoVc.title = @"户型详情";
 //        infoVc.huXingBianHao = [self.louPanInformationControllerModel.others[indexPath.row] ID];
+        self.tableView.contentOffset = CGPointMake(0, 0);
         [self openNewLouPanInfoVC:[self.louPanInformationControllerModel.others[indexPath.row] ID]];
 //        [self.navigationController pushViewController:infoVc animated:YES];
     }

@@ -85,7 +85,14 @@ static CGFloat carouselPic_height = 226;
  */
 - (void)phone_click
 {
-//    WXZLogFunc;
+    WXZLogFunc;
+    // 打电话
+    if (self.louPanMessageModel.view.XiangMuTel) {
+        NSString *phoneNumStr = [NSString stringWithFormat:@"telprompt://%@",self.louPanMessageModel.view.XiangMuTel];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumStr]];
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"手机未录入" maskType:SVProgressHUDMaskTypeBlack];
+    }
 }
 - (void)footViewLunBo{
     // 尺寸

@@ -36,7 +36,7 @@ static NSString *quYuListViewCellID = @"quyuCell";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self refreshCity];
+    [self notification];
 //    self.tableView.backgroundColor = [UIColor clearColor];
 //    [self.tableView registerClass:[WXZquYuListViewCell class] forCellReuseIdentifier:quYuListViewCellID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZquYuListViewCell class]) bundle:nil] forCellReuseIdentifier:quYuListViewCellID];

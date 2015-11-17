@@ -31,6 +31,8 @@
 @property (nonatomic , strong) WXZquYuListViewController *quYuListViewVC;
 /* leftBtn */
 @property (nonatomic , weak) WXZLeftBtnView *leftBtn;
+/* WXZLouPanHomeHeadView */
+@property (nonatomic , weak) WXZLouPanHomeHeadView *louPanHomeHeadView;
 @end
 
 @implementation WXZLouPanController
@@ -52,7 +54,7 @@ static NSInteger inp = 1;
     params[@"xiaoqu"] = xiaoqu;
     params[@"qu"] = quyu;
     [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        WXZLog(@"%@", responseObject);
+//        WXZLog(@"%@", responseObject);
         // 隐藏指示器
         [SVProgressHUD dismiss];
         // 转模型,存储模型
@@ -76,9 +78,11 @@ static NSInteger inp = 1;
 
 #pragma mark - 通知
 - (void)notification{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshList) name:@"RefreshCity" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshList:) name:@"RefreshCity" object:nil];
 }
-- (void)refreshList{
+- (void)refreshList:(NSNotification *)notification
+{
+    self.leftBtn.leftBtnLabel.text = @"区域";
     inp = 1;
     xiaoqu = @"";
     quyu = @"";
@@ -87,7 +91,9 @@ static NSInteger inp = 1;
 }
 #pragma mark - <初始化项目>
 - (void)setUp{
-//    self.tableView.style = UITableViewStyleGrouped;
+    // 注册通知
+    [self notification];
+    
     // 去除分割线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置导航栏左边按钮
@@ -153,6 +159,8 @@ static NSInteger inp = 1;
 //    self.tableView.contentOffset = CGPointMake(0, 0);
     // 取消键盘
     [self.search resignFirstResponder];
+    
+    WXZLog(@"%f", self.tableView.contentOffset.y);
     if (self.quYuListViewVC == nil) {
         // 楼盘区域列表
         WXZquYuListViewController *quYuListViewVC = [[WXZquYuListViewController alloc] init];
@@ -160,11 +168,14 @@ static NSInteger inp = 1;
         self.quYuListViewVC = quYuListViewVC;
         self.quYuListViewVC.view.frame = CGRectMake(0, self.tableView.contentOffset.y, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
         [self.tableView addSubview:self.quYuListViewVC.view];
+//        [self.tableView insertSubview:self.quYuListViewVC.view aboveSubview:self.louPanHomeHeadView];
         self.tableView.scrollEnabled = NO;
+        self.louPanHomeHeadView.hidden = YES;
     }else{
         self.quYuListViewVC.view.frame = CGRectMake(0, self.tableView.contentOffset.y, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);;
         self.quYuListViewVC.view.hidden = !self.quYuListViewVC.view.hidden;
         self.tableView.scrollEnabled = !self.tableView.scrollEnabled;
+        self.louPanHomeHeadView.hidden = !self.louPanHomeHeadView.hidden;
     }
 }
 
@@ -172,6 +183,7 @@ static NSInteger inp = 1;
 #pragma mark - WXZquYuListViewControllerDelegate
 - (void)quYuListViewControllerDelegate:(NSString *)parameter
 {
+    self.tableView.contentOffset = CGPointMake(0, 0);
     self.quYuListViewVC.view.hidden = YES;
     self.tableView.scrollEnabled = YES;
     inp = 1;
@@ -183,7 +195,7 @@ static NSInteger inp = 1;
     // 修改左上方按钮
     if (![parameter  isEqual: @""]) {
         NSString *name = [parameter substringToIndex:2];
-        WXZLog(@"%@", name);
+//        WXZLog(@"%@", name);
         self.leftBtn.leftBtnLabel.text = name;
     }else{
         self.leftBtn.leftBtnLabel.text = @"区域";
@@ -279,6 +291,7 @@ static NSInteger inp = 1;
 {
     WXZLouPanHomeHeadView *louPanHomeHeadView = [WXZLouPanHomeHeadView louPanHomeHeadView];
     louPanHomeHeadView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 218 / 375);
+    self.louPanHomeHeadView = louPanHomeHeadView;
     return louPanHomeHeadView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

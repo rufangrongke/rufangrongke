@@ -98,28 +98,28 @@
     // 物业公司
     self.wuyegongsi.text = model.WuYeGongSi;
     // 建筑面积
-    self.jianzhumianji.text = [NSString stringWithFormat:@"%zd平米", model.Area_JianZhu];
+    self.jianzhumianji.text = [NSString stringWithFormat:@"%@平米", model.Area_JianZhu];
     // 总户数
-    self.zonghushu.text = [NSString stringWithFormat:@"%zd", model.ZongHuShu];
+    self.zonghushu.text = [NSString stringWithFormat:@"%@", model.ZongHuShu];
     // 容积率
-    self.rongjilv.text = [NSString stringWithFormat:@"%@f", model.RongJiLv];
+    self.rongjilv.text = [NSString stringWithFormat:@"%@", model.RongJiLv];
     // 绿化率
-    self.lvhualv.text = [NSString stringWithFormat:@"%@f", model.LvHuaLv];
+    self.lvhualv.text = [NSString stringWithFormat:@"%@", model.LvHuaLv];
     // 车位数
-    self.cheweishu.text = [NSString stringWithFormat:@"%zd", model.CheWeiShu];
+    self.cheweishu.text = [NSString stringWithFormat:@"%@", model.CheWeiShu];
     // 车位比
     self.cheweibi.text = model.CheWeiBi;
     
     // 均价
-    self.junjia.text = [NSString stringWithFormat:@"%zd元", model.JunJia];
+    self.junjia.text = [NSString stringWithFormat:@"%@元", model.JunJia];
     // 物业费
-    self.wuyefei.text = [NSString stringWithFormat:@"%@f", model.WuYeFei];
+    self.wuyefei.text = [NSString stringWithFormat:@"%@", model.WuYeFei];
     // 建筑类型
     self.jianzhuleixing.text = model.JianZhuLeiXing;
     // 装修类型
     self.zhuangxiuleixing.text = model.ZhuangXiu;
     // 产权年限
-    self.chanquannianxian.text = [NSString stringWithFormat:@"%zd", model.ChanQuanNianXian];
+    self.chanquannianxian.text = [NSString stringWithFormat:@"%@", model.ChanQuanNianXian];
 }
 
 @end
