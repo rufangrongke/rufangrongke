@@ -206,6 +206,7 @@ static NSString *searchStr; // 记录搜索条件
     _leftTitleLabel.frame = CGRectMake(0, 0, _leftView.width-14, _leftView.height);
     _leftImgView.frame = CGRectMake(_leftView.width-14, (_leftView.height-8)/2, 14, 8);
     _leftTitleLabel.text = type;
+    [_leftView setNeedsLayout];
     // 显示菊花
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 请求列表
@@ -215,6 +216,9 @@ static NSString *searchStr; // 记录搜索条件
 // 通知事件，刷新客户列表（显示所有数据）
 - (void)updateKeHuInfo:(id)sender
 {
+    [_screeningView removeFromSuperview];
+    _screeningView = nil;
+    
     _leftView.size = CGSizeMake(52, 44);
     _leftTitleLabel.size = CGSizeMake(38, 44);
     _leftImgView.frame = CGRectMake(_leftView.width-14, (_leftView.height-8)/2, 14, 8);
@@ -458,7 +462,7 @@ static NSString *searchStr; // 记录搜索条件
         if (_screeningView == nil)
         {
             _screeningView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZScreeningView class]) owner:self options:nil] lastObject];
-            _screeningView.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
+            _screeningView.frame = CGRectMake(0, self.tableView.contentOffset.y, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
             _screeningView.backgroundColor = [UIColor whiteColor];
             [self.view addSubview:_screeningView];
         }
