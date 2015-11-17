@@ -62,7 +62,7 @@ static NSString *searchStr; // 记录搜索条件
     
     // 初始化
     self.dataArr = [NSMutableArray array];
-    self.shaixuanArr = @[@"所有",@"已报备",@"已带看",@"已预约",@"以认购",@"已结佣",@"未报备",@"无效客户"];
+    self.shaixuanArr = @[@"所有",@"已报备",@"已带看",@"已预约",@"已认购",@"已结佣",@"未报备",@"无效客户"];
     
     isRefresh = YES;
     isMore = YES;
@@ -88,9 +88,9 @@ static NSString *searchStr; // 记录搜索条件
 - (void)setUp
 {
     // 左边按钮
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_shaixuan" highImage:@"kh_shaixuan" target:self action:@selector(quDu_click)];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage2:@"kh_shaixuan" highImage:@"kh_shaixuan" title:@"" target:self action:@selector(quDu_click) isEnable:YES];
     // 右边按钮
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"lp_qd" highImage:@"lp_qd" title:@"" target:self action:@selector(queDing_click) isEnable:YES];
     
     // 添加一个系统的搜索框
     _searchBar = [[UISearchBar alloc] init];
@@ -110,7 +110,7 @@ static NSString *searchStr; // 记录搜索条件
     [param setObject:eachPage1 forKey:@"ps"];
     [param setObject:chooseCategory forKey:@"zt"];
     [param setObject:chooseConditions forKey:@"key"];
-    
+//    WXZLog(@"%@",param);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     [manager POST:urlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
@@ -158,14 +158,14 @@ static NSString *searchStr; // 记录搜索条件
             // 结束刷新
             [self.tableView.footer endRefreshing];
         }
-        searchStr = @"";
-        _searchBar.text = @"";
+//        searchStr = @"";
+//        _searchBar.text = @"";
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-        searchStr = @"";
-        _searchBar.text = @"";
+//        searchStr = @"";
+//        _searchBar.text = @"";
     }];
 }
 
@@ -175,14 +175,18 @@ static NSString *searchStr; // 记录搜索条件
     currentPage = 1;
     isRefresh = YES;
     shaixuanStr = type;
-    searchStr = @"";
+//    searchStr = @"";
+
+    self.navigationItem.leftBarButtonItem.title = type;
+    self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@""];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage2:@"" highImage:@"" title:type target:self action:@selector(quDu_click) isEnable:YES];
     // 显示菊花
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 请求列表
     [self keHuListRequest:currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
 }
 
-// 通知事件
+// 通知事件，刷新客户列表（显示所有数据）
 - (void)updateKeHuInfo:(id)sender
 {
     currentPage = 1;
@@ -345,13 +349,14 @@ static NSString *searchStr; // 记录搜索条件
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
+    searchStr = searchBar.text;
     [self hideScreeningView];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
-    searchStr = searchBar.text;
+//    searchStr = searchBar.text;
     [self queDing_click]; //
 }
 
@@ -377,9 +382,10 @@ static NSString *searchStr; // 记录搜索条件
 }
 - (void)loadMoreKeHuInfo
 {
+    // 加载更多
     isRefresh = NO;
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    [self keHuListRequest:currentPage++ numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
+    [self keHuListRequest:++currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
 }
 
 // 添加新客户事件
@@ -399,11 +405,11 @@ static NSString *searchStr; // 记录搜索条件
 // 右上方按钮监听点击
 - (void)queDing_click
 {
-    WXZLogFunc;
+    [self.searchBar resignFirstResponder];
     [self hideScreeningView];
     currentPage = 1;
     isRefresh = YES;
-    shaixuanStr = @"";
+//    shaixuanStr = @"";
     searchStr = self.searchBar.text;
     // 显示菊花
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
@@ -432,8 +438,8 @@ static NSString *searchStr; // 记录搜索条件
         [UIView setAnimationDelay:0.1];
         // 显示视图
         _screeningView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZScreeningView class]) owner:self options:nil] lastObject];
-        _screeningView.frame = CGRectMake(10, 0, 140, 185);
-        _screeningView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"kh_screening"]];
+        _screeningView.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
+        _screeningView.backgroundColor = [UIColor whiteColor];
         _screeningView.dataArr = self.shaixuanArr;
         _screeningView.backScreeningTypeDelegate = self;
         [self.mengCengView addSubview:_screeningView];

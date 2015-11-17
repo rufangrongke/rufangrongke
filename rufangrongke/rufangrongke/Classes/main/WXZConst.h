@@ -101,6 +101,10 @@ UIKIT_EXTERN NSString * const jinjirengongsibagding_parameter;
 UIKIT_EXTERN NSString * const jingjirenshimingrenzheng;
 UIKIT_EXTERN NSString * const jingjirenshimingrenzheng_parameter;
 
+// 23.经纪人修改手机号 --
+UIKIT_EXTERN NSString * const jinjirenxiugaishoujihao2;
+UIKIT_EXTERN NSString * const jinjirenxiugaishoujihao2_parameter;
+
 /******************************************************************/
 UIKIT_EXTERN NSString * const phoneNumber;
 UIKIT_EXTERN NSString * const password;

@@ -32,17 +32,20 @@
 
 - (void)updateInfo:(WXZKeHuDetailModel *)model isModify:(BOOL)ismodify
 {
-    self.noLimitBtn.backgroundColor = [UIColor lightGrayColor];
+    [self.noLimitBtn setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
+    [self.noLimitBtn setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
     if (ismodify)
     {
         NSString *sStr = [NSString stringWithFormat:@"%@",model.JiaGeS];
         NSString *eStr = [NSString stringWithFormat:@"%@",model.JiaGeE];
-        if (![WXZChectObject checkWhetherStringIsEmpty:sStr])
+        if ([WXZChectObject checkWhetherStringIsEmpty:sStr] && [WXZChectObject checkWhetherStringIsEmpty:eStr])
+        {
+            [self.noLimitBtn setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
+            [self.noLimitBtn setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
+        }
+        else
         {
             self.pricefTextField.text = sStr;
-        }
-        if (![WXZChectObject checkWhetherStringIsEmpty:eStr])
-        {
             self.priceeTextField.text = eStr;
         }
     }
@@ -51,6 +54,9 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    [self.noLimitBtn setBackgroundImage:[UIImage imageNamed:@"kh_quyuunselect"] forState:UIControlStateNormal];
+    [self.noLimitBtn setTitleColor:WXZRGBColor(27, 28, 27) forState:UIControlStateNormal];
+    
     [UIView animateWithDuration:0.25 animations:^{
         if (textField.tag == 100025 || textField.tag == 100026)
         {

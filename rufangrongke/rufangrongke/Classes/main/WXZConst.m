@@ -97,6 +97,10 @@ NSString * const jinjirengongsibagding_parameter = @"ltcid=&ltname=&picfile=";
 NSString * const jingjirenshimingrenzheng = @"UsRz.ashx";
 NSString * const jingjirenshimingrenzheng_parameter = @"truename=&sfzid=&sfzPic=";
 
+// 23.经纪人修改手机号 --
+NSString * const jinjirenxiugaishoujihao2 = @"UsGaimob2.ashx";
+NSString * const jinjirenxiugaishoujihao2_parameter = @"lN=&lD=";
+
 /************************************************************************************/
 // 用户名密码常量
 NSString * const phoneNumber = @"phoneNumber";

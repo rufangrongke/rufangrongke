@@ -225,6 +225,7 @@ static NSString *sex = @"先生"; // 记录性别
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]]; // 取消菊花
             if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
             {
                 // 跳转到登录页面（修改密码）
@@ -238,11 +239,10 @@ static NSString *sex = @"先生"; // 记录性别
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
                 [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
             }
-            [SVProgressHUD dismiss]; // 取消菊花
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:@"修改失败"];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

@@ -180,12 +180,12 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             NSLog(@"%@",responseObject[@"msg"]);
+//             NSLog(@"%@",responseObject[@"msg"]);
+             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
              // 发送通知更新个人资料
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
              [self reloadCityRegionList]; // 更新区域方法
              [self.navigationController popViewControllerAnimated:YES];
-             [SVProgressHUD dismiss];
          }
          else
          {
