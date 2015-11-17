@@ -11,15 +11,15 @@
             <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="区域" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nU-MM-Xbj">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="区域" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nU-MM-Xbj">
                     <rect key="frame" x="0.0" y="0.0" width="38" height="30"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lp_jt" translatesAutoresizingMaskIntoConstraints="NO" id="CyN-Bm-xjp">
-                    <rect key="frame" x="46" y="11" width="14" height="8"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="lp_jt" translatesAutoresizingMaskIntoConstraints="NO" id="CyN-Bm-xjp">
+                    <rect key="frame" x="43" y="11" width="14" height="8"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="14" id="YaY-xs-QSo"/>
                         <constraint firstAttribute="height" constant="8" id="nZz-hV-Y6f"/>
@@ -28,6 +28,8 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="CyN-Bm-xjp" firstAttribute="trailing" secondItem="3nU-MM-Xbj" secondAttribute="leading" constant="5" id="UFk-nF-txm"/>
+                <constraint firstItem="CyN-Bm-xjp" firstAttribute="leading" secondItem="3nU-MM-Xbj" secondAttribute="trailing" constant="5" id="VB6-RW-mPC"/>
                 <constraint firstAttribute="trailing" secondItem="CyN-Bm-xjp" secondAttribute="trailing" id="WKP-fF-YfS"/>
                 <constraint firstAttribute="bottom" secondItem="3nU-MM-Xbj" secondAttribute="bottom" id="aIj-ty-aKJ"/>
                 <constraint firstItem="CyN-Bm-xjp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eIv-iL-8ge"/>
@@ -36,6 +38,12 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="UFk-nF-txm"/>
+                    <exclude reference="WKP-fF-YfS"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="leftBtnLabel" destination="3nU-MM-Xbj" id="vvr-wh-jN6"/>
             </connections>

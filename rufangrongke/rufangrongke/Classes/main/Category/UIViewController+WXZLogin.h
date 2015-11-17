@@ -19,4 +19,6 @@ typedef void(^loginMessage)(id result);
 - (NSDictionary *)localUserInfo;
 
 - (void)reloadCityRegionList;
+/*回到登陆页*/
+- (void)goBackLoginPage;
 @end

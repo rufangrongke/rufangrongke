@@ -23,7 +23,7 @@
                         </mask>
                     </variation>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="QeK-88-7sX"/>
+                        <outlet property="delegate" destination="-1" id="uXK-r2-cy3"/>
                     </connections>
                 </scrollView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lp_about" translatesAutoresizingMaskIntoConstraints="NO" id="1Qe-MK-bbA">

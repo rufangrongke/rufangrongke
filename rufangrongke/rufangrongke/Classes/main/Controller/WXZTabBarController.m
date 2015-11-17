@@ -39,7 +39,7 @@
     
     // 添加子控制器
 //    [UIImage imageNamed:lp];
-    [self setupChildVc:[[WXZLouPanController alloc] init] title:@"楼盘" image:@"lp_loupan" selectedImage:@"lp_loupandj"];
+    [self setupChildVc:[[WXZLouPanController alloc] initWithStyle:UITableViewStyleGrouped] title:@"楼盘" image:@"lp_loupan" selectedImage:@"lp_loupandj"];
     [self setupChildVc:[[WXZKeHuController alloc] init] title:@"客户" image:@"lp_kehu" selectedImage:@"lp_kehux"];
     
     [self setupChildVc:[[WXZWoController alloc] init] title:@"我" image:@"lp_me" selectedImage:@"lp_mex"];

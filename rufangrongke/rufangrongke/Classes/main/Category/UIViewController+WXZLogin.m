@@ -8,6 +8,7 @@
 
 #import "UIViewController+WXZLogin.h"
 #import "AFNetworking.h"
+#import "WXZLoginController.h"
 
 @implementation UIViewController (WXZLogin)
 - (NSDictionary *)loginMessage
@@ -106,5 +107,10 @@
         // 显示失败信息
 //        [SVProgressHUD showErrorWithStatus:@"加载信息失败!"];
     }];
+}
+- (void)goBackLoginPage{
+    // 添加tabBarcontroller
+    WXZLoginController *vc = [[WXZLoginController alloc]init];
+    [[[[UIApplication sharedApplication] delegate] window] setRootViewController:vc];
 }
 @end
