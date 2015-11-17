@@ -20,6 +20,8 @@
 		30ECA2751BD2B3B4006A8090 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2741BD2B3B4006A8090 /* Images.xcassets */; };
 		30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30ECA2761BD2B3B4006A8090 /* LaunchScreen.xib */; };
 		30ECA2841BD2B3B5006A8090 /* rufangrongkeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30ECA2831BD2B3B5006A8090 /* rufangrongkeTests.m */; };
+		8802E69A1BFAC18900866F52 /* WXZLouPanHomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8802E6991BFAC18900866F52 /* WXZLouPanHomeHeadView.m */; };
+		8802E69C1BFAC1AA00866F52 /* WXZLouPanHomeHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8802E69B1BFAC1AA00866F52 /* WXZLouPanHomeHeadView.xib */; };
 		88041AAD1BF1F82100FDABFC /* WXZKeHuInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88041AAC1BF1F82100FDABFC /* WXZKeHuInfoModel.m */; };
 		88041AB11BF20A3D00FDABFC /* WXZKeHuDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88041AB01BF20A3D00FDABFC /* WXZKeHuDetailModel.m */; };
 		880869021BF0C4D100128610 /* WXZLouPanYongJinSectionHeadView_0.m in Sources */ = {isa = PBXBuildFile; fileRef = 880869011BF0C4D100128610 /* WXZLouPanYongJinSectionHeadView_0.m */; };
@@ -239,6 +241,9 @@
 		30ECA2821BD2B3B5006A8090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30ECA2831BD2B3B5006A8090 /* rufangrongkeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rufangrongkeTests.m; sourceTree = "<group>"; };
 		39928E051B59D36C45248CC0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8802E6981BFAC18900866F52 /* WXZLouPanHomeHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanHomeHeadView.h; sourceTree = "<group>"; };
+		8802E6991BFAC18900866F52 /* WXZLouPanHomeHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanHomeHeadView.m; sourceTree = "<group>"; };
+		8802E69B1BFAC1AA00866F52 /* WXZLouPanHomeHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanHomeHeadView.xib; sourceTree = "<group>"; };
 		88041AAB1BF1F82100FDABFC /* WXZKeHuInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZKeHuInfoModel.h; path = KeHuModel/WXZKeHuInfoModel.h; sourceTree = "<group>"; };
 		88041AAC1BF1F82100FDABFC /* WXZKeHuInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZKeHuInfoModel.m; path = KeHuModel/WXZKeHuInfoModel.m; sourceTree = "<group>"; };
 		88041AAF1BF20A3D00FDABFC /* WXZKeHuDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZKeHuDetailModel.h; path = KeHuDetailModel/WXZKeHuDetailModel.h; sourceTree = "<group>"; };
@@ -632,6 +637,9 @@
 				88F31BD61BF4889F007FEA53 /* WXZquYuListViewCell.h */,
 				88F31BD71BF4889F007FEA53 /* WXZquYuListViewCell.m */,
 				88F31BD81BF4889F007FEA53 /* WXZquYuListViewCell.xib */,
+				8802E6981BFAC18900866F52 /* WXZLouPanHomeHeadView.h */,
+				8802E6991BFAC18900866F52 /* WXZLouPanHomeHeadView.m */,
+				8802E69B1BFAC1AA00866F52 /* WXZLouPanHomeHeadView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1459,6 +1467,7 @@
 				882902871BE73C6400BA7D24 /* WXZPersonalCityVC.xib in Resources */,
 				8829029B1BE73CDD00BA7D24 /* WXZWoHeadCell.xib in Resources */,
 				88E30FB51BEA340F002F5FF1 /* WXZMaiDianController.xib in Resources */,
+				8802E69C1BFAC1AA00866F52 /* WXZLouPanHomeHeadView.xib in Resources */,
 				30ECA2781BD2B3B4006A8090 /* LaunchScreen.xib in Resources */,
 				885388011BDD1DC0005DCF38 /* WXZTableViewCell.xib in Resources */,
 				882793671BEC55DC00218F13 /* WXZLouPanMaiDianCell_1.xib in Resources */,
@@ -1547,6 +1556,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8802E69A1BFAC18900866F52 /* WXZLouPanHomeHeadView.m in Sources */,
 				88D8578E1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m in Sources */,
 				88465A9D1BF0D6BA006B75F9 /* WXZLouPanInformationControllerCell_0_1.m in Sources */,
 				88DBC10B1BF04E4100425B81 /* WXZLouPanInformationTableViewController.m in Sources */,

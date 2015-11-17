@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WXZLouPanHomeHeadView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="218"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pxk-4b-GGz">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="130" id="2z8-J0-6NC"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="QeK-88-7sX"/>
+                    </connections>
+                </scrollView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lp_about" translatesAutoresizingMaskIntoConstraints="NO" id="1Qe-MK-bbA">
+                    <rect key="frame" x="0.0" y="130" width="375" height="88"/>
+                </imageView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="7kg-4z-bFM">
+                    <rect key="frame" x="168" y="101" width="39" height="37"/>
+                </pageControl>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="7kg-4z-bFM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5Sj-aZ-EYp"/>
+                <constraint firstItem="7kg-4z-bFM" firstAttribute="bottom" secondItem="pxk-4b-GGz" secondAttribute="bottom" constant="8" id="8jT-09-QbS"/>
+                <constraint firstAttribute="bottom" secondItem="1Qe-MK-bbA" secondAttribute="bottom" id="G2K-B5-xHI"/>
+                <constraint firstAttribute="trailing" secondItem="pxk-4b-GGz" secondAttribute="trailing" id="KBa-rb-NRx"/>
+                <constraint firstAttribute="trailing" secondItem="1Qe-MK-bbA" secondAttribute="trailing" id="Owe-KK-3eY"/>
+                <constraint firstItem="1Qe-MK-bbA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Q1a-0K-kEf"/>
+                <constraint firstItem="pxk-4b-GGz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SE8-dW-4fh"/>
+                <constraint firstItem="pxk-4b-GGz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SWl-7A-ZI2"/>
+                <constraint firstItem="1Qe-MK-bbA" firstAttribute="top" secondItem="pxk-4b-GGz" secondAttribute="bottom" id="WED-kS-2qN"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="pageControl" destination="7kg-4z-bFM" id="pSv-SE-fxH"/>
+                <outlet property="scrollView" destination="pxk-4b-GGz" id="MLb-iH-aep"/>
+            </connections>
+            <point key="canvasLocation" x="153" y="335"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="lp_about" width="375" height="88"/>
+    </resources>
+</document>
