@@ -17,8 +17,26 @@
 
 @implementation WXZquYuListViewController
 static NSString *quYuListViewCellID = @"quyuCell";
+#pragma mark - 通知
+- (void)notification{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCity) name:@"RefreshCity" object:nil];
+}
+- (void)refreshCity{
+    NSString *url = [OutNetBaseURL stringByAppendingString:quyuliebiao];
+    [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        // 字典转模型
+        self.quYuListViewCellModel = [WXZquYuListViewCellModel objectWithKeyValues:responseObject];
+        // 刷新表格
+        [self.tableView reloadData];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        WXZLog(@"%@", error);
+        // 显示失败信息
+        [SVProgressHUD showErrorWithStatus:@"加载信息失败!"];
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self refreshCity];
 //    self.tableView.backgroundColor = [UIColor clearColor];
 //    [self.tableView registerClass:[WXZquYuListViewCell class] forCellReuseIdentifier:quYuListViewCellID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZquYuListViewCell class]) bundle:nil] forCellReuseIdentifier:quYuListViewCellID];
@@ -35,7 +53,7 @@ static NSString *quYuListViewCellID = @"quyuCell";
 //    }else{// 发送请求
         NSString *url = [OutNetBaseURL stringByAppendingString:quyuliebiao];
         [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-            WXZLog(@"%@", responseObject);
+//            WXZLog(@"%@", responseObject);
             NSDictionary *cityListDic = (NSDictionary *)responseObject;
             // 获取沙河路径
             NSString *cityListInfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:cityListInfoFile];

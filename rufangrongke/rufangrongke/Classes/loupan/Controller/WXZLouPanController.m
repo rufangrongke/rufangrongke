@@ -52,6 +52,7 @@ static NSInteger inp = 1;
     params[@"xiaoqu"] = xiaoqu;
     params[@"qu"] = quyu;
     [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        WXZLog(@"%@", responseObject);
         // 隐藏指示器
         [SVProgressHUD dismiss];
         // 转模型,存储模型
@@ -73,22 +74,22 @@ static NSInteger inp = 1;
     return _fysList;
 }
 
-
-#pragma - <初始化项目>
+#pragma mark - 通知
+- (void)notification{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshList) name:@"RefreshCity" object:nil];
+}
+- (void)refreshList{
+    inp = 1;
+    xiaoqu = @"";
+    quyu = @"";
+    [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
+}
+#pragma mark - <初始化项目>
 - (void)setUp{
 //    self.tableView.style = UITableViewStyleGrouped;
     // 去除分割线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置导航栏左边按钮
-//    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-////    leftBtn.frame = CGRectMake(0, 0, 60, 30);
-//    [leftBtn setTitle:@"区域" forState:UIControlStateNormal];
-//    leftBtn.titleLabel.font = [UIFont systemFontOfSize:19];
-//    [leftBtn setImage:[UIImage imageNamed:@"lp_jt"] forState:UIControlStateNormal];
-//    [leftBtn setTitleColor:[UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0] forState:UIControlStateNormal];
-//    [leftBtn addTarget:self action:@selector(quYu_click) forControlEvents:UIControlEventTouchUpInside];
-//    [leftBtn sizeToFit];
-//    self.leftBtn = leftBtn;
     WXZLeftBtnView *leftBtn = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLeftBtnView class]) owner:nil options:nil].lastObject;
     [leftBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(quYu_click)]];
     self.leftBtn = leftBtn;
@@ -148,6 +149,7 @@ static NSInteger inp = 1;
  *  左上方按钮监听点击
  */
 - (void)quYu_click{
+//    self.tableView.contentOffset = CGPointMake(0, 0);
     // 取消键盘
     [self.search resignFirstResponder];
     if (self.quYuListViewVC == nil) {
@@ -166,7 +168,7 @@ static NSInteger inp = 1;
 }
 
 
-#pragma WXZquYuListViewControllerDelegate
+#pragma mark - WXZquYuListViewControllerDelegate
 - (void)quYuListViewControllerDelegate:(NSString *)parameter
 {
     self.quYuListViewVC.view.hidden = YES;
@@ -186,7 +188,7 @@ static NSInteger inp = 1;
         self.leftBtn.leftBtnLabel.text = @"区域";
     }
 }
-#pragma 刷新控件
+#pragma mark - 刷新控件
 /**
  * 添加刷新控件
  */
@@ -297,7 +299,7 @@ static NSInteger inp = 1;
     
 }
 
-#pragma 取消键盘
+#pragma mark - 键盘
 // 取消键盘
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
