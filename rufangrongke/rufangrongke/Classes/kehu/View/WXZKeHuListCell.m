@@ -10,6 +10,7 @@
 #import "WXZChectObject.h"
 #import "WXZStringObject.h"
 #import "WXZReportPreparationVC.h"
+#import "WXZDateObject.h"
 
 @implementation WXZKeHuListCell
 
@@ -44,6 +45,25 @@
     
     self.reportedBtn.hidden = YES;
     self.callBtn.hidden = NO;
+    
+    if (![WXZChectObject checkWhetherStringIsEmpty:keHuInfoModel.hdTime] || ![WXZChectObject checkWhetherStringIsEmpty:keHuInfoModel.typebig] || ![WXZChectObject checkWhetherStringIsEmpty:keHuInfoModel.loupan])
+    {
+        
+        NSString *dateStr = keHuInfoModel.hdTime; // 获取时间
+        dateStr = [WXZStringObject replacementString:dateStr replace:@"/" replaced:@"-"]; // 替换字符
+        NSDate *date = [WXZDateObject formatDate1:dateStr dateFormat:@"yyyy-MM-dd HH:mm:ss"]; // 格式化为NSDate
+        NSString *dateStr2 = [WXZDateObject formatDate2:date dateFormat:@"yy-MM-dd HH:mm"]; // 格式化为NSString
+        // 格式化字符串（最终结果）
+        NSString *footerStr = [NSString stringWithFormat:@"%@ %@ %@",dateStr2,keHuInfoModel.typebig,keHuInfoModel.loupan];
+        
+        self.footerViews.hidden = NO;
+        self.yixiangLabel.text = footerStr;
+    }
+    else
+    {
+        self.footerViews.hidden = YES;
+        self.yixiangLabel.text = @"";
+    }
 }
 
 // 更新数据

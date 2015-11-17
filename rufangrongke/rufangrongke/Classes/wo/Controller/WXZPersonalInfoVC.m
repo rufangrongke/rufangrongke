@@ -243,6 +243,10 @@ static NSString *sex = @"先生"; // 记录性别
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            {
+                [self goBackLoginPage]; // 回到登录页面
+            }
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
