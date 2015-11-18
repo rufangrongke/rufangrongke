@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="meK-cY-kOp">
@@ -42,6 +42,11 @@
                             <constraint firstItem="tI7-TU-hy2" firstAttribute="leading" secondItem="meK-cY-kOp" secondAttribute="leading" id="w40-U5-QXl"/>
                             <constraint firstAttribute="height" constant="29" id="z1o-OB-I3H"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="z1o-OB-I3H"/>
+                            </mask>
+                        </variation>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJt-YS-0w5">
                         <rect key="frame" x="0.0" y="29" width="375" height="38"/>
@@ -88,9 +93,15 @@
                             <constraint firstItem="1tG-CW-7sz" firstAttribute="leading" secondItem="GnW-Pe-Sgh" secondAttribute="trailing" constant="15" id="bLd-Fd-2pv"/>
                             <constraint firstAttribute="bottom" secondItem="eDa-Tm-yXR" secondAttribute="bottom" id="f3e-xK-u9P"/>
                             <constraint firstItem="GnW-Pe-Sgh" firstAttribute="leading" secondItem="IJt-YS-0w5" secondAttribute="leading" constant="10" id="rda-KJ-43g"/>
+                            <constraint firstItem="GnW-Pe-Sgh" firstAttribute="top" secondItem="ZjI-Qk-5ST" secondAttribute="bottom" constant="6" id="ueg-Mk-Ivz"/>
                             <constraint firstItem="eDa-Tm-yXR" firstAttribute="top" secondItem="IJt-YS-0w5" secondAttribute="top" id="yig-Sg-rpB"/>
                             <constraint firstItem="ZjI-Qk-5ST" firstAttribute="leading" secondItem="IJt-YS-0w5" secondAttribute="leading" id="zTf-un-NI0"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="BOZ-5Y-H1e"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <constraints>

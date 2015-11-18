@@ -44,7 +44,4 @@
 // 添加 button 单击事件
 - (void)buttonWithTarget:(id)target action:(SEL)action;
 
-// 更新数据
-//- (void)showKeHuListInfo:(NSDictionary *)dic;
-
 @end

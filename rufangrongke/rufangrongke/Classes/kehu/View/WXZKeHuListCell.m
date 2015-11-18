@@ -31,25 +31,25 @@
 // 添加 button 单击事件
 - (void)buttonWithTarget:(id)target action:(SEL)action
 {
-    // 添加单击事件
+    // 添加报备单击事件
     [self.reportedBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    
+    // 添加打电话单击事件
     [self.callBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 }
 
+// 客户信息展示
 - (void)setKeHuInfoModel:(WXZKeHuInfoModel *)keHuInfoModel
 {
     self.customerNameLabel.text = keHuInfoModel.XingMing; // 姓名
     self.customerPhoneLabel.text = keHuInfoModel.Mobile; // 电话
-    
-    /**
-     *  房源信息：
-     */
-    self.houseInfoLabel.text = keHuInfoModel.YiXiang;
-    
+    self.houseInfoLabel.text = keHuInfoModel.YiXiang; // 购房意向
+    // 隐藏报备按钮，显示打电话按钮
     self.reportedBtn.hidden = YES;
     self.callBtn.hidden = NO;
     
+    /**
+     *  活动内容
+     */
     if (![WXZChectObject checkWhetherStringIsEmpty:keHuInfoModel.hdTime] || ![WXZChectObject checkWhetherStringIsEmpty:keHuInfoModel.typebig] || ![WXZChectObject checkWhetherStringIsEmpty:keHuInfoModel.loupan])
     {
         
@@ -70,34 +70,18 @@
     }
 }
 
-// 更新数据
-//- (void)showKeHuListInfo:(NSDictionary *)dic
-//{
-//    self.customerNameLabel.text = dic[@"XingMing"]; // 姓名
-//    self.customerPhoneLabel.text = dic[@"Mobile"]; // 电话
-//    
-//    /**
-//     *  房源信息：
-//     */
-//    self.houseInfoLabel.text = dic[@"YiXiang"];
-//    
-//    self.reportedBtn.hidden = YES;
-//    self.callBtn.hidden = NO;
-//}
-
 // 报备/打电话事件
 - (IBAction)reportedOrCallAction:(UIButton *)sender
 {
     if (sender.tag == 100024)
     {
-        NSLog(@"报备事件");
+        // 报备事件
         WXZReportPreparationVC *reportVC = [[WXZReportPreparationVC alloc] init];
         [_controller.navigationController pushViewController:reportVC animated:YES];
     }
     else
     {
-        NSLog(@"打电话事件:%@",self.customerPhoneLabel.text);
-        // 打电话
+        // 打电话事件
         NSString *phoneNumStr = [NSString stringWithFormat:@"telprompt://%@",self.customerPhoneLabel.text];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumStr]];
         // 打电话方法二

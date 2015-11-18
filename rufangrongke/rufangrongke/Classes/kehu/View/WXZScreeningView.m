@@ -48,6 +48,7 @@
     WXZScreeningCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectImgView.hidden = NO; // 选中的cell不隐藏
     
+    // 选中的筛选类型内容
     NSString *currentTitle = self.dataArr[indexPath.row];
     if ([currentTitle isEqualToString:@"所有"])
     {

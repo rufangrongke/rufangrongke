@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.selectImgView.hidden = YES; // 
+    self.selectImgView.hidden = YES; // 初始隐藏筛选选中图片
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

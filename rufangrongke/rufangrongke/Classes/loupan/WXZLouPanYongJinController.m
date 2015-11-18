@@ -60,7 +60,7 @@
                 [SVProgressHUD dismiss];
 
             }else{ //登陆失败
-                [SVProgressHUD showErrorWithStatus:@"登陆超时" maskType:SVProgressHUDMaskTypeBlack];
+                [SVProgressHUD showErrorWithStatus:@"登录超时" maskType:SVProgressHUDMaskTypeBlack];
             }
             
         }];

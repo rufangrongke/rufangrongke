@@ -80,7 +80,7 @@
 - (void)back
 {
     [SVProgressHUD dismiss];
-    WXZLog(@"%@", self.viewControllers);
+//    WXZLog(@"%@", self.viewControllers);
     if (self.viewControllers.count == 2) {
         for (UIViewController *vc in self.viewControllers) {
             if ([vc isKindOfClass:[WXZLouPanController class]]) {
