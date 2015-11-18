@@ -64,7 +64,7 @@
 - (IBAction)baobeiloupanAction:(id)sender
 {
 //    NSLog(@"报备楼盘");
-    [SVProgressHUD showErrorWithStatus:@"流程：选择楼盘->报备客户"];
+    [SVProgressHUD showErrorWithStatus:@"流程：选择楼盘->报备客户" maskType:SVProgressHUDMaskTypeBlack];
 //    WXZReportPreparationVC *rpVC = [[WXZReportPreparationVC alloc] init];
 //    [_controller.navigationController pushViewController:rpVC animated:YES];
 }
