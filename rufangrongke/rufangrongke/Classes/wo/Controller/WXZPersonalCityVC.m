@@ -155,7 +155,7 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
          }
          else
          {
-             [SVProgressHUD showErrorWithStatus:@"暂无数据"];
+             [SVProgressHUD showErrorWithStatus:@"暂无数据" maskType:SVProgressHUDMaskTypeBlack];
              if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
              {
                  [self goBackLoginPage]; // 回到登录页面
@@ -165,8 +165,7 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
          [self.myTableView.header endRefreshing];
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
-         [SVProgressHUD showErrorWithStatus:@"请求失败"];
-//         [SVProgressHUD dismiss]; // 取消菊花
+         [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
      }];
 }
 
@@ -184,21 +183,19 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-//             NSLog(@"%@",responseObject[@"msg"]);
-             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
+             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
              // 发送通知更新个人资料
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
-//             [self reloadCityRegionList]; // 更新区域方法
              [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshCity" object:nil]; // 更新区域方法
              [self.navigationController popViewControllerAnimated:YES];
          }
          else
          {
-             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
          }
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
-         [SVProgressHUD showErrorWithStatus:@"请求失败"];
+         [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
      }];
 }
 

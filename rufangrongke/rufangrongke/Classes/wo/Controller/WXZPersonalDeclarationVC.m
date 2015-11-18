@@ -61,14 +61,14 @@
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]]; // 取消菊花
+             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
              // 发送通知
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
              [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
          }
          else
          {
-             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
              if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
              {
                  [self goBackLoginPage]; // 回到登录页面
@@ -76,7 +76,7 @@
          }
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
-         [SVProgressHUD showErrorWithStatus:@"请求失败"];
+         [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
 //         [SVProgressHUD dismiss]; // 取消菊花
      }];
 }

@@ -85,19 +85,12 @@ static BOOL isRefreshWo;
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     }
     
-    [self loginRequest:^(id result) {
-        if (![result isEqual:@"请求失败"])
-        {
-            NSDictionary *dic = (NSDictionary *)result;
-            // 刷新模型
-            self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:dic];
-            [self.myTableView reloadData]; // 刷新
-            [SVProgressHUD dismiss]; // 结束菊花
-        }
-        else
-        {
-            [SVProgressHUD showErrorWithStatus:result];
-        }
+    [self loginRequest:^(id successResult) {
+        NSDictionary *loginDic = (NSDictionary *)successResult;
+        // 刷新模型
+        self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:loginDic];
+        [self.myTableView reloadData]; // 刷新
+        [SVProgressHUD dismiss]; // 取消菊花
         isRefreshWo = YES;
     }];
 }
@@ -346,13 +339,13 @@ static BOOL isRefreshWo;
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             // 刷新界面
             [self personalDataRequest:YES]; // 个人资料数据请求
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
@@ -360,8 +353,7 @@ static BOOL isRefreshWo;
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
-//        [SVProgressHUD dismiss]; // 取消菊花
+        [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }
 
@@ -461,13 +453,13 @@ static BOOL isRefreshWo;
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             [self removeWorkingTimeView]; // 把view从父view上移除
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             // 刷新界面
             [self personalDataRequest:YES]; // 个人资料数据请求
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
@@ -475,8 +467,7 @@ static BOOL isRefreshWo;
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
-//        [SVProgressHUD dismiss]; // 
+        [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }
 #pragma mark - WorkingTime End

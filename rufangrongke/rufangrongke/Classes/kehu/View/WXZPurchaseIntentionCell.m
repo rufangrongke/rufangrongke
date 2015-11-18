@@ -40,7 +40,7 @@
     }
 }
 
-- (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row  isModify:(BOOL)ismodify yuanData:(WXZKeHuDetailModel *)model
+- (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row withQuYuArr:(NSMutableArray *)quyuAr1 withHxArr:(NSMutableArray *)hxAr2 withFwArr:(NSMutableArray *)fwAr3  isModify:(BOOL)ismodify yuanData:(WXZKeHuDetailModel *)model
 {
     NSMutableArray *houseArr = [NSMutableArray array];
     NSInteger btnTag = 0;
@@ -140,6 +140,27 @@
                     [self.typeBtn setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
                 }
             }
+            else
+            {
+                NSArray *array = @[];
+                if (row == 0)
+                {
+                    array = quyuAr1;
+                }
+                else if (row == 1)
+                {
+                    array = hxAr2;
+                }
+                else
+                {
+                    array = fwAr3;
+                }
+                if ([self areEqual2:houseArr[i*limit+j][@"q"] localData:array row:row])
+                {
+                    [self.typeBtn setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
+                    [self.typeBtn setTitleColor:WXZRGBColor(255, 255, 255) forState:UIControlStateNormal];
+                }
+            }
         }
     }
 }
@@ -158,6 +179,22 @@
         huoquStr = model.Hx;
     }
     NSArray *relationArr = [WXZStringObject interceptionOfString:huoquStr interceptType:@"/"];
+    
+    for (NSString *subStr in relationArr)
+    {
+        if ([subStr isEqualToString:nowTitle])
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+// 判断两个字符串是否相等
+- (BOOL)areEqual2:(NSString *)nowTitle localData:(NSArray *)model row:(NSInteger)row
+{
+    //    WXZLog(@"%@",model);
+    NSArray *relationArr = model;
     
     for (NSString *subStr in relationArr)
     {

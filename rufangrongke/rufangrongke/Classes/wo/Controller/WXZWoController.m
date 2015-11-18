@@ -69,17 +69,12 @@
 - (void)woInfoRequest
 {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    [self loginRequest:^(id result) {
-        if (![result isEqual:@"请求失败"])
-        {
-            NSDictionary *dic = (NSDictionary *)result;
-            // 转模型
-            self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:dic];
-            [self.myTableView reloadData]; // 刷新
-            [SVProgressHUD dismiss]; // 取消菊花
-        }
-        else
-            [SVProgressHUD showErrorWithStatus:result];
+    [self loginRequest:^(id successResult) {
+        NSDictionary *loginDic = (NSDictionary *)successResult;
+        // 转模型
+        self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:loginDic];
+        [self.myTableView reloadData]; // 刷新
+        [SVProgressHUD dismiss]; // 取消菊花
     }];
 }
 

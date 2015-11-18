@@ -14,7 +14,6 @@
 #import <SVProgressHUD.h>
 #import "WXZKeHuListCell.h"
 #import "WXZKHListHeaderView.h"
-#import "WXZKHListFooterView.h"
 #import "WXZAddCustomerVC.h"
 #import "WXZCustomerDetailsVC.h"
 #import "WXZReportPreparationVC.h"
@@ -41,7 +40,6 @@
 @property (nonatomic,strong) NSArray *shaixuanArr;
 
 @property (nonatomic,weak) WXZKHListHeaderView *headerView;
-@property (nonatomic,weak) WXZKHListFooterView *footerView;
 
 @property (nonatomic,strong) WXZKeHuInfoModel *kehuInfoModel;
 
@@ -137,7 +135,7 @@ static NSString *searchStr; // 记录搜索条件
     [param setObject:eachPage1 forKey:@"ps"];
     [param setObject:chooseCategory forKey:@"zt"];
     [param setObject:chooseConditions forKey:@"key"];
-//    WXZLog(@"%@",param);
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     [manager POST:urlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
@@ -180,24 +178,24 @@ static NSString *searchStr; // 记录搜索条件
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
             }
         }
         [self.tableView reloadData];
-        // 结束刷新
+        // 结束header刷新
         [self.tableView.header endRefreshing];
         if (isMore)
         {
-            // 结束刷新
+            // 结束footer刷新
             [self.tableView.footer endRefreshing];
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
+        [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }
 
@@ -321,27 +319,6 @@ static NSString *searchStr; // 记录搜索条件
     }
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-//{
-////    if (section != 0)
-////    {
-////        // 首先判断有没有值
-////        self.kehuInfoModel = self.dataArr[section-1];
-////        if (![WXZChectObject checkWhetherStringIsEmpty:self.kehuInfoModel.hdTime] || ![WXZChectObject checkWhetherStringIsEmpty:self.kehuInfoModel.typebig] || ![WXZChectObject checkWhetherStringIsEmpty:self.kehuInfoModel.loupan])
-////        {
-////            _footerView = [WXZKHListFooterView initListFooterView]; // footer背景 view
-////            _footerView.keHuInfoModel = self.dataArr[section-1]; // footer 信息
-////            
-////            return _footerView;
-////        }
-////        else
-////        {
-////            return nil;
-////        }
-////    }
-//    return nil;
-//}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     // 返回header的高
@@ -357,11 +334,6 @@ static NSString *searchStr; // 记录搜索条件
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-//    if (section == 0)
-//    {
-//        return 0.001;
-//    }
-//    return 31;
     return 0.01f;
 }
 
@@ -384,7 +356,7 @@ static NSString *searchStr; // 记录搜索条件
         yixiang = 18;
     }
     
-    return 20 + 20 + 12 + yixiang+31; // 返回行高
+    return 20 + 20 + 12 + yixiang + 31; // 返回行高(距上边＋姓名的高＋姓名和意向的间距＋意向的高＋footerview的高)
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -414,7 +386,6 @@ static NSString *searchStr; // 记录搜索条件
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
-//    searchStr = searchBar.text;
     [self queDing_click]; //
 }
 
@@ -498,7 +469,6 @@ static NSString *searchStr; // 记录搜索条件
         _screeningView.hidden = NO;
         self.tableView.scrollEnabled = NO;
         self.headerView.hidden = YES;
-        self.footerView.hidden = YES;
         isHiden = YES;
     }
 }
@@ -508,7 +478,6 @@ static NSString *searchStr; // 记录搜索条件
     [self.screeningView setHidden:YES];
     self.tableView.scrollEnabled = YES;
     self.headerView.hidden = NO;
-    self.footerView.hidden = NO;
     isHiden = NO;
 }
 

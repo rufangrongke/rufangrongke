@@ -96,8 +96,6 @@
 		8869E1751BFABFEB00D409FC /* WXZCustomerDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8869E1731BFABFEB00D409FC /* WXZCustomerDetailsVC.xib */; };
 		8869E1821BFAC09A00D409FC /* WXZKeHuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8869E1771BFAC09A00D409FC /* WXZKeHuListCell.m */; };
 		8869E1831BFAC09A00D409FC /* WXZKeHuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8869E1781BFAC09A00D409FC /* WXZKeHuListCell.xib */; };
-		8869E1841BFAC09A00D409FC /* WXZKHListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8869E17A1BFAC09A00D409FC /* WXZKHListFooterView.m */; };
-		8869E1851BFAC09A00D409FC /* WXZKHListFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8869E17B1BFAC09A00D409FC /* WXZKHListFooterView.xib */; };
 		8869E1861BFAC09A00D409FC /* WXZKHListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8869E17D1BFAC09A00D409FC /* WXZKHListHeaderView.m */; };
 		8869E1871BFAC09A00D409FC /* WXZKHListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8869E17E1BFAC09A00D409FC /* WXZKHListHeaderView.xib */; };
 		8869E1881BFAC09A00D409FC /* WXZScreeningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8869E1801BFAC09A00D409FC /* WXZScreeningView.m */; };
@@ -362,9 +360,6 @@
 		8869E1761BFAC09A00D409FC /* WXZKeHuListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKeHuListCell.h; sourceTree = "<group>"; };
 		8869E1771BFAC09A00D409FC /* WXZKeHuListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKeHuListCell.m; sourceTree = "<group>"; };
 		8869E1781BFAC09A00D409FC /* WXZKeHuListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKeHuListCell.xib; sourceTree = "<group>"; };
-		8869E1791BFAC09A00D409FC /* WXZKHListFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKHListFooterView.h; sourceTree = "<group>"; };
-		8869E17A1BFAC09A00D409FC /* WXZKHListFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKHListFooterView.m; sourceTree = "<group>"; };
-		8869E17B1BFAC09A00D409FC /* WXZKHListFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKHListFooterView.xib; sourceTree = "<group>"; };
 		8869E17C1BFAC09A00D409FC /* WXZKHListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZKHListHeaderView.h; sourceTree = "<group>"; };
 		8869E17D1BFAC09A00D409FC /* WXZKHListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZKHListHeaderView.m; sourceTree = "<group>"; };
 		8869E17E1BFAC09A00D409FC /* WXZKHListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZKHListHeaderView.xib; sourceTree = "<group>"; };
@@ -1079,9 +1074,6 @@
 				8869E1761BFAC09A00D409FC /* WXZKeHuListCell.h */,
 				8869E1771BFAC09A00D409FC /* WXZKeHuListCell.m */,
 				8869E1781BFAC09A00D409FC /* WXZKeHuListCell.xib */,
-				8869E1791BFAC09A00D409FC /* WXZKHListFooterView.h */,
-				8869E17A1BFAC09A00D409FC /* WXZKHListFooterView.m */,
-				8869E17B1BFAC09A00D409FC /* WXZKHListFooterView.xib */,
 				8869E17C1BFAC09A00D409FC /* WXZKHListHeaderView.h */,
 				8869E17D1BFAC09A00D409FC /* WXZKHListHeaderView.m */,
 				8869E17E1BFAC09A00D409FC /* WXZKHListHeaderView.xib */,
@@ -1446,7 +1438,6 @@
 				8826188C1BF050F100FAD6E9 /* WXZLouPanInformationControllerCell_1_2.xib in Resources */,
 				886023571BEC4FE800C0D75E /* WXZRealEstateListCell.xib in Resources */,
 				880869131BF0C59800128610 /* WXZLouPanYongJinCell_1.xib in Resources */,
-				8869E1851BFAC09A00D409FC /* WXZKHListFooterView.xib in Resources */,
 				882618911BF0510600FAD6E9 /* WXZLouPanInformationControllerCell_1_3.xib in Resources */,
 				8869E1D51BFAC27B00D409FC /* WXZWoTypeCell.xib in Resources */,
 				88366B591BFB105A0046DE64 /* WXZLeftBtnView.xib in Resources */,
@@ -1617,7 +1608,6 @@
 				88AC3BC41BFB22C00005E877 /* WXZScreeningCell.m in Sources */,
 				88D857861BF9B90B0069EE4E /* WXZLouPanBaoBeiKeHuController.m in Sources */,
 				88EAA7161BD87C180072CD40 /* AFHTTPRequestOperation.m in Sources */,
-				8869E1841BFAC09A00D409FC /* WXZKHListFooterView.m in Sources */,
 				88EAA71C1BD87C180072CD40 /* AFURLRequestSerialization.m in Sources */,
 				882618861BF050E000FAD6E9 /* WXZLouPanInformationControllerCell_1_1.m in Sources */,
 				88AE89371BE07EA800407ECF /* WXZLouPanMessageCell_0_1.m in Sources */,

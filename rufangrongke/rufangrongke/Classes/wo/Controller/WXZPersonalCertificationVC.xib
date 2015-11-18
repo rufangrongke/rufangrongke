@@ -32,7 +32,7 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" tag="100014" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入与身份证一致的姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GWe-6J-nXA">
+                                <textField opaque="NO" clipsSubviews="YES" tag="100014" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入与身份证一致的姓名" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GWe-6J-nXA">
                                     <rect key="frame" x="97" y="15" width="493" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="q0W-cj-Gw1"/>
@@ -58,7 +58,7 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" tag="100015" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入身份证号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NhR-3O-yTh">
+                                <textField opaque="NO" clipsSubviews="YES" tag="100015" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入身份证号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NhR-3O-yTh">
                                     <rect key="frame" x="97" y="74" width="493" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="EnS-KH-gRx"/>

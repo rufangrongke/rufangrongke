@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="29"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未填写" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJE-4X-uks">
-                                <rect key="frame" x="10" y="6" width="45" height="18"/>
+                                <rect key="frame" x="10" y="6" width="355" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.10588235294117647" green="0.10980392156862745" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -37,7 +37,7 @@
                             <constraint firstAttribute="bottom" secondItem="tI7-TU-hy2" secondAttribute="bottom" id="9Um-we-C2w"/>
                             <constraint firstItem="JJE-4X-uks" firstAttribute="leading" secondItem="meK-cY-kOp" secondAttribute="leading" constant="10" id="eHe-vK-tjC"/>
                             <constraint firstAttribute="centerY" secondItem="JJE-4X-uks" secondAttribute="centerY" id="ip3-dB-dA3"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JJE-4X-uks" secondAttribute="trailing" constant="10" id="qzO-Xq-l0L"/>
+                            <constraint firstAttribute="trailing" secondItem="JJE-4X-uks" secondAttribute="trailing" constant="10" id="qzO-Xq-l0L"/>
                             <constraint firstItem="tI7-TU-hy2" firstAttribute="top" secondItem="meK-cY-kOp" secondAttribute="top" id="rn3-G5-sQo"/>
                             <constraint firstItem="tI7-TU-hy2" firstAttribute="leading" secondItem="meK-cY-kOp" secondAttribute="leading" id="w40-U5-QXl"/>
                             <constraint firstAttribute="height" constant="29" id="z1o-OB-I3H"/>

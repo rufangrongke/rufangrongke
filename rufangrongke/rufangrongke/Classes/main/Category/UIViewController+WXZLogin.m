@@ -52,14 +52,15 @@
    
 }
 
-- (void)loginRequest:(loginMessage)message
+// 登录请求
+- (void)loginRequest:(loginSuccessMsg)message
 {
     // 1.创建请求对象
     NSString *urlString = [OutNetBaseURL stringByAppendingString:denglu];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"mob"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"phoneNumber"];
-    parameters[@"pas"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    parameters[@"mob"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"phoneNumber"]; // 手机号
+    parameters[@"pas"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"]; // 密码
     
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject)
     {
@@ -72,16 +73,19 @@
             NSDictionary *userinfo = loginContentDic[@"u"];
             // 将用户信息写入字典
             [userinfo writeToFile:userinfoPath atomically:YES];
-            
             message(userinfo);
         }
         else
         {
-            message(@"请求失败");
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            {
+                [self goBackLoginPage]; // 回到登录页面
+            }
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        message(@"请求失败");
+        [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }
 

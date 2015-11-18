@@ -225,7 +225,7 @@ static NSString *sex = @"先生"; // 记录性别
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]]; // 取消菊花
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
             if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
             {
                 // 跳转到登录页面（修改密码）
@@ -242,7 +242,7 @@ static NSString *sex = @"先生"; // 记录性别
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
@@ -250,8 +250,7 @@ static NSString *sex = @"先生"; // 记录性别
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
-//        [SVProgressHUD dismiss]; // 取消菊花
+        [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }
 
