@@ -118,6 +118,7 @@
     parameters[@"pas"] = pwd;
     // afn
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        WXZLog(@"%@", responseObject);
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;
         // 获取沙河路径
         NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];

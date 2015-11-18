@@ -144,6 +144,7 @@ static NSString *searchStr; // 记录搜索条件
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
+            WXZLog(@"%@", responseObject);
             NSArray *arr = responseObject[@"list"];
             if (isRefresh)
             {

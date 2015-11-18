@@ -75,7 +75,7 @@ static NSInteger ind = 1;
         if ([dic[@"ok"] isEqualToNumber:@(1)]) {
             // 字典转模型
             self.louPanBaoBeiKeHuModel = [WXZLouPanBaoBeiKeHuModel objectWithKeyValues:responseObject];
-            //        WXZLog(@"%@", self.louPanBaoBeiKeHuModel.list);
+            WXZLog(@"%@", self.louPanBaoBeiKeHuModel.list);
             self.listArray = [NSMutableArray arrayWithArray:self.louPanBaoBeiKeHuModel.list];
             // 刷新表格
             [self.tableView reloadData];
@@ -147,7 +147,7 @@ static NSInteger ind = 1;
             // 结束刷新
             [self.tableView.footer endRefreshing];
             // 显示失败信息
-            [SVProgressHUD showErrorWithStatus:@"加载信息失败!"];
+            [SVProgressHUD showErrorWithStatus:@"加载信息失败!" maskType:SVProgressHUDMaskTypeBlack];
         }];
     }else{
         [self.tableView.footer endRefreshingWithNoMoreData];

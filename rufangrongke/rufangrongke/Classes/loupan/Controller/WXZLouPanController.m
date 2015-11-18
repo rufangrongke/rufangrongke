@@ -118,6 +118,7 @@ static NSInteger inp = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    WXZLog(@"%@", [self localUserInfo]);
     // 初始化信息
     [self setUp];
     // 添加刷新控件

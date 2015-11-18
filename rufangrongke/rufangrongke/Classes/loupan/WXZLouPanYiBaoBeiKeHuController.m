@@ -25,6 +25,7 @@ static NSString *WXZLouPanYiBaoBeiKeHuCellID = @"WXZLouPanYiBaoBeiKeHuCellID";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [SVProgressHUD show];
     // 初始化
     [self setUp];
     // 网络请求
@@ -36,10 +37,12 @@ static NSString *WXZLouPanYiBaoBeiKeHuCellID = @"WXZLouPanYiBaoBeiKeHuCellID";
         // 字典转模型
         self.louPanYiBaoBeiKeHuModel = [WXZLouPanYiBaoBeiKeHuModel objectWithKeyValues:responseObject];
         WXZLog(@"%@", self.louPanYiBaoBeiKeHuModel.ls);
+        [SVProgressHUD dismiss];
         // 刷新表格
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         WXZLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:@"请检查您的网络" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }
 
