@@ -88,38 +88,68 @@
     [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
     NSString *wxzTime = [dateFormatter stringFromDate:date];
     // 开盘时间
-    self.kaipanshijian.text = wxzTime;
+    if (model.KaiPanTime) {
+        self.kaipanshijian.text = wxzTime;
+    }
     // 交房时间
     date =[dateFormat dateFromString:model.JiaoFangTime];
     wxzTime = [dateFormatter stringFromDate:date];
-    self.jiaofangshijian.text = wxzTime;
+    if (model.JiaoFangTime) {
+        self.jiaofangshijian.text = wxzTime;
+    }
     // 开发商品牌
-    self.kaifashangpinpai.text = model.KaiFaShangPiPai;
+    if (model.KaiFaShangPiPai) {
+        self.kaifashangpinpai.text = model.KaiFaShangPiPai;
+    }
     // 物业公司
-    self.wuyegongsi.text = model.WuYeGongSi;
+    if (model.WuYeGongSi) {
+        self.wuyegongsi.text = model.WuYeGongSi;
+    }
     // 建筑面积
-    self.jianzhumianji.text = [NSString stringWithFormat:@"%@平米", model.Area_JianZhu];
+    if (model.Area_JianZhu) {
+        self.jianzhumianji.text = [NSString stringWithFormat:@"%@平米", model.Area_JianZhu];
+    }
     // 总户数
-    self.zonghushu.text = [NSString stringWithFormat:@"%@", model.ZongHuShu];
+    if (model.ZongHuShu) {
+        self.zonghushu.text = [NSString stringWithFormat:@"%@", model.ZongHuShu];
+    }
     // 容积率
-    self.rongjilv.text = [NSString stringWithFormat:@"%@", model.RongJiLv];
+    if (model.RongJiLv) {
+        self.rongjilv.text = [NSString stringWithFormat:@"%@", model.RongJiLv];
+    }
     // 绿化率
-    self.lvhualv.text = [NSString stringWithFormat:@"%@", model.LvHuaLv];
+    if (model.LvHuaLv) {
+        self.lvhualv.text = [NSString stringWithFormat:@"%@", model.LvHuaLv];
+    }
     // 车位数
-    self.cheweishu.text = [NSString stringWithFormat:@"%@", model.CheWeiShu];
+    if (model.CheWeiShu) {
+        self.cheweishu.text = [NSString stringWithFormat:@"%@", model.CheWeiShu];
+    }
     // 车位比
-    self.cheweibi.text = model.CheWeiBi;
+    if (model.CheWeiBi) {
+        self.cheweibi.text = model.CheWeiBi;
+    }
     
     // 均价
-    self.junjia.text = [NSString stringWithFormat:@"%@元", model.JunJia];
+    if (model.JunJia) {
+        self.junjia.text = [NSString stringWithFormat:@"%@元", model.JunJia];
+    }
     // 物业费
-    self.wuyefei.text = [NSString stringWithFormat:@"%@", model.WuYeFei];
+    if (model.WuYeFei) {
+        self.wuyefei.text = [NSString stringWithFormat:@"%@", model.WuYeFei];
+    }
     // 建筑类型
-    self.jianzhuleixing.text = model.JianZhuLeiXing;
+    if (model.JianZhuLeiXing) {
+        self.jianzhuleixing.text = model.JianZhuLeiXing;
+    }
     // 装修类型
-    self.zhuangxiuleixing.text = model.ZhuangXiu;
+    if (model.ZhuangXiu) {
+        self.zhuangxiuleixing.text = model.ZhuangXiu;
+    }
     // 产权年限
-    self.chanquannianxian.text = [NSString stringWithFormat:@"%@", model.ChanQuanNianXian];
+    if (model.ChanQuanNianXian) {
+        self.chanquannianxian.text = [NSString stringWithFormat:@"%@", model.ChanQuanNianXian];
+    }
 }
 
 @end

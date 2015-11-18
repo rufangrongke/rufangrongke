@@ -206,6 +206,8 @@ static NSString *searchStr; // 记录搜索条件
     currentPage = 1;
     isRefresh = YES;
     shaixuanStr = type;
+    searchStr = @"";
+    _searchBar.text = @"";
     if ([type isEqualToString:@"筛选"])
     {
         shaixuanStr = @"";

@@ -44,9 +44,6 @@
  */
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    // 隐藏tabBar.louPanBottomBar
-//    WXZTabBar *tabBar = viewController.tabBarController.tabBar;
-//    tabBar.louPanBottomBar.hidden = YES;
     
     if (self.childViewControllers.count > 0) { // 如果push进来的不是第一个控制器
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -59,8 +56,6 @@
         //        [button sizeToFit];
         // 让按钮的内容往左边偏移10
         button.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-//        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         
         // 修改导航栏左边的item
@@ -84,6 +79,7 @@
 
 - (void)back
 {
+    [SVProgressHUD dismiss];
     WXZLog(@"%@", self.viewControllers);
     if (self.viewControllers.count == 2) {
         for (UIViewController *vc in self.viewControllers) {

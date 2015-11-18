@@ -91,10 +91,11 @@
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;
         WXZLog(@"%@", responseObject);
+        NSString *msg = loginContentDic[@"msg"];
         if ([loginContentDic[@"ok"] isEqualToNumber:@(0)]) {
-            [SVProgressHUD showErrorWithStatus:@"注册失败" maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showErrorWithStatus:msg maskType:SVProgressHUDMaskTypeBlack];
         }else{
-            [SVProgressHUD showSuccessWithStatus:@"注册成功" maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showSuccessWithStatus:msg maskType:SVProgressHUDMaskTypeBlack];
             [self.yaoqingren resignFirstResponder];
             [self.phoneNumber resignFirstResponder];
             [self.verificationCode resignFirstResponder];

@@ -31,7 +31,7 @@
     [super viewDidLoad];
     // 楼盘详情初始化
     [self setUp];
-    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 1.创建请求对象
     NSString *urlString = [OutNetBaseURL stringByAppendingString:yongjinliebiao];
     
@@ -55,18 +55,18 @@
         //        WXZLog(@"%@", self.louPanInformationControllerModel.others);
         // 4.回到主线程
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            //            if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
-            //                // 隐藏HUD
-            //                [SVProgressHUD dismiss];
-            //
-            //            }else{ //登陆失败
-            //                [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误" maskType:SVProgressHUDMaskTypeBlack];
-            //            }
+            if ([responseObject[@"ok"] isEqualToNumber:@1]) { // 正确登陆
+                // 隐藏HUD
+                [SVProgressHUD dismiss];
+
+            }else{ //登陆失败
+                [SVProgressHUD showErrorWithStatus:@"登陆超时" maskType:SVProgressHUDMaskTypeBlack];
+            }
             
         }];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            //            [SVProgressHUD showErrorWithStatus:@"登陆超时,请重新登陆." maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showErrorWithStatus:@"请检查您的网络设置" maskType:SVProgressHUDMaskTypeBlack];
         }];
     }];
 
