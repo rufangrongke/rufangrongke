@@ -274,7 +274,7 @@ static BOOL isRefreshDetail;
     else
     {
 //        NSLog(@"设备不支持");
-        [SVProgressHUD showErrorWithStatus:@"此设备不支持发送短信"];
+        [SVProgressHUD showErrorWithStatus:@"此设备不支持发送短信" maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 
@@ -286,20 +286,20 @@ static BOOL isRefreshDetail;
     {
         case MessageComposeResultSent:
         {
-            NSLog(@"//信息传送成功");
+//            NSLog(@"//信息传送成功");
 //            [SVProgressHUD showErrorWithStatus:@"发送成功"];
         }
             break;
         case MessageComposeResultFailed:
         {
-            NSLog(@"//信息传送失败");
-            [SVProgressHUD showErrorWithStatus:@"信息传送失败"];
+//            NSLog(@"//信息传送失败");
+            [SVProgressHUD showErrorWithStatus:@"信息传送失败" maskType:SVProgressHUDMaskTypeBlack];
         }
             break;
         case MessageComposeResultCancelled:
         {
-            NSLog(@"//信息被用户取消传送");
-            [SVProgressHUD showErrorWithStatus:@"取消发送"];
+//            NSLog(@"//信息被用户取消传送");
+            [SVProgressHUD showErrorWithStatus:@"取消发送" maskType:SVProgressHUDMaskTypeBlack];
         }
             break;
             

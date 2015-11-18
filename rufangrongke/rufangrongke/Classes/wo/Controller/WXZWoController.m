@@ -243,19 +243,19 @@
             {
                 // 推出意见反馈页面
 //                NSLog(@"意见反馈");
-                [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！"];
+                [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
             }
             else if (indexPath.row == 2)
             {
                 // 推出排行榜页面
 //                NSLog(@"排行榜");
-                [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！"];
+                [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
             }
             else if (indexPath.row == 3)
             {
                 // 推出百问百答页面
 //                NSLog(@"百问百答");
-                [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！"];
+                [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
             }
         }
             break;
@@ -263,7 +263,7 @@
         {
             // 推出帮助页面
 //            NSLog(@"帮助");
-            [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！"];
+            [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
         }
             break;
             
@@ -284,22 +284,22 @@
     if (sender.tag == 100003)
     {
 //        NSLog(@"佣金");
-        [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！"];
+        [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
     }
     else if (sender.tag == 100004)
     {
 //        NSLog(@"成交奖");
-        [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！"];
+        [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
     }
     else if (sender.tag == 100005)
     {
 //        NSLog(@"积分");
-        [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！"];
+        [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
     }
     else if (sender.tag == 100006)
     {
 //        NSLog(@"信用值");
-        [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！"];
+        [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
     }
 }
 

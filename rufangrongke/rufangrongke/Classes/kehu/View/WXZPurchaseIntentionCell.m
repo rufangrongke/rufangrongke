@@ -42,16 +42,17 @@
 
 - (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row withQuYuArr:(NSMutableArray *)quyuAr1 withHxArr:(NSMutableArray *)hxAr2 withFwArr:(NSMutableArray *)fwAr3  isModify:(BOOL)ismodify yuanData:(WXZKeHuDetailModel *)model
 {
-    NSMutableArray *houseArr = [NSMutableArray array];
-    NSInteger btnTag = 0;
+    NSMutableArray *houseArr = [NSMutableArray array]; // 存储初始数据的数组
+    NSInteger btnTag = 0; // 按钮tag值
     [houseArr removeAllObjects];
     if (row == 0)
     {
-        [houseArr addObjectsFromArray:typeArr];
+        [houseArr addObjectsFromArray:typeArr]; // 初始化区域数据（网络获取）
         btnTag = 1000030;
     }
     else if (row == 1)
     {
+        // 初始化户型数据（本地获取）
         for (int i = 0; i < typeArr.count; i++)
         {
             NSMutableDictionary *doorModelDic = [NSMutableDictionary dictionary];
@@ -62,6 +63,7 @@
     }
     else if (row == 2)
     {
+        // 初始化房型数据（本地获取）
         for (int i = 0; i < typeArr.count; i++)
         {
             NSMutableDictionary *houseTypeDic = [NSMutableDictionary dictionary];
@@ -145,16 +147,17 @@
                 NSArray *array = @[];
                 if (row == 0)
                 {
-                    array = quyuAr1;
+                    array = quyuAr1; // 本地存储的区域数据（用户选中的）
                 }
                 else if (row == 1)
                 {
-                    array = hxAr2;
+                    array = hxAr2; // 本地存储的户型数据（用户选中的）
                 }
                 else
                 {
-                    array = fwAr3;
+                    array = fwAr3; // 本地存储的房型数据（用户选中的）
                 }
+                // 判断名称是否相等
                 if ([self areEqual2:houseArr[i*limit+j][@"q"] localData:array row:row])
                 {
                     [self.typeBtn setBackgroundImage:[UIImage imageNamed:@"kh_quyuselected"] forState:UIControlStateNormal];
@@ -165,10 +168,9 @@
     }
 }
 
-// 判断两个字符串是否相等
+// 判断两个字符串是否相等（初始数据和详情页传过来的数据比较）
 - (BOOL)areEqual:(NSString *)nowTitle localData:(WXZKeHuDetailModel *)model row:(NSInteger)row
 {
-//    WXZLog(@"%@",model);
     NSString *huoquStr = @"";
     if (row == 0)
     {
@@ -190,10 +192,9 @@
     return NO;
 }
 
-// 判断两个字符串是否相等
+// 判断两个字符串是否相等2（初始数据和本地数组中数据比较）
 - (BOOL)areEqual2:(NSString *)nowTitle localData:(NSArray *)model row:(NSInteger)row
 {
-    //    WXZLog(@"%@",model);
     NSArray *relationArr = model;
     
     for (NSString *subStr in relationArr)

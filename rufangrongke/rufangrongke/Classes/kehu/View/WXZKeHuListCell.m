@@ -12,6 +12,10 @@
 #import "WXZReportPreparationVC.h"
 #import "WXZDateObject.h"
 
+@interface WXZKeHuListCell ()
+@property (nonatomic,strong) UIWebView *phoneCallWebView;
+@end
+
 @implementation WXZKeHuListCell
 
 - (void)awakeFromNib {
@@ -96,8 +100,27 @@
         // 打电话
         NSString *phoneNumStr = [NSString stringWithFormat:@"telprompt://%@",self.customerPhoneLabel.text];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumStr]];
+        // 打电话方法二
+//        [self dialPhoneNumber:self.customerPhoneLabel.text];
     }
 }
+
+#pragma mark - 打电话方法二
+- (void) dialPhoneNumber:(NSString *)aPhoneNumber
+{
+    NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",aPhoneNumber]];
+    if ( !_phoneCallWebView ) {
+        _phoneCallWebView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    }
+    [_phoneCallWebView loadRequest:[NSURLRequest requestWithURL:phoneURL]];
+}
+
+- (void) dealloc
+{
+    // cleanup
+    _phoneCallWebView = nil;
+}
+#pragma mark - end
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

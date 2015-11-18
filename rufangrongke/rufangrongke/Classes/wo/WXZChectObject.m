@@ -130,7 +130,7 @@
     {
         if ([WXZChectObject checkIsAllNumber:mobileNum])
         {
-            NSString *regex = @"[1][34578]\\d{9}"; // 判断手机号的正则表达式
+            NSString *regex = @"[1][345678]\\d{9}"; // 判断手机号的正则表达式
             NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
             BOOL isMatch = [pred evaluateWithObject:mobileNum];
             if (isMatch)
