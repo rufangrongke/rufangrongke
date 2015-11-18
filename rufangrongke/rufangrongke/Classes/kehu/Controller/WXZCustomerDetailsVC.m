@@ -69,7 +69,7 @@ static BOOL isRefreshDetail;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_detailedit" highImage:@"" target:self action:@selector(editAction:)];
 }
 
-#pragma mark - Request
+#pragma mark - KeHu Detail Request
 - (void)customerDetailRequest:(NSString *)cId
 {
     // 详情页信息请求
@@ -81,7 +81,6 @@ static BOOL isRefreshDetail;
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-//            WXZLog(@"%@",responseObject);
             self.cdDic = responseObject[@"kehu"];
             self.keHuDetailModel = [WXZKeHuDetailModel objectWithKeyValues:self.cdDic];
             [self.myTableView reloadData];
@@ -89,7 +88,7 @@ static BOOL isRefreshDetail;
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
@@ -97,7 +96,7 @@ static BOOL isRefreshDetail;
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
+        [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }
 

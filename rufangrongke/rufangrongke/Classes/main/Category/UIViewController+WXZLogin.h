@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^loginMessage)(id result);
+typedef void(^loginSuccessMsg)(id successResult);
+typedef void(^loginFailedMsg)(id failedResult);
 
 @interface UIViewController (WXZLogin)
 //- (void)login;
 - (NSDictionary *)loginMessage;
 
-- (void)loginRequest:(loginMessage)message;
+- (void)loginRequest:(loginSuccessMsg)message;
 
 - (NSDictionary *)localUserInfo;
 

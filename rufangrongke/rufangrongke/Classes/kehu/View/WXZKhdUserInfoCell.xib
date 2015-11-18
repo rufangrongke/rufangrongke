@@ -18,13 +18,13 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="姓名：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nc4-CA-uMW">
                         <rect key="frame" x="10" y="10" width="48" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e34-1U-XVB">
                         <rect key="frame" x="10" y="39" width="48" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kh_boda" translatesAutoresizingMaskIntoConstraints="NO" id="mc8-t4-h4f">
@@ -65,18 +65,12 @@
                         </connections>
                     </button>
                     <textField opaque="NO" clipsSubviews="YES" tag="100019" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FxU-5Y-LHO">
-                        <rect key="frame" x="66" y="10" width="150" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="150" id="VHl-KC-nmZ"/>
-                        </constraints>
+                        <rect key="frame" x="66" y="10" width="249" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <textField opaque="NO" clipsSubviews="YES" tag="100020" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入11位手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69K-Bp-Kmu">
-                        <rect key="frame" x="66" y="39" width="150" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="150" id="avf-Up-4bK"/>
-                        </constraints>
+                        <rect key="frame" x="66" y="39" width="200" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
@@ -88,6 +82,7 @@
                     <constraint firstItem="69K-Bp-Kmu" firstAttribute="leading" secondItem="e34-1U-XVB" secondAttribute="trailing" constant="8" id="DGA-Cu-C3a"/>
                     <constraint firstItem="69K-Bp-Kmu" firstAttribute="centerY" secondItem="e34-1U-XVB" secondAttribute="centerY" id="GAb-ML-fvO"/>
                     <constraint firstItem="h01-mW-YG9" firstAttribute="centerY" secondItem="q9d-Ep-tht" secondAttribute="centerY" id="Gas-4s-8NQ"/>
+                    <constraint firstAttribute="trailing" secondItem="FxU-5Y-LHO" secondAttribute="trailing" constant="60" id="Joa-zn-PaU"/>
                     <constraint firstItem="mc8-t4-h4f" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="38" id="KGE-6v-IC7"/>
                     <constraint firstItem="Nc4-CA-uMW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Lnh-vq-jtN"/>
                     <constraint firstItem="FxU-5Y-LHO" firstAttribute="centerY" secondItem="Nc4-CA-uMW" secondAttribute="centerY" id="PR8-PB-LTX"/>
@@ -101,6 +96,7 @@
                     <constraint firstItem="e34-1U-XVB" firstAttribute="top" secondItem="Nc4-CA-uMW" secondAttribute="bottom" constant="5" id="fK0-rP-HzH"/>
                     <constraint firstItem="mc8-t4-h4f" firstAttribute="leading" secondItem="q9d-Ep-tht" secondAttribute="trailing" constant="28" id="j6m-Nd-tnd"/>
                     <constraint firstItem="xGF-2Z-fU4" firstAttribute="centerX" secondItem="mc8-t4-h4f" secondAttribute="centerX" id="kXi-Ha-POy"/>
+                    <constraint firstItem="h01-mW-YG9" firstAttribute="leading" secondItem="69K-Bp-Kmu" secondAttribute="trailing" constant="15" id="opy-tp-q6v"/>
                     <constraint firstItem="q9d-Ep-tht" firstAttribute="centerY" secondItem="mc8-t4-h4f" secondAttribute="centerY" id="uGC-SE-1pI"/>
                 </constraints>
                 <variation key="default">

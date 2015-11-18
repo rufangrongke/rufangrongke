@@ -64,7 +64,7 @@ static NSInteger isModifyCount; // 第几次请求
     self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 405);
     
     self.xinPCodeView.hidden = YES; // 不显示输入新手机号输入框
-    self.determineBtn.frame = CGRectMake(17, 288, WXZ_ScreenWidth-17*2, 44);
+//    self.determineBtn.frame = CGRectMake(17, 288, WXZ_ScreenWidth-17*2, 44);
 }
 
 // 修改手机号请求1
@@ -88,7 +88,7 @@ static NSInteger isModifyCount; // 第几次请求
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]]; // 取消菊花
+             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
              
              if (isModifyCount == 1)
              {
@@ -105,7 +105,7 @@ static NSInteger isModifyCount; // 第几次请求
          }
          else
          {
-             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
              if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
              {
                  [self goBackLoginPage]; // 回到登录页面
@@ -113,7 +113,7 @@ static NSInteger isModifyCount; // 第几次请求
          }
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
-         [SVProgressHUD showErrorWithStatus:@"请求失败"];
+         [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
      }];
 }
 
@@ -137,7 +137,7 @@ static NSInteger isModifyCount; // 第几次请求
              
              if ([dic[@"status"] integerValue] == 1)
              {
-                 [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"]];
+                 [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
                  // 倒计时
                  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                      [self countdownWithTimeOut:dic[@"timeout"]]; // 倒计时
@@ -146,11 +146,11 @@ static NSInteger isModifyCount; // 第几次请求
              }
              else
              {
-                 [SVProgressHUD showErrorWithStatus:dic[@"msg"]];
+                 [SVProgressHUD showErrorWithStatus:dic[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
              }
              
          } failure:^(NSURLSessionDataTask *task, NSError *error) {
-             [SVProgressHUD showErrorWithStatus:@"请求失败"];
+             [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
          }];
     }
 }
