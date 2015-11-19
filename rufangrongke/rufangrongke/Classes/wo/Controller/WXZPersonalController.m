@@ -149,7 +149,7 @@ static BOOL isRefreshWo;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%ld",(long)indexPath.row);
+//    NSLog(@"%ld",(long)indexPath.row);
     if (indexPath.row == 0)
     {
         // 头像 - 添加UIActionSheet
@@ -475,7 +475,6 @@ static BOOL isRefreshWo;
 // 退出登录
 - (void)logOutAction:(id)sender
 {
-//    NSLog(@"退出登录");
     // 跳到登录页面
     WXZLoginController *loginController = [[WXZLoginController alloc]init];
     WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];

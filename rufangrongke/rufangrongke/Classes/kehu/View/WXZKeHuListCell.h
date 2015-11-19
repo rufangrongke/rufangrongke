@@ -17,12 +17,15 @@
  *  customerNameLabel   用户名
  *  customerPhoneLabel     用户手机号
  *  houseInfoLabel     房源信息
+ *  yixiangLabel 最新互动信息展示
+ *  footerViews 最新互动信息底层view
  */
 @property (weak, nonatomic) IBOutlet UILabel *customerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *customerPhoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *houseInfoLabel;
-@property (weak, nonatomic) IBOutlet UIView *footerViews;
+
 @property (weak, nonatomic) IBOutlet UILabel *yixiangLabel;
+@property (weak, nonatomic) IBOutlet UIView *footerViews;
 
 /**
  *  UIButton: 按钮
@@ -33,9 +36,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *reportedBtn;
 @property (weak, nonatomic) IBOutlet UIButton *callBtn;
 
-// 传controller
+// 传controller权限
 @property (nonatomic,strong) UIViewController *controller;
 
+// 客户列表数据模型
 @property (nonatomic,strong) WXZKeHuInfoModel *keHuInfoModel;
 
 // 加载nib文件
@@ -43,8 +47,5 @@
 
 // 添加 button 单击事件
 - (void)buttonWithTarget:(id)target action:(SEL)action;
-
-// 更新数据
-//- (void)showKeHuListInfo:(NSDictionary *)dic;
 
 @end

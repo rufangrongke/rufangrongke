@@ -7,14 +7,14 @@
 //  筛选view
 
 #import <UIKit/UIKit.h>
-#import "WXZKeHuController.h"
+#import "WXZKeHuController.h" // 引入客户首页.h文件
 
 @interface WXZScreeningView : UIView //<BackFilterTypeDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *myTable;
+@property (weak, nonatomic) IBOutlet UITableView *myTable; // 筛选类型tableView
 
-@property (nonatomic,strong) NSArray *dataArr;
+@property (nonatomic,strong) NSArray *dataArr; // 筛选类型内容数组
 
-@property (nonatomic,assign) id<BackFilterTypeDelegate> backScreeningTypeDelegate;
+@property (nonatomic,assign) id<BackFilterTypeDelegate> backScreeningTypeDelegate; // 声明返回筛选类型内容的代理
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation WXZKeHuInfoModel
 
-// 转换id
+// 转换id（把id转换成ID）
 + (NSDictionary *)replacedKeyFromPropertyName
 {
     return @{@"ID" : @"id"};

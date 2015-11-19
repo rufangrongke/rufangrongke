@@ -57,16 +57,16 @@ static BOOL isRefreshDetail;
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateNormal];
     [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateHighlighted];
-    leftButton.size = CGSizeMake(70, 30);
+    leftButton.size = CGSizeMake(70, 44);
     // 让按钮内部的所有内容左对齐
     leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     // 让按钮的内容往左边偏移10
-    leftButton.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    leftButton.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
     [leftButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     // 修改导航栏左边的item
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_detailedit" highImage:@"" target:self action:@selector(editAction:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_detailedit" highImage:@"kh_detailedit" target:self action:@selector(editAction:)];
 }
 
 #pragma mark - KeHu Detail Request

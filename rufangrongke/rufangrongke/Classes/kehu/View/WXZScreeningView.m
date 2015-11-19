@@ -17,6 +17,7 @@
 
 - (void)awakeFromNib
 {
+    // 初始化tableView的相关属性方法
     self.myTable.dataSource = self;
     self.myTable.delegate = self;
     self.myTable.backgroundColor = [UIColor clearColor];
@@ -26,7 +27,7 @@
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArr.count;
+    return self.dataArr.count; // 返回行数
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -34,20 +35,22 @@
     WXZScreeningCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScreeningCell"];
     if (!cell)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZScreeningCell class]) owner:nil options:nil] lastObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZScreeningCell class]) owner:nil options:nil] lastObject]; // 加载nib文件
         cell.backgroundColor = [UIColor clearColor];
     }
     
-    cell.titleLabel.text = self.dataArr[indexPath.row]; // 赋值
+    cell.titleLabel.text = self.dataArr[indexPath.row]; // 赋值（展示筛选类型）
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 获取点击的筛选类型cell，并显示选中图片
     WXZScreeningCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectImgView.hidden = NO; // 选中的cell不隐藏
     
+    // 选中的筛选类型内容
     NSString *currentTitle = self.dataArr[indexPath.row];
     if ([currentTitle isEqualToString:@"所有"])
     {
