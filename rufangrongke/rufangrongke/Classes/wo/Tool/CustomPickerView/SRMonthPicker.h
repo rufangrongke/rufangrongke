@@ -20,6 +20,10 @@
  THE SOFTWARE.
  */
 
+/**
+ * pickerView:选择年月的类
+ **/
+
 #import <UIKit/UIKit.h>
 
 @class SRMonthPicker;

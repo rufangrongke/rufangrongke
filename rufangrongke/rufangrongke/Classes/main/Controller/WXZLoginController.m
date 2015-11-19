@@ -50,8 +50,8 @@
 - (IBAction)remenberPassword:(UIButton *)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    // 写入上次的状态
-    WXZLog(@"%zd", [defaults boolForKey:@"remenberPasswordBtnStatus"]);
-    WXZLog(@"phoneNumber:%@, password%@", [defaults stringForKey:@"phoneNumber"], [defaults stringForKey:@"password"]);
+//    WXZLog(@"%zd", [defaults boolForKey:@"remenberPasswordBtnStatus"]);
+//    WXZLog(@"phoneNumber:%@, password%@", [defaults stringForKey:@"phoneNumber"], [defaults stringForKey:@"password"]);
     sender.selected = [defaults boolForKey:@"remenberPasswordBtnStatus"];
     if (!sender.selected) {
         self.usernameField.text = [defaults stringForKey:@"phoneNumber"] ? [defaults stringForKey:@"phoneNumber"] : self.usernameField.text;
@@ -64,7 +64,7 @@
     
     // 记住选中状态
     [defaults setBool:sender.selected forKey:@"remenberPasswordBtnStatus"];
-    WXZLog(@"%zd", [defaults boolForKey:@"remenberPasswordBtnStatus"]);
+//    WXZLog(@"%zd", [defaults boolForKey:@"remenberPasswordBtnStatus"]);
     if (self.remenberPasswordBtn.selected == NO) { // 取消记住密码
         // 取消自动登录
         [self.autoLoginBtn setSelected:NO];
@@ -118,7 +118,7 @@
     parameters[@"pas"] = pwd;
     // afn
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        WXZLog(@"%@", responseObject);
+//        WXZLog(@"%@", responseObject);
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;
         // 获取沙河路径
         NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
@@ -150,7 +150,7 @@
             
         }];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        WXZLog(@"%@", error);
+//        WXZLog(@"%@", error);
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [SVProgressHUD showErrorWithStatus:@"请检查您的网络设置" maskType:SVProgressHUDMaskTypeBlack];
         }];

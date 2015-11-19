@@ -39,7 +39,6 @@
 
 - (void)setWoInfoModel:(WXZWoInfoModel *)woInfoModel
 {
-    WXZLog(@"%@",woInfoModel.cityName);
     // 拼接头像url
     NSString *picurl = [picBaseULR stringByAppendingFormat:@"%@", woInfoModel.TouXiang];
     [self.headImgView sd_setImageWithURL:[NSURL URLWithString:picurl] placeholderImage:[UIImage imageNamed:@"wo_head"]];
@@ -68,45 +67,6 @@
         self.declarationLabel.text = @"一句话喊出你的精气神儿！~编辑你的服务宣言";
     }
 }
-
-//- (void)updateWoInfo:(NSDictionary *)headInfoDic
-//{
-//    // 拼接头像url
-//    if (headInfoDic[@"TouXiang"] != nil)
-//    {
-//        NSURL *headUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:headInfoDic[@"TouXiang"]]];
-//        [self.headImgView sd_setImageWithURL:headUrl placeholderImage:[UIImage imageNamed:@"wo_head"]];
-//    }
-//    else
-//    {
-//        NSURL *headUrl = [NSURL URLWithString:[picBaseULR stringByAppendingString:@""]];
-//        [self.headImgView sd_setImageWithURL:headUrl placeholderImage:[UIImage imageNamed:@"wo_head"]];
-//    }
-//    
-//    self.userNameLabel.text = headInfoDic[@"TrueName"]; // 用户名
-//    if ([headInfoDic[@"TrueName"] isEqualToString:@""] || headInfoDic[@"TrueName"] == nil)
-//    {
-//        self.userNameLabel.text = @"添加用户名";
-//    }
-//    // 未认证或已认证
-//    self.certificationImgView.image = [UIImage imageNamed:@"wo_certification"];
-//    if ([headInfoDic[@"IsShiMing"] isEqualToString:@"True"])
-//    {
-//        self.certificationImgView.image = [UIImage imageNamed:@"wo_certified"];
-//    }
-//    // 门店
-//    self.storeYardsLabel.text = headInfoDic[@"LtName"];
-//    if ([headInfoDic[@"LtName"] isEqualToString:@""] || headInfoDic[@"LtName"] == nil)
-//    {
-//        self.storeYardsLabel.text = @"尚未绑定门店码";
-//    }
-//    // 服务宣言
-//    self.declarationLabel.text = headInfoDic[@"XuanYan"];
-//    if ([headInfoDic[@"XuanYan"] isEqualToString:@""] || headInfoDic[@"XuanYan"] == nil)
-//    {
-//        self.declarationLabel.text = @"一句话喊出你的精气神儿！~编辑你的服务宣言";
-//    }
-//}
 
 // 设置button单击事件
 - (void)buttonWithTarget:(id)target withAction:(SEL)action

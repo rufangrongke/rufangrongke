@@ -10,7 +10,6 @@
 #import "AFNetworking.h"
 #import <SVProgressHUD.h>
 #import "WXZChectObject.h"
-#import "CDPMonitorKeyboard.h"
 
 @interface WXZPersonalStoreVC () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 
@@ -35,15 +34,12 @@
     
     self.storeNameTextField.delegate = self; // 遵循协议
     
-//    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 350); // 设置scrollView的contentSize
-    
     [self initControl]; // 初始化
     
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification object:nil];
-    
     //增加监听，当键退出时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
@@ -53,6 +49,7 @@
 // 初始化控件
 - (void)initControl
 {
+    // 设置门店图片圆角
     self.cardImgView.layer.cornerRadius = 6;
     self.cardImgView.layer.masksToBounds = YES;
 }
@@ -152,18 +149,18 @@
         NSLog(@"不是图片");
     }
     
-    [picker dismissViewControllerAnimated:YES completion:nil]; // 取消
+    [picker dismissViewControllerAnimated:YES completion:nil]; // 取消相册页面
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [picker dismissViewControllerAnimated:YES completion:nil]; // 取消
+    [picker dismissViewControllerAnimated:YES completion:nil]; // 取消相册页面
 }
 
-// 修改绑定门店请求和图片上传
+#pragma mark - 修改绑定门店请求和图片上传
 - (void)modifyRequestWithParameter1:(NSString *)ltcid parameter2:(NSString *)ltname parameter3:(NSData *)picfile
 {
-    NSString *nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirengongsibagding];
+    NSString *nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirengongsibagding]; // 请求url
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     [param setObject:ltcid forKey:@"ltcid"]; // 公司编号
     [param setObject:ltname forKey:@"ltname"]; // 公司名称
@@ -182,7 +179,7 @@
          if ([responseObject[@"ok"] integerValue] == 1)
          {
              [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
-             // 发送通知
+             // 发送通知，更新个人资料页面
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
              [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
          }

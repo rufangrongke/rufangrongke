@@ -4,7 +4,11 @@
 //
 //  Created by 儒房融科 on 15/11/10.
 //  Copyright (c) 2015年 王晓植. All rights reserved.
-//  筛选view
+//
+
+/**
+ * 筛选类型view
+ **/
 
 #import <UIKit/UIKit.h>
 #import "WXZKeHuController.h" // 引入客户首页.h文件

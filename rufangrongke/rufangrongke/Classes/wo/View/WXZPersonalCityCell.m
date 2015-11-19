@@ -21,7 +21,7 @@
 
 - (void)showContentCell:(NSString *)content
 {
-    self.cityNameLabel.text = content;
+    self.cityNameLabel.text = content; // 显示城市
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

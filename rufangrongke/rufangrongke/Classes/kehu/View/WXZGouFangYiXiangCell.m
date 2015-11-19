@@ -14,9 +14,9 @@
 
 @interface WXZGouFangYiXiangCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *yixiangLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yixiangLabel; // 展示购房意向
 
-@property (nonatomic,strong) NSDictionary *dDic;
+@property (nonatomic,strong) NSDictionary *dDic; // 存储传进来的详情信息
 
 @end
 
@@ -53,7 +53,7 @@
 
 //- (IBAction)goufangyixiangAction:(id)sender
 //{
-//    NSLog(@"购房意向");
+//    // 购房意向
 //    WXZAddCustomerVC *addVC = [[WXZAddCustomerVC alloc] init];
 //    addVC.isModifyCustomerInfo = YES;
 //    addVC.titleStr = @"修改客户信息";
@@ -63,7 +63,7 @@
 
 - (IBAction)baobeiloupanAction:(id)sender
 {
-//    NSLog(@"报备楼盘");
+    // 报备楼盘
     [SVProgressHUD showErrorWithStatus:@"流程：选择楼盘->报备客户" maskType:SVProgressHUDMaskTypeBlack];
 //    WXZReportPreparationVC *rpVC = [[WXZReportPreparationVC alloc] init];
 //    [_controller.navigationController pushViewController:rpVC animated:YES];

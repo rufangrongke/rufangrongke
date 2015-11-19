@@ -20,7 +20,7 @@
 
 @property (nonatomic,strong) NSDictionary *woHeadInfoDic; // 关于头像，姓名等的信息字典
 
-@property (nonatomic,strong) WXZWoInfoModel *woInfoModel; //
+@property (nonatomic,strong) WXZWoInfoModel *woInfoModel; // 登录返回的信息数据模型
 
 @end
 
@@ -32,12 +32,7 @@
     
     // 视图整体背景色
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
-//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    
-    // 状态栏
-//    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
-//    statusView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wo_status_bar"]];
-//    [self.view addSubview:statusView];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES]; // 隐藏状态栏
     
     // 获取缓存数据
 //    self.woHeadInfoDic = [self localUserInfo];
@@ -47,7 +42,7 @@
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
     
-    // 注册通知
+    // 注册通知，用来更新“我”界面的数据，和显示
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWoData:) name:@"UpdateWoPage" object:nil];
 }
 
@@ -62,7 +57,7 @@
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = YES;
     
-    [self.myTableView reloadData];
+    [self.myTableView reloadData]; // 刷新列表
 }
 
 #pragma mark - Wo Info Request
@@ -82,7 +77,6 @@
 - (void)updateWoData:(NSNotification *)noti
 {
     [self woInfoRequest]; // 请求
-//    [self.myTableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate/DataSource Methods
@@ -212,7 +206,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"section = %ld,row = %ld",(long)indexPath.section,(long)indexPath.row);
     switch (indexPath.section)
     {
         case 0:
@@ -220,7 +213,6 @@
             if (indexPath.row == 0)
             {
                 // 推出个人资料页面
-//                NSLog(@"个人资料");
                 WXZPersonalController *personalVC = [[WXZPersonalController alloc] init];
                 personalVC.woInfoModel = self.woInfoModel;
                 [self.navigationController pushViewController:personalVC animated:YES];
@@ -232,7 +224,6 @@
             if (indexPath.row == 0)
             {
                 // 推出我的推荐码页面
-//                NSLog(@"我的推荐码");
                 WXZIRecommendCodeVC *recommendCodeVC = [[WXZIRecommendCodeVC alloc] init];
                 recommendCodeVC.headUrl = self.woInfoModel.TouXiang;
                 recommendCodeVC.userName = self.woInfoModel.TrueName;
@@ -242,19 +233,16 @@
             else if (indexPath.row == 1)
             {
                 // 推出意见反馈页面
-//                NSLog(@"意见反馈");
                 [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
             }
             else if (indexPath.row == 2)
             {
                 // 推出排行榜页面
-//                NSLog(@"排行榜");
                 [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
             }
             else if (indexPath.row == 3)
             {
                 // 推出百问百答页面
-//                NSLog(@"百问百答");
                 [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
             }
         }
@@ -262,7 +250,6 @@
         case 2:
         {
             // 推出帮助页面
-//            NSLog(@"帮助");
             [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
         }
             break;
@@ -275,7 +262,8 @@
 #pragma mark - 立即绑定事件
 - (void)immediatelyBindingAction:(id)sender
 {
-    NSLog(@"立即绑定");
+    // 立即绑定
+    
 }
 
 #pragma mark - Wo_Type Button Event
@@ -283,22 +271,22 @@
 {
     if (sender.tag == 100003)
     {
-//        NSLog(@"佣金");
+        // 佣金
         [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
     }
     else if (sender.tag == 100004)
     {
-//        NSLog(@"成交奖");
+        // 成交奖
         [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
     }
     else if (sender.tag == 100005)
     {
-//        NSLog(@"积分");
+        // 积分
         [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
     }
     else if (sender.tag == 100006)
     {
-//        NSLog(@"信用值");
+        // 信用值
         [SVProgressHUD showErrorWithStatus:@"此功能暂未开通，敬请期待！" maskType:SVProgressHUDMaskTypeBlack];
     }
 }

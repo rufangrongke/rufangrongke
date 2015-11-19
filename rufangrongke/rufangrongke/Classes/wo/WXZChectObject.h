@@ -6,6 +6,10 @@
 //  Copyright (c) 2015年 王晓植. All rights reserved.
 //
 
+/**
+ * 检查某些信息类
+ **/
+
 #import <Foundation/Foundation.h>
 
 @interface WXZChectObject : NSObject

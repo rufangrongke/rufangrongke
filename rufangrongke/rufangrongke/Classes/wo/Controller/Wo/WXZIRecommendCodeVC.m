@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImgView; // 头像
 
 @property (weak, nonatomic) IBOutlet UILabel *customerNameLabel; // 用户名
-@property (weak, nonatomic) IBOutlet UILabel *recommendCodeLabel; // 推荐码
+@property (weak, nonatomic) IBOutlet UILabel *recommendCodeLabel; // 我的推荐码
 
 @end
 
@@ -28,7 +28,7 @@
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"本人推荐码";
     
-    [self initControl];
+    [self initControl]; // 初始化控件
 }
 
 - (void)viewWillAppear:(BOOL)animated

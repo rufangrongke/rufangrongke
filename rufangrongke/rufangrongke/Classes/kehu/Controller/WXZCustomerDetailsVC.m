@@ -21,18 +21,18 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
-@property (nonatomic,strong) UILabel *headerTitleLabel;
+@property (nonatomic,strong) UILabel *headerTitleLabel; // 购房意向
 
-@property (nonatomic,strong) UITextField *nameTextField;
-@property (nonatomic,strong) UITextField *phoneNumTextField;
+@property (nonatomic,strong) UITextField *nameTextField; // 姓名输入框
+@property (nonatomic,strong) UITextField *phoneNumTextField; // 手机号输入框
 
-@property (nonatomic,strong) NSDictionary *cdDic; // 客户详情信息
+@property (nonatomic,strong) NSDictionary *cdDic; // 存储客户详情信息字典
 
-@property (nonatomic,strong) WXZKeHuDetailModel *keHuDetailModel;
+@property (nonatomic,strong) WXZKeHuDetailModel *keHuDetailModel; // 客户详情数据模型
 
 @end
 
-static BOOL isRefreshDetail;
+static BOOL isRefreshDetail; // 是否刷新本页面
 
 @implementation WXZCustomerDetailsVC
 
@@ -42,18 +42,19 @@ static BOOL isRefreshDetail;
     // 视图整体背景色
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     self.navigationItem.title = @"客户详情";
-    
+    // tableView代理方法
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
     
-    isRefreshDetail = NO;
-    
+    isRefreshDetail = NO; // 是否刷新本页
+    // 客户详情页数据请求
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self customerDetailRequest:self.customerId];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // 导航栏左侧按钮
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateNormal];
     [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateHighlighted];
@@ -65,25 +66,26 @@ static BOOL isRefreshDetail;
     [leftButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     // 修改导航栏左边的item
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-    
+    // 导航栏右侧按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_detailedit" highImage:@"kh_detailedit" target:self action:@selector(editAction:)];
 }
 
 #pragma mark - KeHu Detail Request
+// 客户详情页信息请求
 - (void)customerDetailRequest:(NSString *)cId
 {
-    // 详情页信息请求
-    NSString *url = [OutNetBaseURL stringByAppendingString:kehuxiangqing];
+    NSString *url = [OutNetBaseURL stringByAppendingString:kehuxiangqing]; // 请求url
+    
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [param setObject:cId forKey:@"id"];
+    [param setObject:cId forKey:@"id"]; // 客户id
     
     [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            self.cdDic = responseObject[@"kehu"];
-            self.keHuDetailModel = [WXZKeHuDetailModel objectWithKeyValues:self.cdDic];
-            [self.myTableView reloadData];
+            self.cdDic = responseObject[@"kehu"]; // 获取数据
+            self.keHuDetailModel = [WXZKeHuDetailModel objectWithKeyValues:self.cdDic]; // 转模型
+            [self.myTableView reloadData]; // 刷新列表
             [SVProgressHUD dismiss];
         }
         else
@@ -100,7 +102,7 @@ static BOOL isRefreshDetail;
     }];
 }
 
-// 代理方法
+// 更新客户详情页信息代理方法
 - (void)updateKeHuDetailInfo:(NSString *)customerId
 {
     isRefreshDetail = YES;
@@ -111,16 +113,17 @@ static BOOL isRefreshDetail;
 // 编辑事件
 - (void)editAction:(UIButton *)sender
 {
-    // 跳转到修改客户信息页面
+    // push到修改客户信息页面
     WXZAddCustomerVC *addVC = [[WXZAddCustomerVC alloc] init];
-    addVC.isModifyCustomerInfo = YES;
-    addVC.titleStr = @"修改客户信息";
-    addVC.detailModel = self.keHuDetailModel;
-    addVC.isKeHuDetail = YES;
-    addVC.updateDelegate = self; // 遵循协议
+    addVC.isModifyCustomerInfo = YES; // 是否是修改客户信息
+    addVC.titleStr = @"修改客户信息"; // 导航栏标题
+    addVC.detailModel = self.keHuDetailModel; // 传客户详情信息
+    addVC.isKeHuDetail = YES; // 是否为客户详情页
+    addVC.updateDelegate = self; // 遵循更新客户详情页信息协议
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
+// 返回按钮事件
 - (void)backAction:(id)sender
 {
     if (isRefreshDetail)
@@ -150,9 +153,9 @@ static BOOL isRefreshDetail;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//
     if (indexPath.section == 0)
     {
+        // 客户基本信息cell
         WXZKhdUserInfoCell *userInfoCell = [tableView dequeueReusableCellWithIdentifier:@"KhdUserInfoCell"];
         if (!userInfoCell)
         {
@@ -168,18 +171,20 @@ static BOOL isRefreshDetail;
     }
     else if (indexPath.section == 1)
     {
+        // 客户购房意向cell
         WXZGouFangYiXiangCell *gfyxCell = [tableView dequeueReusableCellWithIdentifier:@"GouFangYiXiangCell"];
         if (!gfyxCell)
         {
             gfyxCell = [WXZGouFangYiXiangCell initGouFangYiXiangCell];
         }
         gfyxCell.controller = self; // 权限
-        [gfyxCell updateInfo:self.cdDic];
+        [gfyxCell updateInfo:self.cdDic]; // 初始化数据
         
         return gfyxCell;
     }
     else
     {
+        // 房屋详情cell
         WXZHousingDetailsCell *hdCell = [tableView dequeueReusableCellWithIdentifier:@"HousingDetailsCell"];
         if (!hdCell)
         {
@@ -253,7 +258,7 @@ static BOOL isRefreshDetail;
 {
     //方法一
 //        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"sms://13888888888"]];
-    
+    // 方法二
     [self showMessageView:[NSArray arrayWithObjects:self.phoneNumTextField.text, nil] title:@"新信息" body:@""];
 }
 
@@ -273,7 +278,6 @@ static BOOL isRefreshDetail;
     }
     else
     {
-//        NSLog(@"设备不支持");
         [SVProgressHUD showErrorWithStatus:@"此设备不支持发送短信" maskType:SVProgressHUDMaskTypeBlack];
     }
 }
@@ -286,19 +290,16 @@ static BOOL isRefreshDetail;
     {
         case MessageComposeResultSent:
         {
-//            NSLog(@"//信息传送成功");
 //            [SVProgressHUD showErrorWithStatus:@"发送成功"];
         }
             break;
         case MessageComposeResultFailed:
         {
-//            NSLog(@"//信息传送失败");
             [SVProgressHUD showErrorWithStatus:@"信息传送失败" maskType:SVProgressHUDMaskTypeBlack];
         }
             break;
         case MessageComposeResultCancelled:
         {
-//            NSLog(@"//信息被用户取消传送");
             [SVProgressHUD showErrorWithStatus:@"取消发送" maskType:SVProgressHUDMaskTypeBlack];
         }
             break;

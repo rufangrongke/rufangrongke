@@ -42,15 +42,13 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton *bindingBtn;
 
-@property (nonatomic,strong) WXZWoInfoModel *woInfoModel; // 数据 
+@property (nonatomic,strong) WXZWoInfoModel *woInfoModel; // 登录返回信息的数据模型
 
 // 加载nib文件
 + (instancetype)initHeadCell;
 
 // 设置头像边框
 - (void)headBorder;
-// 更新头像
-//- (void)updateWoInfo:(NSDictionary *)headInfoDic;
 
 // 设置button单击事件
 - (void)buttonWithTarget:(id)target withAction:(SEL)action;

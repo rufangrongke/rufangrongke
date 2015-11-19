@@ -6,10 +6,14 @@
 //  Copyright (c) 2015年 王晓植. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "SRMonthPicker.h"
+/**
+ * 从业时间view
+ **/
 
-@interface WXZWorkingTimeView : UIView<SRMonthPickerDelegate>
+#import <UIKit/UIKit.h>
+#import "SRMonthPicker.h" // pickerView
+
+@interface WXZWorkingTimeView : UIView<SRMonthPickerDelegate> // 遵循协议
 
 @property (weak, nonatomic) IBOutlet UIView *bgView; // 背景view
 

@@ -11,13 +11,12 @@
 #import "WXZChectObject.h"
 #import "JxbScaleButton.h"
 #import <SVProgressHUD.h>
-#import "CDPMonitorKeyboard.h"
 #import "WXZLoginController.h"
 #import "WXZNavController.h"
 
 @interface WXZModifyPhoneVC () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
+@property (weak, nonatomic) IBOutlet UIScrollView *myScrollView; // 底层scrollView
 
 @property (weak, nonatomic) IBOutlet UIView *xinPCodeView; // 新手机号验证码view
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *xinPCodeViewHeight; // 新手机号验证码view的高度的约束属性
@@ -49,7 +48,7 @@ static NSInteger isModifyCount; // 第几次请求
     self.xinPhoneTextField.delegate = self;
     self.erPhoneTextField.delegate = self;
     self.xinPCodeTextField.delegate = self;
-    isModifyCount = 1; // 初始值
+    isModifyCount = 1; // 初始值为1
     
     // 赋值
     self.currentPhoneNumLabel.text = self.phone;
@@ -62,23 +61,21 @@ static NSInteger isModifyCount; // 第几次请求
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 405);
-    
     self.xinPCodeView.hidden = YES; // 不显示输入新手机号输入框
-    self.xinPCodeViewHeight.constant = 0.0f;
+    self.xinPCodeViewHeight.constant = 0.0f; // 更改新手机号验证码view的高度
 }
 
-// 修改手机号请求1
+// 修改手机号请求1或2
 - (void)modifyRequestWithParameter1:(NSString *)parm1 parameter:(NSString *)parm2
 {
     NSString *url = @"";
     if (isModifyCount == 1)
     {
-        url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao];
+        url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao]; // 第一次请求url
     }
     else if (isModifyCount == 2)
     {
-        url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao2];
+        url = [OutNetBaseURL stringByAppendingString:jinjirenxiugaishoujihao2]; // 第二次请求url
     }
     
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -93,9 +90,9 @@ static NSInteger isModifyCount; // 第几次请求
              
              if (isModifyCount == 1)
              {
-                 self.xinPCodeView.hidden = NO; // 请求成功，显示输入新手机号输入框
-                 self.xinPCodeViewHeight.constant = 55;
-                 isModifyCount = 2;
+                 self.xinPCodeView.hidden = NO; // 请求成功，显示输入新手机号验证码输入框
+                 self.xinPCodeViewHeight.constant = 55; // 更改新手机号验证码view的高度
+                 isModifyCount = 2; // 更改为第二次请求
              }
              else
              {
@@ -143,7 +140,7 @@ static NSInteger isModifyCount; // 第几次请求
                  // 倒计时
                  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                      [self countdownWithTimeOut:dic[@"timeout"]]; // 倒计时
-                     [self.view setNeedsDisplay];
+                     [self.view setNeedsDisplay]; // 
                  }];
              }
              else
@@ -157,7 +154,7 @@ static NSInteger isModifyCount; // 第几次请求
     }
 }
 
-// 倒计时
+// 倒计时方法
 - (void)countdownWithTimeOut:(NSString *)timeOutStr
 {
     int timeOut2 = timeOutStr.intValue;
@@ -176,7 +173,7 @@ static NSInteger isModifyCount; // 第几次请求
                 _codeBtn.userInteractionEnabled = YES;
                 isModifyCount = 1; // 倒计时结束还没有修改成功，则需要重新请求
                 self.xinPCodeView.hidden = YES; // 隐藏新手机验证码view
-                self.xinPCodeViewHeight.constant = 0;
+                self.xinPCodeViewHeight.constant = 0; // 更改新手机号验证码view的高度
             });
         }
         else
@@ -202,29 +199,34 @@ static NSInteger isModifyCount; // 第几次请求
     [self.erPhoneTextField resignFirstResponder];
     [self.xinPCodeTextField resignFirstResponder];
     
-    if (isModifyCount == 1)
+    // 判断所需参数是否符合规范
+    if (![WXZChectObject checkWhetherStringIsEmpty:self.codeTextField.text withTipInfo:@"验证码不能为空"] && ![WXZChectObject checkWhetherStringIsEmpty:self.xinPhoneTextField.text withTipInfo:@"请输入手机号"] && ![WXZChectObject checkWhetherStringIsEmpty:self.erPhoneTextField.text withTipInfo:@"请再次输入手机号"] && [WXZChectObject checkPhone2:self.xinPhoneTextField.text withTipInfo:@"手机号格式不正确"])
     {
-        if (![WXZChectObject checkWhetherStringIsEmpty:self.codeTextField.text withTipInfo:@"验证码不能为空"] && ![WXZChectObject checkWhetherStringIsEmpty:self.xinPhoneTextField.text withTipInfo:@"请输入手机号"] && ![WXZChectObject checkWhetherStringIsEmpty:self.erPhoneTextField.text withTipInfo:@"请再次输入手机号"] && [WXZChectObject checkPhone2:self.xinPhoneTextField.text withTipInfo:@"手机号格式不正确"])
+        // 判断两次输入的手机号是否一致
+        if ([self.xinPhoneTextField.text isEqualToString:self.erPhoneTextField.text])
         {
-            if ([self.xinPhoneTextField.text isEqualToString:self.erPhoneTextField.text])
+            if (isModifyCount == 1)
             {
-                // 显示菊花
-                [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+                // 第1次数据请求
+                [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
                 [self modifyRequestWithParameter1:self.codeTextField.text parameter:self.xinPhoneTextField.text];
             }
-            else
+            else if (isModifyCount == 2)
             {
-                [SVProgressHUD showErrorWithStatus:@"两次输入的手机号不一致，请重新输入"];
+                // 判断新手机号验证码是否为空
+                if (![WXZChectObject checkWhetherStringIsEmpty:self.xinPCodeTextField.text withTipInfo:@"新手机号验证码不能为空"])
+                {
+                    // 第2次数据请求
+                    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
+                    [self modifyRequestWithParameter1:self.xinPCodeTextField.text parameter:self.xinPhoneTextField.text];
+                }
             }
         }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"两次输入的手机号不一致，请重新输入"];
+        }
     }
-    else if (isModifyCount == 2)
-    {
-        // 显示菊花
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-        [self modifyRequestWithParameter1:self.xinPCodeTextField.text parameter:self.xinPhoneTextField.text];
-    }
-    
 }
 
 #pragma mark - UITextFieldDelegate
@@ -232,19 +234,19 @@ static NSInteger isModifyCount; // 第几次请求
 {
     // 键盘出来时，改变父view的坐标，使输入框露出来
     [UIView animateWithDuration:0.25 animations:^{
-        if (textField.tag == 100013)
+        if (textField.tag == 100013) // 再次输入新手机号
         {
             self.view.frame = CGRectMake(0, -60, WXZ_ScreenWidth, WXZ_ScreenHeight);
         }
-        else if (textField.tag == 100012)
+        else if (textField.tag == 100012) // 新手机号
         {
             self.view.frame = CGRectMake(0, 0, WXZ_ScreenWidth, WXZ_ScreenHeight);
         }
-        else if (textField.tag == 100027)
+        else if (textField.tag == 100027) // 新手机号验证码
         {
             self.view.frame = CGRectMake(0, -110, WXZ_ScreenWidth, WXZ_ScreenHeight);
         }
-        else
+        else // 旧手机号验证码
         {
             self.view.frame = CGRectMake(0, 64, WXZ_ScreenWidth, WXZ_ScreenHeight-64);
         }
@@ -298,10 +300,8 @@ static NSInteger isModifyCount; // 第几次请求
 }
 
 // dealloc中需要移除监听
--(void)dealloc{
-    //移除监听，当键盘出现或改变时收出消息
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    
+-(void)dealloc
+{
     //移除监听，当键退出时收出消息
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }

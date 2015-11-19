@@ -10,6 +10,6 @@
 
 @interface WXZCustomerDetailsVC : UIViewController
 
-@property (nonatomic,strong) NSString *customerId;
+@property (nonatomic,strong) NSString *customerId; // 客户id
 
 @end

@@ -6,14 +6,18 @@
 //  Copyright (c) 2015年 王晓植. All rights reserved.
 //
 
+/**
+ * 城市列表cell
+ **/
+
 #import <UIKit/UIKit.h>
 
 @interface WXZPersonalCityCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityNameLabel; // 城市名称
 
-+ (instancetype)initCityCell;
++ (instancetype)initCityCell; // 加载nib文件
 
-- (void)showContentCell:(NSString *)content;
+- (void)showContentCell:(NSString *)content; // 显示城市数据
 
 @end

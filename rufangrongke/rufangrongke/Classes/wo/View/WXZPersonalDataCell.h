@@ -6,21 +6,20 @@
 //  Copyright (c) 2015年 王晓植. All rights reserved.
 //
 
+/**
+ * 个人资料头像cell
+ **/
+
 #import <UIKit/UIKit.h>
 #import "WXZWoInfoModel.h"
 
 @interface WXZPersonalDataCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *headImgView;
+@property (weak, nonatomic) IBOutlet UIImageView *headImgView; // 头像图片
 
-@property (nonatomic,strong) WXZWoInfoModel *woInfoModel;
+@property (nonatomic,strong) WXZWoInfoModel *woInfoModel; // "我"页面数据模型
 
 // 加载nib文件
 + (instancetype)initPersonalDataCell;
-
-// 头像边框
-//- (void)headBorder;
-// 刷新头像
-//- (void)updateHead:(NSString *)headUrl;
 
 @end

@@ -70,7 +70,8 @@ static NSString *sex = @"先生"; // 记录性别
         
         rect = [self calculateRect:self.personalNameView.frame];
         
-        self.nameTextField.text = self.nameOrSex;
+        self.nameTextField.text = self.woInfoModel.TrueName;
+        [self isCertification]; // 是否实名认证过了
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
     {
@@ -83,9 +84,9 @@ static NSString *sex = @"先生"; // 记录性别
         
         rect = [self calculateRect:self.personalSexView.frame];
         
-        sex = self.nameOrSex;
+        sex = self.woInfoModel.Sex;
         // 设置默认选中(首先判断里边是否有缓存)
-        if ([self.nameOrSex isEqualToString:@"女士"])
+        if ([self.woInfoModel.Sex isEqualToString:@"女士"])
         {
             self.menImgView.hidden = YES;
             self.womenImgView.hidden = NO;
@@ -97,6 +98,7 @@ static NSString *sex = @"先生"; // 记录性别
             self.womenImgView.hidden = YES;
             sex = @"先生";
         }
+        [self isCertification]; // 是否实名认证过了
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
     {
@@ -113,7 +115,7 @@ static NSString *sex = @"先生"; // 记录性别
     [self.view addSubview:self.determineBtn];
 }
 
-// 计算button的frame
+// 计算确定button的frame
 - (CGRect)calculateRect:(CGRect)frame
 {
     CGRect rect = frame;
@@ -124,6 +126,37 @@ static NSString *sex = @"先生"; // 记录性别
     frame = rect;
     
     return frame;
+}
+
+// 是否已经实名认证
+- (void)isCertification
+{
+    // 已认证则不显示按钮，所有东西不可修改；有身份证号但是为False，则为审核中
+    if ([self.woInfoModel.IsShiMing isEqualToString:@"True"])
+    {
+        [self limitControlConditions]; // 限制控件条件
+        if ([self.whichController isEqualToString:@"ModifyPersonalName"])
+            [self.determineBtn setTitle:@"您已实名认证，姓名不可更改" forState:UIControlStateNormal];
+        else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
+            [self.determineBtn setTitle:@"您已实名认证，性别不可更改" forState:UIControlStateNormal];
+    }
+    else if ([self.woInfoModel.IsShiMing isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:self.woInfoModel.sfzid])
+    {
+        [self limitControlConditions]; // 限制控件条件
+        [self.determineBtn setTitle:@"您已提交实名认证，正在审核中..." forState:UIControlStateNormal];
+    }
+}
+
+// 限制控件条件
+- (void)limitControlConditions
+{
+    // 姓名输入框不可用
+    self.nameTextField.enabled = NO;
+    // 性别选择btn不可用
+    self.menBtn.enabled = NO;
+    self.womenBtn.enabled = NO;
+    // 确定按钮不可用
+    self.determineBtn.enabled = NO;
 }
 
 // 选择性别事件
@@ -143,7 +176,8 @@ static NSString *sex = @"先生"; // 记录性别
         sex = @"女士";
     }
 }
-// 密码显示
+
+// 密码隐藏与显示
 - (IBAction)pwdShowAction:(id)sender
 {
     if ([self.pwdShowImgView.image isEqual:[UIImage imageNamed:@"wo_pwdcipher"]])
@@ -167,34 +201,32 @@ static NSString *sex = @"先生"; // 记录性别
     // 判断是哪个controller，并进行相应请求
     if ([self.whichController isEqualToString:@"ModifyPersonalName"])
     {
+        // 判断输入的姓名是否为4个字符内的汉字
         if (![WXZChectObject checkWhetherStringIsEmpty:self.nameTextField.text withTipInfo:@"请输入姓名"] && [WXZStringObject judgmentIsCharacters:self.nameTextField.text withTipInfo:@"请输入4个字符内的汉字"] && ![WXZChectObject isBeyondTheScopeOf:4 string:self.nameTextField.text withTipInfo:@"请输入4个字符内的汉字"] )
         {
-            // 显示菊花
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-            [self modifyRequestWithParameter1:self.nameTextField.text parameter:@""];
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
+            [self modifyRequestWithParameter1:self.nameTextField.text parameter:@""]; // 修改姓名请求
         }
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
     {
         if (![WXZChectObject checkWhetherStringIsEmpty:sex withTipInfo:@"请选择性别"])
         {
-            // 显示菊花
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-            [self modifyRequestWithParameter1:sex parameter:@""];
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
+            [self modifyRequestWithParameter1:sex parameter:@""]; // 修改性别请求
         }
     }
     else if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
     {
         if (![WXZChectObject checkWhetherStringIsEmpty:self.currentPwdTextField.text withTipInfo:@"请输入当前密码"] && ![WXZChectObject checkWhetherStringIsEmpty:self.modifyPwdTextField.text withTipInfo:@"请输入新密码"])
         {
-            // 显示菊花
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-            [self modifyRequestWithParameter1:self.currentPwdTextField.text parameter:self.modifyPwdTextField.text];
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
+            [self modifyRequestWithParameter1:self.currentPwdTextField.text parameter:self.modifyPwdTextField.text]; // 修改密码请求
         }
     }
 }
 
-// 修改姓名，性别，密码请求
+#pragma mark - 修改姓名，性别，密码请求
 - (void)modifyRequestWithParameter1:(NSString *)param1 parameter:(NSString *)param2
 {
     NSString *nameUrlStr;
@@ -235,7 +267,7 @@ static NSString *sex = @"先生"; // 记录性别
             }
             else
             {
-                // 发送通知
+                // 发送通知，更新个人资料页面
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
                 [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
             }
