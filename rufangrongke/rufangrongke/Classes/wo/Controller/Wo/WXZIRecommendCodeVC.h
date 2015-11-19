@@ -6,12 +6,16 @@
 //  Copyright (c) 2015年 王晓植. All rights reserved.
 //
 
+/**
+ * 我的推荐码页面
+ **/
+
 #import <UIKit/UIKit.h>
 
 @interface WXZIRecommendCodeVC : UIViewController
 
-@property (nonatomic,strong) NSString *headUrl;
-@property (nonatomic,strong) NSString *userName;
-@property (nonatomic,strong) NSString *recommendedCodeStr; // 推荐码
+@property (nonatomic,strong) NSString *headUrl; // 用户头像url
+@property (nonatomic,strong) NSString *userName; // 用户名
+@property (nonatomic,strong) NSString *recommendedCodeStr; // 我的推荐码
 
 @end

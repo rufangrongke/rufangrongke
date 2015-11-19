@@ -10,14 +10,14 @@
 
 @interface WXZKhdUserInfoCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *phoneNumTextField;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField; // 姓名输入框
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumTextField; // 手机号输入框
 
-@property (weak, nonatomic) IBOutlet UIButton *smsBtn;
-@property (weak, nonatomic) IBOutlet UIButton *callBtn;
+@property (weak, nonatomic) IBOutlet UIButton *smsBtn; // 消息按钮
+@property (weak, nonatomic) IBOutlet UIButton *callBtn; // 打电话按钮
 
-+ (instancetype)initKhdUserInfoCell;
++ (instancetype)initKhdUserInfoCell; // 加载nib文件
 
-- (void)showInfo:(NSString *)str phone:(NSString *)str2;
+- (void)showInfo:(NSString *)str phone:(NSString *)str2; // 初始化信息
 
 @end

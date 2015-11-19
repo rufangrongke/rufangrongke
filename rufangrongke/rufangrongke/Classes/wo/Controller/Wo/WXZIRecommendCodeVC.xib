@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WXZIRecommendCodeVC">
@@ -28,20 +29,27 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxd-OG-B98">
                     <rect key="frame" x="276" y="153" width="48" height="20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_recommendedcode" translatesAutoresizingMaskIntoConstraints="NO" id="5SB-lr-ybI">
                     <rect key="frame" x="142" y="225" width="317" height="94"/>
                     <constraints>
+                        <constraint firstAttribute="width" secondItem="5SB-lr-ybI" secondAttribute="height" multiplier="317:94" id="Zqu-il-w8f"/>
                         <constraint firstAttribute="width" constant="317" id="cfs-mp-f1f"/>
                         <constraint firstAttribute="height" constant="94" id="gsO-95-j3t"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="cfs-mp-f1f"/>
+                            <exclude reference="gsO-95-j3t"/>
+                        </mask>
+                    </variation>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DASDFA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQB-jc-knG">
-                    <rect key="frame" x="183" y="235" width="236" height="74"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DASDFA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQB-jc-knG">
+                    <rect key="frame" x="186" y="235" width="230" height="74"/>
                     <fontDescription key="fontDescription" type="system" pointSize="62"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -58,6 +66,12 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5SB-lr-ybI" secondAttribute="trailing" constant="28" id="oRP-bv-ynQ"/>
                 <constraint firstItem="5SB-lr-ybI" firstAttribute="centerY" secondItem="AQB-jc-knG" secondAttribute="centerY" id="tUa-3A-pAa"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="mMb-hy-dhU"/>
+                    <exclude reference="oRP-bv-ynQ"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>

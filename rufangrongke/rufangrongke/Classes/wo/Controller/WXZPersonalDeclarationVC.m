@@ -30,31 +30,31 @@
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"服务宣言";
     
-    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 300); // 设置scrollView的contentSize
     // 赋值，遵循协议
     self.declarationTextView.text = self.declarationContent; // 显示原有内容
-    self.declarationTextView.delegate = self;
+    self.declarationTextView.delegate = self; // 遵循协议
     self.declarationWordPromptLabel.text = [NSString stringWithFormat:@"%lu/30",(unsigned long)self.declarationContent.length]; // 显示原有字数
 }
 
-// 提交服务宣言
+// 提交服务宣言事件
 - (IBAction)declarationCommitAction:(id)sender
 {
     [self.declarationTextView resignFirstResponder];
+    // 判断参数是否符合规范
     if (![WXZChectObject checkWhetherStringIsEmpty:self.declarationTextView.text withTipInfo:@"请输入服务宣言"] && ![WXZChectObject isBeyondTheScopeOf:30 string:self.declarationTextView.text withTipInfo:@"请输入30个字符内的服务宣言"])
     {
         // 显示菊花
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-        [self modifyRequestWithParameter:self.declarationTextView.text]; // 提交请求
+        [self modifyRequestWithParameter:self.declarationTextView.text]; // 提交服务宣言请求
     }
 }
 
-// 修改服务宣言请求
+#pragma mark - 修改服务宣言请求
 - (void)modifyRequestWithParameter:(NSString *)param1
 {
-    NSString *nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenziliaoxiugai];
+    NSString *nameUrlStr = [OutNetBaseURL stringByAppendingString:jinjirenziliaoxiugai]; // 请求url
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    [param setObject:@"XuanYan" forKey:@"lN"]; // 属性名
+    [param setObject:@"XuanYan" forKey:@"lN"]; // 修改的属性名
     [param setObject:param1 forKey:@"lD"]; // 服务宣言内容
     
     [[AFHTTPSessionManager manager] POST:nameUrlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
@@ -62,7 +62,7 @@
          if ([responseObject[@"ok"] integerValue] == 1)
          {
              [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
-             // 发送通知
+             // 发送通知，更新个人资料页面
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
              [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
          }
@@ -77,7 +77,6 @@
          
      } failure:^(NSURLSessionDataTask *task, NSError *error) {
          [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
-//         [SVProgressHUD dismiss]; // 取消菊花
      }];
 }
 
@@ -89,7 +88,7 @@
     if (textView.text.length >= 30)
     {
         NSString *wordNumStr = [NSString stringWithFormat:@"%lu/30",(unsigned long)textView.text.length];
-        
+        // 富文本
         NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:wordNumStr];
         NSDictionary *inFanWeiDic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor],NSForegroundColorAttributeName, nil];
         NSDictionary *outFanWeiDic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor],NSForegroundColorAttributeName, nil];
@@ -100,9 +99,10 @@
     }
 }
 
+// 轻击手势事件
 - (IBAction)declarationTapAction:(id)sender
 {
-    [self.declarationTextView resignFirstResponder];
+    [self.declarationTextView resignFirstResponder]; // textView失去第一响应
 }
 
 - (void)didReceiveMemoryWarning {

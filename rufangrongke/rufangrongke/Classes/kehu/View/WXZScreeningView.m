@@ -52,16 +52,18 @@
     
     // 选中的筛选类型内容
     NSString *currentTitle = self.dataArr[indexPath.row];
+    // 判断当前选中的筛选类型是否等于“所有”，等于则传回“筛选”
     if ([currentTitle isEqualToString:@"所有"])
     {
         currentTitle = @"筛选";
     }
     
-    [self.backScreeningTypeDelegate backScreeningType:currentTitle]; // 代理方法
+    [self.backScreeningTypeDelegate backScreeningType:currentTitle]; // 代理方法，传回筛选类型
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 获取cell，并隐藏未选中cell上的选中图片
     WXZScreeningCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectImgView.hidden = YES; // 其他cell的隐藏
 }

@@ -11,10 +11,10 @@
 
 @interface WXZPurchaseIntentionCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *lineImgView;
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel; // 期望类型信息
+@property (weak, nonatomic) IBOutlet UIImageView *lineImgView; // 下划线
 
-@property (nonatomic,strong) UIButton *typeBtn; //
+@property (nonatomic,strong) UIButton *typeBtn; // 类型btn
 
 @end
 
@@ -24,11 +24,13 @@
     // Initialization code
 }
 
+// 加载nib文件
 + (instancetype)initPurchaseIntentionCell
 {
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
+// 展示期望区域、户型、房型title信息
 - (void)showTypeName:(NSInteger)row
 {
     NSArray *typeNameArr = @[@"期望区域：",@"期望户型：",@"房屋类型："];
@@ -40,6 +42,7 @@
     }
 }
 
+// 初始化期望区域、户型、房型信息按钮
 - (void)showTypeData:(NSArray *)typeArr Target:(id)target action:(SEL)action row:(NSInteger)row withQuYuArr:(NSMutableArray *)quyuAr1 withHxArr:(NSMutableArray *)hxAr2 withFwArr:(NSMutableArray *)fwAr3  isModify:(BOOL)ismodify yuanData:(WXZKeHuDetailModel *)model
 {
     NSMutableArray *houseArr = [NSMutableArray array]; // 存储初始数据的数组

@@ -170,7 +170,6 @@
 		88D8578A1BF9BBEA0069EE4E /* WXZLouPanBaoBeiKeHuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D857891BF9BBEA0069EE4E /* WXZLouPanBaoBeiKeHuModel.m */; };
 		88D8578E1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D8578C1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m */; };
 		88D8578F1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D8578D1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib */; };
-		88DB2EC11BE8846500003A77 /* CDPMonitorKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */; };
 		88DBC1081BF0442900425B81 /* WXZDateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1051BF0442900425B81 /* WXZDateObject.m */; };
 		88DBC1091BF0442900425B81 /* WXZStringObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1071BF0442900425B81 /* WXZStringObject.m */; };
 		88DBC10B1BF04E4100425B81 /* WXZLouPanInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88916B431BF043F700981258 /* WXZLouPanInformationTableViewController.m */; };
@@ -483,8 +482,6 @@
 		88D8578B1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZLouPanBaoBeiKeHuCell.h; sourceTree = "<group>"; };
 		88D8578C1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZLouPanBaoBeiKeHuCell.m; sourceTree = "<group>"; };
 		88D8578D1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanBaoBeiKeHuCell.xib; sourceTree = "<group>"; };
-		88DB2EBF1BE8846500003A77 /* CDPMonitorKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDPMonitorKeyboard.h; path = Tool/NotificationKeyboard/CDPMonitorKeyboard.h; sourceTree = "<group>"; };
-		88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDPMonitorKeyboard.m; path = Tool/NotificationKeyboard/CDPMonitorKeyboard.m; sourceTree = "<group>"; };
 		88DBC1041BF0442900425B81 /* WXZDateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZDateObject.h; path = Tool/WXZDateObject.h; sourceTree = "<group>"; };
 		88DBC1051BF0442900425B81 /* WXZDateObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZDateObject.m; path = Tool/WXZDateObject.m; sourceTree = "<group>"; };
 		88DBC1061BF0442900425B81 /* WXZStringObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZStringObject.h; path = Tool/WXZStringObject.h; sourceTree = "<group>"; };
@@ -1211,15 +1208,6 @@
 			name = model;
 			sourceTree = "<group>";
 		};
-		88DB2EBE1BE883FA00003A77 /* NotificationKeyboard */ = {
-			isa = PBXGroup;
-			children = (
-				88DB2EBF1BE8846500003A77 /* CDPMonitorKeyboard.h */,
-				88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */,
-			);
-			name = NotificationKeyboard;
-			sourceTree = "<group>";
-		};
 		88E30FA51BEA27DF002F5FF1 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1326,7 +1314,6 @@
 		88F3F1751BDF6D2A00768422 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				88DB2EBE1BE883FA00003A77 /* NotificationKeyboard */,
 				882902C41BE74E5300BA7D24 /* CustomPickerView */,
 				8876D5D21BE1B8E9001A7EAF /* WXZiMuTableObject.h */,
 				8876D5D31BE1B8E9001A7EAF /* WXZiMuTableObject.m */,
@@ -1685,7 +1672,6 @@
 				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
 				88D857791BF9842D0069EE4E /* WXZLouPanYiBaoBeiKeHuController.m in Sources */,
-				88DB2EC11BE8846500003A77 /* CDPMonitorKeyboard.m in Sources */,
 				882793661BEC55DC00218F13 /* WXZLouPanMaiDianCell_1.m in Sources */,
 				8869E1E91BFAC29A00D409FC /* WXZPersonalData2Cell.m in Sources */,
 				88AE89321BE07E9A00407ECF /* WXZLouPanMessageCell_0_0.m in Sources */,

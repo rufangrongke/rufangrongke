@@ -15,7 +15,7 @@ typedef void(^loginFailedMsg)(id failedResult);
 //- (void)login;
 - (NSDictionary *)loginMessage;
 
-- (void)loginRequest:(loginSuccessMsg)message;
+- (void)loginRequest:(loginSuccessMsg)message; // 登录请求
 
 - (NSDictionary *)localUserInfo;
 

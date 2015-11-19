@@ -10,7 +10,7 @@
 
 @interface WXZiMuTableObject : NSObject
 
-+ (WXZiMuTableObject *)parxuInit;
++ (WXZiMuTableObject *)parxuInit; // 排序
 - (NSMutableDictionary *)sortedArrayWithPinYinDic:(NSArray *)citys;
 - (NSString *)hanZiToPinYinWithString:(NSString *)hanZi;
 

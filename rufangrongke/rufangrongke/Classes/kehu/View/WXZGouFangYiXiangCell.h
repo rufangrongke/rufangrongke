@@ -10,10 +10,10 @@
 
 @interface WXZGouFangYiXiangCell : UITableViewCell
 
-@property (nonatomic,strong) UIViewController *controller;
+@property (nonatomic,strong) UIViewController *controller; // controller权限
 
-+ (instancetype)initGouFangYiXiangCell;
++ (instancetype)initGouFangYiXiangCell; // 加载nib文件
 
-- (void)updateInfo:(NSDictionary *)dic;
+- (void)updateInfo:(NSDictionary *)dic; // 初始化客户详情信息
 
 @end

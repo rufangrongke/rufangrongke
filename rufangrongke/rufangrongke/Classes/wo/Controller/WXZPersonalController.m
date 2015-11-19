@@ -52,7 +52,7 @@ static BOOL isRefreshWo;
     isRefreshWo = NO;
 //    [self personalDataRequest:YES]; // 个人资料数据请求
     
-    // 注册通知
+    // 注册通知，更新个人资料页面数据
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePersonalData:) name:@"UpdatePersonalDataPage" object:nil];
 }
 
@@ -60,20 +60,18 @@ static BOOL isRefreshWo;
 {
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = NO;
-    
+    // 导航栏左侧按钮
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateNormal];
     [leftButton setImage:[UIImage imageNamed:@"jt"] forState:UIControlStateHighlighted];
     leftButton.size = CGSizeMake(70, 44);
     // 让按钮内部的所有内容左对齐
     leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    // 让按钮的内容往左边偏移10
+    // 让按钮的内容往左边偏移5
     leftButton.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
     [leftButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     // 修改导航栏左边的item
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-    
-//    [self.myTableView reloadData]; // 刷新列表
 }
 
 #pragma mark - 个人资料数据请求
@@ -111,7 +109,7 @@ static BOOL isRefreshWo;
 {
     if (indexPath.row == 0)
     {
-        // 头像
+        // 头像cell
         WXZPersonalDataCell *personalDataCell = [tableView dequeueReusableCellWithIdentifier:@"PersonalDataCell"];
         if (!personalDataCell)
         {
@@ -124,7 +122,7 @@ static BOOL isRefreshWo;
     }
     else
     {
-        // 个人资料其他信息
+        // 个人资料其他信息cell
         WXZPersonalData2Cell *personalData2Cell = [tableView dequeueReusableCellWithIdentifier:@"PersonalDataCell2"];
         if (!personalData2Cell)
         {
@@ -149,7 +147,6 @@ static BOOL isRefreshWo;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"%ld",(long)indexPath.row);
     if (indexPath.row == 0)
     {
         // 头像 - 添加UIActionSheet
@@ -164,14 +161,14 @@ static BOOL isRefreshWo;
             // 修改姓名
             personalInfo.whichController = @"ModifyPersonalName";
             personalInfo.titleStr = @"修改姓名";
-            personalInfo.nameOrSex = self.woInfoModel.TrueName;
+            personalInfo.woInfoModel = self.woInfoModel;
         }
         else if (indexPath.row == 2)
         {
             // 修改性别
             personalInfo.whichController = @"ModifyPersonalSex";
             personalInfo.titleStr = @"修改性别";
-            personalInfo.nameOrSex = self.woInfoModel.Sex;
+            personalInfo.woInfoModel = self.woInfoModel;
         }
         else
         {
@@ -301,9 +298,9 @@ static BOOL isRefreshWo;
         // 图片压缩
         NSData *imgData = UIImageJPEGRepresentation(img, 0.4f);
         
-        // 添加转圈
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-        [self upLoadHead:imgData]; // 请求
+        // 上传头像请求
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 添加转圈
+        [self upLoadHead:imgData]; // 上传头像请求
     }
     else
     {
@@ -324,11 +321,10 @@ static BOOL isRefreshWo;
     NSString *url = [OutNetBaseURL stringByAppendingString:shangchuangtupian];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"TouXiang" forKey:@"lx"];
-    [params setObject:head forKey:@"File"];
+    [params setObject:@"TouXiang" forKey:@"lx"]; // 要修改的属性名
+    [params setObject:head forKey:@"File"]; // 头像二进制文件
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
         NSString *fileName = [NSString stringWithFormat:@"%@.png", @"customerHead"];
@@ -340,7 +336,7 @@ static BOOL isRefreshWo;
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
-            // 刷新界面
+            // 刷新个人资料界面
             [self personalDataRequest:YES]; // 个人资料数据请求
         }
         else
@@ -358,13 +354,9 @@ static BOOL isRefreshWo;
 }
 
 #pragma mark - WorkingTime Start
+// 初始化从业时间控件
 - (void)initWorkingTime
 {
-    if ([UIScreen mainScreen].bounds.size.width == 320)
-    {
-        _workingTimeView.bgView.frame = CGRectMake(12, 40, 320-24, 320-24+1);
-    }
-    
     // 遵循协议
     _workingTimeView.timePickerView.monthPickerDelegate = self;
     
@@ -454,7 +446,7 @@ static BOOL isRefreshWo;
         {
             [self removeWorkingTimeView]; // 把view从父view上移除
             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
-            // 刷新界面
+            // 刷新个人资料界面
             [self personalDataRequest:YES]; // 个人资料数据请求
         }
         else

@@ -6,10 +6,14 @@
 //  Copyright (c) 2015年 王晓植. All rights reserved.
 //
 
+/**
+ * 城市列表headerView
+ **/
+
 #import <UIKit/UIKit.h>
 
 @interface WXZCitySectionHeader : UIView
 
-@property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *headerTitleLabel; // 显示城市header标题（字母）
 
 @end

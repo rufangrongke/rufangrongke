@@ -20,17 +20,20 @@
     self.phoneNumTextField.delegate = self;
 }
 
+// 加载nib文件
 + (instancetype)initBasicInfoCell
 {
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
+// 初始化客户基本信息
 - (void)modifyInfo:(WXZKeHuDetailModel *)model isModify:(BOOL)ismodify
 {
     if (ismodify)
     {
         self.nameTextField.text = model.XingMing;
         self.phoneNumTextField.text = model.Mobile;
+        // 首次进来默认选中的性别
         if ([model.Sex isEqualToString:@"先生"])
         {
             [self.menBtn setImage:[UIImage imageNamed:@"kh_nvbzhu"] forState:UIControlStateNormal];

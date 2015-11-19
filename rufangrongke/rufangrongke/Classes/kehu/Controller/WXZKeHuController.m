@@ -81,9 +81,7 @@ static NSString *searchStr; // 记录搜索条件内容
     [self keHuListRequest:currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr]; // 请求列表
     [self setupRefresh]; // 添加下拉刷新和自动上拉加载更多方法
     
-    
-    
-    // 注册通知
+    // 注册通知（筛选），更新客户列表
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKeHuInfo:) name:@"UpdateKeHuInfoNotification" object:nil];
 }
 
@@ -104,7 +102,7 @@ static NSString *searchStr; // 记录搜索条件内容
     _leftImgView.image = [UIImage imageNamed:@"kh_ip_jt"];
     [_leftView addSubview:_leftImgView];
     // 添加左侧按钮的轻击手势
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(quDu_click)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shaiXuan_click)];
     [_leftView addGestureRecognizer:tap];
     // 显示
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_leftView];
@@ -118,6 +116,19 @@ static NSString *searchStr; // 记录搜索条件内容
     _searchBar.placeholder = @"请输入客户姓名";
     _searchBar.delegate = self;
     self.navigationItem.titleView = _searchBar;
+    // 移除searchBar的背景
+    for (UIView *view in self.searchBar.subviews) {
+//        // for before iOS7.0
+//        if ([view isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
+//            [view removeFromSuperview];
+//            break;
+//        }
+        // for later iOS7.0(include)
+        if ([view isKindOfClass:NSClassFromString(@"UIView")] && view.subviews.count > 0) {
+            [[view.subviews objectAtIndex:0] removeFromSuperview];
+            break;
+        }
+    }
 }
 
 #pragma mark - Data Request Methods
@@ -232,17 +243,20 @@ static NSString *searchStr; // 记录搜索条件内容
     [self keHuListRequest:currentPage numberEachPage:eachPage handsomeChooseCategory:shaixuanStr handsomeChooseConditions:searchStr];
 }
 
-// 通知事件，刷新客户列表（显示所有数据）
+// 筛选通知事件，刷新客户列表（显示所有数据）
 - (void)updateKeHuInfo:(id)sender
 {
     [_screeningView removeFromSuperview]; // 移除弹出框view
     _screeningView = nil; // 置为空
+    
     // 重新布局导航栏左侧按钮的frame
     _leftView.size = CGSizeMake(52, 44);
     _leftTitleLabel.size = CGSizeMake(38, 44);
     _leftImgView.frame = CGRectMake(_leftView.width-14, (_leftView.height-8)/2, 14, 8);
     _leftTitleLabel.text = @"筛选";
     [_leftView setNeedsUpdateConstraints]; // 更新约束
+    
+    [self.tableView.footer resetNoMoreData]; // 重置上拉加载方法
     // 客户列表数据请求（所有的数据）
     currentPage = 1;
     isRefresh = YES;
@@ -296,6 +310,8 @@ static NSString *searchStr; // 记录搜索条件内容
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 移除键盘
+    [self.searchBar resignFirstResponder];
     [self hideScreeningView]; // 选择列表隐藏弹窗
     // push到客户详情页
     WXZCustomerDetailsVC *customerDetailsVC = [[WXZCustomerDetailsVC alloc] init];
@@ -401,7 +417,7 @@ static NSString *searchStr; // 记录搜索条件内容
     // 添加下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshKeHuInfo)];
     // 添加自动上拉加载
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreKeHuInfo)];
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreKeHuInfo)];
     //    self.tableView.footer.hidden = YES;
 }
 
@@ -443,6 +459,8 @@ static NSString *searchStr; // 记录搜索条件内容
 {
     [self.searchBar resignFirstResponder]; // 搜索框键盘失去第一响应
     [self hideScreeningView]; // 隐藏弹窗方法
+    
+    [self.tableView.footer resetNoMoreData]; // 重置上拉加载方法
     // 搜索客户列表请求
     currentPage = 1; // 当前请求页数
     isRefresh = YES; // 是否刷新
@@ -452,9 +470,10 @@ static NSString *searchStr; // 记录搜索条件内容
 }
 
 // 左侧筛选按钮点击事件
-- (void)quDu_click
+- (void)shaiXuan_click
 {
     [self.searchBar resignFirstResponder]; // 搜索框键盘失去第一响应
+    [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, self.tableView.contentOffset.y) animated:NO]; // 让点击区域后让tableview瞬间停止滑动
     // 判断是否隐藏弹窗
     if (isTanChuangHiden)
     {

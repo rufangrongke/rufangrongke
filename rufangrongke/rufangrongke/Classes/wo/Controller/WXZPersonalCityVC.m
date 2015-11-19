@@ -22,7 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UISearchBar *citySearchBar; // 搜索框
 
-@property (weak, nonatomic) IBOutlet UITableView *myTableView; // 
+@property (weak, nonatomic) IBOutlet UITableView *myTableView; // 列表
 
 @property (weak, nonatomic) IBOutlet UILabel *currentCityLabel; // 当前城市
 @property (weak, nonatomic) IBOutlet UILabel *largeIndexZimu; // 字幕
@@ -45,7 +45,7 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        // 初始化
+        // 初始化数组和字典
         self.citysArr=[[NSMutableArray alloc] init];
         self.ziMuAllKeys=[[NSArray alloc] init];
         self.indexZimuAllKeys=[[NSArray alloc] init];
@@ -56,7 +56,7 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     return self;
 }
 
-//去掉tableview多余的分割线
+// 去掉tableview多余的分割线
 - (void)setExtraCellLineHidden: (UITableView *)tableView
 {
     UIView *view = [UIView new];
@@ -98,22 +98,16 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"设定城市";
     
+    // tableView代理方法
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
-    
     //改变tableview索引的背景颜色
     self.myTableView.sectionIndexColor = WXZRGBColor(27, 28, 27); // 设置索引的字体颜色
     self.myTableView.sectionIndexBackgroundColor=[UIColor clearColor];//设置索引背景色
     self.myTableView.sectionHeaderHeight = 30.f; // 设置头的高
     
     selectedCurrentCityName = @""; // 初始值为空
-    _currentCityLabel.text = self.currentCity; // 赋值
-    
-    // 显示菊花
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    // 加载城市列表
-    [self cityListRequest];
-    [self setupRefresh];
+    _currentCityLabel.text = self.currentCity; // 赋值，先显示原有的城市名
     
     // 设置字幕的圆角
     self.largeIndexZimu.layer.cornerRadius = 6;
@@ -123,29 +117,34 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     // 设置searchbar无文字时，return键可点击
     self.citySearchBar.enablesReturnKeyAutomatically = NO;
     self.citySearchBar.delegate = self;
+    
+    // 加载城市列表数据请求
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
+    [self cityListRequest]; // 请求
+    [self setupRefresh]; // 添加刷新
 }
 
 #pragma mark - City List Data Request
 - (void)cityListRequest
 {
-    // 请求链接
-    NSString *cityUrlStr = [OutNetBaseURL stringByAppendingString:chengshileibiao];
+    NSString *cityUrlStr = [OutNetBaseURL stringByAppendingString:chengshileibiao]; // 请求url
     
     [[AFHTTPSessionManager manager] GET:cityUrlStr parameters:nil success:^(NSURLSessionDataTask *task, id responseObject)
      {
-         NSArray *arr = responseObject[@"citys"];
+         NSArray *arr = responseObject[@"citys"]; // 取出城市
          if (arr.count > 0)
          {
              for (int i=0; i<arr.count; i++)
              {
-                 [self.citysArr addObject:arr[i][@"city"]];
-                 [self.sourceDic setObject:arr[i][@"id"] forKey:arr[i][@"city"]];
+                 [self.citysArr addObject:arr[i][@"city"]]; //  存储城市名
+                 [self.sourceDic setObject:arr[i][@"id"] forKey:arr[i][@"city"]]; // 存储城市对应的id
              }
-             [self tableviewZimuXuHao:self.citysArr];
-             [self.myTableView reloadData];
-             if(self.citysArr.count > 0)
+             [self tableviewZimuXuHao:self.citysArr]; // 转换成字幕序号
+             [self.myTableView reloadData]; // 刷新列表
+             
+             if(self.citysArr.count > 0) // 判断是否有城市
              {
-                 [self setExtraCellLineHidden:self.myTableView];
+                 [self setExtraCellLineHidden:self.myTableView]; // 去掉tableview多余的分割线
              }
              else
              {
@@ -185,9 +184,9 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
          if ([responseObject[@"ok"] isEqualToNumber:@(1)])
          {
              [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
-             // 发送通知更新个人资料
+             // 发送通知，更新个人资料
              [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshCity" object:nil]; // 更新区域方法
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshCity" object:nil]; // 发送通知，更新区域方法
              [self.navigationController popViewControllerAnimated:YES];
          }
          else
@@ -208,15 +207,17 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
 {
     self.myTableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshKeHuInfo)];
 }
+
+// 刷新方法
 - (void)refreshKeHuInfo
 {
-    [self.citysArr removeAllObjects]; // 总体数据
+    [self.citysArr removeAllObjects]; // 移除城市总体数据
     self.ziMuAllKeys = @[]; // tableview上显示的索引
     self.indexZimuAllKeys = @[]; // 索引条显示的索引
-    
-    [self.sourceDic removeAllObjects]; // 存储城市和城市对应id
+    // 移除存储城市和城市对应id
+    [self.sourceDic removeAllObjects];
     [self.allCitysDic removeAllObjects];
-    // 刷新
+    // 刷新请求
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
     [self cityListRequest]; // 加载城市列表
 }

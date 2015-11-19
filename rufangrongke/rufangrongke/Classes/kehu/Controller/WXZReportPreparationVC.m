@@ -13,9 +13,9 @@
 
 @interface WXZReportPreparationVC () <UITableViewDataSource,UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *allLouPanLabel;
+@property (weak, nonatomic) IBOutlet UILabel *allLouPanLabel; // 所有楼盘
 
-@property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UITableView *myTableView; // 列表
 
 @end
 
@@ -27,7 +27,7 @@
     // 视图整体背景色
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
     self.navigationItem.title = @"报备楼盘";
-    
+    // tableView代理方法
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
     
@@ -36,6 +36,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // 导航栏右侧按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"kh_loupanbaobeicity" highImage:@"" target:self action:@selector(cityAction:)];
 }
 
