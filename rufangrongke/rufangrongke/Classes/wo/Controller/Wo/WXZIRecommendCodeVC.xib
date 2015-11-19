@@ -33,7 +33,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wo_recommendedcode" translatesAutoresizingMaskIntoConstraints="NO" id="5SB-lr-ybI">
-                    <rect key="frame" x="142" y="225" width="317" height="94"/>
+                    <rect key="frame" x="15" y="225" width="570" height="169"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="5SB-lr-ybI" secondAttribute="height" multiplier="317:94" id="Zqu-il-w8f"/>
                         <constraint firstAttribute="width" constant="317" id="cfs-mp-f1f"/>
@@ -47,7 +47,7 @@
                     </variation>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DASDFA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQB-jc-knG">
-                    <rect key="frame" x="186" y="235" width="230" height="74"/>
+                    <rect key="frame" x="185" y="273" width="230" height="74"/>
                     <fontDescription key="fontDescription" type="system" pointSize="62"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -56,9 +56,13 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="5SB-lr-ybI" firstAttribute="top" secondItem="Xxd-OG-B98" secondAttribute="bottom" constant="52" id="2tB-0N-1Y3"/>
+                <constraint firstAttribute="trailing" secondItem="5SB-lr-ybI" secondAttribute="trailing" constant="15" id="77d-Q4-zUi"/>
                 <constraint firstItem="vdl-Ue-l1o" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="45" id="EFz-b0-8Jt"/>
                 <constraint firstItem="Xxd-OG-B98" firstAttribute="top" secondItem="vdl-Ue-l1o" secondAttribute="bottom" constant="8" id="EG3-Jm-PkY"/>
+                <constraint firstItem="5SB-lr-ybI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="142" id="HHQ-MQ-fCw"/>
                 <constraint firstItem="5SB-lr-ybI" firstAttribute="centerX" secondItem="AQB-jc-knG" secondAttribute="centerX" id="N1v-He-YFl"/>
+                <constraint firstItem="5SB-lr-ybI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="NBs-T0-6Mk"/>
+                <constraint firstAttribute="trailing" secondItem="5SB-lr-ybI" secondAttribute="trailing" constant="141" id="Uxa-iu-pKl"/>
                 <constraint firstAttribute="centerX" secondItem="vdl-Ue-l1o" secondAttribute="centerX" id="hx5-fw-Wvb"/>
                 <constraint firstAttribute="centerX" secondItem="5SB-lr-ybI" secondAttribute="centerX" id="kcE-Kv-5IU"/>
                 <constraint firstItem="Xxd-OG-B98" firstAttribute="centerX" secondItem="vdl-Ue-l1o" secondAttribute="centerX" id="m1s-we-TUJ"/>
@@ -68,6 +72,8 @@
             </constraints>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="HHQ-MQ-fCw"/>
+                    <exclude reference="Uxa-iu-pKl"/>
                     <exclude reference="mMb-hy-dhU"/>
                     <exclude reference="oRP-bv-ynQ"/>
                 </mask>
