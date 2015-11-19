@@ -53,7 +53,7 @@ static NSString *quYuListViewCellID = @"quyuCell";
 //    }else{// 发送请求
         NSString *url = [OutNetBaseURL stringByAppendingString:quyuliebiao];
         [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-//            WXZLog(@"%@", responseObject);
+            WXZLog(@"%@", responseObject);
             NSDictionary *cityListDic = (NSDictionary *)responseObject;
             // 获取沙河路径
             NSString *cityListInfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:cityListInfoFile];
@@ -90,7 +90,7 @@ static NSString *quYuListViewCellID = @"quyuCell";
 {
     if (indexPath.row == 0) {
         WXZquYuListViewCell *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZquYuListViewCell class]) owner:nil options:nil].lastObject;
-        cell.cityLabel.text = @"全部区域";
+        cell.cityLabel.text = [NSString stringWithFormat:@"全部区域(%zd)", self.quYuListViewCellModel.all];
         return cell;
     }else{
         WXZquYuListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"quyuCell"];

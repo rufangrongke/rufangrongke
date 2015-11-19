@@ -181,7 +181,8 @@ static NSString *searchStr; // 记录搜索条件内容
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 消息提示
+            // 判断是否为登录超时，登录超时则返回登录页面重新登录
             if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面

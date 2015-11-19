@@ -88,6 +88,7 @@ static NSInteger inp = 1;
     xiaoqu = @"";
     quyu = @"";
     self.fysList = nil;
+    [self.tableView.footer resetNoMoreData];
     [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
 }
 #pragma mark - <初始化项目>
@@ -106,10 +107,25 @@ static NSInteger inp = 1;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
     // 添加一个系统的搜索框
     UISearchBar *search = [[UISearchBar alloc]init];
+    search.bounds = CGRectMake(0, 0, 100, 40);
     search.placeholder = @"楼盘搜索";
     self.navigationItem.titleView = search;
     search.delegate = self;
     self.search = search;
+    // 消除pop的时候searchbar背景闪一下
+    for (UIView *view in self.search.subviews) {
+//        // for before iOS7.0
+//        if ([view isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
+//            [view removeFromSuperview];
+//            break;
+//        }
+        // for later iOS7.0(include)
+        if ([view isKindOfClass:NSClassFromString(@"UIView")] && view.subviews.count > 0) {
+            [[view.subviews objectAtIndex:0] removeFromSuperview];
+            break;
+        }
+    }
+
 
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZTableViewCell class]) bundle:nil] forCellReuseIdentifier:WXZLoupanCellID];
@@ -157,7 +173,8 @@ static NSInteger inp = 1;
  *  左上方按钮监听点击
  */
 - (void)quYu_click{
-//    self.tableView.contentOffset = CGPointMake(0, 0);
+    // 让点击区域后让tableview瞬间停止滑动
+    [self.tableView setContentOffset:CGPointMake(self.tableView.contentOffset.x, self.tableView.contentOffset.y) animated:NO];
     // 取消键盘
     [self.search resignFirstResponder];
     
@@ -169,7 +186,6 @@ static NSInteger inp = 1;
         self.quYuListViewVC = quYuListViewVC;
         self.quYuListViewVC.view.frame = CGRectMake(0, self.tableView.contentOffset.y, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
         [self.tableView addSubview:self.quYuListViewVC.view];
-//        [self.tableView insertSubview:self.quYuListViewVC.view aboveSubview:self.louPanHomeHeadView];
         self.tableView.scrollEnabled = NO;
         self.louPanHomeHeadView.hidden = YES;
     }else{
@@ -184,6 +200,8 @@ static NSInteger inp = 1;
 #pragma mark - WXZquYuListViewControllerDelegate
 - (void)quYuListViewControllerDelegate:(NSString *)parameter
 {
+    // 上拉刷新控件置空
+    [self.tableView.footer resetNoMoreData];
     self.tableView.contentOffset = CGPointMake(0, 0);
     self.quYuListViewVC.view.hidden = YES;
     self.tableView.scrollEnabled = YES;
@@ -210,11 +228,12 @@ static NSInteger inp = 1;
 {
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewUsers)];
     
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
-    //    self.tableView.footer.hidden = YES;
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
 }
 - (void)loadNewUsers
 {
+    // 下拉刷新复活
+    [self.tableView.footer resetNoMoreData];
     inp = 1;
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -224,6 +243,7 @@ static NSInteger inp = 1;
     [[AFHTTPSessionManager manager] POST:url parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         // 转模型,存储模型
         self.loupanModel = [WXZLouPan objectWithKeyValues:responseObject];
+        
         self.fysList = [NSMutableArray arrayWithArray:self.loupanModel.fys];
         // 刷新表格
         [self.tableView reloadData];
@@ -323,6 +343,8 @@ static NSInteger inp = 1;
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 收回键盘
+    [self.search resignFirstResponder];
     WXZLouPanMessageController *louPanMessage = [[WXZLouPanMessageController alloc] init];
     // 标题
     louPanMessage.navigationItem.title = [self.fysList[indexPath.row] xiaoqu];

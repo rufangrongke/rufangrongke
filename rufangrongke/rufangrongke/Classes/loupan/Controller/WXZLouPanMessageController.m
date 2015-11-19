@@ -115,6 +115,9 @@ static CGFloat carouselPic_height = 226;
 //    pageView.currentColor = [UIColor orangeColor];
     // 情景一：采用本地图片实现
     SDCycleScrollView *pageView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(carouselPic_x, carouselPic_y, mainScreenWeight, carouselPic_height) imageURLStringsGroup:nil];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loupan-banner"]];
+    imageView.bounds = pageView.bounds;
+    [pageView insertSubview:imageView atIndex:0];
     self.pageView = pageView;
     self.tableView.tableHeaderView = self.pageView;
 }
@@ -185,7 +188,7 @@ static CGFloat carouselPic_height = 226;
         }
         // 非轮播图片
         if (PicUrls.count != 0) {
-            self.pageView.imageURLStringsGroup = PicUrls;
+                self.pageView.imageURLStringsGroup = PicUrls;
         }
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

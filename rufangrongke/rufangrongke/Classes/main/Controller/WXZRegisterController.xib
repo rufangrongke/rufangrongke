@@ -40,7 +40,7 @@
                                 <constraint firstAttribute="height" constant="1" id="Fxy-nc-S0O"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的真实姓名" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="72V-Be-ree" userLabel="真实姓名">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入您的真实姓名" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="72V-Be-ree" userLabel="真实姓名">
                             <rect key="frame" x="88" y="14" width="462" height="31"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
@@ -88,7 +88,7 @@
                                 <constraint firstAttribute="height" constant="1" id="VDR-QJ-v4u"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入11位手机号" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="tsV-NX-iHM" userLabel="手机号码">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入11位手机号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="tsV-NX-iHM" userLabel="手机号码">
                             <rect key="frame" x="88" y="14" width="462" height="31"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -137,7 +137,7 @@
                                 <constraint firstAttribute="height" constant="1" id="x6K-oR-GHz"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="o0F-qf-OqG" userLabel="验证码">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="o0F-qf-OqG" userLabel="验证码">
                             <rect key="frame" x="88" y="14" width="462" height="31"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -205,7 +205,7 @@
                                 <constraint firstAttribute="height" constant="1" id="Vez-yF-xM0"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="1F7-YC-s6Q" userLabel="设置密码">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1F7-YC-s6Q" userLabel="设置密码">
                             <rect key="frame" x="88" y="13" width="443" height="31.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -268,7 +268,7 @@
                                 <constraint firstAttribute="height" constant="1" id="o4k-V9-BIJ"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入邀请人" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="w3w-og-wTl" userLabel="邀请人">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入邀请人" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="w3w-og-wTl" userLabel="邀请人">
                             <rect key="frame" x="88" y="10" width="462" height="39"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="39" id="rlj-AC-iTE"/>
@@ -324,7 +324,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="register:" destination="-1" eventType="touchUpInside" id="h6F-H2-wFA"/>
+                        <action selector="registerNewUser:" destination="-1" eventType="touchUpInside" id="KFj-CX-z5W"/>
                     </connections>
                 </button>
             </subviews>

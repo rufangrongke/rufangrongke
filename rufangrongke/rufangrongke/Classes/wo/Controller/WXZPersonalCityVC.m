@@ -181,7 +181,8 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
     
     [[AFHTTPSessionManager manager] POST:nameUrlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
      {
-         if ([responseObject[@"ok"] integerValue] == 1)
+         WXZLog(@"%@", responseObject);
+         if ([responseObject[@"ok"] isEqualToNumber:@(1)])
          {
              [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
              // 发送通知更新个人资料

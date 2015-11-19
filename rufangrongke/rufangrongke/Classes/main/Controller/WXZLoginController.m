@@ -211,7 +211,8 @@
     [self.pwdField resignFirstResponder];
 }
 
-#pragma 键盘处理 不遮盖textfield
+#pragma mark - 键盘处理 
+// 不遮盖textfield
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     WXZLogFunc;
     CGFloat offset = self.view.height - (260 + textField.height + 216 +50);
@@ -229,6 +230,12 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.view.y = 0;
     }];
+    return YES;
+}
+// 点击return 搜索
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self login:nil];
     return YES;
 }
 @end

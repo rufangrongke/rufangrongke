@@ -72,7 +72,7 @@
                                 <constraint firstAttribute="height" constant="20" id="aCP-BF-Cdd"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入用户名" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="YNQ-Hl-rLD">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入用户名" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YNQ-Hl-rLD">
                             <rect key="frame" x="98" y="0.0" width="429" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -122,8 +122,8 @@
                                 <constraint firstAttribute="height" constant="20" id="n00-cD-x6X"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="1xb-UU-DCY">
-                            <rect key="frame" x="98" y="0.0" width="421" height="40"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1xb-UU-DCY">
+                            <rect key="frame" x="98" y="0.0" width="412" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             <connections>
@@ -152,7 +152,7 @@
                         <constraint firstAttribute="centerY" secondItem="1xb-UU-DCY" secondAttribute="centerY" id="NPB-4v-5mY"/>
                         <constraint firstAttribute="centerY" secondItem="2Qj-sU-NAv" secondAttribute="centerY" id="QSJ-Ac-zO1"/>
                         <constraint firstAttribute="trailing" secondItem="ydU-Tf-ABg" secondAttribute="trailing" id="RnF-hh-Hnz"/>
-                        <constraint firstAttribute="trailing" secondItem="1xb-UU-DCY" secondAttribute="trailing" constant="21" id="RvQ-fF-GnI"/>
+                        <constraint firstAttribute="trailing" secondItem="1xb-UU-DCY" secondAttribute="trailing" constant="30" id="RvQ-fF-GnI"/>
                         <constraint firstItem="1xb-UU-DCY" firstAttribute="top" secondItem="TD8-qq-8p8" secondAttribute="top" id="aFM-Pc-zvZ"/>
                         <constraint firstAttribute="height" constant="40" id="bxa-IF-OHD"/>
                         <constraint firstItem="2Qj-sU-NAv" firstAttribute="leading" secondItem="TD8-qq-8p8" secondAttribute="leading" constant="13" id="e3b-Mr-J8P"/>

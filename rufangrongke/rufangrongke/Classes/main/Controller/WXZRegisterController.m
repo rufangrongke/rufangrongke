@@ -12,7 +12,7 @@
 #import <SVProgressHUD.h>
 #import "WXZChectObject.h"
 
-@interface WXZRegisterController ()
+@interface WXZRegisterController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *name;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumber;
 @property (weak, nonatomic) IBOutlet UITextField *verificationCode;
@@ -71,7 +71,7 @@
     
 }
 
-- (IBAction)register:(id)sender {
+- (IBAction)registerNewUser:(id)sender {
     if (self.verificationCode.text.length != 6) {
         [SVProgressHUD showErrorWithStatus:@"请输入6位验证码"];
         return;
@@ -163,5 +163,11 @@
     dispatch_resume(_timer);
 }
 
-
+#pragma mark - 监听键盘
+// 点击return 搜索
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self registerNewUser:nil];
+    return YES;
+}
 @end

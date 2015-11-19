@@ -62,7 +62,7 @@
     // 包装一个导航控制器, 添加导航控制器为tabbarcontroller的子控制器
     WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:vc];
     
-    
+    nav.navigationBar.backgroundColor = [UIColor clearColor];
     // 设置导航栏背景图片和颜色
 //    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"NavBg"] forBarMetrics:UIBarMetricsDefault];
     
