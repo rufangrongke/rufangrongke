@@ -171,7 +171,6 @@
 		88D8578E1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D8578C1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.m */; };
 		88D8578F1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D8578D1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib */; };
 		88DB2EC11BE8846500003A77 /* CDPMonitorKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */; };
-		88DBC1031BF0436C00425B81 /* WXZMessagePrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1021BF0436C00425B81 /* WXZMessagePrompt.m */; };
 		88DBC1081BF0442900425B81 /* WXZDateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1051BF0442900425B81 /* WXZDateObject.m */; };
 		88DBC1091BF0442900425B81 /* WXZStringObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DBC1071BF0442900425B81 /* WXZStringObject.m */; };
 		88DBC10B1BF04E4100425B81 /* WXZLouPanInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88916B431BF043F700981258 /* WXZLouPanInformationTableViewController.m */; };
@@ -479,8 +478,6 @@
 		88D8578D1BF9C3F40069EE4E /* WXZLouPanBaoBeiKeHuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZLouPanBaoBeiKeHuCell.xib; sourceTree = "<group>"; };
 		88DB2EBF1BE8846500003A77 /* CDPMonitorKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDPMonitorKeyboard.h; path = Tool/NotificationKeyboard/CDPMonitorKeyboard.h; sourceTree = "<group>"; };
 		88DB2EC01BE8846500003A77 /* CDPMonitorKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDPMonitorKeyboard.m; path = Tool/NotificationKeyboard/CDPMonitorKeyboard.m; sourceTree = "<group>"; };
-		88DBC1011BF0436C00425B81 /* WXZMessagePrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZMessagePrompt.h; path = Tool/WXZMessagePrompt.h; sourceTree = "<group>"; };
-		88DBC1021BF0436C00425B81 /* WXZMessagePrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZMessagePrompt.m; path = Tool/WXZMessagePrompt.m; sourceTree = "<group>"; };
 		88DBC1041BF0442900425B81 /* WXZDateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZDateObject.h; path = Tool/WXZDateObject.h; sourceTree = "<group>"; };
 		88DBC1051BF0442900425B81 /* WXZDateObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZDateObject.m; path = Tool/WXZDateObject.m; sourceTree = "<group>"; };
 		88DBC1061BF0442900425B81 /* WXZStringObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZStringObject.h; path = Tool/WXZStringObject.h; sourceTree = "<group>"; };
@@ -1120,8 +1117,6 @@
 				88DBC1051BF0442900425B81 /* WXZDateObject.m */,
 				88DBC1061BF0442900425B81 /* WXZStringObject.h */,
 				88DBC1071BF0442900425B81 /* WXZStringObject.m */,
-				88DBC1011BF0436C00425B81 /* WXZMessagePrompt.h */,
-				88DBC1021BF0436C00425B81 /* WXZMessagePrompt.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -1620,7 +1615,6 @@
 				8827936B1BEC55E900218F13 /* WXZLouPanMaiDianCell_2.m in Sources */,
 				88EAA71B1BD87C180072CD40 /* AFURLConnectionOperation.m in Sources */,
 				88E30FAB1BEA285A002F5FF1 /* WXZLiandong.m in Sources */,
-				88DBC1031BF0436C00425B81 /* WXZMessagePrompt.m in Sources */,
 				8869E16A1BFABF8E00D409FC /* WXZKeHuController.m in Sources */,
 				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,

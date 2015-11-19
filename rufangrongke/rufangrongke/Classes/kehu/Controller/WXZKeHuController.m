@@ -336,7 +336,7 @@ static NSString *searchStr; // 记录搜索条件内容
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.01f;
+    return 0.01f; // 返回footer的高度
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -384,7 +384,6 @@ static NSString *searchStr; // 记录搜索条件内容
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     searchStr = searchBar.text; // 搜索条件内容赋值
-//    [self hideScreeningView]; // 隐藏弹窗
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar

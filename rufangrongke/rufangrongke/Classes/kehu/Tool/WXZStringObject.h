@@ -6,6 +6,10 @@
 //  Copyright (c) 2015年 王晓植. All rights reserved.
 //
 
+/**
+ * 字符串相关操作类
+ **/
+
 #import <Foundation/Foundation.h>
 
 @interface WXZStringObject : NSObject

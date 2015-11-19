@@ -36,8 +36,6 @@
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"实名认证";
     
-//    self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 300);
-    
     // 赋值
     self.nameTextField.text = self.woInfoModel.TrueName;
     self.idCardTextField.text = self.woInfoModel.sfzid;

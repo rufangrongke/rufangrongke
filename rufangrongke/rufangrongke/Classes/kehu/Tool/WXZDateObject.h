@@ -6,6 +6,10 @@
 //  Copyright (c) 2015年 王晓植. All rights reserved.
 //
 
+/**
+ * 日期对象格式化类
+ **/
+
 #import <Foundation/Foundation.h>
 
 @interface WXZDateObject : NSObject

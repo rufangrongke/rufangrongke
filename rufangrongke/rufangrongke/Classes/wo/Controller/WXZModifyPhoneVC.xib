@@ -16,6 +16,7 @@
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="xinPCodeTextField" destination="Z5A-4T-VbJ" id="ou5-CQ-e5f"/>
                 <outlet property="xinPCodeView" destination="T3i-cu-Plz" id="iHg-u5-rXG"/>
+                <outlet property="xinPCodeViewHeight" destination="Nfd-U6-qph" id="HDp-V6-jlZ"/>
                 <outlet property="xinPhoneTextField" destination="1Rg-IW-yFZ" id="vSu-cq-xJe"/>
             </connections>
         </placeholder>

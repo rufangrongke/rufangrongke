@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *myScrollView;
 
 @property (weak, nonatomic) IBOutlet UIView *xinPCodeView; // 新手机号验证码view
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *xinPCodeViewHeight; // 新手机号验证码view的高度的约束属性
 
 @property (weak, nonatomic) IBOutlet UITextField *codeTextField; // 验证码输入框
 @property (weak, nonatomic) IBOutlet UITextField *xinPhoneTextField; // 新手机号输入框
@@ -64,7 +65,7 @@ static NSInteger isModifyCount; // 第几次请求
     self.myScrollView.contentSize = CGSizeMake(WXZ_ScreenWidth, 405);
     
     self.xinPCodeView.hidden = YES; // 不显示输入新手机号输入框
-//    self.determineBtn.frame = CGRectMake(17, 288, WXZ_ScreenWidth-17*2, 44);
+    self.xinPCodeViewHeight.constant = 0.0f;
 }
 
 // 修改手机号请求1
@@ -93,6 +94,7 @@ static NSInteger isModifyCount; // 第几次请求
              if (isModifyCount == 1)
              {
                  self.xinPCodeView.hidden = NO; // 请求成功，显示输入新手机号输入框
+                 self.xinPCodeViewHeight.constant = 55;
                  isModifyCount = 2;
              }
              else
@@ -174,6 +176,7 @@ static NSInteger isModifyCount; // 第几次请求
                 _codeBtn.userInteractionEnabled = YES;
                 isModifyCount = 1; // 倒计时结束还没有修改成功，则需要重新请求
                 self.xinPCodeView.hidden = YES; // 隐藏新手机验证码view
+                self.xinPCodeViewHeight.constant = 0;
             });
         }
         else

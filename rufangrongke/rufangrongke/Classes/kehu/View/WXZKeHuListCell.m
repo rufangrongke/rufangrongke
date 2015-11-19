@@ -13,7 +13,9 @@
 #import "WXZDateObject.h"
 
 @interface WXZKeHuListCell ()
-@property (nonatomic,strong) UIWebView *phoneCallWebView;
+
+@property (nonatomic,strong) UIWebView *phoneCallWebView; // 打电话方法二
+
 @end
 
 @implementation WXZKeHuListCell
@@ -48,25 +50,25 @@
     self.callBtn.hidden = NO;
     
     /**
-     *  活动内容
+     *  互动信息相关拼接和显示
+     *  首先判断有没有互动信息，有则显示，否则隐藏互动信息这块内容
      */
     if (![WXZChectObject checkWhetherStringIsEmpty:keHuInfoModel.hdTime] || ![WXZChectObject checkWhetherStringIsEmpty:keHuInfoModel.typebig] || ![WXZChectObject checkWhetherStringIsEmpty:keHuInfoModel.loupan])
     {
-        
-        NSString *dateStr = keHuInfoModel.hdTime; // 获取时间
+        NSString *dateStr = keHuInfoModel.hdTime; // 获取互动时间
         dateStr = [WXZStringObject replacementString:dateStr replace:@"/" replaced:@"-"]; // 替换字符
         NSDate *date = [WXZDateObject formatDate1:dateStr dateFormat:@"yyyy-MM-dd HH:mm:ss"]; // 格式化为NSDate
         NSString *dateStr2 = [WXZDateObject formatDate2:date dateFormat:@"yy-MM-dd HH:mm"]; // 格式化为NSString
         // 格式化字符串（最终结果）
-        NSString *footerStr = [NSString stringWithFormat:@"%@ %@ %@",dateStr2,keHuInfoModel.typebig,keHuInfoModel.loupan];
+        NSString *footerStr = [NSString stringWithFormat:@"%@ %@ %@",dateStr2,keHuInfoModel.typebig,keHuInfoModel.loupan]; // 拼接最新互动信息
         
-        self.footerViews.hidden = NO;
-        self.yixiangLabel.text = footerStr;
+        self.footerViews.hidden = NO; // 不隐藏最新互动信息底层view
+        self.yixiangLabel.text = footerStr; // 展示拼接好的最新互动信息
     }
     else
     {
-        self.footerViews.hidden = YES;
-        self.yixiangLabel.text = @"";
+        self.footerViews.hidden = YES; // 隐藏最新互动信息底层view
+        self.yixiangLabel.text = @""; // 不展示最新互动信息
     }
 }
 
@@ -75,13 +77,13 @@
 {
     if (sender.tag == 100024)
     {
-        // 报备事件
+        // 报备事件，push到报备页面
         WXZReportPreparationVC *reportVC = [[WXZReportPreparationVC alloc] init];
         [_controller.navigationController pushViewController:reportVC animated:YES];
     }
     else
     {
-        // 打电话事件
+        // 打电话事件方法一（可能是私有方法）
         NSString *phoneNumStr = [NSString stringWithFormat:@"telprompt://%@",self.customerPhoneLabel.text];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumStr]];
         // 打电话方法二

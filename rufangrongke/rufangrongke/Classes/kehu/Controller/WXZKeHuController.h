@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#pragma mark - 返回筛选类型代理方法
 @protocol BackFilterTypeDelegate <NSObject>
 
-- (void)backScreeningType:(NSString *)type;
+- (void)backScreeningType:(NSString *)type; // 返回筛选类型
 
 @end
 
