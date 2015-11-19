@@ -196,6 +196,13 @@
 		88EF69581BF421B300B4E169 /* WXZReportPreparationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886023461BEC4F7C00C0D75E /* WXZReportPreparationVC.xib */; };
 		88F31BD91BF4889F007FEA53 /* WXZquYuListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F31BD71BF4889F007FEA53 /* WXZquYuListViewCell.m */; };
 		88F31BDA1BF4889F007FEA53 /* WXZquYuListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F31BD81BF4889F007FEA53 /* WXZquYuListViewCell.xib */; };
+		88F4AEE51BFD631C00300A28 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4AED81BFD631C00300A28 /* TAAbstractDotView.m */; };
+		88F4AEE61BFD631C00300A28 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4AEDA1BFD631C00300A28 /* TAAnimatedDotView.m */; };
+		88F4AEE71BFD631C00300A28 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4AEDC1BFD631C00300A28 /* TADotView.m */; };
+		88F4AEE81BFD631C00300A28 /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4AEDE1BFD631C00300A28 /* TAPageControl.m */; };
+		88F4AEE91BFD631C00300A28 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4AEE01BFD631C00300A28 /* SDCollectionViewCell.m */; };
+		88F4AEEA1BFD631C00300A28 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4AEE21BFD631C00300A28 /* SDCycleScrollView.m */; };
+		88F4AEEB1BFD631C00300A28 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4AEE41BFD631C00300A28 /* UIView+SDExtension.m */; };
 		88F4F6201BF2F65B007FBCB7 /* WXZquYuListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4F61E1BF2F65B007FBCB7 /* WXZquYuListViewController.m */; };
 		88F4F6211BF2F65B007FBCB7 /* WXZquYuListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F4F61F1BF2F65B007FBCB7 /* WXZquYuListViewController.xib */; };
 		88F4F6241BF3100B007FBCB7 /* WXZquYuListViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F4F6231BF3100B007FBCB7 /* WXZquYuListViewCellModel.m */; };
@@ -522,6 +529,20 @@
 		88F31BD61BF4889F007FEA53 /* WXZquYuListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXZquYuListViewCell.h; sourceTree = "<group>"; };
 		88F31BD71BF4889F007FEA53 /* WXZquYuListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXZquYuListViewCell.m; sourceTree = "<group>"; };
 		88F31BD81BF4889F007FEA53 /* WXZquYuListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WXZquYuListViewCell.xib; sourceTree = "<group>"; };
+		88F4AED71BFD631C00300A28 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
+		88F4AED81BFD631C00300A28 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
+		88F4AED91BFD631C00300A28 /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
+		88F4AEDA1BFD631C00300A28 /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
+		88F4AEDB1BFD631C00300A28 /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
+		88F4AEDC1BFD631C00300A28 /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
+		88F4AEDD1BFD631C00300A28 /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
+		88F4AEDE1BFD631C00300A28 /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
+		88F4AEDF1BFD631C00300A28 /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
+		88F4AEE01BFD631C00300A28 /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
+		88F4AEE11BFD631C00300A28 /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
+		88F4AEE21BFD631C00300A28 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
+		88F4AEE31BFD631C00300A28 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
+		88F4AEE41BFD631C00300A28 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		88F4F61D1BF2F65B007FBCB7 /* WXZquYuListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXZquYuListViewController.h; path = ../View/WXZquYuListViewController.h; sourceTree = "<group>"; };
 		88F4F61E1BF2F65B007FBCB7 /* WXZquYuListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WXZquYuListViewController.m; path = ../View/WXZquYuListViewController.m; sourceTree = "<group>"; };
 		88F4F61F1BF2F65B007FBCB7 /* WXZquYuListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WXZquYuListViewController.xib; path = ../View/WXZquYuListViewController.xib; sourceTree = "<group>"; };
@@ -609,6 +630,7 @@
 		305784351BD3D35000169C44 /* loupan */ = {
 			isa = PBXGroup;
 			children = (
+				88F4AED41BFD62E000300A28 /* Lib */,
 				88C108951BF0A7F900337E09 /* LouPanYongJin */,
 				882EBF3B1BE9E7CD000FB1D7 /* LouPanInformation */,
 				88AE89241BE066B000407ECF /* LouPanMessage */,
@@ -1321,6 +1343,43 @@
 			name = Tool;
 			sourceTree = "<group>";
 		};
+		88F4AED41BFD62E000300A28 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				88F4AED51BFD631C00300A28 /* SDCycleScrollView */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		88F4AED51BFD631C00300A28 /* SDCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				88F4AED61BFD631C00300A28 /* PageControl */,
+				88F4AEDF1BFD631C00300A28 /* SDCollectionViewCell.h */,
+				88F4AEE01BFD631C00300A28 /* SDCollectionViewCell.m */,
+				88F4AEE11BFD631C00300A28 /* SDCycleScrollView.h */,
+				88F4AEE21BFD631C00300A28 /* SDCycleScrollView.m */,
+				88F4AEE31BFD631C00300A28 /* UIView+SDExtension.h */,
+				88F4AEE41BFD631C00300A28 /* UIView+SDExtension.m */,
+			);
+			path = SDCycleScrollView;
+			sourceTree = "<group>";
+		};
+		88F4AED61BFD631C00300A28 /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				88F4AED71BFD631C00300A28 /* TAAbstractDotView.h */,
+				88F4AED81BFD631C00300A28 /* TAAbstractDotView.m */,
+				88F4AED91BFD631C00300A28 /* TAAnimatedDotView.h */,
+				88F4AEDA1BFD631C00300A28 /* TAAnimatedDotView.m */,
+				88F4AEDB1BFD631C00300A28 /* TADotView.h */,
+				88F4AEDC1BFD631C00300A28 /* TADotView.m */,
+				88F4AEDD1BFD631C00300A28 /* TAPageControl.h */,
+				88F4AEDE1BFD631C00300A28 /* TAPageControl.m */,
+			);
+			path = PageControl;
+			sourceTree = "<group>";
+		};
 		9472ED2A46F6C39A66F33F89 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1589,11 +1648,13 @@
 				8869E1C31BFAC25900D409FC /* WXZPersonalInfoVC.m in Sources */,
 				305784471BD3D35000169C44 /* AppDelegate.m in Sources */,
 				30D59ABA1BD5ECD6003F0A0C /* WXZTabBar.m in Sources */,
+				88F4AEE91BFD631C00300A28 /* SDCollectionViewCell.m in Sources */,
 				8869E1E71BFAC29A00D409FC /* WXZPersonalCityCell.m in Sources */,
 				88F4F6711BF3416F007FBCB7 /* WXZYingDaoPageViewController.m in Sources */,
 				8869E1BD1BFAC25900D409FC /* WXZPersonalCityVC.m in Sources */,
 				8869E1EB1BFAC29A00D409FC /* WXZPersonalDataCell.m in Sources */,
 				88C108931BF0A33000337E09 /* WXZLouPanInfoVC_footTableView_Cell_2_0.m in Sources */,
+				88F4AEE81BFD631C00300A28 /* TAPageControl.m in Sources */,
 				8869E1951BFAC0D400D409FC /* WXZPriceCell.m in Sources */,
 				88EAA7181BD87C180072CD40 /* AFHTTPSessionManager.m in Sources */,
 				8869E1861BFAC09A00D409FC /* WXZKHListHeaderView.m in Sources */,
@@ -1601,6 +1662,7 @@
 				882793BC1BEC98A800218F13 /* WXZLouPanHuXingController.m in Sources */,
 				30A9F1F01BD4A20E00A6440D /* WXZSeachView.m in Sources */,
 				8869E1D01BFAC27B00D409FC /* WXZWoHeadCell.m in Sources */,
+				88F4AEE61BFD631C00300A28 /* TAAnimatedDotView.m in Sources */,
 				880869021BF0C4D100128610 /* WXZLouPanYongJinSectionHeadView_0.m in Sources */,
 				886023471BEC4F7C00C0D75E /* WXZReportPreparationVC.m in Sources */,
 				880869071BF0C53500128610 /* WXZLouPanYongJinSectionHeadView_1.m in Sources */,
@@ -1614,12 +1676,15 @@
 				88AE89371BE07EA800407ECF /* WXZLouPanMessageCell_0_1.m in Sources */,
 				880869121BF0C59800128610 /* WXZLouPanYongJinCell_1.m in Sources */,
 				888115EA1BDE068C003A0356 /* UIViewController+WXZLogin.m in Sources */,
+				88F4AEEA1BFD631C00300A28 /* SDCycleScrollView.m in Sources */,
 				88AE892D1BE0733F00407ECF /* XMGPageView.m in Sources */,
+				88F4AEE51BFD631C00300A28 /* TAAbstractDotView.m in Sources */,
 				882618901BF0510600FAD6E9 /* WXZLouPanInformationControllerCell_1_3.m in Sources */,
 				882902C21BE73F7500BA7D24 /* WXZIRecommendCodeVC.m in Sources */,
 				8827936B1BEC55E900218F13 /* WXZLouPanMaiDianCell_2.m in Sources */,
 				88EAA71B1BD87C180072CD40 /* AFURLConnectionOperation.m in Sources */,
 				88E30FAB1BEA285A002F5FF1 /* WXZLiandong.m in Sources */,
+				88F4AEEB1BFD631C00300A28 /* UIView+SDExtension.m in Sources */,
 				88DBC1031BF0436C00425B81 /* WXZMessagePrompt.m in Sources */,
 				8869E16A1BFABF8E00D409FC /* WXZKeHuController.m in Sources */,
 				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
@@ -1675,6 +1740,7 @@
 				88D857821BF98BF20069EE4E /* WXZLouPanYiBaoBeiKeHuModel.m in Sources */,
 				88AE893C1BE07EBC00407ECF /* WXZLouPanMessageCell_1_0.m in Sources */,
 				885388001BDD1DC0005DCF38 /* WXZTableViewCell.m in Sources */,
+				88F4AEE71BFD631C00300A28 /* TADotView.m in Sources */,
 				88F4F6201BF2F65B007FBCB7 /* WXZquYuListViewController.m in Sources */,
 				886023651BEC4FF800C0D75E /* WXZKhdUserInfoCell.m in Sources */,
 				882E46FF1BF07CB60022378F /* WXZLouPanInfoVC_footTableView_footView.m in Sources */,

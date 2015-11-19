@@ -63,12 +63,12 @@
         if ([viewController isKindOfClass:[WXZLouPanMessageController class]]) {
             // 隐藏tabbar
             viewController.hidesBottomBarWhenPushed = NO;
-//            WXZTabBar *tabBar = viewController.tabBarController.tabBar;
-//            tabBar.louPanBottomBar.hidden = NO;
+            WXZTabBar *tabBar = viewController.tabBarController.tabBar;
+            tabBar.louPanBottomBar.hidden = NO;
         }else{// 隐藏tabbar
             viewController.hidesBottomBarWhenPushed = YES;
-//            WXZTabBar *tabBar = viewController.tabBarController.tabBar;
-//            tabBar.louPanBottomBar.hidden = YES;
+            WXZTabBar *tabBar = viewController.tabBarController.tabBar;
+            tabBar.louPanBottomBar.hidden = YES;
         }
     }
     

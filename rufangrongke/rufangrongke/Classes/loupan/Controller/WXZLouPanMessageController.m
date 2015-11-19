@@ -24,6 +24,7 @@
 #import "WXZLouPanBottomBar.h"
 #import "WXZLouPanYiBaoBeiKeHuController.h"
 #import "WXZLouPanBaoBeiKeHuController.h"
+#import "SDCycleScrollView.h"
 
 
 @interface WXZLouPanMessageController ()<UITableViewDataSource, UITableViewDelegate, LouPanHuXingControllerDelegate, WXZLouPanBottomBarProtocol>
@@ -34,7 +35,7 @@
 /* LouPanMessageModel */
 @property (nonatomic , strong) WXZLouPanMessageModel *louPanMessageModel;
 /* pageView */
-@property (nonatomic , strong) XMGPageView *pageView;
+@property (nonatomic , strong) SDCycleScrollView *pageView;
 /* WXZXiangQingController */
 @property (nonatomic , strong) WXZXiangQingController *xiangQingController;
 /* WXZMaiDianController */
@@ -94,10 +95,8 @@ static CGFloat carouselPic_height = 226;
         [SVProgressHUD showErrorWithStatus:@"手机未录入" maskType:SVProgressHUDMaskTypeBlack];
     }
 }
-- (void)footViewLunBo{
+- (void)headViewLunBo{
     // 尺寸
-    // 主屏幕尺寸mainScreen_height;mainScreen_width;
-    CGFloat mainScreenHeight = mainScreen_height;
     CGFloat mainScreenWeight = mainScreen_width;
     // 轮播图片 宽 / 高
     CGFloat carouselPic_x = 0;
@@ -108,12 +107,14 @@ static CGFloat carouselPic_height = 226;
     carouselPic_height = mainScreenWeight / carouselPic_widthToHeigth;
     
     // XMGPageView
-    XMGPageView *pageView = [XMGPageView pageView];
-    pageView.frame = CGRectMake(carouselPic_x, carouselPic_y, mainScreenWeight, carouselPic_height);
-    WXZLog(@"%f, %f, %f, %f",carouselPic_x, carouselPic_y, mainScreenWeight, carouselPic_height);
-    pageView.imageNames = @[@"loupan-banner", @"loupan-banner", @"loupan-banner"];
-    pageView.otherColor = [UIColor grayColor];
-    pageView.currentColor = [UIColor orangeColor];
+//    XMGPageView *pageView = [XMGPageView pageView];
+//    pageView.frame = CGRectMake(carouselPic_x, carouselPic_y, mainScreenWeight, carouselPic_height);
+//    WXZLog(@"%f, %f, %f, %f",carouselPic_x, carouselPic_y, mainScreenWeight, carouselPic_height);
+//    pageView.imageNames = @[@"loupan-banner", @"loupan-banner", @"loupan-banner"];
+//    pageView.otherColor = [UIColor grayColor];
+//    pageView.currentColor = [UIColor orangeColor];
+    // 情景一：采用本地图片实现
+    SDCycleScrollView *pageView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(carouselPic_x, carouselPic_y, mainScreenWeight, carouselPic_height) imageURLStringsGroup:nil];
     self.pageView = pageView;
     self.tableView.tableHeaderView = self.pageView;
 }
@@ -157,7 +158,7 @@ static CGFloat carouselPic_height = 226;
     // 楼盘详情初始化
     [self setUp];
     // footView--轮播
-    [self footViewLunBo];
+    [self headViewLunBo];
     
     // 添加footView
     [self setUpFootView];
@@ -184,7 +185,7 @@ static CGFloat carouselPic_height = 226;
         }
         // 非轮播图片
         if (PicUrls.count != 0) {
-            self.pageView.imageNames = PicUrls;
+            self.pageView.imageURLStringsGroup = PicUrls;
         }
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

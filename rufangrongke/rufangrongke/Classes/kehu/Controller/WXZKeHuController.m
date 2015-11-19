@@ -180,7 +180,7 @@ static NSString *searchStr; // 记录搜索条件
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
-            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
             }

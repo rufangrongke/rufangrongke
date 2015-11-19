@@ -112,7 +112,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
-            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
             }

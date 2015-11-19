@@ -17,6 +17,7 @@
 #import "WXZquYuListViewController.h"
 #import "WXZLouPanHomeHeadView.h"
 #import "WXZLeftBtnView.h"
+#import "SDCycleScrollView.h"
 
 @interface WXZLouPanController ()<UITableViewDataSource, UITableViewDelegate, WXZquYuListViewControllerDelegate, UISearchBarDelegate>
 /** 楼盘模型字典 */
@@ -32,7 +33,7 @@
 /* leftBtn */
 @property (nonatomic , weak) WXZLeftBtnView *leftBtn;
 /* WXZLouPanHomeHeadView */
-@property (nonatomic , weak) WXZLouPanHomeHeadView *louPanHomeHeadView;
+@property (nonatomic , weak) UIView *louPanHomeHeadView;
 @end
 
 @implementation WXZLouPanController
@@ -118,7 +119,6 @@ static NSInteger inp = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    WXZLog(@"%@", [self localUserInfo]);
     // 初始化信息
     [self setUp];
     // 添加刷新控件
@@ -290,8 +290,27 @@ static NSInteger inp = 1;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    WXZLouPanHomeHeadView *louPanHomeHeadView = [WXZLouPanHomeHeadView louPanHomeHeadView];
+//    WXZLouPanHomeHeadView *louPanHomeHeadView = [WXZLouPanHomeHeadView louPanHomeHeadView];
+//    louPanHomeHeadView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 218 / 375);
+//    self.louPanHomeHeadView = louPanHomeHeadView;
+//    return louPanHomeHeadView;
+    UIView *louPanHomeHeadView = [[UIView alloc] init];
     louPanHomeHeadView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 218 / 375);
+    NSArray *images = @[[UIImage imageNamed:@"lp_babber0"],
+                        [UIImage imageNamed:@"lp_babber1"]
+                        ];
+    CGFloat w = louPanHomeHeadView.bounds.size.width;
+    CGFloat view_h = [UIScreen mainScreen].bounds.size.width * 218 / 375;
+    CGFloat h = view_h * 0.59633;
+    // 本地加载 --- 创建不带标题的图片轮播器
+    SDCycleScrollView *cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, w, h) imagesGroup:images];
+    
+    cycleScrollView.infiniteLoop = YES;
+    cycleScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
+    [louPanHomeHeadView addSubview:cycleScrollView];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, h, w, view_h - h)];
+    imageView.image = [UIImage imageNamed:@"lp_about"];
+    [louPanHomeHeadView addSubview:imageView];
     self.louPanHomeHeadView = louPanHomeHeadView;
     return louPanHomeHeadView;
 }

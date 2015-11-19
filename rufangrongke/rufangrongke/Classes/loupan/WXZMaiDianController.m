@@ -45,15 +45,21 @@ static NSString *maindianCellID = @"maindianCellID";
 {
     if (indexPath.row == 0) {
         WXZLouPanMaiDianCell *cell_0 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMaiDianCell class]) owner:nil options:nil] lastObject];
-        cell_0.louPanMaiDianLabel.text = [NSString stringWithFormat:@"  %@", self.model.MaiDian];
+        if (self.model.MaiDian) {
+            cell_0.louPanMaiDianLabel.text = [NSString stringWithFormat:@"  %@", self.model.MaiDian];
+        }
         return cell_0;
     }else if (indexPath.row == 1){
         WXZLouPanMaiDianCell_1 *cell_1 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMaiDianCell_1 class]) owner:nil options:nil] lastObject];
-        cell_1.muBiaoKeHuLabel.text = [NSString stringWithFormat:@"  %@", self.model.MuBiaoKeHu];
+        if (self.model.MuBiaoKeHu) {
+            cell_1.muBiaoKeHuLabel.text = [NSString stringWithFormat:@"  %@", self.model.MuBiaoKeHu];
+        }
         return cell_1;
     }else{
         WXZLouPanMaiDianCell_2 *cell_2 = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLouPanMaiDianCell_2 class]) owner:nil options:nil] lastObject];
-        cell_2.kuoKeJiQiaoLabel.text = [NSString stringWithFormat:@"  %@", self.model.TuoKeJiQiao];
+        if (self.model.TuoKeJiQiao) {
+            cell_2.kuoKeJiQiaoLabel.text = [NSString stringWithFormat:@"  %@", self.model.TuoKeJiQiao];
+        }
         return cell_2;
     }
 }
