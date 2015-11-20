@@ -87,7 +87,6 @@
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        WXZLog(@"login error = %@",error);
         [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }

@@ -183,9 +183,9 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+//             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
              // 发送通知，更新个人资料
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:responseObject[@"msg"]];
              [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshCity" object:nil]; // 发送通知，更新区域方法
              [self.navigationController popViewControllerAnimated:YES];
          }

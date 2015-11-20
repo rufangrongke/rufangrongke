@@ -9,6 +9,12 @@
 #import "WXZWoHeadCell.h"
 #import <UIImageView+WebCache.h>
 
+@interface WXZWoHeadCell ()
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *binDingCenterX; // 绑定门店label的居中约束
+
+@end
+
 @implementation WXZWoHeadCell
 
 - (void)awakeFromNib {
@@ -56,9 +62,12 @@
     }
     // 门店
     self.storeYardsLabel.text = woInfoModel.LtName;
+    self.binDingCenterX.constant = 0; // 修改绑定门店label的居中约束
     if ([woInfoModel.LtName isEqualToString:@""] || woInfoModel.LtName == nil)
     {
         self.storeYardsLabel.text = @"尚未绑定门店码";
+        self.bindingBtn.hidden = NO; // 隐藏立即绑定按钮
+        self.binDingCenterX.constant = 33; // 修改绑定门店label的居中约束
     }
     // 服务宣言
     self.declarationLabel.text = woInfoModel.XuanYan;

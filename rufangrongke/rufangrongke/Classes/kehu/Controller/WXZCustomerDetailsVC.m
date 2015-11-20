@@ -165,7 +165,7 @@ static BOOL isRefreshDetail; // 是否刷新本页面
         }
         self.nameTextField = userInfoCell.nameTextField;
         self.phoneNumTextField = userInfoCell.phoneNumTextField;
-        [userInfoCell showInfo:self.cdDic[@"XingMing"] phone:self.cdDic[@"Mobile"]];
+        userInfoCell.detailModel = self.keHuDetailModel; // 传值
         [userInfoCell.smsBtn addTarget:self action:@selector(sendSmsAction:) forControlEvents:UIControlEventTouchUpInside];
         
         return userInfoCell;
@@ -179,7 +179,7 @@ static BOOL isRefreshDetail; // 是否刷新本页面
             gfyxCell = [WXZGouFangYiXiangCell initGouFangYiXiangCell];
         }
         gfyxCell.controller = self; // 权限
-        [gfyxCell updateInfo:self.cdDic]; // 初始化数据
+        gfyxCell.detailModel = self.keHuDetailModel; // 初始化数据
         
         return gfyxCell;
     }
@@ -192,7 +192,8 @@ static BOOL isRefreshDetail; // 是否刷新本页面
             hdCell = [WXZHousingDetailsCell initHousingDetailsCell];
         }
         [hdCell updateInfo];
-        [hdCell showInfo:self.cdDic];
+        hdCell.detailModel = self.keHuDetailModel;
+//        [hdCell showInfo:self.cdDic];
         
         return hdCell;
     }

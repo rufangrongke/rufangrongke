@@ -257,9 +257,10 @@ static NSString *sex = @"先生"; // 记录性别
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
+//            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
             if ([self.whichController isEqualToString:@"ModifyPersonalPwd"])
             {
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
                 // 跳转到登录页面（修改密码）
                 WXZLoginController *loginController = [[WXZLoginController alloc]init];
                 WXZNavController *nav = [[WXZNavController alloc] initWithRootViewController:loginController];
@@ -268,7 +269,7 @@ static NSString *sex = @"先生"; // 记录性别
             else
             {
                 // 发送通知，更新个人资料页面
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:responseObject[@"msg"]];
                 [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
             }
         }

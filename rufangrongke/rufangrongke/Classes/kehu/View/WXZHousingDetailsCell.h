@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZKeHuDetailModel.h"
 
 @interface WXZHousingDetailsCell : UITableViewCell
-
 
 @property (weak, nonatomic) IBOutlet UIView *customerInfoView;
 @property (weak, nonatomic) IBOutlet UIView *tipsView;
@@ -36,6 +36,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *statusBtn;
 @property (weak, nonatomic) IBOutlet UIButton *moreBtn;
 @property (weak, nonatomic) IBOutlet UIButton *chongfaBtn;
+
+@property (nonatomic,strong) WXZKeHuDetailModel *detailModel; // 客户详情数据模型
 
 + (instancetype)initHousingDetailsCell;
 

@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZKeHuDetailModel.h"
 
 @interface WXZGouFangYiXiangCell : UITableViewCell
 
 @property (nonatomic,strong) UIViewController *controller; // controller权限
 
-+ (instancetype)initGouFangYiXiangCell; // 加载nib文件
+@property (nonatomic,strong) WXZKeHuDetailModel *detailModel; // 客户详情数据模型
 
-- (void)updateInfo:(NSDictionary *)dic; // 初始化客户详情信息
++ (instancetype)initGouFangYiXiangCell; // 加载nib文件
 
 @end
