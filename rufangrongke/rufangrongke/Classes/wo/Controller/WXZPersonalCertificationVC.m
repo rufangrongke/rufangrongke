@@ -142,8 +142,8 @@
 {
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.image"])
     {
-        // 如果是则从info字典参数中获取原图片
-        UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+        // 如果是则从info字典参数中获取裁剪后的图片
+        UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         //如果图片选取器的源类型为摄像头
         if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
             //将图片存入系统相册
