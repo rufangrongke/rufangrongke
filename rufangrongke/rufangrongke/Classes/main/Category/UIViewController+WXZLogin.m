@@ -101,7 +101,7 @@
 - (void)reloadCityRegionList{
     NSString *url = [OutNetBaseURL stringByAppendingString:quyuliebiao];
     [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        WXZLog(@"%@", responseObject);
+//        WXZLog(@"%@", responseObject);
         NSDictionary *cityListDic = (NSDictionary *)responseObject;
         // 获取沙河路径
         NSString *cityListInfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:cityListInfoFile];

@@ -219,8 +219,8 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     WXZLogFunc;
     CGFloat offset = self.view.height - (260 + textField.height + 216 +50);
-    WXZLog(@"self.view.height-%f, textField.y-%f, textField.height-%f", self.view.height, textField.y, textField.height);
-    WXZLog(@"%f", offset);
+//    WXZLog(@"self.view.height-%f, textField.y-%f, textField.height-%f", self.view.height, textField.y, textField.height);
+//    WXZLog(@"%f", offset);
     if (offset <= 0) {
         [UIView animateWithDuration:0.3 animations:^{
             self.view.y = offset;
