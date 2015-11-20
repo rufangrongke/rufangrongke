@@ -28,7 +28,6 @@
 }
 
 @property (nonatomic,strong) UISearchBar *searchBar; // 搜索框
-//@property (nonatomic,strong) UITextField *searchTextField; // 搜索框
 
 @property (nonatomic,strong) WXZScreeningView *screeningView; // 筛选弹窗
 @property (nonatomic,weak) WXZKHListHeaderView *headerView; // 添加客户的section的headerView

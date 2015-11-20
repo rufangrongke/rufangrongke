@@ -66,7 +66,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjY-Yj-nZd">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yjY-Yj-nZd">
                         <rect key="frame" x="207" y="202" width="53" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="VnE-gj-B49"/>
@@ -125,6 +125,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="binDingCenterX" destination="KMO-gL-iHB" id="bwO-e5-tGr"/>
                 <outlet property="bindingBtn" destination="yjY-Yj-nZd" id="OFz-JO-Mde"/>
                 <outlet property="certificationImgView" destination="9TQ-23-gzX" id="z4g-OJ-To1"/>
                 <outlet property="declarationLabel" destination="agU-md-HcP" id="YTA-Fu-O34"/>

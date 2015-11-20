@@ -34,13 +34,13 @@
     self.view.backgroundColor = WXZRGBColor(246, 246, 246);
 //    [[UIApplication sharedApplication] setStatusBarHidden:YES]; // 隐藏状态栏
     
-    // 获取缓存数据
-//    self.woHeadInfoDic = [self localUserInfo];
-    [self woInfoRequest]; // “我”信息数据请求
-    
     // 设置数据源，遵循协议
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
+    
+    // 获取登录缓存数据，转模型，并刷新列表数据
+    self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:[self localUserInfo]];
+    [self.myTableView reloadData]; // 刷新列表
     
     // 注册通知，用来更新“我”界面的数据，和显示
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWoData:) name:@"UpdateWoPage" object:nil];
@@ -56,31 +56,18 @@
 {
     // 隐藏导航navigation
     self.navigationController.navigationBarHidden = YES;
-    
-    [self.myTableView reloadData]; // 刷新列表
 }
 
-#pragma mark - Wo Info Request
-- (void)woInfoRequest
-{
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    [self loginRequest:^(id successResult) {
-        NSDictionary *loginDic = (NSDictionary *)successResult;
-        // 转模型
-        self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:loginDic];
-        [self.myTableView reloadData]; // 刷新
-        [SVProgressHUD dismiss]; // 取消菊花
-    }];
-}
-
+#pragma mark - Refresh Wo Info
 // 刷新“我”界面数据（通知方法）
 - (void)updateWoData:(NSNotification *)noti
 {
-    [self woInfoRequest]; // 请求
+    // 获取登录缓存数据，并转模型
+    self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:[self localUserInfo]];
+    [self.myTableView reloadData]; // 刷新列表
 }
 
 #pragma mark - UITableViewDelegate/DataSource Methods
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // 返回分组
@@ -172,7 +159,7 @@
     {
         if (indexPath.row == 0)
         {
-            return 269;
+            return 269; //
         }
         else
         {

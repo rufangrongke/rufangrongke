@@ -154,7 +154,8 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
          }
          else
          {
-             [SVProgressHUD showErrorWithStatus:@"暂无数据" maskType:SVProgressHUDMaskTypeBlack];
+             [SVProgressHUD showErrorWithStatus:@"没有城市信息" maskType:SVProgressHUDMaskTypeBlack];
+             // 判断是否为登录超时，登录超时则返回登录页面重新登录
              if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
              {
                  [self goBackLoginPage]; // 回到登录页面
@@ -183,9 +184,9 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
          WXZLog(@"%@", responseObject);
          if ([responseObject[@"ok"] isEqualToNumber:@(1)])
          {
-             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+//             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
              // 发送通知，更新个人资料
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:responseObject[@"msg"]];
              [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshCity" object:nil]; // 发送通知，更新区域方法
              [self.navigationController popViewControllerAnimated:YES];
          }

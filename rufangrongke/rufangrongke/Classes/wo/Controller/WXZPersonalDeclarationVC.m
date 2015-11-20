@@ -61,14 +61,15 @@
      {
          if ([responseObject[@"ok"] integerValue] == 1)
          {
-             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
+//             [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
              // 发送通知，更新个人资料页面
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:responseObject[@"msg"]];
              [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
          }
          else
          {
              [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+             // 判断是否为登录超时，登录超时则返回登录页面重新登录
              if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
              {
                  [self goBackLoginPage]; // 回到登录页面

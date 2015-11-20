@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WXZKeHuDetailModel.h"
 
 @interface WXZKhdUserInfoCell : UITableViewCell
 
@@ -16,8 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *smsBtn; // 消息按钮
 @property (weak, nonatomic) IBOutlet UIButton *callBtn; // 打电话按钮
 
-+ (instancetype)initKhdUserInfoCell; // 加载nib文件
+@property (nonatomic,strong) WXZKeHuDetailModel *detailModel; // 客户详情数据模型
 
-- (void)showInfo:(NSString *)str phone:(NSString *)str2; // 初始化信息
++ (instancetype)initKhdUserInfoCell; // 加载nib文件
 
 @end

@@ -19,6 +19,11 @@
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
+- (void)setDetailModel:(WXZKeHuDetailModel *)detailModel
+{
+    
+}
+
 - (void)updateInfo
 {
     [self.statusBtn setTitle:@"已接受" forState:UIControlStateNormal];

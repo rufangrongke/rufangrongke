@@ -142,8 +142,8 @@
 {
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.image"])
     {
-        // 如果是则从info字典参数中获取原图片
-        UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+        // 如果是则从info字典参数中获取裁剪后的图片
+        UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         //如果图片选取器的源类型为摄像头
         if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
             //将图片存入系统相册
@@ -212,14 +212,15 @@
     {        
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+//            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             // 发送通知，更新个人资料页面
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdatePersonalDataPage" object:responseObject[@"msg"]];
             [self.navigationController popViewControllerAnimated:YES]; // 修改成功返回上一页面
         }
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+            // 判断是否为登录超时，登录超时则返回登录页面重新登录
             if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面

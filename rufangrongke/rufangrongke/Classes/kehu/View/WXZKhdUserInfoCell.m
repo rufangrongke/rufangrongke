@@ -28,18 +28,18 @@
 }
 
 // 展示信息
-- (void)showInfo:(NSString *)str phone:(NSString *)str2
+- (void)setDetailModel:(WXZKeHuDetailModel *)detailModel
 {
-    if ([WXZChectObject checkWhetherStringIsEmpty:str])
+    if ([WXZChectObject checkWhetherStringIsEmpty:detailModel.XingMing])
     {
         self.nameTextField.placeholder = @"";
     }
-    if ([WXZChectObject checkWhetherStringIsEmpty:str])
+    if ([WXZChectObject checkWhetherStringIsEmpty:detailModel.Mobile])
     {
         self.phoneNumTextField.placeholder = @"";
     }
-    self.nameTextField.text = str;
-    self.phoneNumTextField.text = str2;
+    self.nameTextField.text = detailModel.XingMing;
+    self.phoneNumTextField.text = detailModel.Mobile;
 }
 
 // 拨打电话

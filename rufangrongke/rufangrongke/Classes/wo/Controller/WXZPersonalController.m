@@ -33,7 +33,7 @@
 
 @end
 
-static BOOL isRefreshWo;
+static BOOL isRefreshWo; // 是否要刷新“我”页面
 
 @implementation WXZPersonalController
 
@@ -45,12 +45,11 @@ static BOOL isRefreshWo;
     // 添加标题，设置标题的颜色和字号
     self.navigationItem.title = @"个人资料";
     
+    isRefreshWo = NO; // 初始值
+    
     // 设置tableview 的数据源和代理
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
-    
-    isRefreshWo = NO;
-//    [self personalDataRequest:YES]; // 个人资料数据请求
     
     // 注册通知，更新个人资料页面数据
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePersonalData:) name:@"UpdatePersonalDataPage" object:nil];
@@ -74,21 +73,16 @@ static BOOL isRefreshWo;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 }
 
-#pragma mark - 个人资料数据请求
-- (void)personalDataRequest:(BOOL)isNotification
+#pragma mark - 刷新个人资料数据请求
+- (void)personalDataRequest:(NSString *)msg
 {
-    if (isNotification)
-    {
-        // 显示菊花
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    }
-    
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack]; // 显示菊花
+    // 登录请求，更新登录数据
     [self loginRequest:^(id successResult) {
-        NSDictionary *loginDic = (NSDictionary *)successResult;
-        // 刷新模型
-        self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:loginDic];
+        // 登录成功，并刷新模型
+        self.woInfoModel = [WXZWoInfoModel objectWithKeyValues:successResult];
         [self.myTableView reloadData]; // 刷新
-        [SVProgressHUD dismiss]; // 取消菊花
+        [SVProgressHUD showSuccessWithStatus:msg maskType:SVProgressHUDMaskTypeBlack]; // 取消菊花
         isRefreshWo = YES;
     }];
 }
@@ -96,7 +90,7 @@ static BOOL isRefreshWo;
 // 通知事件（刷新数据）
 - (void)updatePersonalData:(NSNotification *)noti
 {
-    [self personalDataRequest:YES]; // 个人资料数据请求
+    [self personalDataRequest:noti.object]; // 个人资料数据请求
 }
 
 #pragma mark - UITableViewDataSource/Delegate Methods
@@ -287,8 +281,8 @@ static BOOL isRefreshWo;
 {
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.image"])
     {
-        // 如果是则从info字典参数中获取原图片
-        UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+        // 如果是则从info字典参数中获取裁剪后的图片
+        UIImage *img = [info objectForKey:UIImagePickerControllerEditedImage];
         //如果图片选取器的源类型为摄像头
         if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
             //将图片存入系统相册
@@ -335,13 +329,14 @@ static BOOL isRefreshWo;
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+//            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             // 刷新个人资料界面
-            [self personalDataRequest:YES]; // 个人资料数据请求
+            [self personalDataRequest:responseObject[@"msg"]]; // 个人资料数据请求
         }
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+            // 判断是否为登录超时，登录超时则返回登录页面重新登录
             if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
@@ -445,13 +440,14 @@ static BOOL isRefreshWo;
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             [self removeWorkingTimeView]; // 把view从父view上移除
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+//            [SVProgressHUD showSuccessWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             // 刷新个人资料界面
-            [self personalDataRequest:YES]; // 个人资料数据请求
+            [self personalDataRequest:responseObject[@"msg"]]; // 个人资料数据请求
         }
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+            // 判断是否为登录超时，登录超时则返回登录页面重新登录
             if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面

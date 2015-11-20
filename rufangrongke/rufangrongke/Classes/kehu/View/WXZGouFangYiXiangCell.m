@@ -16,7 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *yixiangLabel; // 展示购房意向
 
-@property (nonatomic,strong) NSDictionary *dDic; // 存储传进来的详情信息
+//@property (nonatomic,strong) NSDictionary *dDic; // 存储传进来的详情信息
 
 @end
 
@@ -31,10 +31,9 @@
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
 }
 
-- (void)updateInfo:(NSDictionary *)dic
+- (void)setDetailModel:(WXZKeHuDetailModel *)detailModel
 {
-    self.dDic = dic;
-    NSString *str2 = [NSString stringWithFormat:@"%@",dic[@"YiXiang"]];
+    NSString *str2 = [NSString stringWithFormat:@"%@",detailModel.YiXiang];
     if ([str2 isEqualToString:@""] || str2 == nil || [str2 isEqual:[NSNull null]] || [str2 isEqualToString:@"<null>"])
     {
         NSString *str = @"未填写（完善购房意向可获得额外积分）";
@@ -47,19 +46,9 @@
     }
     else
     {
-        self.yixiangLabel.text = dic[@"YiXiang"];
+        self.yixiangLabel.text = detailModel.YiXiang;
     }
 }
-
-//- (IBAction)goufangyixiangAction:(id)sender
-//{
-//    // 购房意向
-//    WXZAddCustomerVC *addVC = [[WXZAddCustomerVC alloc] init];
-//    addVC.isModifyCustomerInfo = YES;
-//    addVC.titleStr = @"修改客户信息";
-//    addVC.detailDic = self.dDic;
-//    [self.controller.navigationController pushViewController:addVC animated:YES];
-//}
 
 - (IBAction)baobeiloupanAction:(id)sender
 {
