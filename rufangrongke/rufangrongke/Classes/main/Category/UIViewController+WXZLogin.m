@@ -122,17 +122,19 @@
 typedef void (^WXZNetworkBlock)();
 - (void)networkResponse:(id)responseObject block:(WXZNetworkBlock)block
 {
-    if ([responseObject[@"ok"] isEqualToNumber:@(1)])
-    {
-        block();
-    }
-    else
-    {
-        [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
-        if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        if ([responseObject[@"ok"] isEqualToNumber:@(1)])
         {
-            [self goBackLoginPage]; // 回到登录页面
+            block();
         }
-    }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+            if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
+            {
+                [self goBackLoginPage]; // 回到登录页面
+            }
+        }
+    }];
 }
 @end
