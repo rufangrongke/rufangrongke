@@ -107,9 +107,12 @@
         return;
     }
     
+    // 只要点击登陆就会缓存手机号和密码，以供后面使用
+    [defaults setObject:usePhone forKey:@"CacheMobile"];
+    [defaults setObject:pwd forKey:@"CachePwd"];
+    
     // 显示HUD
     [SVProgressHUD showWithStatus:@"登录中..." maskType:SVProgressHUDMaskTypeBlack];
-    
     
     // 1.创建请求对象
     NSString *urlString = [OutNetBaseURL stringByAppendingString:denglu];
@@ -118,16 +121,17 @@
     parameters[@"pas"] = pwd;
     // afn
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-//        WXZLog(@"%@", responseObject);
+        
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;
         // 获取沙河路径
-        NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
+        NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:userinfoFile];
         // 获取用户信息
         NSDictionary *userinfo = loginContentDic[@"u"];
 //        WXZLog(@"%@",loginContentDic[@"u"]);
         if ([loginContentDic[@"ok"] isEqualToNumber:@1]) { // 正确登陆
             // 将用户信息写入字典
             [userinfo writeToFile:userinfoPath atomically:YES];
+            
             // 存储用户名,存储密码
             if ([defaults boolForKey:@"remenberPasswordBtnStatus"]) {
                 [defaults setObject:usePhone forKey:@"phoneNumber"];

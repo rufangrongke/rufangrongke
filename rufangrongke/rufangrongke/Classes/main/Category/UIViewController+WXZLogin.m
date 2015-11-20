@@ -52,23 +52,24 @@
    
 }
 
-// 登录请求
+// 登录请求（修改个人资料更新的时候用）
 - (void)loginRequest:(loginSuccessMsg)message
 {
     // 1.创建请求对象
     NSString *urlString = [OutNetBaseURL stringByAppendingString:denglu];
     
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"mob"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"phoneNumber"]; // 手机号
-    parameters[@"pas"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"]; // 密码
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"mob"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"CacheMobile"]; // 手机号
+    param[@"pas"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"CachePwd"]; // 密码
     
-    [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject)
+    [[AFHTTPSessionManager manager] POST:urlString parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
             NSDictionary *loginContentDic = (NSDictionary *)responseObject;
+            /** 更新登录缓存内容 **/
             // 获取沙河路径
-            NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
+            NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:userinfoFile];
             // 获取用户信息
             NSDictionary *userinfo = loginContentDic[@"u"];
             // 将用户信息写入字典
@@ -78,6 +79,7 @@
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+            // 判断是否为登录超时，登录超时则返回登录页面重新登录
             if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
@@ -85,14 +87,15 @@
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        WXZLog(@"login error = %@",error);
         [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
     }];
 }
 
 - (NSDictionary *)localUserInfo
 {
-    NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:userinfoFile];
-
+    NSString *userinfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:userinfoFile];
+    
     return [NSDictionary dictionaryWithContentsOfFile:userinfoPath];
 }
 
