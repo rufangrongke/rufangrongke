@@ -155,8 +155,8 @@ static NSString *selectedCurrentCityName; // 存储已选择的当前城市名
          else
          {
              [SVProgressHUD showErrorWithStatus:@"没有城市信息" maskType:SVProgressHUDMaskTypeBlack];
-             // 判断是否为登录超时，登录超时则返回登录页面重新登录
-             if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
+             // 判断是否为登陆超时，登录超时则返回登录页面重新登录
+             if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
              {
                  [self goBackLoginPage]; // 回到登录页面
              }
