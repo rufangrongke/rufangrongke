@@ -210,7 +210,7 @@ static NSString *searchStr; // 记录搜索条件内容
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
-        self 
+        NSLog(@"sf");
     }];
 }
 
