@@ -80,8 +80,8 @@
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
-            // 判断是否为登录超时，登录超时则返回登录页面重新登录
-            if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
+            // 判断是否为登陆超时，登录超时则返回登录页面重新登录
+            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
             }
@@ -102,7 +102,7 @@
 - (void)reloadCityRegionList{
     NSString *url = [OutNetBaseURL stringByAppendingString:quyuliebiao];
     [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        WXZLog(@"%@", responseObject);
+//        WXZLog(@"%@", responseObject);
         NSDictionary *cityListDic = (NSDictionary *)responseObject;
         // 获取沙河路径
         NSString *cityListInfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:cityListInfoFile];

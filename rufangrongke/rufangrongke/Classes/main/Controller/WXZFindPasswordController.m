@@ -97,7 +97,7 @@
 //        }];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [SVProgressHUD showErrorWithStatus:@"登录超时,请重新登录." maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showErrorWithStatus:@"登陆超时,请重新登录." maskType:SVProgressHUDMaskTypeBlack];
         }];
     }];
 
