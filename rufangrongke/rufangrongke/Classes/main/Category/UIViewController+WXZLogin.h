@@ -22,4 +22,9 @@ typedef void(^loginFailedMsg)(id failedResult);
 - (void)reloadCityRegionList;
 /*回到登陆页*/
 - (void)goBackLoginPage;
+/* 请求结果 */
+typedef void (^WXZNetworkBlock)();
+- (void)networkResponse:(id)responseObject block:(WXZNetworkBlock)block;
+/* 网络无法访问 */
+- (void)netWorkError;
 @end
