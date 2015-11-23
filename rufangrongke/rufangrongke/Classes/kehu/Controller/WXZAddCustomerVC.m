@@ -93,7 +93,10 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
 - (void)quyuListRequest
 {
     NSString *url = [OutNetBaseURL stringByAppendingString:quyuliebiao]; // 区域列表请求url
-    [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject)
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = requestTimeout;
+    [manager POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject)
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
@@ -107,7 +110,7 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 显示错误信息
             // 判断是否为登陆超时，登录超时则返回登录页面重新登录
-            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            if ([responseObject[@"msg"] isEqualToString:@"登录超时"] || [responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
             }
@@ -137,7 +140,9 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
     [param setObject:hx forKey:@"Hx"]; // 购房期望户型和房型
     [param setObject:yixinag forKey:@"YiXiang"]; // 购房整体意向
     
-    [[AFHTTPSessionManager manager] POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = requestTimeout;
+    [manager POST:url parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
         if ([responseObject[@"ok"] integerValue] == 1)
         {
@@ -153,6 +158,11 @@ static NSString *sex = @""; // 记录选择的性别，默认为男
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
+            // 判断是否为登陆超时，登录超时则返回登录页面重新登录
+            if ([responseObject[@"msg"] isEqualToString:@"登录超时"] || [responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            {
+                [self goBackLoginPage]; // 回到登录页面
+            }
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

@@ -63,14 +63,14 @@
         self.idCardTextField.enabled = NO;
         self.selectImgTap.enabled = NO;
     }
-    else if ([self.woInfoModel.IsShiMing isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:self.woInfoModel.sfzid])
-    {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"hehe.png" highImage:@"hehe.png" title:@"审核中" target:self action:@selector(completeAction:) isEnable:NO];
-        
-        self.nameTextField.enabled = NO;
-        self.idCardTextField.enabled = NO;
-        self.selectImgTap.enabled = NO;
-    }
+//    else if ([self.woInfoModel.IsShiMing isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:self.woInfoModel.sfzid])
+//    {
+//        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage2:@"hehe.png" highImage:@"hehe.png" title:@"审核中" target:self action:@selector(completeAction:) isEnable:NO];
+//        
+//        self.nameTextField.enabled = NO;
+//        self.idCardTextField.enabled = NO;
+//        self.selectImgTap.enabled = NO;
+//    }
 }
 
 // 初始化控件
@@ -221,7 +221,7 @@
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             // 判断是否为登陆超时，登录超时则返回登录页面重新登录
-            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            if ([responseObject[@"msg"] isEqualToString:@"登录超时"] || [responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
             }

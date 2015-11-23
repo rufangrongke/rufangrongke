@@ -140,11 +140,11 @@ static NSString *sex = @"先生"; // 记录性别
         else if ([self.whichController isEqualToString:@"ModifyPersonalSex"])
             [self.determineBtn setTitle:@"您已实名认证，性别不可更改" forState:UIControlStateNormal];
     }
-    else if ([self.woInfoModel.IsShiMing isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:self.woInfoModel.sfzid])
-    {
-        [self limitControlConditions]; // 限制控件条件
-        [self.determineBtn setTitle:@"您已提交实名认证，正在审核中..." forState:UIControlStateNormal];
-    }
+//    else if ([self.woInfoModel.IsShiMing isEqualToString:@"False"] && ![WXZChectObject checkWhetherStringIsEmpty:self.woInfoModel.sfzid])
+//    {
+//        [self limitControlConditions]; // 限制控件条件
+//        [self.determineBtn setTitle:@"您已提交实名认证，正在审核中..." forState:UIControlStateNormal];
+//    }
 }
 
 // 限制控件条件
@@ -277,7 +277,7 @@ static NSString *sex = @"先生"; // 记录性别
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
             // 判断是否为登陆超时，登录超时则返回登录页面重新登录
-            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            if ([responseObject[@"msg"] isEqualToString:@"登录超时"] || [responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
             }

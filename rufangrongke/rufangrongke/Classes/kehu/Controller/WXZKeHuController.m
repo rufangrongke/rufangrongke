@@ -142,7 +142,7 @@ static NSString *searchStr; // 记录搜索条件内容
     [param setObject:chooseConditions forKey:@"key"]; // 搜索条件
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.requestSerializer.timeoutInterval = 30; // 设置请求超时时间
+    manager.requestSerializer.timeoutInterval = requestTimeout; // 设置请求超时时间
     [manager POST:urlStr parameters:param success:^(NSURLSessionDataTask *task, id responseObject)
     {
         if ([responseObject[@"ok"] integerValue] == 1)
@@ -194,7 +194,7 @@ static NSString *searchStr; // 记录搜索条件内容
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack]; // 消息提示
             // 判断是否为登陆超时，登录超时则返回登录页面重新登录
-            if ([responseObject[@"msg"] isEqualToString:@"登陆超时"])
+            if ([responseObject[@"msg"] isEqualToString:@"登录超时"] || [responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
             }
@@ -210,7 +210,7 @@ static NSString *searchStr; // 记录搜索条件内容
         
     } failure:^(NSURLSessionDataTask *task, NSError *error)
     {
-        [SVProgressHUD showErrorWithStatus:@"请求失败" maskType:SVProgressHUDMaskTypeBlack];
+        self 
     }];
 }
 
@@ -221,7 +221,7 @@ static NSString *searchStr; // 记录搜索条件内容
     currentPage = 1; // 请求页数
     isRefresh = YES; // 是否刷新
     shaixuanStr = type; // 筛选类型
-    searchStr = @""; // 搜索条件
+    searchStr = @""; // 搜索条件置空
     _searchBar.text = @""; // 搜索框置空
     // 判断传回来的筛选类型是否等于“筛选”，等于则传空参数
     if ([type isEqualToString:@"筛选"])
@@ -493,7 +493,7 @@ static NSString *searchStr; // 记录搜索条件内容
         
         _screeningView.frame = CGRectMake(0, self.tableView.contentOffset.y, WXZ_ScreenWidth, WXZ_ScreenHeight-64); // 实时修改筛选弹窗的frame
         _screeningView.dataArr = self.shaixuanArr; // 把弹窗数据传给view进行显示
-        _screeningView.backScreeningTypeDelegate = self; // 设置返回点击的弹窗数据
+        _screeningView.backScreeningTypeDelegate = self; // 设置返回点击的弹窗数据代理
         _screeningView.hidden = NO; // 不隐藏弹窗
         self.tableView.scrollEnabled = NO; // tableView不可滑动
         self.headerView.hidden = YES; // 隐藏section的headerView
