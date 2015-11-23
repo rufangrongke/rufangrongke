@@ -138,5 +138,7 @@ typedef void (^WXZNetworkBlock)();
             }
         }
     }];
+    
+    // 网络请求失败,请稍后重试
 }
 @end

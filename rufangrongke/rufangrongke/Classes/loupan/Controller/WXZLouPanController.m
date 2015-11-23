@@ -43,11 +43,14 @@ static NSString * const WXZLoupanCellID = @"loupanleibiaoCell";
 static NSString *xiaoqu = @"";
 static NSString *quyu = @"";
 static NSInteger inp = 1;
+
+#pragma mark - 网络
 /**
  * 抽取的网络请求方法
  */
 - (void)networkRequestsWithInp:(NSInteger)inp xiaoqu:(NSString *)xiaoqu quyu:(NSString *)quyu{
-    [SVProgressHUD show];
+    // 显示指示器
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     // 发送请求
     NSString *url = [OutNetBaseURL stringByAppendingString:loupanliebiao];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -68,7 +71,9 @@ static NSInteger inp = 1;
         [SVProgressHUD showErrorWithStatus:@"加载推荐信息失败!"];
     }];
 }
-/* fysList懒加载 */
+
+#pragma mark - 懒加载
+ /* fysList懒加载 */
 - (NSMutableArray *)fysList
 {
     if (_fysList == nil) {
@@ -98,13 +103,16 @@ static NSInteger inp = 1;
     
     // 去除分割线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     // 设置导航栏左边按钮
     WXZLeftBtnView *leftBtn = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZLeftBtnView class]) owner:nil options:nil].lastObject;
     [leftBtn addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(quYu_click)]];
     self.leftBtn = leftBtn;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    
     // 设置导航栏右边按钮
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithImage:@"lp_qd" highImage:@"lp_qd" target:self action:@selector(queDing_click)];
+    
     // 添加一个系统的搜索框
     UISearchBar *search = [[UISearchBar alloc]init];
     search.bounds = CGRectMake(0, 0, 100, 40);
@@ -112,20 +120,14 @@ static NSInteger inp = 1;
     self.navigationItem.titleView = search;
     search.delegate = self;
     self.search = search;
+    
     // 消除pop的时候searchbar背景闪一下
     for (UIView *view in self.search.subviews) {
-//        // for before iOS7.0
-//        if ([view isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
-//            [view removeFromSuperview];
-//            break;
-//        }
-        // for later iOS7.0(include)
         if ([view isKindOfClass:NSClassFromString(@"UIView")] && view.subviews.count > 0) {
             [[view.subviews objectAtIndex:0] removeFromSuperview];
             break;
         }
     }
-
 
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZTableViewCell class]) bundle:nil] forCellReuseIdentifier:WXZLoupanCellID];
@@ -133,15 +135,14 @@ static NSInteger inp = 1;
     self.tableView.rowHeight = 100;
 }
 
+#pragma mark - viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 初始化信息
     [self setUp];
+    
     // 添加刷新控件
     [self setupRefresh];
-    
-    // 显示指示器
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     
     // 网络请求
     [self networkRequestsWithInp:inp xiaoqu:xiaoqu quyu:quyu];
@@ -290,10 +291,10 @@ static NSInteger inp = 1;
 
 
 #pragma mark - <UITableViewDataSource>
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 1;
+//}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.fysList.count;
@@ -302,7 +303,7 @@ static NSInteger inp = 1;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WXZTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WXZLoupanCellID];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    NSLog(@"%@", self.loupanLeibiaoS[indexPath.row]);
     cell.fys = self.fysList[indexPath.row];
     

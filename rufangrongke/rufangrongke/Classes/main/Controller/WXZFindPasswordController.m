@@ -12,7 +12,7 @@
 #import "AFNetworking.h"
 #import "WXZChectObject.h"
 
-@interface WXZFindPasswordController ()
+@interface WXZFindPasswordController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumber;
 @property (weak, nonatomic) IBOutlet UITextField *verificationCode;
 @property (weak, nonatomic) IBOutlet UITextField *resetPassword;
@@ -119,13 +119,6 @@
     [super didReceiveMemoryWarning];
     
 }
-// 取消键盘
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.phoneNumber resignFirstResponder];
-    [self.verificationCode resignFirstResponder];
-    [self.resetPassword resignFirstResponder];
-}
 
 - (IBAction)showHidenPwd:(UIButton *)sender {
     // 隐藏或者显示密码
@@ -173,5 +166,54 @@
     dispatch_resume(_timer);
 }
 
+#pragma mark - 监听键盘
+// 不遮盖textfield
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    //    WXZLogFunc;
+    CGRect frame = [textField.superview convertRect:textField.frame toView:self.view];
+    CGFloat offset = self.view.height - (260 + frame.size.height + frame.origin.y + 20);
+    WXZLog(@"self.view.height=%f, textField.y=%f, textField.height=%f", self.view.height, textField.y, textField.height);
+    WXZLog(@"%f", offset);
+    if (offset <= 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.y = offset;
+        }];
+    }
+    return YES;
+}
+
+// 点击return 搜索
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // 将view回置
+    [UIView animateWithDuration:0.3 animations:^{
+        WXZLog(@"%zd", self.view.y);
+        self.view.y = 64;
+        WXZLog(@"%zd", self.view.y);
+        
+    }];
+    // 取消键盘
+    [textField resignFirstResponder];
+    // 最后一个textField == yaoqingren 注册
+    if (textField == self.resetPassword) {
+        [self findPassword:nil];
+    }
+    return YES;
+}
+
+// 取消键盘
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.phoneNumber resignFirstResponder];
+    [self.verificationCode resignFirstResponder];
+    [self.resetPassword resignFirstResponder];
+    // 将view回置
+    [UIView animateWithDuration:0.3 animations:^{
+        WXZLog(@"%zd", self.view.y);
+        self.view.y = 64;
+        WXZLog(@"%zd", self.view.y);
+        
+    }];
+}
 
 @end

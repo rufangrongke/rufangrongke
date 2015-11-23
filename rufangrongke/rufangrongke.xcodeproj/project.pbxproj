@@ -1667,7 +1667,6 @@
 				88EAA71B1BD87C180072CD40 /* AFURLConnectionOperation.m in Sources */,
 				88E30FAB1BEA285A002F5FF1 /* WXZLiandong.m in Sources */,
 				88F4AEEB1BFD631C00300A28 /* UIView+SDExtension.m in Sources */,
-				88DBC1031BF0436C00425B81 /* WXZMessagePrompt.m in Sources */,
 				8869E16A1BFABF8E00D409FC /* WXZKeHuController.m in Sources */,
 				885387F91BDD01D6005DCF38 /* WXZFindPasswordController.m in Sources */,
 				88EAA71E1BD87C180072CD40 /* AFURLSessionManager.m in Sources */,
@@ -1860,6 +1859,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dymost.rufangrongke.rongkebaoxinfang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1878,6 +1878,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dymost.rufangrongke.rongkebaoxinfang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

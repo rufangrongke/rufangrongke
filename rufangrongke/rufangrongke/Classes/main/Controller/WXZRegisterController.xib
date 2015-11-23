@@ -44,6 +44,9 @@
                             <rect key="frame" x="88" y="14" width="462" height="31"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="Sx1-xL-lhF"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <constraints>
@@ -92,6 +95,9 @@
                             <rect key="frame" x="88" y="14" width="462" height="31"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="oZd-v6-vR6"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <constraints>
@@ -141,6 +147,9 @@
                             <rect key="frame" x="88" y="14" width="462" height="31"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="B5e-7i-TOr"/>
+                            </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLE-08-GxX" customClass="JxbScaleButton">
                             <rect key="frame" x="503" y="10" width="67" height="30"/>
@@ -209,6 +218,9 @@
                             <rect key="frame" x="88" y="13" width="443" height="31.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="xT7-QH-ZSP"/>
+                            </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YwG-LI-t7O" userLabel="眼睛">
                             <rect key="frame" x="540" y="15" width="30" height="30"/>
@@ -275,6 +287,9 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="Taq-4A-0lM"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <constraints>

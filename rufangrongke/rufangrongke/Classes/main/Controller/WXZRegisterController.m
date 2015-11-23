@@ -54,21 +54,15 @@
     }];
     
 }
-// 取消键盘
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.name resignFirstResponder];
-    [self.phoneNumber resignFirstResponder];
-    [self.verificationCode resignFirstResponder];
-    [self.password resignFirstResponder];
-    [self.yaoqingren resignFirstResponder];
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 显示导航栏
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.title = @"注册";
-    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (IBAction)registerNewUser:(id)sender {
@@ -167,7 +161,51 @@
 // 点击return 搜索
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self registerNewUser:nil];
+    // 将view回置
+    [UIView animateWithDuration:0.3 animations:^{
+        WXZLog(@"%zd", self.view.y);
+        self.view.y = 64;
+        WXZLog(@"%zd", self.view.y);
+        
+    }];
+    // 取消键盘
+    [textField resignFirstResponder];
+    // 最后一个textField == yaoqingren 注册
+    if (textField == self.yaoqingren) {
+        [self registerNewUser:nil];
+    }
     return YES;
 }
+
+// 不遮盖textfield
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+//    WXZLogFunc;
+    CGRect frame = [textField.superview convertRect:textField.frame toView:self.view];
+    CGFloat offset = self.view.height - (260 + frame.size.height + frame.origin.y + 20);
+    WXZLog(@"self.view.height=%f, textField.y=%f, textField.height=%f", self.view.height, textField.y, textField.height);
+    WXZLog(@"%f", offset);
+    if (offset <= 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.y = offset;
+        }];
+    }
+    return YES;
+}
+// 取消键盘
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.name resignFirstResponder];
+    [self.phoneNumber resignFirstResponder];
+    [self.verificationCode resignFirstResponder];
+    [self.password resignFirstResponder];
+    [self.yaoqingren resignFirstResponder];
+    // 将view回置
+    [UIView animateWithDuration:0.3 animations:^{
+        WXZLog(@"%zd", self.view.y);
+        self.view.y = 64;
+        WXZLog(@"%zd", self.view.y);
+        
+    }];
+}
+
 @end

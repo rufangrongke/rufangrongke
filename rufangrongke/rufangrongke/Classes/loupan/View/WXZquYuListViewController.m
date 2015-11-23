@@ -13,6 +13,8 @@
 @interface WXZquYuListViewController ()<UITableViewDataSource, UITableViewDelegate>
 /* WXZquYuListViewCellModel */
 @property (nonatomic , strong) WXZquYuListViewCellModel *quYuListViewCellModel;
+/* 选中的cell */
+@property (nonatomic , strong) WXZquYuListViewCell *quYuListViewCell;
 @end
 
 @implementation WXZquYuListViewController
@@ -26,6 +28,8 @@ static NSString *quYuListViewCellID = @"quyuCell";
     [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         // 字典转模型
         self.quYuListViewCellModel = [WXZquYuListViewCellModel objectWithKeyValues:responseObject];
+        // 将选中的按钮取消
+//        self.quYuListViewCell.chooseImage.hidden = YES;
         // 刷新表格
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -37,10 +41,9 @@ static NSString *quYuListViewCellID = @"quyuCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self notification];
-//    self.tableView.backgroundColor = [UIColor clearColor];
-//    [self.tableView registerClass:[WXZquYuListViewCell class] forCellReuseIdentifier:quYuListViewCellID];
+    // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WXZquYuListViewCell class]) bundle:nil] forCellReuseIdentifier:quYuListViewCellID];
-//
+
 //    // 获取沙河路径
 //    NSString *cityListInfoPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingString:cityListInfoFile];
 //    // 从沙河中获取城市列表
@@ -91,10 +94,14 @@ static NSString *quYuListViewCellID = @"quyuCell";
     if (indexPath.row == 0) {
         WXZquYuListViewCell *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([WXZquYuListViewCell class]) owner:nil options:nil].lastObject;
         cell.cityLabel.text = [NSString stringWithFormat:@"全部区域(%zd)", self.quYuListViewCellModel.all];
+        // 引用cell
+        self.quYuListViewCell = cell;
         return cell;
     }else{
         WXZquYuListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"quyuCell"];
         cell.qus = self.quYuListViewCellModel.qus[indexPath.row - 1];
+        // 引用cell
+        self.quYuListViewCell = cell;
         return cell;
     }
 }

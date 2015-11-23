@@ -17,8 +17,8 @@
 @interface WXZLoginController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
-
 @property (weak, nonatomic) IBOutlet UITextField *pwdField;
+
 @property (weak, nonatomic) IBOutlet UIButton *showHideCode_Button;
 @property (weak, nonatomic) IBOutlet UIButton *remenberPasswordBtn;
 @property (weak, nonatomic) IBOutlet UIButton *autoLoginBtn;
@@ -54,11 +54,16 @@
 //    WXZLog(@"phoneNumber:%@, password%@", [defaults stringForKey:@"phoneNumber"], [defaults stringForKey:@"password"]);
     sender.selected = [defaults boolForKey:@"remenberPasswordBtnStatus"];
     if (!sender.selected) {
+//        self.usernameField.text = @"";
+//        self.pwdField.text = @"";
         self.usernameField.text = [defaults stringForKey:@"phoneNumber"] ? [defaults stringForKey:@"phoneNumber"] : self.usernameField.text;
-        self.pwdField.text = [defaults stringForKey:@"password"] ? [defaults stringForKey:@"phoneNumber"] : self.pwdField.text;
+        self.pwdField.text = [defaults stringForKey:@"password"] ? [defaults stringForKey:@"password"] : self.pwdField.text;
     }else{
 //        self.usernameField.text = @"";
 //        self.pwdField.text = @"";
+//        [defaults setObject:@"" forKey:@"phoneNumber"];
+//        [defaults setObject:@"" forKey:@"password"];
+        
     }
     sender.selected = !sender.selected;
     
@@ -136,6 +141,10 @@
             if ([defaults boolForKey:@"remenberPasswordBtnStatus"]) {
                 [defaults setObject:usePhone forKey:@"phoneNumber"];
                 [defaults setObject:pwd forKey:@"password"];
+            }else{
+                [defaults setObject:@"" forKey:@"phoneNumber"];
+                [defaults setObject:@"" forKey:@"password"];
+                
             }
         }
         // 4.回到主线程
@@ -187,9 +196,7 @@
     if (self.remenberPasswordBtn.selected) {
         self.usernameField.text = [self.defaults stringForKey:@"phoneNumber"];
         self.pwdField.text = [self.defaults stringForKey:@"password"];
-    }    
-//    self.usernameField.delegate = self;
-//    WXZLog(@"self.view.height-%f, textField.y-%f, textField.height-%f", self.view.frame.size.height, self.usernameField.frame.origin.y, self.usernameField.frame.size.height);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -204,23 +211,18 @@
 }
 #pragma 注册
 - (IBAction)registerAccount:(id)sender {
-    WXZLogFunc;
+//    WXZLogFunc;
     // 添加注册控制器
     [self.navigationController pushViewController:[[WXZRegisterController alloc] init] animated:YES];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.usernameField resignFirstResponder];
-    [self.pwdField resignFirstResponder];
-}
-
-#pragma mark - 键盘处理 
+#pragma mark - 监听键盘
 // 不遮盖textfield
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    WXZLogFunc;
-    CGFloat offset = self.view.height - (260 + textField.height + 216 +50);
-    WXZLog(@"self.view.height-%f, textField.y-%f, textField.height-%f", self.view.height, textField.y, textField.height);
+    //    WXZLogFunc;
+    CGRect frame = [textField.superview convertRect:textField.frame toView:self.view];
+    CGFloat offset = self.view.height - (260 + frame.size.height + frame.origin.y + 20);
+    WXZLog(@"self.view.height=%f, textField.y=%f, textField.height=%f", self.view.height, textField.y, textField.height);
     WXZLog(@"%f", offset);
     if (offset <= 0) {
         [UIView animateWithDuration:0.3 animations:^{
@@ -229,17 +231,37 @@
     }
     return YES;
 }
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-    WXZLogFunc;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.view.y = 0;
-    }];
-    return YES;
-}
+
 // 点击return 搜索
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self login:nil];
+    // 将view回置
+    [UIView animateWithDuration:0.3 animations:^{
+        WXZLog(@"%zd", self.view.y);
+        self.view.y = 0;
+        WXZLog(@"%zd", self.view.y);
+        
+    }];
+    // 取消键盘
+    [textField resignFirstResponder];
+    // 最后一个textField == yaoqingren 注册
+    if (textField == self.pwdField) {
+        [self login:nil];
+    }
     return YES;
+}
+
+// 取消键盘
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.usernameField resignFirstResponder];
+    [self.pwdField resignFirstResponder];
+    // 将view回置
+    [UIView animateWithDuration:0.3 animations:^{
+        WXZLog(@"%zd", self.view.y);
+        self.view.y = 0;
+        WXZLog(@"%zd", self.view.y);
+        
+    }];
 }
 @end
