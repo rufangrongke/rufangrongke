@@ -65,4 +65,6 @@
 #define mainScreen_height  [UIScreen mainScreen].bounds.size.height;
 #define mainScreen_widthToHeigth mainScreen_width / mainScreen_height;
 
+// 超时时间
+#define requestTimeout 30;
 #endif

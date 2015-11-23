@@ -101,7 +101,9 @@
 
 - (void)reloadCityRegionList{
     NSString *url = [OutNetBaseURL stringByAppendingString:quyuliebiao];
-    [[AFHTTPSessionManager manager] POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = requestTimeout;
+    [manager POST:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
 //        WXZLog(@"%@", responseObject);
         NSDictionary *cityListDic = (NSDictionary *)responseObject;
         // 获取沙河路径
@@ -132,7 +134,7 @@ typedef void (^WXZNetworkBlock)();
         else
         {
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"] maskType:SVProgressHUDMaskTypeBlack];
-            if ([responseObject[@"msg"] isEqualToString:@"登录超时"])
+            if ([responseObject[@"msg"] isEqualToString:@"登录超时"] || [responseObject[@"msg"] isEqualToString:@"登陆超时"])
             {
                 [self goBackLoginPage]; // 回到登录页面
             }
@@ -140,5 +142,9 @@ typedef void (^WXZNetworkBlock)();
     }];
     
     // 网络请求失败,请稍后重试
+}
+- (void)netWorkError
+{
+    [SVProgressHUD showErrorWithStatus:@"网络请求失败,请稍后重试" maskType:SVProgressHUDMaskTypeBlack];
 }
 @end
