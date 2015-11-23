@@ -125,6 +125,7 @@
     parameters[@"mob"] = usePhone;
     parameters[@"pas"] = pwd;
     // afn
+//    AFHTTPSessionManager *manage = [];
     [[AFHTTPSessionManager manager] POST:urlString parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary *loginContentDic = (NSDictionary *)responseObject;

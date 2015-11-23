@@ -123,7 +123,7 @@
     [[[[UIApplication sharedApplication] delegate] window] setRootViewController:vc];
 }
 
-typedef void (^WXZNetworkBlock)();
+
 - (void)networkResponse:(id)responseObject block:(WXZNetworkBlock)block
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
